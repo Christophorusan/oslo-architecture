@@ -103,7 +103,7 @@
 
     <header class="article-header">
       <h1>Understanding AI Agents with Harmonix</h1>
-      <p class="subtitle">Signals · Dispatch · Audience Graph · Recommendations · Units · Memory · Connectors</p>
+      <p class="subtitle">Signals · Audience Graph · Recommendations · Units · Memory · Connectors</p>
       <p class="lede">Turns Codex and Claude Code into a company operator that learns who matters, what is working, and what should happen next</p>
     </header>
 
@@ -286,8 +286,8 @@
 
     <section>
       <h2>2. Dispatch + Classification</h2>
-      <p>Dispatch turns signals into typed skill calls. No business logic, but more than basic routing. Dispatch should normalize the event, classify what kind of account or opportunity it represents, enrich it, and route it to the right unit with enough context that the unit can act intelligently.</p>
-      <p>A request moves through six steps: <strong>Parse</strong> (normalize input into a structured shape) → <strong>Classify</strong> (user, partner, prospect, noise, roadmap signal) → <strong>Resolve</strong> (pick a skill via the 4-tier fallback) → <strong>Validate</strong> (check args against the skill's typed schema using zod) → <strong>Confirm</strong> (ask if confidence is low or the skill writes externally) → <strong>Run</strong> (issue a capability token, enqueue, execute, stream results back).</p>
+      <p>The audience graph is where signals become usable company context. Dispatch normalizes the event, but this layer decides whether an account looks like a user, a partner, a prospect, a power user, or just noise. It enriches the profile, links it to similar accounts, and writes that relationship back into memory.</p>
+      <p>This is the Moneyball layer. Instead of trying to outwork larger teams, Oslo should out-select them. It should score which people matter, which roadmap moment they are closest to, and which opportunities deserve attention now.</p>
       <p>Every input gets three IDs at parse time: <code>trace_id</code> (random, follows the request through every layer, replayable later), <code>idempotency_key</code> (deterministic, deduplicates retries), and <code>capability_token</code> (issued at run time, enumerates exactly what the skill can read, write, and call — checked at every boundary).</p>
 
       <h3>What classification adds</h3>
@@ -367,8 +367,8 @@
 
     <section>
       <h2>5. Units</h2>
-      <p>Units are organizational departments. Skills are the verbs each department exposes.</p>
-      <p>The six units cover Oslo's full work surface:</p>
+      <p>Recommendations are the output of the scoring system. Units are the departments that act on those recommendations.</p>
+      <p>The six units cover Oslo's full work surface, but they should all run the same selection logic: maximum result, minimum wasted effort.</p>
       <ul>
         <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic.</li>
         <li><strong>Marketing</strong> — content calendar, daily posts, reaction analysis, brand voice, distribution, winning formats. Also owns <strong>design</strong> (banner specs, brand kit, social graphics, visual identity) — design work is operationally tied to Marketing, so it lives there rather than as a separate unit. Sub-categorized into Conversion, Content, SEO, Paid, Measurement, Retention, Growth (pattern from <a href="https://github.com/coreyhaines31/marketingskills">coreyhaines31/marketingskills</a>).</li>
@@ -479,9 +479,9 @@
     </section>
 
     <section>
-      <h2>Closing flow</h2>
-      <p>signal arrives → dispatch parses and classifies it → profile is enriched against users, partners, and lookalikes → opportunity is ranked against roadmap and timing → the right unit plans the move → connector calls and memory writes pass through capability-token verification + symptom-triggered rules → recommendation or action streams back to the entry point that triggered it → trace logged → episodic memory written → next run starts with better context</p>
-      <p>Every reaction, post, reply, meeting, and shipped milestone becomes training data for the next decision. Daily consolidation distills episodic memory into procedural memory, so the playbooks improve from the work that already happened. That is how Oslo should get smarter over time: by learning what kind of people engage, what kind convert into users or partners, and what content or outreach actually moved them.</p>
+      <h2>6. Closing Loop</h2>
+      <p>signal arrives → dispatch normalizes it → the audience graph classifies and enriches it → the system scores who matters and why → the right unit gets a recommendation → the operator approves or edits when needed → action is taken → the result is logged back into memory</p>
+      <p>That is the loop. Observe, score, prioritize, act, learn. The same idea should apply to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
     </section>
 
     <section>
