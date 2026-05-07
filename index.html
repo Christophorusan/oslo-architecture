@@ -103,7 +103,7 @@
 
     <header class="article-header">
       <h1>Understanding AI Agents with Harmonix</h1>
-      <p class="subtitle">Signals · Audience Graph · Recommendations · Units · Memory · Connectors</p>
+      <p class="subtitle">Signals · Dispatch · Audience Graph · Recommendations · Units · Memory · Connectors</p>
       <p class="lede">Turns Codex and Claude Code into a company operator that learns who matters, what is working, and what should happen next</p>
     </header>
 
@@ -260,22 +260,38 @@
     </section>
 
     <section>
-      <h2>1. Execution Layer</h2>
-      <p>Four entry points, one dispatcher. All four run the same skills against the same memory. Long-running skills are async-first, so dispatch returns a <code>job_id</code> immediately and streams results back as they happen.</p>
-      <p>Two entry points bring their own model, Claude Code and Codex. The other two, Discord and Telegram, use Oslo's LLM connector. X reactions, app events, and scheduled jobs also enter here as signals. The point of this layer is not just access. It is intake. Who is engaging, what are they engaging with, and what should the rest of the system do with that signal?</p>
+      <h2>1. Signals</h2>
+      <p>Signals are everything Oslo watches. Some come from operators driving Oslo directly. Others come from the world — engagement on a post, a deposit on the protocol, a scheduled trigger firing. All signals reach the same dispatcher.</p>
+      <p>Long-running handling is async-first: dispatch returns a <code>job_id</code> immediately and streams results back as they happen. A ninety-second skill does not block the IDE or the chat.</p>
+
+      <h3>Operator-driven signals</h3>
+      <p>Two of these come with their own model loaded — the host model in your coding agent does the natural-language interpretation. The other two are chat surfaces with no upstream model.</p>
       <p><em>Claude Code is from Anthropic; Codex is from OpenAI. Different host models, same role to Oslo.</em></p>
       <p><strong>Codex</strong> — e.g. <code>oslo bd.daily-leads --limit=50</code> from a terminal. Scripted runs, automation, scheduled jobs.</p>
       <p><strong>Claude Code</strong> — Oslo's tools appear in your coding session via an MCP server (Model Context Protocol — a standard interface for AI assistants to call external tools). Stdio for local mode, HTTP/SSE for hosted. Multi-step work where you want to read along.</p>
-      <p><strong>Discord</strong> — slash command in a channel or @mention. Work that belongs in a shared log.</p>
+      <p><strong>Discord</strong> — slash command in a channel or @mention. Work that belongs in a shared log: outreach drafts, weekly briefs, anything the team should see.</p>
       <p><strong>Telegram</strong> — message the bot in plain language. Quick checks and phone approvals.</p>
-      <p class="note">Note: Cron (a scheduled timer; default UTC, per-skill timezone override), webhooks (URLs external services POST to on events), and replay (re-run a past <code>trace_id</code>, optionally with a different model, prompt, or skill version) all reach the same dispatcher without a human typing.</p>
+
+      <h3>Non-operator signals</h3>
+      <p>Signals that wake the dispatcher without a human typing:</p>
+      <ul>
+        <li><strong>X reactions</strong> — every like, reply, repost, quote on @harmonixfi posts. Treated as audience-graph input.</li>
+        <li><strong>App activity</strong> — deposits, withdrawals, vault interactions on the Harmonix app. Treated as user-classification input.</li>
+        <li><strong>Cron</strong> — scheduled timer (default UTC, per-skill timezone override). Daily and weekly skills run on cron.</li>
+        <li><strong>Webhooks</strong> — URLs external services POST to when something happens (Stripe payment, GitHub PR merged, partner-side event).</li>
+        <li><strong>Replay</strong> — re-run a past <code>trace_id</code>, optionally with a different model, prompt, or skill version. Used for debugging and prompt regression testing.</li>
+      </ul>
+      <p class="note">Note: Whether typed by a human or fired by a timer, every signal gets normalized into the same shape and handed to dispatch. The unit running at the other end never has to know where the signal came from.</p>
     </section>
 
     <section>
-      <h2>2. Dispatch</h2>
+      <h2>2. Dispatch + Classification</h2>
       <p>Dispatch turns signals into typed skill calls. No business logic, but more than basic routing. Dispatch should normalize the event, classify what kind of account or opportunity it represents, enrich it, and route it to the right unit with enough context that the unit can act intelligently.</p>
       <p>A request moves through six steps: <strong>Parse</strong> (normalize input into a structured shape) → <strong>Classify</strong> (user, partner, prospect, noise, roadmap signal) → <strong>Resolve</strong> (pick a skill via the 4-tier fallback) → <strong>Validate</strong> (check args against the skill's typed schema using zod) → <strong>Confirm</strong> (ask if confidence is low or the skill writes externally) → <strong>Run</strong> (issue a capability token, enqueue, execute, stream results back).</p>
       <p>Every input gets three IDs at parse time: <code>trace_id</code> (random, follows the request through every layer, replayable later), <code>idempotency_key</code> (deterministic, deduplicates retries), and <code>capability_token</code> (issued at run time, enumerates exactly what the skill can read, write, and call — checked at every boundary).</p>
+
+      <h3>What classification adds</h3>
+      <p>The Classify step is what makes dispatch more than a router. Before any skill runs, the dispatcher answers: <em>who or what is this signal about?</em> An X reaction goes through identity resolution — does the handle match a known user, a known partner contact, a lookalike candidate, or a stranger? An app event matches against the user table. A roadmap webhook matches against the current roadmap state. Classification writes its result onto the input itself, so by the time a skill receives the call, it already knows whether the signal is high-priority (a known partner replying) or background noise (a bot retweet). Skills don't reclassify — they trust the dispatcher's output.</p>
 
       <h3>What dispatch reads from the control plane</h3>
       <p>Dispatch is the heaviest reader of the control plane — the configuration the data plane consults but never writes to. On every request, dispatch reads from five components:</p>
@@ -304,16 +320,62 @@
     </section>
 
     <section>
-      <h2>3. Skills &amp; Units</h2>
+      <h2>3. Audience Graph</h2>
+      <p>The audience graph is Oslo's model of who matters. It is the data structure underneath every BD outreach decision, every Marketing audience-targeting question, and every Ops priority call.</p>
+      <p>Three primary classifications, plus a graph of relationships between them:</p>
+      <ul>
+        <li><strong>Users</strong> — accounts that interact with the protocol (deposits, withdrawals, vault activity, app sessions). Identity-resolved across surfaces — the same person can have a handle on X, a wallet on chain, a Discord ID, a Telegram ID, and Oslo merges them.</li>
+        <li><strong>Partners</strong> — accounts engaged in BD relationships. Includes warm-intro paths, last-touched dates, partnership status, and interaction sentiment.</li>
+        <li><strong>Lookalikes</strong> — accounts whose profile, follower overlap, and content signals match users or partners but who haven't yet engaged. Ranked by ICP fit.</li>
+      </ul>
+      <p>Each entry holds: handle, resolved identity, classification, score, source events, last interaction, projected next-best-action, and a list of edges (warm intros, mutual followers, shared partner orgs).</p>
+
+      <h3>How the graph is built</h3>
+      <p>Three analysis skills run on cron and write to the graph. They don't propose actions — only update what's known.</p>
+      <ul>
+        <li><strong><code>bd.audience-analyzer</code></strong> (daily) — reads marketing post events + reactor profiles, enriches each handle (bio, follower overlap, what they post about), updates user/partner classification.</li>
+        <li><strong><code>bd.partner-lookalikes</code></strong> (weekly) — for each user/partner cohort, queries x-api for handles with overlapping followers and similar topic vectors. Scores by ICP fit. Stages new candidates with provenance ("matches the cohort that includes Vincent Wang and Jordi Alexander").</li>
+        <li><strong><code>bd.partner-graph</code></strong> (weekly) — reads BD episodic memory (every interaction with every partner contact) and builds a graph of relationships, warm-intro paths, last-touched dates, sentiment scores. Writes the partner table and the partner-graph edge table.</li>
+      </ul>
+
+      <h3>Why the graph matters</h3>
+      <p>Without it, Oslo treats every signal in isolation. A reaction on a tweet would just be a reaction. With the graph, the same reaction means <em>"the COO of a partner protocol just liked this thread about haUSD"</em> — and that's a different signal entirely.</p>
+      <p>Every other unit reads the graph. Marketing's <code>marketing.suggest-content</code> references which audience tier it's writing for. BD's <code>bd.suggest-contacts</code> ranks proposals by graph score. Ops' weekly brief surfaces partner-graph anomalies (someone who used to engage stopped engaging, someone new keeps showing up).</p>
+
+      <p class="note">Note: The graph is shared company memory. Skills declare reads against <code>audience_graph</code> like any other memory; the capability token enforces it. Updates happen only via the analysis skills above. Skills cannot mutate the graph as a side effect.</p>
+    </section>
+
+    <section>
+      <h2>4. Recommendations</h2>
+      <p>Oslo doesn't only execute work. It also proposes work — what to do next, with reasoning. The recommendation queue is the output of weekly analysis skills that read the audience graph + recent activity + roadmap state, identify patterns, and surface proposals to Discord for operator review.</p>
+
+      <h3>The proposal loop</h3>
+      <p>Three unit-level proposal skills run weekly on cron:</p>
+      <ul>
+        <li><strong><code>bd.suggest-contacts</code></strong> — produces a list of <em>"contact these 5 people this week, here's why for each"</em>. Each entry includes: handle, classification (user / partner / lookalike), audience-graph score, the specific signal that triggered the proposal (recent activity, roadmap moment, warm path), and a draft opening line.</li>
+        <li><strong><code>marketing.suggest-content</code></strong> — produces 5 post topics for the next 7 days. Each entry includes: hook, format (text / chart / video), target time, expected engagement range based on <code>marketing.engagement_patterns</code>, and rationale ("works on the user cohort, ties to the v2 roadmap shipping next week").</li>
+        <li><strong><code>ops.suggest-priorities</code></strong> — produces a "this week, focus on these 3 things; defer these 2" call. Each entry includes: rationale, dependencies, projected outcome, and what gets blocked if it slips.</li>
+      </ul>
+      <p>A cross-unit aggregator (<code>ops.weekly-strategy-brief</code>) composes all three into one Sunday-evening Discord post in <code>#oslo-proposals</code>. Monday morning the operator reviews it.</p>
+
+      <h3>The operator review</h3>
+      <p>Each proposal renders with three buttons in Discord: <strong>accept</strong>, <strong>reject</strong>, <strong>edit</strong>. Accepting fires the next skill (e.g., <code>bd.draft-outreach</code> for an accepted contact). Rejecting writes a "rejected, reason: …" entry to the decisions log. Editing opens a follow-up dialog where the operator can adjust args.</p>
+      <p>The decisions log is critical — it's how the analysis side learns what's good and what's not. Next week's <code>bd.suggest-contacts</code> reads last week's accept/reject pattern. If you keep rejecting "warm intro through @x because @x replied to a thread once," the analyzer downweights that signal.</p>
+
+      <p class="note">Note: Proposals never fire actions automatically. Even with high confidence and operator approval, write actions go through the standard HITL flow with capability-token gating. The recommendation loop produces "what should happen" — the operator and the safety layer both decide whether it does.</p>
+    </section>
+
+    <section>
+      <h2>5. Units</h2>
       <p>Units are organizational departments. Skills are the verbs each department exposes.</p>
       <p>The six units cover Oslo's full work surface:</p>
       <ul>
-        <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic</li>
-        <li><strong>Marketing</strong> — content calendar, daily posts, reaction analysis, brand voice, distribution, winning formats. Sub-categorized into Conversion, Content, SEO, Paid, Measurement, Retention, Growth (pattern from <a href="https://github.com/coreyhaines31/marketingskills">coreyhaines31/marketingskills</a>).</li>
+        <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic.</li>
+        <li><strong>Marketing</strong> — content calendar, daily posts, reaction analysis, brand voice, distribution, winning formats. Also owns <strong>design</strong> (banner specs, brand kit, social graphics, visual identity) — design work is operationally tied to Marketing, so it lives there rather than as a separate unit. Sub-categorized into Conversion, Content, SEO, Paid, Measurement, Retention, Growth (pattern from <a href="https://github.com/coreyhaines31/marketingskills">coreyhaines31/marketingskills</a>).</li>
         <li><strong>Engineering</strong> — protocol notes, technical explanations, vault checks, roadmap state, product milestones. Vaults sit inside Engineering because vault work is engineering work.</li>
         <li><strong>Security</strong> — watchlists, exploit monitoring, threat briefs, real-time on-chain alerts.</li>
         <li><strong>Ops</strong> — activity logs, weekly reports, market briefs, coordination, roadmap cadence.</li>
-        <li><strong>Data</strong> — account scoring, ICP clustering, lookalikes, customer and partner segmentation.</li>
+        <li><strong>Data</strong> — account scoring, ICP clustering, lookalikes, customer and partner segmentation. The unit other units read from when they need analytical rigor instead of operational action.</li>
       </ul>
       <p>Each unit has a foundational <code>&lt;unit&gt;.context</code> skill loaded by every other skill in that unit. The context skill holds ICP, partner criteria, brand voice, protocol rules, roadmap priorities, scoring rubrics, and content heuristics. That is what lets Oslo explain not only what it wants to do, but why it thinks the move makes sense.</p>
       <p>Skills live in a flat folder, named <code>&lt;unit&gt;.&lt;verb&gt;</code>. Filename, slash command, and ID are the same string. E.g. <code>bd.daily-leads.skill.ts</code> is invoked as <code>/oslo bd.daily-leads</code>.</p>
@@ -351,10 +413,11 @@
     </section>
 
     <section>
-      <h2>4. Memory</h2>
-      <p>Memory is attached to units, but the system also needs a shared operating graph. BD's leads should not blindly reach Marketing's prompts, and Engineering's vault marks should not bleed into Security's watchlist, but Oslo does need one place to answer higher-order questions like who our users are, who our partners are, who looks like them, what shipped last week, and what content moved the right audience.</p>
-      <p>Each unit has four memory types:</p>
+      <h2>6. Memory</h2>
+      <p>Memory is attached to units, but Oslo also maintains a shared operating graph. BD's leads should not blindly reach Marketing's prompts, and Engineering's vault marks should not bleed into Security's watchlist — but Oslo does need one place to answer higher-order questions like who our users are, who our partners are, who looks like them, what shipped last week, and what content moved the right audience.</p>
+      <p>Each unit has five memory types:</p>
       <ul>
+        <li><strong>Audience graph</strong> — the shared company graph of users, partners, and lookalikes (Section 3). Read by every unit; written only by Data and BD analysis skills.</li>
         <li><strong>Semantic</strong> — what the unit knows. Leads, target accounts, audience segments, roadmap state, vault theses, watchlists, brand kit specs. Lives in Supabase, prefixed by unit.</li>
         <li><strong>Episodic</strong> — what happened. Outreach sent, posts published, reactions received, meetings held, alerts fired. Lives in Supabase with vector embeddings (numerical fingerprints of text, used to find similar past events by meaning rather than keyword match).</li>
         <li><strong>Procedural</strong> — how the unit works. Playbooks, prompts, templates, scoring rubrics, contact heuristics, content heuristics. Lives as markdown in <code>units/&lt;unit&gt;/knowledge/</code>. Version-controlled. The daily <code>consolidate</code> skill extends procedural memory from successful episodic patterns.</li>
@@ -380,13 +443,13 @@
       <p>Each external system is reached through the open <strong>Agent2Agent (A2A) protocol</strong> — a standard hosted by the Linux Foundation, supported by Microsoft, Google, and AWS. Each external system publishes an <strong>Agent Card</strong> (JSON metadata describing its identity, skills, endpoint, auth). Oslo's connector reads the Agent Card and calls the documented skills. Either side can run on different machines, change stack, or be replaced — only the contract has to hold. This is the foundation for multi-agent collaboration as the protocol scales.</p>
 
       <h3>Decisions log</h3>
-      <p>Each unit also keeps a decisions log — a markdown file recording the reason behind judgment calls. E.g. <em>"Paused outreach to Acme because they raised; revisit Q4."</em> Episodic memory captures what happened. The decisions log captures what was decided and why. The log is what makes Oslo's memory usable months later, when the question is no longer <em>what did we do</em> but <em>why did we do it</em>.</p>
+      <p>Each unit also keeps a decisions log — a markdown file recording the reason behind judgment calls. E.g. <em>"Paused outreach to Acme because they raised; revisit Q4."</em> Episodic memory captures what happened. The decisions log captures what was decided and why. The log is also where the recommendation loop closes — every accept / reject of a proposal lands here with the reason, and next week's analysis reads the log to adjust scoring weights.</p>
 
-      <p class="note">Note: Skills compose across units, but they cannot bypass the rules. A weekly report does not query BD's table directly; it asks BD's skill for the data, with the read explicitly declared and the capability token verifying it.</p>
+      <p class="note">Note: Skills compose across units, but they cannot bypass the rules. A weekly digest does not query BD's table directly; it asks BD's skill for the data, with the read explicitly declared and the capability token verifying it.</p>
     </section>
 
     <section>
-      <h2>5. Connectors &amp; Safety</h2>
+      <h2>7. Connectors</h2>
       <p>Connectors are how Oslo touches anything outside its own process. Every external API, Supabase, Hyperliquid, X, Discord, Telegram, Notion, GitHub, app analytics, plus the LLM connector, is wrapped in a typed client that handles retry, rate limiting, caching, identity resolution, and cost tracking. Skills do not make raw HTTP calls. They go through <code>ctx.connectors.&lt;name&gt;</code>, and every call is checked against the skill's capability token before it is made. Connectors are structured as published packages with hot reload (pattern from <a href="https://github.com/activepieces/activepieces">Activepieces</a>) so skills, the runtime, and any future marketplace can install them uniformly.</p>
 
       <h3>Capability tokens as the safety primitive</h3>
@@ -400,7 +463,7 @@
         <li><strong><code>dead-man-switch</code></strong> — global halt that trips when anomaly thresholds breach. All skills stop until cleared.</li>
         <li><strong><code>secret-egress-scan</code></strong> — every output checked for patterns matching any secret loaded into the runtime.</li>
       </ul>
-      <p>Each rule declares severity. <strong>block</strong> halts the skill and surfaces it for review; <strong>warn</strong> logs and continues. The full eighteen rules are in <code>src/safety/rules/</code> in the <a href="https://github.com/Christophorusan/oslo">oslo repo</a>.</p>
+      <p>Each rule declares severity. <strong>block</strong> halts the skill and surfaces it for review; <strong>warn</strong> logs and continues. The full eighteen rules are in <code>src/safety/rules/</code> in the (private) oslo repo.</p>
 
       <h3>The Hyperliquid trade guard</h3>
       <p>Hyperliquid is the only connector where Oslo can write to a chain. Because a single bad call has irreversible cost, the trade guard adds ten rules on top of the standard layer (the tenth is <strong>pre-flight transaction simulation</strong>, inspired by <a href="https://www.hypernative.io/">Hypernative</a>'s Guardian product). Four worth detailing:</p>
@@ -457,7 +520,7 @@
     </section>
 
     <footer>
-      <p><a href="https://github.com/Christophorusan/oslo">github.com/Christophorusan/oslo</a> · Harmonix · Hyperliquid</p>
+      <p><a href="https://github.com/Christophorusan/oslo-architecture">github.com/Christophorusan/oslo-architecture</a> · Harmonix · Hyperliquid</p>
     </footer>
 
   </main>
