@@ -875,6 +875,17 @@ footer a { color: var(--text3); border-bottom: none; }
       </ul>
       <p>The remaining six (volume cap, asset whitelist, position cap, time-window guard, circuit breaker, address-reputation pre-check) are in <code>src/safety/rules/hyperliquid-trade-guard.ts</code>.</p>
 
+      <h3>Cost + token efficiency</h3>
+      <p>Every LLM call records <code>tokens_in</code>, <code>tokens_out</code>, <code>model</code>, <code>cost_usd</code>, and <code>latency_ms</code> to <code>oslo_skill_calls</code>, keyed by <code>trace_id</code> and <code>skill_id</code>. That gives you four rollups for free: cost per skill, cost per trace, cost per model, and cost per unit per day.</p>
+      <p>The point is not just to know the bill. It's to optimize. Oslo improves on quality <em>and</em> efficiency:</p>
+      <ul>
+        <li><strong>Use the cheapest path that does the job well.</strong> Default to a small free-tier model (Groq Llama 3.1-8b). Escalate to a larger model only when confidence is low, the task is high-stakes, or the output quality matters.</li>
+        <li><strong>Compress context.</strong> Memory is reused, not re-explained. Procedural memory (markdown playbooks) sits in the system prompt once; episodic snippets are pulled by relevance, not dumped wholesale.</li>
+        <li><strong>Avoid redundant reasoning.</strong> A skill that already classified an account doesn't reclassify it next time. Dispatch writes the classification onto the input so downstream skills trust it.</li>
+        <li><strong>Cap per skill.</strong> Each skill has a daily dollar cap. Breach the cap and it auto-pauses until the next UTC day. Stops a runaway prompt from burning the whole budget.</li>
+      </ul>
+      <p>The <code>ops.cost-report</code> skill rolls all of this up over a day, week, or month. <code>oslo.suggest-self-improvement</code> reads the same data and proposes which skill to cheap-tier next — that's the 5th slot in the daily morning brief.</p>
+
       <p class="note">Note: Connectors are the only path Oslo has to anything outside its own process. There are no manual HTTP calls in skill code. Every external interaction is forced through one of two dozen typed methods, each gated by capability-token verification and wrapped by symptom-triggered rules. Skills cannot bypass safety because there is no path that does so.</p>
     </section>
 
