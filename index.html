@@ -109,7 +109,9 @@
 
     <section>
       <h2>Architecture Spec</h2>
-      <p>Oslo should not just run isolated tasks. It should behave like a company learning loop. The job is to watch the surfaces where Harmonix already operates, understand who is reacting, classify which accounts look like users versus partners, search for more people like them, track roadmap progress, recommend who to contact and why, and propose the content most likely to work next.</p>
+      <p>Oslo is built from memory, skills, unit-specific workflows, and automation loops. Its job is not just to execute tasks, but to observe what is happening, understand what matters, act across the company, and improve over time.</p>
+      <p>Its primary promise is simple: help a small team feel bigger. In practice, that means finding the highest-leverage users, partners, content opportunities, and next actions, then helping the team act on them. It should find leads, suggest improvements, do reports, create content, and get better over time from the work it already does.</p>
+      <p>Team members can extend Oslo by adding new skills, so the system becomes more useful as the company teaches it new workflows, tones, playbooks, and operating habits.</p>
       <p>That changes the architecture. Instead of thinking about Oslo as a bag of scripts, think of it as an intelligence layer sitting under Codex and Claude Code. Reactions, replies, product milestones, partner conversations, roadmap state, and content performance all get written into one operating memory. From there, the system can score accounts, build lookalike lists, connect each opportunity to a roadmap moment, and explain the next best action with reasons.</p>
       <p>Oslo has one operator, six departments, and four entry points. <strong>Codex and Claude Code are the primary entry points</strong> because they are the reasoning and review layer. <strong>Discord and Telegram are the chat surfaces</strong> where live signals and quick approvals happen. All four reach the same dispatcher. Dispatch should not only pick a skill. It should capture the signal, classify it, enrich it, score it, and route it to the right unit. The unit then runs Plan → Act → Verify, streams progress back, and writes episodic memory so the next run starts smarter.</p>
       <p>Two model paths. <strong>Codex / Claude Code path</strong>: when you drive Oslo from one of these, the host model is already in the loop. It understands your input, emits a structured call, and Oslo runs the skill with no extra routing call. <strong>Chat path</strong>: when you drive Oslo from Discord, Telegram, X reactions, or a scheduled trigger, there is no host model. Oslo's dispatch handles routing itself through a fast deterministic ladder, falling back to a small LLM only for genuinely novel inputs. Why not put an LLM at the front of every dispatch like other agent frameworks? Because two LLMs in series, host model upstream plus dispatcher LLM, would do the work twice.</p>
@@ -119,7 +121,7 @@
 
     <section>
       <h2>The Architecture</h2>
-      <p>The diagram below maps every layer in one view. Each section that follows zooms into one of them.</p>
+      <p>The diagram below maps every layer in one view. The feedback loop should be read as sitting over the whole system, not just at the end. It improves the signals we watch, the scores we trust, the recommendations we make, the memory we keep, and the skills each unit uses.</p>
 
       <div class="diagram-wrap">
         <div class="diagram-title">Oslo — Growth Intelligence Architecture</div>
@@ -412,7 +414,7 @@
 
     <section>
       <h2>5. Memory</h2>
-      <p>Memory is attached to units, but Oslo also maintains a shared operating graph. BD's leads should not blindly reach Marketing's prompts, and Engineering's vault marks should not bleed into Security's watchlist — but Oslo does need one place to answer higher-order questions like who our users are, who our partners are, who looks like them, what shipped last week, and what content moved the right audience.</p>
+      <p>Memory is the company context layer. It should remember who customers are, who partners are, what the product is, who the key contacts are, what happened before, what content worked, what did not work, and how the team likes to operate. Unit memory stays scoped, but Oslo also maintains a shared operating graph so it can answer higher-order questions like who our best users are, which partners resemble them, what shipped last week, and what content or outreach actually moved the right audience.</p>
       <p>Each unit has five memory types:</p>
       <ul>
         <li><strong>Audience graph</strong> — the shared company graph of users, partners, and lookalikes (Section 3). Read by every unit; written only by Data and BD analysis skills.</li>
@@ -479,7 +481,7 @@
     <section>
       <h2>Closing Loop</h2>
       <p>signal arrives → dispatch normalizes it → the audience graph classifies and enriches it → the system scores who matters and why → the right unit gets a recommendation → the operator approves or edits when needed → action is taken → the result is logged back into memory</p>
-      <p>That is the loop. Observe, score, prioritize, act, learn. The same idea should apply to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
+      <p>That is the loop. Observe, score, prioritize, act, learn. The feedback loop is not just the last box. It sits over the whole system and improves memory, skills, automation, and unit strategy. The same idea should apply to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
     </section>
 
     <section>
