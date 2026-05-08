@@ -264,6 +264,54 @@ p.note {
   margin-bottom: 6px;
 }
 .defs .def .body { color: var(--text2); font-size: 14px; line-height: 1.6; }
+/* CD-article-style comparison block: two-column "X vs Y" labeled bullets. */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 22px 0;
+}
+.compare .col {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.compare .col .label {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.compare .col .body { color: var(--text2); font-size: 14.5px; line-height: 1.65; }
+@media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
+
+/* Flow chain — a styled mono line that reads like a system loop. */
+.flow {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 22px 0;
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--text2);
+  word-spacing: 2px;
+}
+.flow .step { color: var(--text); font-weight: 500; }
+.flow .arrow { color: var(--accent); font-weight: 700; padding: 0 6px; height: auto; display: inline; }
+.flow .arrow::after { display: none; }
+
+[data-theme="dark"] .compare .col {
+  border-left-color: rgba(226,246,161,0.32);
+}
+[data-theme="dark"] .flow {
+  background: rgba(226,246,161,0.04);
+  border-color: rgba(226,246,161,0.18);
+}
+
 .voice {
   background: rgba(23,49,50,0.03);
   border: 1px solid rgba(23,49,50,0.08);
@@ -654,7 +702,17 @@ footer a { color: var(--text3); border-bottom: none; }
         <li><strong>How we judge success</strong> — what counts as a good output, what counts as a bad one, the threshold for confirm-and-edit.</li>
         <li><strong>How the workflow gets better from repeated use</strong> — what the daily <code>consolidate</code> skill harvests, what the decisions log feeds back, how scoring weights shift week to week.</li>
       </ul>
-      <p>That's the difference between a script and a skill. A script runs. A skill <em>learns the company's way of doing the job</em>, and the next run starts from a smarter place.</p>
+      <p>That's the difference between a script and a skill:</p>
+      <div class="compare">
+        <div class="col">
+          <div class="label">Script</div>
+          <div class="body">Runs the same way every time. No memory. No feedback. Predictable input, predictable output. If the world changes, the script doesn't notice.</div>
+        </div>
+        <div class="col">
+          <div class="label">Skill</div>
+          <div class="body">Learns the company's way of doing the job. Reads memory, writes memory, tracks cost and outcome. Improves week over week as accept/reject decisions feed back into scoring. The next run starts from a smarter place.</div>
+        </div>
+      </div>
 
       <h3>Units: who owns the work</h3>
       <p>The six units cover Oslo's full work surface, but they should all run the same selection logic: maximum result, minimum wasted effort. Each unit owns its own memory, its own skills, its own goals, and a daily research loop that keeps it current and in sync with the other departments.</p>
@@ -811,7 +869,9 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>Closing Loop</h2>
-      <p>signal arrives → dispatch normalizes it → the audience graph classifies and enriches it → the system scores who matters and why → the right unit gets a recommendation → the operator approves or edits when needed → action is taken → the result is logged back into memory</p>
+      <div class="flow">
+        <span class="step">signal</span><span class="arrow">→</span><span class="step">dispatch normalizes</span><span class="arrow">→</span><span class="step">audience graph classifies + enriches</span><span class="arrow">→</span><span class="step">system scores who matters and why</span><span class="arrow">→</span><span class="step">unit gets a recommendation</span><span class="arrow">→</span><span class="step">operator approves / edits / postpones</span><span class="arrow">→</span><span class="step">action is taken</span><span class="arrow">→</span><span class="step">result logged to memory</span><span class="arrow">→</span><span class="step">next signal starts smarter</span>
+      </div>
       <p>That is the loop. Observe, score, prioritize, act, learn.</p>
       <p>The feedback loop is not just the last box. It sits over the whole system — improving memory, skills, automation, unit strategy, and the recommendations themselves. It should learn from <strong>business outcomes, not engagement</strong>. If a post leads to a deposit, that matters more than likes. If an outreach leads to retention, that matters more than a reply. If a partner conversation leads to measurable TVL, that matters more than the meeting count.</p>
       <p>Over time, Oslo should get better at three things: <strong>self-improvement, better suggestions, and better conversions</strong>. Every accept, reject, and edit feeds back into the scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually mattered. The same idea applies to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
