@@ -907,11 +907,27 @@ footer a { color: var(--text3); border-bottom: none; }
         </div>
         <div class="col">
           <div class="label">data.weight-outcomes</div>
-          <div class="body">Reads accepted proposals from 7-30 days ago. For each, looks for downstream signals that the action moved a number — a follow-up reply in <code>oslo_interactions</code>, an audience-graph score lift, an engagement spike, a roadmap item shipped. Computes outcome correlation per signal source × pattern. Combines with the decisions-side weight via geometric mean. The merged weight is what suggest-* skills read on the next run.</div>
+          <div class="body">Reads accepted proposals from 7-30 days ago. For each, checks downstream signals that the action moved a number. Computes outcome correlation per signal source × pattern. Combines with the decisions-side weight via geometric mean. The merged weight is what suggest-* skills read on the next run.</div>
         </div>
       </div>
+
+      <h3>What "outcome" actually means</h3>
+      <p>Engagement is not the goal. Money moving is the goal. Two more skills feed the outcome side with real data, market-adjusted:</p>
+      <div class="compare">
+        <div class="col">
+          <div class="label">data.app-activity-sync</div>
+          <div class="body">Nightly. Scans every Harmonix vault contract on HyperEVM (haHYPE, hakHYPE, haUSDC) and Arbitrum (BasisTrade) for ERC20 deposit and withdraw events. Aggregates to <code>oslo_app_activity</code> (per wallet × day × vault) and <code>oslo_app_wallets</code> (per wallet rollup: total deposited, days active, classification). Source of truth for "did money move".</div>
+        </div>
+        <div class="col">
+          <div class="label">data.market-snapshot</div>
+          <div class="body">Hourly. Captures HYPE / BTC / ETH price + 24h change, Hyperliquid 24h volume, Harmonix TVL. Writes to <code>oslo_market_state</code>. Lets the outcome evaluator normalize: <em>"a post that got 80 likes on a -8% HYPE day is stronger than the same 80 likes on a +5% pump day."</em></div>
+        </div>
+      </div>
+      <p>So when a BD proposal is accepted and the @user behind it deposits to a Harmonix vault within 14 days, <code>data.weight-outcomes</code> joins <code>oslo_app_wallets.linked_handle</code> against <code>oslo_app_activity</code>, sees the deposit, and credits the signals that supported the proposal. When a marketing post is judged, the engagement number is divided by a market-adjustment multiplier read from <code>oslo_market_state</code> — a flat-day winner stays a winner, a pump-day winner gets adjusted down.</p>
+
+      <h3>Surfacing the loop on every proposal</h3>
       <p>Suggest skills (<code>bd.suggest-contacts</code>, eventually <code>marketing.suggest-content</code> and <code>ops.suggest-priorities</code>) read <code>oslo_signal_weights</code> at scoring time and multiply each candidate's score by the product of weights for the evidence behind it. The operator sees the multiplier on the proposal — so if last week's <em>"AUM &gt;$50M"</em> signal was a strong predictor and this week's candidate has it, the proposal explicitly notes <code>learned multiplier=1.42 → adjusted_score=120</code>.</p>
-      <p>The loop closes itself. Decisions feed weights. Weights feed scoring. Scoring feeds decisions. The system gets sharper from the work it already did.</p>
+      <p>The loop closes itself. Decisions feed weights. Outcomes feed weights. Weights feed scoring. Scoring feeds decisions. The system gets sharper from the work it already did.</p>
     </section>
 
     <section>
