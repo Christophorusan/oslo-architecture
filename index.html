@@ -104,13 +104,13 @@
     <header class="article-header">
       <h1>Understanding AI Agents with Harmonix</h1>
       <p class="subtitle">Signals · Audience Graph · Recommendations · Units · Memory · Connectors</p>
-      <p class="lede">Turns Codex and Claude Code into a company operator that learns who matters, what is working, and what should happen next</p>
+      <p class="lede">An AI agent that helps a small team run the company like a much bigger one</p>
     </header>
 
     <section>
       <h2>Architecture Spec</h2>
-      <p>Oslo is built from memory, skills, unit-specific workflows, and automation loops. Its job is not just to execute tasks, but to observe what is happening, understand what matters, act across the company, and improve over time.</p>
-      <p>Its primary promise is simple: help a small team feel bigger. In practice, that means finding the highest-leverage users, partners, content opportunities, and next actions, then helping the team act on them. It should find leads, suggest improvements, do reports, create content, and get better over time from the work it already does.</p>
+      <p>Oslo is built from <strong>memory, skills, unit-specific workflows, automation loops, and a feedback loop</strong> that improves the whole system over time. Its job is not just to execute tasks, but to observe what is happening, understand what matters, act across the company, and get better at all of it.</p>
+      <p>The point is not automation. It is better selection. Think of it as Moneyball for the company: maximum result, minimum wasted effort. Instead of trying to outwork a larger team, Oslo helps a small team out-select one — finding the highest-leverage users, partners, content opportunities, and next actions, then helping the team act on them. It should find leads, suggest improvements, do reports, create content, and get better over time from the work it already does.</p>
       <p>Team members can extend Oslo by adding new skills, so the system becomes more useful as the company teaches it new workflows, tones, playbooks, and operating habits.</p>
       <p>That changes the architecture. Instead of thinking about Oslo as a bag of scripts, think of it as an intelligence layer sitting under Codex and Claude Code. Reactions, replies, product milestones, partner conversations, roadmap state, and content performance all get written into one operating memory. From there, the system can score accounts, build lookalike lists, connect each opportunity to a roadmap moment, and explain the next best action with reasons.</p>
       <p>Oslo has one operator, six departments, and four entry points. <strong>Codex and Claude Code are the primary entry points</strong> because they are the reasoning and review layer. <strong>Discord and Telegram are the chat surfaces</strong> where live signals and quick approvals happen. All four reach the same dispatcher. Dispatch should not only pick a skill. It should capture the signal, classify it, enrich it, score it, and route it to the right unit. The unit then runs Plan → Act → Verify, streams progress back, and writes episodic memory so the next run starts smarter.</p>
@@ -190,7 +190,7 @@
               <h4>Memory</h4>
               <div class="sub">per-unit + shared company graph</div>
               <div class="body">
-                · audience graph: users · partners · lookalikes<br>
+                · audience graph: power users · tourists · integration partners · lookalikes<br>
                 · semantic: facts, roadmap, product state<br>
                 · episodic: reactions, meetings, replies, posts<br>
                 · working: active queue and next actions<br>
@@ -204,9 +204,9 @@
               <h4>Connectors</h4>
               <div class="sub">typed clients · real signals in, recommendations out</div>
               <div class="body">
-                <span class="accent">x-api</span> · discord · telegram<br>
-                app analytics · supabase · notion<br>
-                github · docs · roadmap tracker<br>
+                <span class="accent">x-api · supabase · discord</span><br>
+                <span class="accent">github · product analytics</span><br>
+                telegram · notion · roadmap tracker<br>
                 hyperliquid · defillama · coingecko<br>
                 harmonix-brain · address-reputation<br>
                 <br>
@@ -321,14 +321,15 @@
     <section>
       <h2>2. Audience Graph</h2>
       <p>The audience graph is where signals become usable company context. Dispatch normalizes the event, but this layer decides whether an account looks like a user, a partner, a prospect, a power user, or just noise. It enriches the profile, links it to similar accounts, and writes that relationship back into memory.</p>
-      <p>This is the Moneyball layer. Instead of trying to outwork larger teams, Oslo should out-select them. It should score which people matter, which roadmap moment they are closest to, and which opportunities deserve attention now.</p>
-      <p>Three primary classifications, plus a graph of relationships between them:</p>
+      <p>This is the Moneyball layer. The point is to out-select, not outwork. Oslo should score which people matter, which roadmap moment they are closest to, and which opportunities deserve attention now.</p>
+      <p>Four primary classifications, plus a graph of relationships between them:</p>
       <ul>
-        <li><strong>Users</strong> — accounts that interact with the protocol (deposits, withdrawals, vault activity, app sessions). Identity-resolved across surfaces — the same person can have a handle on X, a wallet on chain, a Discord ID, a Telegram ID, and Oslo merges them. The strongest user-quality signals are large deposits and leaving those deposits in over time.</li>
-        <li><strong>Partners</strong> — integration and growth partners building on us or integrating the product. Think Superform or Clearstar. The strongest partner signal is the ability to bring transactions, TVL, distribution, or product adoption. The graph should track warm-intro paths, last-touched dates, partnership status, and interaction sentiment.</li>
-        <li><strong>Lookalikes</strong> — accounts whose profile, follower overlap, and content signals match users or partners but who have not yet engaged. Ranked by ICP fit.</li>
+        <li><strong>Power users</strong> — the small set of users that produce most of the value. Identity-resolved across surfaces — the same person can have a handle on X, a wallet on chain, a Discord ID, a Telegram ID, and Oslo merges them. The strongest user-quality signals are <strong>large deposits and leaving those deposits in over time</strong>. Everything else (app sessions, withdrawals, reactions) helps explain those two.</li>
+        <li><strong>Tourists</strong> — accounts that touch the protocol but do not retain capital. Small deposits, fast withdrawals, low session depth. Useful as a contrast set; not a target. The graph should bias hard toward power users and away from tourists.</li>
+        <li><strong>Integration partners</strong> — growth and integration partners that can move real numbers for us. Think Superform or Clearstar. The strongest partner signal is the ability to bring <strong>TVL, users, transactions, revenue, deposits, and MAU</strong>. The graph tracks warm-intro paths, last-touched dates, partnership status, and interaction sentiment.</li>
+        <li><strong>Lookalikes</strong> — accounts whose profile, follower overlap, and on-chain or content signals resemble power users or integration partners but have not yet engaged. Ranked by ICP fit.</li>
       </ul>
-      <p>Each entry holds: handle, resolved identity, classification, score, source events, last interaction, projected next-best-action, and a list of edges (warm intros, mutual followers, shared partner orgs). The graph should bias hard toward power users and away from tourists or low-value depositors.</p>
+      <p>Each entry holds: handle, resolved identity, classification, score, source events, last interaction, projected next-best-action, and a list of edges (warm intros, mutual followers, shared partner orgs).</p>
 
       <h3>How the graph is built</h3>
       <p>Three analysis skills run on cron and write to the graph. They do not propose actions — only update what is known. On top of that, Oslo should run a daily research loop that looks for new information, proposes updates to the graph and memory, and writes accepted changes back into the system.</p>
@@ -339,24 +340,44 @@
       </ul>
 
       <h3>Why the graph matters</h3>
-      <p>Without it, Oslo treats every signal in isolation. A reaction on a tweet would just be a reaction. With the graph, the same reaction means <em>"the COO of a partner protocol just liked this thread about haUSD"</em> — and that's a different signal entirely.</p>
-      <p>Every other unit reads the graph. Marketing's <code>marketing.suggest-content</code> references which audience tier it's writing for. BD's <code>bd.suggest-contacts</code> ranks proposals by graph score. Ops' weekly brief surfaces partner-graph anomalies (someone who used to engage stopped engaging, someone new keeps showing up).</p>
+      <p>Without it, Oslo treats every signal in isolation. A reaction on a tweet would just be a reaction. With the graph, the same reaction means <em>"the COO of an integration partner just liked this thread about haUSD"</em> — and that's a different signal entirely.</p>
+      <p>Every other unit reads the graph. Marketing's <code>marketing.suggest-content</code> references which audience tier it's writing for. BD's <code>bd.suggest-contacts</code> ranks proposals by graph score and biases toward power users + integration partners. Ops' weekly brief surfaces partner-graph anomalies (a power user who used to deposit stopped depositing, an integration partner who used to push volume slowed down, a new lookalike keeps showing up).</p>
 
       <p class="note">Note: The graph is shared company memory. Skills declare reads against <code>audience_graph</code> like any other memory; the capability token enforces it. Updates happen only via the analysis skills above. Skills cannot mutate the graph as a side effect.</p>
     </section>
 
     <section>
       <h2>3. Recommendations</h2>
-      <p>Oslo doesn't only execute work. It also proposes work — what to do next, with reasoning. The recommendation queue is the output of weekly analysis skills that read the audience graph + recent activity + roadmap state, identify patterns, and surface proposals to Discord for operator review.</p>
+      <p>Oslo doesn't only execute work. It also proposes work — what to do next, with reasoning. The recommendation queue is the output of analysis skills that read the audience graph + recent activity + roadmap state, identify patterns, and surface proposals to Discord for operator review.</p>
+
+      <h3>The morning brief</h3>
+      <p>Every morning, Oslo should produce one short brief covering the five highest-leverage calls for the day:</p>
+      <ul>
+        <li><strong>Top power users to watch</strong> — who deposited, who's quiet, who's at risk of leaving.</li>
+        <li><strong>Top integration partners to push</strong> — who can move TVL, users, transactions, revenue, deposits, MAU.</li>
+        <li><strong>Top content idea for the day</strong> — the one post most likely to land with the right audience.</li>
+        <li><strong>Top funnel / ops issue hurting growth</strong> — the bottleneck most worth fixing today.</li>
+        <li><strong>Top improvement Oslo itself should make</strong> — the one change that would make the system more useful tomorrow.</li>
+      </ul>
 
       <h3>The proposal loop</h3>
-      <p>Three unit-level proposal skills run weekly on cron:</p>
+      <p>Three unit-level proposal skills feed the brief and run on cron:</p>
       <ul>
-        <li><strong><code>bd.suggest-contacts</code></strong> — produces a list of <em>"contact these 5 people this week, here's why for each"</em>. Each entry includes: handle, classification (user / partner / lookalike), audience-graph score, the specific signal that triggered the proposal (recent activity, roadmap moment, warm path), and a draft opening line.</li>
-        <li><strong><code>marketing.suggest-content</code></strong> — produces 5 post topics for the next 7 days. Each entry includes: hook, format (text / chart / video), target time, expected engagement range based on <code>marketing.engagement_patterns</code>, and rationale ("works on the user cohort, ties to the v2 roadmap shipping next week").</li>
-        <li><strong><code>ops.suggest-priorities</code></strong> — produces a "this week, focus on these 3 things; defer these 2" call. Each entry includes: rationale, dependencies, projected outcome, and what gets blocked if it slips.</li>
+        <li><strong><code>bd.suggest-contacts</code></strong> — produces a list of <em>"contact these 5 people, here's why for each"</em>, biased toward power users and integration partners. Each entry includes: handle, classification (power user / integration partner / lookalike), audience-graph score, the specific signal that triggered the proposal (recent activity, roadmap moment, warm path), and a draft opening line.</li>
+        <li><strong><code>marketing.suggest-content</code></strong> — produces post topics for the next 7 days. Each entry includes: hook, format (text / chart / video), target time, expected engagement range based on <code>marketing.engagement_patterns</code>, and rationale ("works on the power-user cohort, ties to the v2 roadmap shipping next week").</li>
+        <li><strong><code>ops.suggest-priorities</code></strong> — produces a "focus on these 3 things; defer these 2" call. Each entry includes: rationale, dependencies, projected outcome, and what gets blocked if it slips.</li>
       </ul>
       <p>A cross-unit aggregator (<code>ops.weekly-strategy-brief</code>) composes all three into one Sunday-evening Discord post in <code>#oslo-proposals</code>. Monday morning the operator reviews it.</p>
+
+      <h3>What every recommendation looks like</h3>
+      <p>Every proposal — daily or weekly — renders in the same five-field shape so the operator can review it without having to dig:</p>
+      <ul>
+        <li><strong>What</strong> — the action being proposed.</li>
+        <li><strong>Why</strong> — the reason it's the right move now.</li>
+        <li><strong>Evidence</strong> — the specific signals from memory that support it (deposit size, retention curve, partner reach, last-touched date, content performance).</li>
+        <li><strong>Suggested action</strong> — the next step Oslo would take if approved (draft DM, schedule post, open issue).</li>
+        <li><strong>Confidence</strong> — how sure Oslo is, with the threshold that downgrades it to confirm-and-edit instead of accept-as-is.</li>
+      </ul>
 
       <h3>The operator review</h3>
       <p>Each proposal renders with three buttons in Discord: <strong>accept</strong>, <strong>reject</strong>, <strong>edit</strong>. Accepting fires the next skill (e.g., <code>bd.draft-outreach</code> for an accepted contact). Rejecting writes a "rejected, reason: …" entry to the decisions log. Editing opens a follow-up dialog where the operator can adjust args.</p>
@@ -368,16 +389,16 @@
     <section>
       <h2>4. Units</h2>
       <p>Recommendations are the output of the scoring system. Units are the departments that act on those recommendations.</p>
-      <p>The six units cover Oslo's full work surface, but they should all run the same selection logic: maximum result, minimum wasted effort.</p>
+      <p>The six units cover Oslo's full work surface, but they should all run the same selection logic: maximum result, minimum wasted effort. Each unit owns its own memory, its own skills, its own goals, and a daily research loop that keeps it current and in sync with the other departments.</p>
       <ul>
-        <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic. Daily job: identify top integration partners, suggest who to contact, explain why now, and keep the partner graph current.</li>
-        <li><strong>Marketing</strong> — content calendar, daily posts, reaction analysis, brand voice, distribution, winning formats. Also owns <strong>design</strong> (banner specs, brand kit, social graphics, visual identity) — design work is operationally tied to Marketing, so it lives there rather than as a separate unit. Marketing memory should track who customers are, what they are talking about, and how content performed across social surfaces.</li>
-        <li><strong>Engineering</strong> — protocol notes, technical explanations, vault checks, roadmap state, product milestones. Vaults sit inside Engineering because vault work is engineering work. Daily job: track roadmap progress and surface blockers hurting adoption.</li>
-        <li><strong>Security</strong> — watchlists, exploit monitoring, threat briefs, real-time on-chain alerts. Daily job: surface trust and risk signals that could affect user or partner confidence.</li>
-        <li><strong>Ops</strong> — activity logs, weekly reports, market briefs, coordination, roadmap cadence. Daily job: identify bottlenecks, keep the operating loop in sync, and make sure every department sees what the others are doing and how they are performing.</li>
-        <li><strong>Data</strong> — account scoring, ICP clustering, lookalikes, customer and partner segmentation. The unit other units read from when they need analytical rigor instead of operational action. Daily job: refresh scoring, detect pattern changes, and keep every unit in sync with the current picture.</li>
+        <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic. <em>Daily job: identify top integration partners, suggest who to contact, explain why now, and keep the partner graph current.</em></li>
+        <li><strong>Marketing</strong> — content calendar, daily posts, reaction analysis, brand voice, distribution, winning formats. Also owns <strong>design</strong> (banner specs, brand kit, social graphics, visual identity) — design work is operationally tied to Marketing, so it lives there rather than as a separate unit. <em>Daily job: track customer conversation, log what content worked, and keep the picture current of who customers are and what they are talking about.</em></li>
+        <li><strong>Engineering</strong> — protocol notes, technical explanations, vault checks, roadmap state, product milestones. Vaults sit inside Engineering because vault work is engineering work. <em>Daily job: track roadmap progress and surface blockers hurting adoption.</em></li>
+        <li><strong>Security</strong> — watchlists, exploit monitoring, threat briefs, real-time on-chain alerts. <em>Daily job: track trust and risk signals that could affect users or partners.</em></li>
+        <li><strong>Ops</strong> — activity logs, weekly reports, market briefs, coordination, roadmap cadence. <em>Daily job: identify bottlenecks, keep departments in sync, and make sure every unit sees what the others are doing and how they are performing.</em></li>
+        <li><strong>Data</strong> — account scoring, ICP clustering, lookalikes, customer and partner segmentation. The unit other units read from when they need analytical rigor instead of operational action. <em>Daily job: refresh scoring, detect pattern changes, and keep every unit aligned on the latest picture.</em></li>
       </ul>
-      <p>Each unit has a foundational <code>&lt;unit&gt;.context</code> skill loaded by every other skill in that unit. The context skill holds ICP, partner criteria, brand voice, protocol rules, roadmap priorities, scoring rubrics, and content heuristics. Every unit should also have a daily research loop so it stays up to date and stays connected to the other departments. That is what lets Oslo explain not only what it wants to do, but why it thinks the move makes sense.</p>
+      <p>Each unit has a foundational <code>&lt;unit&gt;.context</code> skill loaded by every other skill in that unit. The context skill holds ICP, partner criteria, brand voice, protocol rules, roadmap priorities, scoring rubrics, and content heuristics. The daily research loop is what lets Oslo explain not only what it wants to do, but why it thinks the move makes sense — and what changed since yesterday that made it the right call.</p>
       <p>Skills live in a flat folder, named <code>&lt;unit&gt;.&lt;verb&gt;</code>. Filename, slash command, and ID are the same string. E.g. <code>bd.daily-leads.skill.ts</code> is invoked as <code>/oslo bd.daily-leads</code>.</p>
       <p>Each skill declares: <code>id</code>, <code>unit</code>, <code>description</code>, <code>triggers</code>, <code>inputs</code>/<code>outputs</code> (zod schemas), <code>reads</code>/<code>writes</code>/<code>connectors</code>, <code>depends_on</code> (other skills it composes with), <code>hitl</code> (human-in-the-loop flag), <code>plan</code>/<code>act</code>/<code>verify</code> (three-phase structure for write skills, with checkpointing between phases), and <code>tests</code> (at least three golden cases — happy path, edge case, adversarial input).</p>
 
@@ -414,7 +435,18 @@
 
     <section>
       <h2>5. Memory</h2>
-      <p>Memory is the company context layer. It should remember who customers are, who partners are, what the product is, who the key contacts are, what happened before, what content worked, what did not work, and how the team likes to operate. Marketing memory should also remember what customers are talking about and how content performed. Unit memory stays scoped, but Oslo also maintains a shared operating graph so it can answer higher-order questions like who our best users are, which partners resemble them, what shipped last week, and what content or outreach actually moved the right audience.</p>
+      <p>Memory is the company context layer. It should remember:</p>
+      <ul>
+        <li>who customers are</li>
+        <li>who partners are</li>
+        <li>what the product is</li>
+        <li>who the key contacts are</li>
+        <li>what happened before</li>
+        <li>what content worked</li>
+        <li>what did not work</li>
+        <li>how the team likes to operate</li>
+      </ul>
+      <p>Marketing memory adds two more: what customers are talking about and how content performed across surfaces. Unit memory stays scoped, but Oslo also maintains a shared operating graph so it can answer higher-order questions like who our best users are, which partners resemble them, what shipped last week, and what content or outreach actually moved the right audience.</p>
       <p>Each unit has five memory types:</p>
       <ul>
         <li><strong>Audience graph</strong> — the shared company graph of users, partners, and lookalikes (Section 3). Read by every unit; written only by Data and BD analysis skills.</li>
@@ -450,7 +482,16 @@
 
     <section>
       <h2>6. Connectors</h2>
-      <p>Connectors are how Oslo touches anything outside its own process. The highest-priority connectors are X, Supabase, Discord, GitHub, and product analytics, with Telegram still important for partner and reply workflows. Every external API, Supabase, Hyperliquid, X, Discord, Telegram, Notion, GitHub, app analytics, plus the LLM connector, is wrapped in a typed client that handles retry, rate limiting, caching, identity resolution, and cost tracking. Skills do not make raw HTTP calls. They go through <code>ctx.connectors.&lt;name&gt;</code>, and every call is checked against the skill's capability token before it is made. Connectors are structured as published packages with hot reload (pattern from <a href="https://github.com/activepieces/activepieces">Activepieces</a>) so skills, the runtime, and any future marketplace can install them uniformly.</p>
+      <p>Connectors are how Oslo touches anything outside its own process. The top-priority connectors are:</p>
+      <ul>
+        <li><strong>X</strong> — audience, reactions, content distribution, partner conversations.</li>
+        <li><strong>Supabase</strong> — the home of memory: semantic, episodic, working, audience graph, audit log.</li>
+        <li><strong>Discord</strong> — the team's shared log + the surface where every recommendation lands for review.</li>
+        <li><strong>GitHub</strong> — roadmap state, PRs, ship notes, the source of truth for what's actually changing.</li>
+        <li><strong>Product analytics</strong> — deposits, withdrawals, conversion, retention. The signals that tell us if anything Oslo proposed actually worked.</li>
+      </ul>
+      <p><strong>Telegram</strong> stays important for partner and reply workflows. Hyperliquid, Notion, defillama, coingecko, harmonix-brain, and address-reputation round out the long tail.</p>
+      <p>Every external API plus the LLM connector is wrapped in a typed client that handles retry, rate limiting, caching, identity resolution, and cost tracking. Skills do not make raw HTTP calls. They go through <code>ctx.connectors.&lt;name&gt;</code>, and every call is checked against the skill's capability token before it is made. Connectors are structured as published packages with hot reload (pattern from <a href="https://github.com/activepieces/activepieces">Activepieces</a>) so skills, the runtime, and any future marketplace can install them uniformly.</p>
 
       <h3>Capability tokens as the safety primitive</h3>
       <p>The capability token issued by dispatch is the foundation of the safety layer. Every memory access and connector call presents the token; anything outside what the token allows is rejected at the boundary, before the call is even attempted. Token is short-lived (expires when the skill finishes), scoped to a single skill run, and includes the actor on whose behalf the skill runs.</p>
@@ -481,7 +522,9 @@
     <section>
       <h2>Closing Loop</h2>
       <p>signal arrives → dispatch normalizes it → the audience graph classifies and enriches it → the system scores who matters and why → the right unit gets a recommendation → the operator approves or edits when needed → action is taken → the result is logged back into memory</p>
-      <p>That is the loop. Observe, score, prioritize, act, learn. The feedback loop is not just the last box. It sits over the whole system and improves memory, skills, automation, and unit strategy. It should learn when a post leads to a deposit, when a recommendation leads to retention, and when a partner conversation leads to measurable movement. Over time, Oslo should get better at three things: self-improvement, better suggestions, and better conversions. The same idea should apply to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
+      <p>That is the loop. Observe, score, prioritize, act, learn.</p>
+      <p>The feedback loop is not just the last box. It sits over the whole system — improving memory, skills, automation, unit strategy, and the recommendations themselves. It should learn from <strong>business outcomes, not engagement</strong>. If a post leads to a deposit, that matters more than likes. If an outreach leads to retention, that matters more than a reply. If a partner conversation leads to measurable TVL, that matters more than the meeting count.</p>
+      <p>Over time, Oslo should get better at three things: <strong>self-improvement, better suggestions, and better conversions</strong>. Every accept, reject, and edit feeds back into the scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually mattered. The same idea applies to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
     </section>
 
     <section>
