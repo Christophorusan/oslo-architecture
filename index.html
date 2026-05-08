@@ -126,13 +126,13 @@
         <div class="diagram">
 
           <div class="layer">
-            <h4>Human Loop + Surfaces</h4>
-            <div class="sub">Codex and Claude Code review · Discord and Telegram carry live company signals</div>
+            <h4>Signals</h4>
+            <div class="sub">operator surfaces · non-operator triggers · all signals reach the same dispatcher</div>
             <div class="doors">
-              <div class="door host"><div class="tag">human loop</div><div class="name">Claude Code</div><div class="desc">review<br>reasoning<br>edits</div></div>
-              <div class="door host"><div class="tag">human loop</div><div class="name">Codex</div><div class="desc">automation<br>review<br>commands</div></div>
-              <div class="door headless"><div class="tag">signal surface</div><div class="name">Discord</div><div class="desc">team context<br>approvals<br>shared log</div></div>
-              <div class="door headless"><div class="tag">signal surface</div><div class="name">Telegram</div><div class="desc">replies<br>partners<br>on the go</div></div>
+              <div class="door host"><div class="tag">host model</div><div class="name">Claude Code</div><div class="desc">review<br>reasoning<br>edits</div></div>
+              <div class="door host"><div class="tag">host model</div><div class="name">Codex</div><div class="desc">automation<br>review<br>commands</div></div>
+              <div class="door headless"><div class="tag">chat surface</div><div class="name">Discord</div><div class="desc">team context<br>approvals<br>shared log</div></div>
+              <div class="door headless"><div class="tag">chat surface</div><div class="name">Telegram</div><div class="desc">replies<br>partners<br>on the go</div></div>
             </div>
             <div style="font-size:10px;color:#777;text-align:center;margin-top:10px;font-style:italic;">+ X reactions · app activity · cron · webhooks · replay</div>
           </div>
@@ -282,12 +282,9 @@
         <li><strong>Replay</strong> — re-run a past <code>trace_id</code>, optionally with a different model, prompt, or skill version. Used for debugging and prompt regression testing.</li>
       </ul>
       <p class="note">Note: Whether typed by a human or fired by a timer, every signal gets normalized into the same shape and handed to dispatch. The unit running at the other end never has to know where the signal came from.</p>
-    </section>
-
-    <section>
-      <h2>2. Dispatch + Classification</h2>
-      <p>The audience graph is where signals become usable company context. Dispatch normalizes the event, but this layer decides whether an account looks like a user, a partner, a prospect, a power user, or just noise. It enriches the profile, links it to similar accounts, and writes that relationship back into memory.</p>
-      <p>This is the Moneyball layer. Instead of trying to outwork larger teams, Oslo should out-select them. It should score which people matter, which roadmap moment they are closest to, and which opportunities deserve attention now.</p>
+      <h3>Dispatch and classification</h3>
+      <p>Once a signal arrives, dispatch turns it into a typed skill call. No business logic — only routing, validation, classification, capability-token issuance, and logging.</p>
+      <p>A request moves through six steps: <strong>Parse</strong> (normalize input into a structured shape) → <strong>Classify</strong> (user, partner, prospect, noise, roadmap signal) → <strong>Resolve</strong> (pick a skill via the 4-tier fallback) → <strong>Validate</strong> (check args against the skill's typed schema using zod) → <strong>Confirm</strong> (ask if confidence is low or the skill writes externally) → <strong>Run</strong> (issue a capability token, enqueue, execute, stream results back).</p>
       <p>Every input gets three IDs at parse time: <code>trace_id</code> (random, follows the request through every layer, replayable later), <code>idempotency_key</code> (deterministic, deduplicates retries), and <code>capability_token</code> (issued at run time, enumerates exactly what the skill can read, write, and call — checked at every boundary).</p>
 
       <h3>What classification adds</h3>
@@ -320,8 +317,9 @@
     </section>
 
     <section>
-      <h2>3. Audience Graph</h2>
-      <p>The audience graph is Oslo's model of who matters. It is the data structure underneath every BD outreach decision, every Marketing audience-targeting question, and every Ops priority call.</p>
+      <h2>2. Audience Graph</h2>
+      <p>The audience graph is where signals become usable company context. Dispatch normalizes the event, but this layer decides whether an account looks like a user, a partner, a prospect, a power user, or just noise. It enriches the profile, links it to similar accounts, and writes that relationship back into memory.</p>
+      <p>This is the Moneyball layer. Instead of trying to outwork larger teams, Oslo should out-select them. It should score which people matter, which roadmap moment they are closest to, and which opportunities deserve attention now.</p>
       <p>Three primary classifications, plus a graph of relationships between them:</p>
       <ul>
         <li><strong>Users</strong> — accounts that interact with the protocol (deposits, withdrawals, vault activity, app sessions). Identity-resolved across surfaces — the same person can have a handle on X, a wallet on chain, a Discord ID, a Telegram ID, and Oslo merges them.</li>
@@ -346,7 +344,7 @@
     </section>
 
     <section>
-      <h2>4. Recommendations</h2>
+      <h2>3. Recommendations</h2>
       <p>Oslo doesn't only execute work. It also proposes work — what to do next, with reasoning. The recommendation queue is the output of weekly analysis skills that read the audience graph + recent activity + roadmap state, identify patterns, and surface proposals to Discord for operator review.</p>
 
       <h3>The proposal loop</h3>
@@ -366,7 +364,7 @@
     </section>
 
     <section>
-      <h2>5. Units</h2>
+      <h2>4. Units</h2>
       <p>Recommendations are the output of the scoring system. Units are the departments that act on those recommendations.</p>
       <p>The six units cover Oslo's full work surface, but they should all run the same selection logic: maximum result, minimum wasted effort.</p>
       <ul>
@@ -413,7 +411,7 @@
     </section>
 
     <section>
-      <h2>6. Memory</h2>
+      <h2>5. Memory</h2>
       <p>Memory is attached to units, but Oslo also maintains a shared operating graph. BD's leads should not blindly reach Marketing's prompts, and Engineering's vault marks should not bleed into Security's watchlist — but Oslo does need one place to answer higher-order questions like who our users are, who our partners are, who looks like them, what shipped last week, and what content moved the right audience.</p>
       <p>Each unit has five memory types:</p>
       <ul>
@@ -449,7 +447,7 @@
     </section>
 
     <section>
-      <h2>7. Connectors</h2>
+      <h2>6. Connectors</h2>
       <p>Connectors are how Oslo touches anything outside its own process. Every external API, Supabase, Hyperliquid, X, Discord, Telegram, Notion, GitHub, app analytics, plus the LLM connector, is wrapped in a typed client that handles retry, rate limiting, caching, identity resolution, and cost tracking. Skills do not make raw HTTP calls. They go through <code>ctx.connectors.&lt;name&gt;</code>, and every call is checked against the skill's capability token before it is made. Connectors are structured as published packages with hot reload (pattern from <a href="https://github.com/activepieces/activepieces">Activepieces</a>) so skills, the runtime, and any future marketplace can install them uniformly.</p>
 
       <h3>Capability tokens as the safety primitive</h3>
@@ -479,7 +477,7 @@
     </section>
 
     <section>
-      <h2>6. Closing Loop</h2>
+      <h2>Closing Loop</h2>
       <p>signal arrives → dispatch normalizes it → the audience graph classifies and enriches it → the system scores who matters and why → the right unit gets a recommendation → the operator approves or edits when needed → action is taken → the result is logged back into memory</p>
       <p>That is the loop. Observe, score, prioritize, act, learn. The same idea should apply to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
     </section>
