@@ -927,7 +927,25 @@ footer a { color: var(--text3); border-bottom: none; }
 
       <h3>Surfacing the loop on every proposal</h3>
       <p>Suggest skills (<code>bd.suggest-contacts</code>, eventually <code>marketing.suggest-content</code> and <code>ops.suggest-priorities</code>) read <code>oslo_signal_weights</code> at scoring time and multiply each candidate's score by the product of weights for the evidence behind it. The operator sees the multiplier on the proposal — so if last week's <em>"AUM &gt;$50M"</em> signal was a strong predictor and this week's candidate has it, the proposal explicitly notes <code>learned multiplier=1.42 → adjusted_score=120</code>.</p>
-      <p>The loop closes itself. Decisions feed weights. Outcomes feed weights. Weights feed scoring. Scoring feeds decisions. The system gets sharper from the work it already did.</p>
+
+      <h3>Repeat-rejected candidates: ask, don't discard</h3>
+      <p>Suppose Oslo keeps recommending @vincent because his audience-graph score is high and the learned weights still favor him, but you reject him every week. Two of the three options are wrong:</p>
+      <ul>
+        <li><strong>(a) keep showing him with no change</strong> — wastes your attention.</li>
+        <li><strong>(b) auto-suppress after N rejects</strong> — discards a candidate who might still be good once a missing piece of context resolves.</li>
+        <li><strong>(c) ask why, redo the score, keep him in the pool with adjusted weight</strong> — the operator's call.</li>
+      </ul>
+      <p>So that's what Oslo does. On the second reject of the same target without a captured reason, Discord opens a modal: <em>"Why isn't @vincent a fit?"</em> Three fields:</p>
+      <ul>
+        <li><strong>Reason</strong> — free-form. <em>"They raised in Q3, won't fit until next round."</em></li>
+        <li><strong>Tags</strong> — structured: <code>out_of_icp</code>, <code>timing</code>, <code>already_engaged</code>, <code>wrong_signal</code>, <code>low_priority</code>, <code>needs_warm_intro</code>, <code>not_now_revisit</code>. Lets us downweight whole classes of mistake.</li>
+        <li><strong>Resurface after</strong> — optional date. <em>"Revisit 2026-08-01 once their round closes."</em></li>
+      </ul>
+      <p>The reason persists in <code>oslo_target_feedback</code>. On the next run of <code>bd.suggest-contacts</code>, @vincent's score gets multiplied by 0.3 and the proposal carries the prior context as evidence:</p>
+      <pre><code>oslo_target_feedback: prior reject (3×): they raised in Q3, won't fit until next round [out_of_icp, timing]</code></pre>
+      <p>If the resurface date passes, the multiplier clears and @vincent comes back — with the prior reason still attached so the operator has the full thread. If the operator accepts on a future round, the feedback row clears entirely. The candidate is never deleted from the pool. The score adjusts. The reason stays in memory. The system learns by being asked, not by being silent.</p>
+
+      <p>The loop closes itself. Decisions feed weights. Outcomes feed weights. Operator feedback feeds weights. Weights feed scoring. Scoring feeds decisions. The system gets sharper from the work it already did.</p>
     </section>
 
     <section>
