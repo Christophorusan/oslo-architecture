@@ -139,6 +139,7 @@
       <p>Oslo has one operator, six departments, and four entry points. <strong>Codex and Claude Code are the primary entry points</strong> because they are the reasoning and review layer. <strong>Discord and Telegram are the chat surfaces</strong> where live signals and quick approvals happen. All four reach the same dispatcher. Dispatch should not only pick a skill. It should capture the signal, classify it, enrich it, score it, and route it to the right unit. The unit then runs Plan → Act → Verify, streams progress back, and writes episodic memory so the next run starts smarter.</p>
       <p>Two model paths. <strong>Codex / Claude Code path</strong>: when you drive Oslo from one of these, the host model is already in the loop. It understands your input, emits a structured call, and Oslo runs the skill with no extra routing call. <strong>Chat path</strong>: when you drive Oslo from Discord, Telegram, X reactions, or a scheduled trigger, there is no host model. Oslo's dispatch handles routing itself through a fast deterministic ladder, falling back to a small LLM only for genuinely novel inputs. Why not put an LLM at the front of every dispatch like other agent frameworks? Because two LLMs in series, host model upstream plus dispatcher LLM, would do the work twice.</p>
       <p>Oslo orchestrates with other bots. External agent systems are reached through read-only or read/write contracts following the open <strong>Agent2Agent (A2A) protocol</strong> hosted by the Linux Foundation, supported by Microsoft, Google, and AWS. Oslo never copies their state. The two systems share a contract, not a database.</p>
+      <p>Long term, Oslo should live online like a protocol-like company agent. The runtime stays private, but the system persists over time and team members connect to it through Claude Code, Codex, Discord, and Telegram.</p>
       <p>Oslo's architecture has two layers. The <strong>data plane</strong> is the path every request takes: signal → classification → recommendation → unit action → memory update. The <strong>control plane</strong> is the configuration the data plane reads from on every request: a versioned skill registry, prompt registry, connector catalog, eval harness, and feature flags. Data plane runs constantly; control plane is loaded at boot and hot-reloaded on change. Detailed in Section 2 (Dispatch), since dispatch is the heaviest reader.</p>
     </section>
 
@@ -277,7 +278,7 @@
 
           <div class="obs">
             <h5>Observability Spine</h5>
-            <p>traces (OTel) · structured logs · metrics · events · per-skill cost / latency / success rate · prompt + response logged</p>
+            <p>traces (OTel) · structured logs · metrics · events · per-skill token usage / cost / latency / success rate · prompt + response logged</p>
           </div>
 
         </div>
@@ -322,6 +323,7 @@
         <li><strong>Prompt Registry</strong> — every LLM prompt named and versioned, separate from skill code. Editing a prompt does not require a redeploy. Prompt rollback is one revert away.</li>
         <li><strong>Connector Catalog</strong> — every external API connector available to skills, with declared cost, rate limit, and current health status. The catalog rejects skills that request connectors not present (or currently unhealthy).</li>
         <li><strong>Eval Harness</strong> — golden-test runner. Every skill ships with at least three test cases; CI runs the full suite on every change. Replay can also re-run last week's prod traffic against any new skill or prompt version and diff outputs — no skill or prompt change ships without this gate passing.</li>
+        <li><strong>Cost + Token Telemetry</strong> — every skill and workflow records token usage, latency, model choice, and dollar cost so the system can optimize for efficiency as well as quality.</li>
         <li><strong>Feature Flags</strong> — turn skills on/off, route a percentage of traffic to a canary version, gate experimental connectors.</li>
       </ul>
       <p>Keeping the two planes separate matters because the data plane needs to be fast and stable; the control plane needs to be flexible and frequently updated. Mixing them — hardcoded prompts inside skill code, connector configs scattered across files, no eval gate — is what turns small agent prototypes into systems no one can change without breaking.</p>
