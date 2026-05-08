@@ -737,6 +737,17 @@ footer a { color: var(--text3); border-bottom: none; }
       </ul>
       <p>Each unit has a foundational <code>&lt;unit&gt;.context</code> skill loaded by every other skill in that unit. The context skill holds ICP, partner criteria, brand voice, protocol rules, roadmap priorities, scoring rubrics, and content heuristics. The daily research loop is what lets Oslo explain not only what it wants to do, but why it thinks the move makes sense — and what changed since yesterday that made it the right call.</p>
 
+      <h3>Daily research, per unit</h3>
+      <p>Every unit runs a <code>&lt;unit&gt;.daily-research</code> skill. Cheap, no LLM, pure aggregation. Cron schedules them between 7:00 and 7:25 UTC so the morning brief at 8:05 reads fresh status from every unit:</p>
+      <ul>
+        <li><strong><code>data.daily-research</code></strong> (7:00) — counts the audience graph by classification, computes top score movers up and down vs yesterday's snapshot, flags new high-value wallets from <code>oslo_app_wallets</code>.</li>
+        <li><strong><code>sec.daily-research</code></strong> (7:05) — counts new watchlist entries, breaks down recent <code>sec_events</code> by severity, surfaces any critical alerts for the morning brief risk slot.</li>
+        <li><strong><code>eng.daily-research</code></strong> (7:10) — counts shipped vs blocked roadmap items in the window, lists items past their target date that aren't done, reads vault PnL deltas, counts <code>eng_events</code>.</li>
+        <li><strong><code>marketing.daily-research</code></strong> (7:15) — buckets the last 24h of posts by format and surface, finds the top engagement post, normalizes the average against <code>oslo_market_state</code> so a flat-day winner stays a winner.</li>
+        <li><strong><code>ops.daily-research</code></strong> (7:20) — runs last so it sees what the others wrote. Scans every unit's events table, flags units that have been silent (might be stuck), counts skill failures from <code>oslo_audit_log</code>, identifies the day's bottleneck.</li>
+      </ul>
+      <p>BD already had its daily skills (<code>bd.daily-leads</code>, <code>bd.audience-analyzer</code>) so it's not in this list. After this loop, every unit has a heartbeat — and the morning brief stops being only as fresh as the suggest-* skills.</p>
+
       <h3>Memory · Skills · Units, on one call</h3>
       <p>The three layers do different jobs on the same request. Take BD outreach to a partner:</p>
       <ul>
