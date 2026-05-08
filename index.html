@@ -897,6 +897,21 @@ footer a { color: var(--text3); border-bottom: none; }
       <p>That's the loop. Observe, score, prioritize, act, learn.</p>
       <p>The feedback loop isn't just the last box. It sits over the whole system. It improves memory, skills, automation, unit strategy, and the recommendations themselves. It learns from <strong>business outcomes, not engagement</strong>. If a post leads to a deposit, that matters more than likes. If an outreach leads to retention, that matters more than a reply. If a partner conversation leads to measurable TVL, that matters more than the meeting count.</p>
       <p>Over time, Oslo gets better at three things: <strong>self-improvement, sharper suggestions, and higher conversion</strong>. Every accept, reject, edit, and postpone feeds back into the scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually moved the audience. A small team can't outwork a big one. It can out-select one.</p>
+
+      <h3>How the loop closes in code</h3>
+      <p>Two skills run weekly to make this concrete:</p>
+      <div class="compare">
+        <div class="col">
+          <div class="label">data.weight-decisions</div>
+          <div class="body">Reads the last 28 days of accept / reject / postpone decisions on <code>oslo_proposals</code>. For every signal source × pattern, computes the accept rate. Writes a per-signal weight to <code>oslo_signal_weights</code>. If "warm intro through @x replied once" gets rejected 5 times and accepted zero, that signal's weight drops toward 0.3 and stops dominating future BD recommendations.</div>
+        </div>
+        <div class="col">
+          <div class="label">data.weight-outcomes</div>
+          <div class="body">Reads accepted proposals from 7-30 days ago. For each, looks for downstream signals that the action moved a number — a follow-up reply in <code>oslo_interactions</code>, an audience-graph score lift, an engagement spike, a roadmap item shipped. Computes outcome correlation per signal source × pattern. Combines with the decisions-side weight via geometric mean. The merged weight is what suggest-* skills read on the next run.</div>
+        </div>
+      </div>
+      <p>Suggest skills (<code>bd.suggest-contacts</code>, eventually <code>marketing.suggest-content</code> and <code>ops.suggest-priorities</code>) read <code>oslo_signal_weights</code> at scoring time and multiply each candidate's score by the product of weights for the evidence behind it. The operator sees the multiplier on the proposal — so if last week's <em>"AUM &gt;$50M"</em> signal was a strong predictor and this week's candidate has it, the proposal explicitly notes <code>learned multiplier=1.42 → adjusted_score=120</code>.</p>
+      <p>The loop closes itself. Decisions feed weights. Weights feed scoring. Scoring feeds decisions. The system gets sharper from the work it already did.</p>
     </section>
 
     <section>
