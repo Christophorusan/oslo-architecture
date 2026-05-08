@@ -404,9 +404,10 @@
 
       <h3>The operator review</h3>
       <p>Each proposal renders with four buttons in Discord: <strong>accept</strong>, <strong>reject</strong>, <strong>edit</strong>, <strong>postpone</strong>. Accepting fires the next skill (e.g., <code>bd.draft-outreach</code> for an accepted contact). Rejecting writes a "rejected, reason: …" entry to the decisions log. Editing opens a follow-up dialog where the operator can adjust args. Postponing parks the proposal for a later cycle (default: next morning's brief) without dropping the context — the next run sees it again with fresh evidence and updated confidence.</p>
+      <p>The operator is the human loop. Their job is to review, steer, correct, approve, and improve the system over time. At minimum, the operator should be responsible for approving important actions, correcting bad recommendations, and improving the AI itself.</p>
       <p>The decisions log is critical — it's how the analysis side learns what's good and what's not. Next week's <code>bd.suggest-contacts</code> reads last week's accept/reject pattern. If you keep rejecting "warm intro through @x because @x replied to a thread once," the analyzer downweights that signal.</p>
 
-      <p class="note">Note: Proposals never fire actions automatically. Even with high confidence and operator approval, write actions go through the standard HITL flow with capability-token gating. The recommendation loop produces "what should happen" — the operator and the safety layer both decide whether it does.</p>
+      <p class="note">Note: Proposals never fire actions automatically. Even with high confidence and operator approval, write actions go through the standard HITL flow with capability-token gating. The recommendation loop produces "what should happen" — the operator and the safety layer both decide whether it does. Oslo should never send important external messages, make financial or trading actions, change strategy or memory in a major way, publish outputs on its own, or make information public on its own without approval.</p>
     </section>
 
     <section>
