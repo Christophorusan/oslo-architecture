@@ -368,14 +368,14 @@ footer a { color: var(--text3); border-bottom: none; }
     <header class="article-header">
       <h1>Understanding AI Agents with Harmonix</h1>
       <p class="subtitle">Signals · Audience Graph · Recommendations · Units &amp; Skills · Memory · Connectors</p>
-      <p class="lede">An AI agent that helps a small team run the company like a much bigger one</p>
+      <p class="lede">An AI agent that helps a small team run a company like a bigger one. It watches what's happening, decides what matters, acts on the right thing, and gets better at all of it over time.</p>
     </header>
 
     <section>
       <h2>Architecture Spec</h2>
-      <p>Oslo is built from <strong>memory, skills, unit-specific workflows, automation loops, and a feedback loop</strong> that improves the whole system over time. Its job is not just to execute tasks, but to observe what is happening, understand what matters, act across the company, and get better at all of it.</p>
-      <p>The point is not automation. It is better selection. Think of it as Moneyball for the company: maximum result, minimum wasted effort. Instead of trying to outwork a larger team, Oslo helps a small team out-select one — finding the highest-leverage users, partners, content opportunities, and next actions, then helping the team act on them. It should find leads, suggest improvements, do reports, create content, and get better over time from the work it already does.</p>
-      <p>Three layers do most of the work, and they are easy to blur together. Lock them in:</p>
+      <p>Oslo is built from <strong>memory, skills, unit workflows, automation loops, and a feedback loop</strong>. It watches what's happening in the company, decides what matters, acts on the right thing, writes the result back to memory, and uses that result to do better next time.</p>
+      <p>The point is not to automate everything. It's to pick the right thing to do. A small team can't outwork a big one. It can out-select one. Oslo helps you decide who to talk to, what to post, what to ship, what to drop, and what to do tomorrow. It finds leads, suggests improvements, writes reports, drafts content, and gets sharper over time from the work it already did.</p>
+      <p>Three layers do most of the work. They blur together if you don't separate them:</p>
       <div class="defs">
         <div class="def">
           <div class="label">Memory</div>
@@ -390,12 +390,22 @@ footer a { color: var(--text3); border-bottom: none; }
           <div class="body">Who owns the work. Six departments — BD, Marketing, Engineering, Security, Ops, Data — each running its own daily loop.</div>
         </div>
       </div>
-      <p>The split matters. Memory knows <em>who the partner is</em>. The skill knows <em>how to score and contact them</em>. The BD unit <em>owns that workflow</em>. Same call, three different layers doing three different jobs.</p>
-      <p>Team members extend Oslo by adding new skills, so the system becomes more useful as the company teaches it new workflows, tones, playbooks, and operating habits.</p>
-      <p>That changes the architecture. Instead of thinking about Oslo as a bag of scripts, think of it as an intelligence layer sitting under Codex and Claude Code. Reactions, replies, product milestones, partner conversations, roadmap state, and content performance all get written into one operating memory. From there, the system can score accounts, build lookalike lists, connect each opportunity to a roadmap moment, and explain the next best action with reasons.</p>
-      <p>Oslo has one operator, six departments, and four entry points. <strong>Codex and Claude Code are the primary entry points</strong> because they are the reasoning and review layer. <strong>Discord and Telegram are the chat surfaces</strong> where live signals and quick approvals happen. All four reach the same dispatcher. Dispatch should not only pick a skill. It should capture the signal, classify it, enrich it, score it, and route it to the right unit. The unit then runs Plan → Act → Verify, streams progress back, and writes episodic memory so the next run starts smarter.</p>
-      <p>Two model paths. <strong>Codex / Claude Code path</strong>: when you drive Oslo from one of these, the host model is already in the loop. It understands your input, emits a structured call, and Oslo runs the skill with no extra routing call. <strong>Chat path</strong>: when you drive Oslo from Discord, Telegram, X reactions, or a scheduled trigger, there is no host model. Oslo's dispatch handles routing itself through a fast deterministic ladder, falling back to a small LLM only for genuinely novel inputs. Why not put an LLM at the front of every dispatch like other agent frameworks? Because two LLMs in series, host model upstream plus dispatcher LLM, would do the work twice.</p>
-      <p>Oslo orchestrates with other bots. External agent systems are reached through read-only or read/write contracts following the open <strong>Agent2Agent (A2A) protocol</strong> hosted by the Linux Foundation, supported by Microsoft, Google, and AWS. Oslo never copies their state. The two systems share a contract, not a database.</p>
+      <p>The split matters. Memory knows <em>who the partner is</em>. The skill knows <em>how to score them and how to reach out</em>. The BD unit <em>owns that workflow</em>. Same call, three different layers doing three different jobs.</p>
+      <p>Team members extend Oslo by adding new skills. The more skills the company teaches it, the more useful it gets — new workflows, new playbooks, new operating habits, all reusable.</p>
+      <p>Oslo runs online, like a protocol. People connect to it through Codex, Claude Code, Discord, and Telegram. All four reach the same dispatcher. Dispatch doesn't just pick a skill. It captures the signal, classifies it, enriches it, scores it, and routes it to the right unit. The unit runs Plan → Act → Verify, streams progress back, and writes the result to memory so the next run starts smarter.</p>
+      <p>Two paths into Oslo, depending on where the request comes from:</p>
+      <div class="compare">
+        <div class="col">
+          <div class="label">Codex / Claude Code</div>
+          <div class="body">The host model is already in the loop. It reads your input, emits a structured tool call, and Oslo runs the skill. No extra routing.</div>
+        </div>
+        <div class="col">
+          <div class="label">Chat surface (Discord, Telegram, reactions, cron)</div>
+          <div class="body">No host model upstream. Oslo's dispatcher does the routing itself through a deterministic ladder, falling back to a small LLM only when the input is genuinely new.</div>
+        </div>
+      </div>
+      <p>Why not put an LLM in front of every dispatch like other agent frameworks? Because two LLMs in series — host model plus dispatcher LLM — would do the work twice.</p>
+      <p>Oslo also talks to other agent systems. External agents connect through the open <strong>Agent2Agent (A2A) protocol</strong> hosted by the Linux Foundation, supported by Microsoft, Google, and AWS. Oslo never copies their state. The two systems share a contract, not a database.</p>
       <p>Long term, Oslo should live online like a protocol-like company agent. The runtime stays private, but the system persists over time and team members connect to it through Claude Code, Codex, Discord, and Telegram.</p>
       <p>Oslo's architecture has two layers. The <strong>data plane</strong> is the path every request takes: signal → classification → recommendation → unit action → memory update. The <strong>control plane</strong> is the configuration the data plane reads from on every request: a versioned skill registry, prompt registry, connector catalog, eval harness, and feature flags. Data plane runs constantly; control plane is loaded at boot and hot-reloaded on change. Detailed in Section 2 (Dispatch), since dispatch is the heaviest reader.</p>
     </section>
@@ -546,7 +556,7 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>1. Signals</h2>
-      <p>Signals are the highest-value daily inputs that tell Oslo whether the company is actually winning, where value is coming from, and where attention should go next. The most important ones are revenue, deposits, withdrawals, conversion, and retention. Everything else exists to explain those numbers better. Some signals come from operators driving Oslo directly. Others come from the world — engagement on a post, a deposit on the protocol, a scheduled trigger firing. All signals reach the same dispatcher.</p>
+      <p>Signals are what Oslo watches. They tell you if the company is winning, where the value is coming from, and where attention should go next. The five that matter most are <strong>revenue, deposits, withdrawals, conversion, and retention</strong>. Everything else exists to explain those numbers better. Some signals come from operators driving Oslo directly. Others come from the world — a post gets a reply, a user deposits, a cron job fires. All signals reach the same dispatcher.</p>
 
       <h3>What Oslo watches</h3>
       <p>Five buckets, ordered by leverage:</p>
@@ -615,8 +625,8 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>2. Audience Graph</h2>
-      <p>The audience graph is where signals become usable company context. Dispatch normalizes the event, but this layer decides whether an account looks like a user, a partner, a prospect, a power user, or just noise. It enriches the profile, links it to similar accounts, and writes that relationship back into memory.</p>
-      <p>This is the Moneyball layer. The point is to out-select, not outwork. Oslo should score which people matter, which roadmap moment they are closest to, and which opportunities deserve attention now.</p>
+      <p>The audience graph is where signals become useful. Dispatch normalizes the event. This layer decides whether the account behind it is a power user, a tourist, an integration partner, a lookalike, or noise. It enriches the profile, links it to similar accounts, and writes the result back to memory.</p>
+      <p>The job here is selection, not volume. Oslo scores which people matter, which roadmap moment they are closest to, and which opportunities deserve attention this week. Without the graph, every signal looks the same. With it, a like on a tweet might mean nothing — or it might mean a partner protocol's COO just engaged with a thread about haUSD.</p>
       <p>Four primary classifications, plus a graph of relationships between them:</p>
       <ul>
         <li><strong>Power users</strong> — the small set of users that produce most of the value. Identity-resolved across surfaces — the same person can have a handle on X, a wallet on chain, a Discord ID, a Telegram ID, and Oslo merges them. The strongest user-quality signals are <strong>large deposits and leaving those deposits in over time</strong>. Everything else (app sessions, withdrawals, reactions) helps explain those two.</li>
@@ -643,10 +653,10 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>3. Recommendations</h2>
-      <p>Oslo doesn't only execute work. It also proposes work — what to do next, with reasoning. The recommendation queue is the output of analysis skills that read the audience graph + recent activity + roadmap state, identify patterns, and surface proposals to Discord for operator review.</p>
+      <p>Oslo doesn't just execute work. It proposes work — what to do next, and why. The recommendation queue is the output of analysis skills that read the audience graph, recent activity, and roadmap state, find patterns, and post proposals to Discord for operator review.</p>
 
-      <h3>The morning brief</h3>
-      <p>Every morning, Oslo should produce one short brief covering the five highest-leverage calls for the day:</p>
+      <h3>The daily brief</h3>
+      <p>Every morning, Oslo posts one short brief with the five calls that matter today:</p>
       <ul>
         <li><strong>Top power users to watch</strong> — who deposited, who's quiet, who's at risk of leaving.</li>
         <li><strong>Top integration partners to push</strong> — who can move TVL, users, transactions, revenue, deposits, MAU.</li>
@@ -662,7 +672,8 @@ footer a { color: var(--text3); border-bottom: none; }
         <li><strong><code>marketing.suggest-content</code></strong> — produces post topics for the next 7 days. Each entry includes: hook, format (text / chart / video), target time, expected engagement range based on <code>marketing.engagement_patterns</code>, and rationale ("works on the power-user cohort, ties to the v2 roadmap shipping next week").</li>
         <li><strong><code>ops.suggest-priorities</code></strong> — produces a "focus on these 3 things; defer these 2" call. Each entry includes: rationale, dependencies, projected outcome, and what gets blocked if it slips.</li>
       </ul>
-      <p>A cross-unit aggregator (<code>ops.weekly-strategy-brief</code>) composes all three into one Sunday-evening Discord post in <code>#oslo-proposals</code>. Monday morning the operator reviews it.</p>
+      <h3>The weekly strategy brief</h3>
+      <p>Sunday evening, a cross-unit aggregator (<code>ops.weekly-strategy-brief</code>) runs the three suggest skills in parallel, packages the output, and posts one digest to <code>#oslo-proposals</code>. Monday morning the operator reviews it. Daily brief is for today's calls. Weekly brief is for next week's posture: which partners to go after, which content arcs to plan, which roadmap items get the focus.</p>
 
       <h3>What every recommendation looks like</h3>
       <p>The point is not to output ranked lists. It is to make decisions <strong>legible</strong> — so the operator can approve, reject, edit, or postpone with full context, without having to dig. Every proposal — daily or weekly — renders in the same five-field shape:</p>
@@ -684,10 +695,10 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>4. Units &amp; Skills</h2>
-      <p>Recommendations are the output of the scoring system. Skills are how the work gets done. Units are who owns it.</p>
+      <p>Recommendations are the output of the scoring system. Skills are how the work gets done. Units are who owns it. Same call, three different layers.</p>
 
       <h3>Skills: reusable company workflows</h3>
-      <p>A skill is three things at once: a capability, a repeatable job, and — most importantly — a <strong>repeatable workflow</strong>. Not a one-off script. Not a prompt. A reusable company workflow with:</p>
+      <p>A skill is a capability, a repeatable job, and most importantly a <strong>repeatable workflow</strong>. Not a one-off script. Not a prompt. A reusable company workflow that has:</p>
       <ul>
         <li><strong>Clear input</strong> (typed schema, validated at dispatch)</li>
         <li><strong>Clear output</strong> (typed schema, validated before return)</li>
@@ -772,7 +783,7 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>5. Memory</h2>
-      <p>Memory is the company context layer. It should remember:</p>
+      <p>Memory is the company context layer. It's what makes Oslo more than a script that runs the same way every time. Memory remembers:</p>
       <ul>
         <li>who customers are</li>
         <li>who partners are</li>
@@ -830,7 +841,7 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <section>
       <h2>6. Connectors</h2>
-      <p>Connectors are how Oslo touches anything outside its own process. The top-priority connectors are:</p>
+      <p>Connectors are how Oslo touches anything outside its own process. Skills don't make raw HTTP calls. They go through a typed connector that handles retry, rate limiting, caching, identity resolution, cost tracking, and capability-token checks. The top-priority connectors are:</p>
       <ul>
         <li><strong>X</strong> — audience, reactions, content distribution, partner conversations.</li>
         <li><strong>Supabase</strong> — the home of memory: semantic, episodic, working, audience graph, audit log.</li>
@@ -872,9 +883,9 @@ footer a { color: var(--text3); border-bottom: none; }
       <div class="flow">
         <span class="step">signal</span><span class="arrow">→</span><span class="step">dispatch normalizes</span><span class="arrow">→</span><span class="step">audience graph classifies + enriches</span><span class="arrow">→</span><span class="step">system scores who matters and why</span><span class="arrow">→</span><span class="step">unit gets a recommendation</span><span class="arrow">→</span><span class="step">operator approves / edits / postpones</span><span class="arrow">→</span><span class="step">action is taken</span><span class="arrow">→</span><span class="step">result logged to memory</span><span class="arrow">→</span><span class="step">next signal starts smarter</span>
       </div>
-      <p>That is the loop. Observe, score, prioritize, act, learn.</p>
-      <p>The feedback loop is not just the last box. It sits over the whole system — improving memory, skills, automation, unit strategy, and the recommendations themselves. It should learn from <strong>business outcomes, not engagement</strong>. If a post leads to a deposit, that matters more than likes. If an outreach leads to retention, that matters more than a reply. If a partner conversation leads to measurable TVL, that matters more than the meeting count.</p>
-      <p>Over time, Oslo should get better at three things: <strong>self-improvement, better suggestions, and better conversions</strong>. Every accept, reject, and edit feeds back into the scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually mattered. The same idea applies to growth, engineering, and ops. A small team should not try to outwork a much bigger team. It should out-select it.</p>
+      <p>That's the loop. Observe, score, prioritize, act, learn.</p>
+      <p>The feedback loop isn't just the last box. It sits over the whole system. It improves memory, skills, automation, unit strategy, and the recommendations themselves. It learns from <strong>business outcomes, not engagement</strong>. If a post leads to a deposit, that matters more than likes. If an outreach leads to retention, that matters more than a reply. If a partner conversation leads to measurable TVL, that matters more than the meeting count.</p>
+      <p>Over time, Oslo gets better at three things: <strong>self-improvement, sharper suggestions, and higher conversion</strong>. Every accept, reject, edit, and postpone feeds back into the scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually moved the audience. A small team can't outwork a big one. It can out-select one.</p>
     </section>
 
     <section>
