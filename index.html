@@ -143,23 +143,23 @@ p.note {
   font-style: normal;
 }
 .diagram-wrap {
-  /* Break out of the article's 860px column to use the full viewport. */
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -49vw;
-  margin-right: -49vw;
-  width: 98vw;
-  max-width: 1280px;
-  /* Re-center: when the viewport is wider than max-width, the negative
-     margins overshoot — translateX pulls back to center. */
-  transform: translateX(calc(50vw - 50%));
+  /* Full-bleed break-out: takes 100% of the viewport width regardless of
+     the article's column. Inner .diagram caps at max-width and centers. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   margin-top: 24px;
   margin-bottom: 24px;
-  padding: 14px 16px;
+  padding: 14px 24px;
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  box-sizing: border-box;
+}
+.diagram-wrap .diagram-inner {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 .diagram-title {
   text-align: center;
@@ -298,14 +298,14 @@ footer a { color: var(--text3); border-bottom: none; }
   /* Disable the diagram break-out on narrow screens. Let it sit inside the
      article column with horizontal scroll if needed. */
   .diagram-wrap {
-    position: static;
-    left: auto; right: auto;
-    margin-left: 0; margin-right: 0;
     width: auto;
-    max-width: 100%;
-    transform: none;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
     overflow-x: auto;
   }
+  .diagram-wrap .diagram-inner { max-width: 100%; }
   .doors, .pills, .units { grid-template-columns: repeat(2, 1fr) !important; }
   .rules { grid-template-columns: repeat(2, 1fr) !important; }
 }
@@ -357,6 +357,7 @@ footer a { color: var(--text3); border-bottom: none; }
       <p>The diagram below maps every layer in one view. The feedback loop should be read as sitting over the whole system, not just at the end. It improves the signals we watch, the scores we trust, the recommendations we make, the memory we keep, and the skills each unit uses.</p>
 
       <div class="diagram-wrap">
+       <div class="diagram-inner">
         <div class="diagram-title">Oslo — Growth Intelligence Architecture</div>
         <div class="diagram">
 
@@ -491,12 +492,24 @@ footer a { color: var(--text3); border-bottom: none; }
           </div>
 
         </div>
+       </div>
       </div>
     </section>
 
     <section>
       <h2>1. Signals</h2>
       <p>Signals are the highest-value daily inputs that tell Oslo whether the company is actually winning, where value is coming from, and where attention should go next. The most important ones are revenue, deposits, withdrawals, conversion, and retention. Everything else exists to explain those numbers better. Some signals come from operators driving Oslo directly. Others come from the world — engagement on a post, a deposit on the protocol, a scheduled trigger firing. All signals reach the same dispatcher.</p>
+
+      <h3>What Oslo watches</h3>
+      <p>Five buckets, ordered by leverage:</p>
+      <ul>
+        <li><strong>Business outcomes</strong> — revenue, deposits, withdrawals, conversion, retention. The top of the watch list. Everything else exists to explain these.</li>
+        <li><strong>Audience movement</strong> — X reactions on @harmonixfi (likes, replies, reposts, quotes), follower deltas, power-user activity (deposits, withdrawals, app sessions, vault usage), integration-partner movement (TVL shifts, ship moments worth reacting to), mentions across X / Discord / Telegram.</li>
+        <li><strong>Product state</strong> — vault marks (PnL on positions), roadmap items shipping / blocked / slipping, GitHub PRs and deploys, incidents, feature usage from product analytics.</li>
+        <li><strong>External world</strong> — Hyperliquid ecosystem moves (HYPE price, new vaults, integrations), crypto narrative shifts, security signals (exploits, audits, watchlist alerts), competitor moves.</li>
+        <li><strong>Operator + feedback signals</strong> — <code>@oslo</code> commands from Discord / Telegram / Codex / Claude Code, cron triggers, webhooks, and every accept / reject / edit / postpone on past proposals. The decisions log is what makes the system get smarter.</li>
+      </ul>
+
       <p>Long-running handling is async-first: dispatch returns a <code>job_id</code> immediately and streams results back as they happen. A ninety-second skill does not block the IDE or the chat.</p>
 
       <h3>Operator-driven signals</h3>
@@ -713,6 +726,17 @@ footer a { color: var(--text3); border-bottom: none; }
         <li>how the team likes to operate</li>
       </ul>
       <p>Marketing memory adds two more: what customers are talking about and how content performed across surfaces. Unit memory stays scoped, but Oslo also maintains a shared operating graph so it can answer higher-order questions like who our best users are, which partners resemble them, what shipped last week, and what content or outreach actually moved the right audience.</p>
+
+      <h3>Today, past, future</h3>
+      <p>Memory should answer three temporal questions, not just one:</p>
+      <ul>
+        <li><strong>What matters today</strong> — working memory + the audience-graph snapshot. Active proposals, top accounts to reach this week, the roadmap items shipping now.</li>
+        <li><strong>What mattered in the past</strong> — episodic memory + the decisions log. What worked, what didn't, what got rejected and why.</li>
+        <li><strong>What will matter in the future</strong> — roadmap state, partner pipelines, content calendars, projected outcomes attached to accepted proposals. The forward-looking layer that lets today's choice account for what's coming.</li>
+      </ul>
+      <p>The feedback loop reads all three. A recommendation that ignores the past is naïve. One that ignores the future is short-sighted. One that ignores today is irrelevant.</p>
+
+      <h3>Memory types per unit</h3>
       <p>Each unit has five memory types:</p>
       <ul>
         <li><strong>Audience graph</strong> — the shared company graph of users, partners, and lookalikes (Section 3). Read by every unit; written only by Data and BD analysis skills.</li>
@@ -837,11 +861,22 @@ footer a { color: var(--text3); border-bottom: none; }
 (function(){
   const root = document.documentElement;
   const btn = document.getElementById("themeToggle");
-  const saved = localStorage.getItem("oslo-architecture-theme");
+  const KEY = "oslo-architecture-theme";
+  const VERSION_KEY = "oslo-architecture-theme-default-v";
+  const CURRENT_DEFAULT_VERSION = "2";
+  // Force dark as the first edition for everyone, including returning visitors
+  // who may have a stale "light" preference saved. Bump CURRENT_DEFAULT_VERSION
+  // to roll out a new default again later.
+  const lastSeenDefault = localStorage.getItem(VERSION_KEY);
+  if (lastSeenDefault !== CURRENT_DEFAULT_VERSION) {
+    localStorage.removeItem(KEY);
+    localStorage.setItem(VERSION_KEY, CURRENT_DEFAULT_VERSION);
+  }
+  const saved = localStorage.getItem(KEY);
   const setTheme = (theme) => {
     root.setAttribute("data-theme", theme);
     btn.textContent = theme === "dark" ? "Switch to light" : "Switch to dark";
-    localStorage.setItem("oslo-architecture-theme", theme);
+    localStorage.setItem(KEY, theme);
   };
   setTheme(saved || "dark");
   btn.addEventListener("click", () => {
