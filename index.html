@@ -89,6 +89,13 @@
   .obs h5 { font-size: 10px; color: #E2F6A1; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
   .obs p { font-size: 10px; color: #888; margin: 0; line-height: 1.5; }
 
+  /* Definition block */
+  .defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+  .defs .def { background: #1a1d1a; border: 1px solid #2a2d2a; border-left: 3px solid #E2F6A1; border-radius: 0 8px 8px 0; padding: 16px 18px; }
+  .defs .def .label { color: #E2F6A1; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .defs .def .body { color: #ccc; font-size: 14px; line-height: 1.5; }
+  @media (max-width: 700px) { .defs { grid-template-columns: 1fr; } }
+
   /* Voice cards */
   .voice { background: #1a1d1a; border-left: 3px solid #E2F6A1; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
   .voice .who { color: #E2F6A1; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
@@ -103,7 +110,7 @@
 
     <header class="article-header">
       <h1>Understanding AI Agents with Harmonix</h1>
-      <p class="subtitle">Signals · Audience Graph · Recommendations · Units · Memory · Connectors</p>
+      <p class="subtitle">Signals · Audience Graph · Recommendations · Units &amp; Skills · Memory · Connectors</p>
       <p class="lede">An AI agent that helps a small team run the company like a much bigger one</p>
     </header>
 
@@ -111,7 +118,23 @@
       <h2>Architecture Spec</h2>
       <p>Oslo is built from <strong>memory, skills, unit-specific workflows, automation loops, and a feedback loop</strong> that improves the whole system over time. Its job is not just to execute tasks, but to observe what is happening, understand what matters, act across the company, and get better at all of it.</p>
       <p>The point is not automation. It is better selection. Think of it as Moneyball for the company: maximum result, minimum wasted effort. Instead of trying to outwork a larger team, Oslo helps a small team out-select one — finding the highest-leverage users, partners, content opportunities, and next actions, then helping the team act on them. It should find leads, suggest improvements, do reports, create content, and get better over time from the work it already does.</p>
-      <p>Team members can extend Oslo by adding new skills, so the system becomes more useful as the company teaches it new workflows, tones, playbooks, and operating habits.</p>
+      <p>Three layers do most of the work, and they are easy to blur together. Lock them in:</p>
+      <div class="defs">
+        <div class="def">
+          <div class="label">Memory</div>
+          <div class="body">What Oslo knows. Customers, partners, product, contacts, history, what worked, what didn't, how the team operates.</div>
+        </div>
+        <div class="def">
+          <div class="label">Skills</div>
+          <div class="body">What Oslo can do. Reusable company workflows with typed inputs and outputs that get better from repeated use.</div>
+        </div>
+        <div class="def">
+          <div class="label">Units</div>
+          <div class="body">Who owns the work. Six departments — BD, Marketing, Engineering, Security, Ops, Data — each running its own daily loop.</div>
+        </div>
+      </div>
+      <p>The split matters. Memory knows <em>who the partner is</em>. The skill knows <em>how to score and contact them</em>. The BD unit <em>owns that workflow</em>. Same call, three different layers doing three different jobs.</p>
+      <p>Team members extend Oslo by adding new skills, so the system becomes more useful as the company teaches it new workflows, tones, playbooks, and operating habits.</p>
       <p>That changes the architecture. Instead of thinking about Oslo as a bag of scripts, think of it as an intelligence layer sitting under Codex and Claude Code. Reactions, replies, product milestones, partner conversations, roadmap state, and content performance all get written into one operating memory. From there, the system can score accounts, build lookalike lists, connect each opportunity to a roadmap moment, and explain the next best action with reasons.</p>
       <p>Oslo has one operator, six departments, and four entry points. <strong>Codex and Claude Code are the primary entry points</strong> because they are the reasoning and review layer. <strong>Discord and Telegram are the chat surfaces</strong> where live signals and quick approvals happen. All four reach the same dispatcher. Dispatch should not only pick a skill. It should capture the signal, classify it, enrich it, score it, and route it to the right unit. The unit then runs Plan → Act → Verify, streams progress back, and writes episodic memory so the next run starts smarter.</p>
       <p>Two model paths. <strong>Codex / Claude Code path</strong>: when you drive Oslo from one of these, the host model is already in the loop. It understands your input, emits a structured call, and Oslo runs the skill with no extra routing call. <strong>Chat path</strong>: when you drive Oslo from Discord, Telegram, X reactions, or a scheduled trigger, there is no host model. Oslo's dispatch handles routing itself through a fast deterministic ladder, falling back to a small LLM only for genuinely novel inputs. Why not put an LLM at the front of every dispatch like other agent frameworks? Because two LLMs in series, host model upstream plus dispatcher LLM, would do the work twice.</p>
@@ -370,7 +393,7 @@
       <p>A cross-unit aggregator (<code>ops.weekly-strategy-brief</code>) composes all three into one Sunday-evening Discord post in <code>#oslo-proposals</code>. Monday morning the operator reviews it.</p>
 
       <h3>What every recommendation looks like</h3>
-      <p>Every proposal — daily or weekly — renders in the same five-field shape so the operator can review it without having to dig:</p>
+      <p>The point is not to output ranked lists. It is to make decisions <strong>legible</strong> — so the operator can approve, reject, edit, or postpone with full context, without having to dig. Every proposal — daily or weekly — renders in the same five-field shape:</p>
       <ul>
         <li><strong>What</strong> — the action being proposed.</li>
         <li><strong>Why</strong> — the reason it's the right move now.</li>
@@ -380,15 +403,35 @@
       </ul>
 
       <h3>The operator review</h3>
-      <p>Each proposal renders with three buttons in Discord: <strong>accept</strong>, <strong>reject</strong>, <strong>edit</strong>. Accepting fires the next skill (e.g., <code>bd.draft-outreach</code> for an accepted contact). Rejecting writes a "rejected, reason: …" entry to the decisions log. Editing opens a follow-up dialog where the operator can adjust args.</p>
+      <p>Each proposal renders with four buttons in Discord: <strong>accept</strong>, <strong>reject</strong>, <strong>edit</strong>, <strong>postpone</strong>. Accepting fires the next skill (e.g., <code>bd.draft-outreach</code> for an accepted contact). Rejecting writes a "rejected, reason: …" entry to the decisions log. Editing opens a follow-up dialog where the operator can adjust args. Postponing parks the proposal for a later cycle (default: next morning's brief) without dropping the context — the next run sees it again with fresh evidence and updated confidence.</p>
       <p>The decisions log is critical — it's how the analysis side learns what's good and what's not. Next week's <code>bd.suggest-contacts</code> reads last week's accept/reject pattern. If you keep rejecting "warm intro through @x because @x replied to a thread once," the analyzer downweights that signal.</p>
 
       <p class="note">Note: Proposals never fire actions automatically. Even with high confidence and operator approval, write actions go through the standard HITL flow with capability-token gating. The recommendation loop produces "what should happen" — the operator and the safety layer both decide whether it does.</p>
     </section>
 
     <section>
-      <h2>4. Units</h2>
-      <p>Recommendations are the output of the scoring system. Units are the departments that act on those recommendations.</p>
+      <h2>4. Units &amp; Skills</h2>
+      <p>Recommendations are the output of the scoring system. Skills are how the work gets done. Units are who owns it.</p>
+
+      <h3>Skills: reusable company workflows</h3>
+      <p>A skill is three things at once: a capability, a repeatable job, and — most importantly — a <strong>repeatable workflow</strong>. Not a one-off script. Not a prompt. A reusable company workflow with:</p>
+      <ul>
+        <li><strong>Clear input</strong> (typed schema, validated at dispatch)</li>
+        <li><strong>Clear output</strong> (typed schema, validated before return)</li>
+        <li><strong>Defined memory reads/writes</strong> (which tables/graphs it touches)</li>
+        <li><strong>Defined connectors</strong> (which external surfaces it can call)</li>
+        <li><strong>A unit owner</strong> (the department responsible for it)</li>
+        <li><strong>A way to improve over time</strong> (golden tests, replay against prod traffic, decisions-log feedback)</li>
+      </ul>
+      <p>And every skill encodes three things, not just one:</p>
+      <ul>
+        <li><strong>How we do the task</strong> — the procedure, the prompts, the heuristics, the order of operations.</li>
+        <li><strong>How we judge success</strong> — what counts as a good output, what counts as a bad one, the threshold for confirm-and-edit.</li>
+        <li><strong>How the workflow gets better from repeated use</strong> — what the daily <code>consolidate</code> skill harvests, what the decisions log feeds back, how scoring weights shift week to week.</li>
+      </ul>
+      <p>That's the difference between a script and a skill. A script runs. A skill <em>learns the company's way of doing the job</em>, and the next run starts from a smarter place.</p>
+
+      <h3>Units: who owns the work</h3>
       <p>The six units cover Oslo's full work surface, but they should all run the same selection logic: maximum result, minimum wasted effort. Each unit owns its own memory, its own skills, its own goals, and a daily research loop that keeps it current and in sync with the other departments.</p>
       <ul>
         <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic. <em>Daily job: identify top integration partners, suggest who to contact, explain why now, and keep the partner graph current.</em></li>
@@ -399,10 +442,21 @@
         <li><strong>Data</strong> — account scoring, ICP clustering, lookalikes, customer and partner segmentation. The unit other units read from when they need analytical rigor instead of operational action. <em>Daily job: refresh scoring, detect pattern changes, and keep every unit aligned on the latest picture.</em></li>
       </ul>
       <p>Each unit has a foundational <code>&lt;unit&gt;.context</code> skill loaded by every other skill in that unit. The context skill holds ICP, partner criteria, brand voice, protocol rules, roadmap priorities, scoring rubrics, and content heuristics. The daily research loop is what lets Oslo explain not only what it wants to do, but why it thinks the move makes sense — and what changed since yesterday that made it the right call.</p>
+
+      <h3>Memory · Skills · Units, on one call</h3>
+      <p>The three layers do different jobs on the same request. Take BD outreach to a partner:</p>
+      <ul>
+        <li><strong>Memory</strong> knows <em>who the partner is</em> — name, role, AUM, integrations, last interaction, classification, score.</li>
+        <li><strong>The skill</strong> knows <em>how to score and contact them</em> — read the partner row, look up the warm path, draft the right opener, decide if it needs HITL.</li>
+        <li><strong>The BD unit</strong> <em>owns that workflow</em> — sets the ICP, defines what counts as a good outreach, runs the daily research loop, reviews the proposals.</li>
+      </ul>
+      <p>Easy to blur in conversation. Worth keeping crisp in the architecture: knowledge, capability, ownership.</p>
+
+      <h3>How skills are declared</h3>
       <p>Skills live in a flat folder, named <code>&lt;unit&gt;.&lt;verb&gt;</code>. Filename, slash command, and ID are the same string. E.g. <code>bd.daily-leads.skill.ts</code> is invoked as <code>/oslo bd.daily-leads</code>.</p>
       <p>Each skill declares: <code>id</code>, <code>unit</code>, <code>description</code>, <code>triggers</code>, <code>inputs</code>/<code>outputs</code> (zod schemas), <code>reads</code>/<code>writes</code>/<code>connectors</code>, <code>depends_on</code> (other skills it composes with), <code>hitl</code> (human-in-the-loop flag), <code>plan</code>/<code>act</code>/<code>verify</code> (three-phase structure for write skills, with checkpointing between phases), and <code>tests</code> (at least three golden cases — happy path, edge case, adversarial input).</p>
 
-      <h3>Worked example: bd.daily-leads</h3>
+      <h3>Worked example: bd.partner-lookalikes</h3>
       <pre><code>{
   id: 'bd.partner-lookalikes',
   unit: 'bd',
