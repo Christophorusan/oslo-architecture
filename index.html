@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 @font-face { font-family: 'Aeonik Mono'; src: url('fonts/AeonikMono-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Aeonik Mono'; src: url('fonts/AeonikMono-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
 
-:root {
+:root, [data-theme="light"] {
   --bg: #FFFFFF;
   --bg2: #F9FAF9;
   --card: #FFFFFF;
@@ -23,6 +23,20 @@
   --accent: #173132;
   --accent-soft: rgba(23,49,50,0.06);
   --accent-line: rgba(23,49,50,0.14);
+  --lime: #E2F6A1;
+}
+[data-theme="dark"] {
+  --bg: #172B2C;
+  --bg2: #1E3839;
+  --card: #1E3839;
+  --border: #264546;
+  --border2: #305858;
+  --text: #FFFFFF;
+  --text2: #A8BDB0;
+  --text3: #6B8577;
+  --accent: #E2F6A1;
+  --accent-soft: rgba(194,250,97,0.08);
+  --accent-line: rgba(194,250,97,0.18);
   --lime: #E2F6A1;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -263,13 +277,17 @@ footer {
 }
 footer a { color: var(--text3); border-bottom: none; }
 @media (max-width: 900px) {
-  .article { padding: 56px 24px 96px; }
+  .topbar { padding: 18px 24px 0; }
+  .article { padding: 28px 24px 96px; }
   .article-header h1 { font-size: 34px; }
   .defs, .split { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
+  <div class="topbar">
+    <button class="theme-toggle" id="themeToggle" type="button">Switch to dark</button>
+  </div>
   <main class="article">
 
     <header class="article-header">
@@ -788,5 +806,21 @@ footer a { color: var(--text3); border-bottom: none; }
     </footer>
 
   </main>
+<script>
+(function(){
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+  const saved = localStorage.getItem("oslo-architecture-theme");
+  const setTheme = (theme) => {
+    root.setAttribute("data-theme", theme);
+    btn.textContent = theme === "dark" ? "Switch to light" : "Switch to dark";
+    localStorage.setItem("oslo-architecture-theme", theme);
+  };
+  setTheme(saved || "light");
+  btn.addEventListener("click", () => {
+    setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+  });
+})();
+</script>
 </body>
 </html>
