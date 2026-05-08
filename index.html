@@ -480,7 +480,7 @@
       <p>Skills compose: <code>ops.weekly-report</code> calls <code>bd.daily-leads</code>, gets a list, then calls <code>marketing.calendar-snapshot</code> with that list as context. The calling skill stays in charge. Composition primitives (<code>.then()</code>, <code>.branch()</code>, <code>.parallel()</code>) come from Mastra workflows, already in the runtime.</p>
 
       <h3>Consolidation skills</h3>
-      <p>Each unit has a daily <code>consolidate</code> skill that reads episodic memory and updates procedural memory. Marketing's "hooks that worked" extends from posts above an engagement threshold. BD's "who replies and why" extends from live conversation outcomes. Data's "lookalike patterns" extends from which segments convert into users, partners, or meaningful conversations. Episodic grows; procedural improves; the system gets more useful from its own work.</p>
+      <p>Each unit has a daily <code>consolidate</code> skill that reads episodic memory and updates procedural memory. Marketing's "hooks that worked" extends from posts above an engagement threshold. BD's "who replies and why" extends from live conversation outcomes. Data's "lookalike patterns" extends from which segments convert into users, partners, or meaningful conversations. Episodic grows; procedural improves; the system gets more useful from its own work. Every unit should also run a daily research pass so it stays current and in sync with the other departments.</p>
 
       <p>Default safety: every read runs unattended, every write asks first. A skill that drafts an outreach DM runs free. A skill that sends the DM pauses for approval. Per-skill overrides are supported; the default sets the floor.</p>
 
