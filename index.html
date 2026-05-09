@@ -310,6 +310,37 @@ p.note {
   border-color: rgba(226,246,161,0.18);
 }
 
+/* Per-layer "What it is / How it works" two-column block. */
+.layer-card {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 14px;
+  margin: 22px 0 18px;
+}
+.layer-card .what,
+.layer-card .how {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.layer-card .what {
+  border-left: 3px solid var(--accent-line);
+}
+.layer-card .label {
+  color: var(--text3);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  margin-bottom: 8px;
+}
+.layer-card .body { color: var(--text2); font-size: 14.5px; line-height: 1.65; }
+.layer-card .how ul { margin: 4px 0 0 18px; }
+.layer-card .how li { margin-bottom: 4px; font-size: 14.5px; line-height: 1.6; color: var(--text2); }
+@media (max-width: 720px) { .layer-card { grid-template-columns: 1fr; } }
+[data-theme="dark"] .layer-card .what { border-left-color: rgba(226,246,161,0.28); }
+
 .voice {
   background: rgba(23,49,50,0.03);
   border: 1px solid rgba(23,49,50,0.08);
@@ -365,15 +396,16 @@ footer a { color: var(--text3); border-bottom: none; }
 
     <header class="article-header">
       <h1>Understanding AI Agents with Harmonix</h1>
-      <p class="subtitle">Signals · Audience Graph · Recommendations · Units &amp; Skills · Memory · Connectors</p>
-      <p class="lede">An AI agent that helps a small team run a company like a bigger one. It watches what's happening, decides what matters, acts on the right thing, and gets better at all of it over time.</p>
+      <p class="subtitle">10 layers · entry points · agent core · prompt + context · routing · connectors · execution · memory · audience + recommendations · units · feedback loop</p>
+      <p class="lede">An AI agent that helps a small team run a company like a bigger one. It watches what's happening, decides what matters, acts on the right thing, and gets better at all of it over time. The whole system is ten layers — each with one job, each readable in isolation.</p>
     </header>
 
     <section>
-      <h2>Architecture Spec</h2>
-      <p>Oslo is built from <strong>memory, skills, unit workflows, automation loops, and a feedback loop</strong>. It watches what's happening in the company, decides what matters, acts on the right thing, writes the result back to memory, and uses that result to do better next time.</p>
+      <h2>One-line model</h2>
+      <p>Oslo is a company agent that lives online, watches the signals that matter, routes them through shared memory and unit workflows, and returns a daily and weekly operating brief through interfaces like Codex, Claude Code, Discord, and Telegram.</p>
       <p>The point is not to automate everything. It's to pick the right thing to do. A small team can't outwork a big one. It can out-select one. Oslo helps you decide who to talk to, what to post, what to ship, what to drop, and what to do tomorrow. It finds leads, suggests improvements, writes reports, drafts content, and gets sharper over time from the work it already did.</p>
-      <p>The cleanest way to think about it is <strong>one core agent loop, many entry points</strong>. Codex, Claude Code, Discord, Telegram, cron, and APIs should all hit the same underlying brain. The messenger changes. The memory, skills, routing, and feedback loop do not.</p>
+      <p>The cleanest way to think about it: <strong>one core agent loop, many entry points, ten layers</strong>. Each layer has one job. Each is readable on its own. Codex, Claude Code, Discord, Telegram, cron, and APIs all hit the same underlying brain. The messenger changes. Memory, skills, routing, and feedback do not.</p>
+      <p>Below the diagram, every layer is described twice — what it is in one line, then how it works as a short list of mechanics. The data plane (signal → classification → recommendation → unit action → memory update) runs on every request. The control plane (skill registry, prompt registry, connector catalog, eval harness, feature flags) is loaded at boot and hot-reloaded on change.</p>
       <p>Three layers do most of the work. They blur together if you don't separate them:</p>
       <div class="defs">
         <div class="def">
@@ -406,7 +438,6 @@ footer a { color: var(--text3); border-bottom: none; }
       <p>Why not put an LLM in front of every dispatch like other agent frameworks? Because two LLMs in series — host model plus dispatcher LLM — would do the work twice.</p>
       <p>Oslo also talks to other agent systems. External agents connect through the open <strong>Agent2Agent (A2A) protocol</strong> hosted by the Linux Foundation, supported by Microsoft, Google, and AWS. Oslo never copies their state. The two systems share a contract, not a database.</p>
       <p>Long term, Oslo should live online like a protocol-like company agent. The runtime stays private, but the system persists over time and team members connect to it through Claude Code, Codex, Discord, and Telegram.</p>
-      <p>Oslo's architecture has two layers. The <strong>data plane</strong> is the path every request takes: signal → classification → recommendation → unit action → memory update. The <strong>control plane</strong> is the configuration the data plane reads from on every request: a versioned skill registry, prompt registry, connector catalog, eval harness, and feature flags. Data plane runs constantly; control plane is loaded at boot and hot-reloaded on change. Detailed in Section 2 (Dispatch), since dispatch is the heaviest reader.</p>
     </section>
 
     <section>
@@ -556,147 +587,232 @@ footer a { color: var(--text3); border-bottom: none; }
     </section>
 
     <section>
-      <h2>1. Signals</h2>
-      <p>Signals are what Oslo watches. They tell you if the company is winning, where the value is coming from, and where attention should go next. The five that matter most are <strong>revenue, deposits, withdrawals, conversion, and retention</strong>. Everything else exists to explain those numbers better. Some signals come from operators driving Oslo directly. Others come from the world — a post gets a reply, a user deposits, a cron job fires. All signals reach the same dispatcher.</p>
-
-      <h3>What Oslo watches</h3>
-      <p>Five buckets, ordered by leverage:</p>
+      <h2>1. Entry points</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">The doors into Oslo. Thin surfaces — they don't change the brain, only how the request arrives. Codex, Claude Code, CLI, Discord, Telegram, API, scheduled runs, webhooks, replay.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>Codex / Claude Code</strong> — host model upstream. The IDE produces a structured tool call; dispatch is trivial.</li>
+            <li><strong>Discord / Telegram</strong> — chat surfaces with no host model. The dispatcher routes via a deterministic ladder (Layer 4) and only falls back to a small LLM when the input is genuinely new.</li>
+            <li><strong>CLI</strong> — terminal commands like <code>oslo bd.daily-leads --limit=50</code>.</li>
+            <li><strong>Cron / API / webhooks / replay</strong> — non-operator signals: scheduled timers, external POSTs, re-runs of a past <code>trace_id</code> with a different model or prompt.</li>
+            <li>Whether a human types or a timer fires, every signal is normalized into the same shape and handed to dispatch. The unit at the other end never has to know where the signal came from.</li>
+            <li>Async-first. Dispatch returns a <code>job_id</code> immediately and streams results back; a ninety-second skill never blocks the IDE or the chat.</li>
+          </ul>
+        </div>
+      </div>
+      <p>Five buckets of signals enter through these doors, ordered by leverage:</p>
       <ul>
         <li><strong>Business outcomes</strong> — revenue, deposits, withdrawals, conversion, retention. The top of the watch list. Everything else exists to explain these.</li>
-        <li><strong>Audience movement</strong> — X reactions on @harmonixfi (likes, replies, reposts, quotes), follower deltas, power-user activity (deposits, withdrawals, app sessions, vault usage), integration-partner movement (TVL shifts, ship moments worth reacting to), mentions across X / Discord / Telegram.</li>
+        <li><strong>Audience movement</strong> — X reactions on @harmonixfi, follower deltas, power-user activity, integration-partner movement, mentions across X / Discord / Telegram.</li>
         <li><strong>Product state</strong> — vault marks (PnL on positions), roadmap items shipping / blocked / slipping, GitHub PRs and deploys, incidents, feature usage from product analytics.</li>
-        <li><strong>External world</strong> — Hyperliquid ecosystem moves (HYPE price, new vaults, integrations), crypto narrative shifts, security signals (exploits, audits, watchlist alerts), competitor moves.</li>
-        <li><strong>Operator + feedback signals</strong> — <code>@oslo</code> commands from Discord / Telegram / Codex / Claude Code, cron triggers, webhooks, and every accept / reject / edit / postpone on past proposals. The decisions log is what makes the system get smarter.</li>
+        <li><strong>External world</strong> — Hyperliquid ecosystem moves, crypto narrative shifts, security signals (exploits, audits, watchlist alerts), competitor moves.</li>
+        <li><strong>Operator + feedback signals</strong> — <code>@oslo</code> commands from Discord / Telegram / Codex / Claude Code, and every accept / reject / edit / postpone on past proposals. The decisions log is what makes the system get smarter.</li>
       </ul>
-
-      <p>Long-running handling is async-first: dispatch returns a <code>job_id</code> immediately and streams results back as they happen. A ninety-second skill does not block the IDE or the chat.</p>
-      <p>Signals also need time-awareness. Oslo should know <strong>what matters today</strong>, <strong>what mattered in the past</strong>, and <strong>what is about to matter next</strong>. That is what turns signal collection into operating context instead of just a dashboard feed.</p>
-
-      <h3>Operator-driven signals</h3>
-      <p>Two of these come with their own model loaded — the host model in your coding agent does the natural-language interpretation. The other two are chat surfaces with no upstream model.</p>
-      <p><em>Claude Code is from Anthropic; Codex is from OpenAI. Different host models, same role to Oslo.</em></p>
-      <p><strong>Codex</strong> — e.g. <code>oslo bd.daily-leads --limit=50</code> from a terminal. Scripted runs, automation, scheduled jobs.</p>
-      <p><strong>Claude Code</strong> — Oslo's tools appear in your coding session via an MCP server (Model Context Protocol — a standard interface for AI assistants to call external tools). Stdio for local mode, HTTP/SSE for hosted. Multi-step work where you want to read along.</p>
-      <p><strong>Discord</strong> — slash command in a channel or @mention. Work that belongs in a shared log: outreach drafts, weekly briefs, anything the team should see.</p>
-      <p><strong>Telegram</strong> — message the bot in plain language. Quick checks and phone approvals.</p>
-
-      <h3>Non-operator signals</h3>
-      <p>Signals that wake the dispatcher without a human typing:</p>
-      <ul>
-        <li><strong>X reactions</strong> — every like, reply, repost, quote on @harmonixfi posts. Treated as audience-graph and content-performance input.</li>
-        <li><strong>App activity</strong> — deposits, withdrawals, vault interactions on the Harmonix app. Treated as user-classification, conversion, and retention input.</li>
-        <li><strong>Cron</strong> — scheduled timer (default UTC, per-skill timezone override). Daily and weekly skills run on cron.</li>
-        <li><strong>Webhooks</strong> — URLs external services POST to when something happens (Stripe payment, GitHub PR merged, partner-side event).</li>
-        <li><strong>Replay</strong> — re-run a past <code>trace_id</code>, optionally with a different model, prompt, or skill version. Used for debugging and prompt regression testing.</li>
-      </ul>
-      <p class="note">Note: Whether typed by a human or fired by a timer, every signal gets normalized into the same shape and handed to dispatch. The unit running at the other end never has to know where the signal came from.</p>
-      <h3>Dispatch and classification</h3>
-      <p>Once a signal arrives, dispatch turns it into a typed skill call. No business logic — only routing, validation, classification, capability-token issuance, and logging.</p>
-      <p>A request moves through six steps: <strong>Parse</strong> (normalize input into a structured shape) → <strong>Classify</strong> (user, partner, prospect, noise, roadmap signal) → <strong>Resolve</strong> (pick a skill via the 4-tier fallback) → <strong>Validate</strong> (check args against the skill's typed schema using zod) → <strong>Confirm</strong> (ask if confidence is low or the skill writes externally) → <strong>Run</strong> (issue a capability token, enqueue, execute, stream results back).</p>
-      <p>Every input gets three IDs at parse time: <code>trace_id</code> (random, follows the request through every layer, replayable later), <code>idempotency_key</code> (deterministic, deduplicates retries), and <code>capability_token</code> (issued at run time, enumerates exactly what the skill can read, write, and call — checked at every boundary).</p>
-
-      <h3>What classification adds</h3>
-      <p>The Classify step is what makes dispatch more than a router. Before any skill runs, the dispatcher answers: <em>who or what is this signal about?</em> An X reaction goes through identity resolution — does the handle match a known user, a known partner contact, a lookalike candidate, a power user, a tourist, or a stranger? An app event matches against the user table and gets weighted by deposit size and retained capital. A roadmap webhook matches against the current roadmap state. Classification writes its result onto the input itself, so by the time a skill receives the call, it already knows whether the signal is high-priority (a known partner replying or a high-value user depositing size) or background noise (a bot retweet or a tourist). Skills do not reclassify — they trust the dispatcher's output.</p>
-
-      <h3>What dispatch reads from the control plane</h3>
-      <p>Dispatch is the heaviest reader of the control plane — the configuration the data plane consults but never writes to. On every request, dispatch reads from five components:</p>
-      <ul>
-        <li><strong>Skill Registry (versioned)</strong> — every skill the runtime knows about, with version numbers. Old versions stay queryable so replay can re-run any historical skill against any past input.</li>
-        <li><strong>Prompt Registry</strong> — every LLM prompt named and versioned, separate from skill code. Editing a prompt does not require a redeploy. Prompt rollback is one revert away.</li>
-        <li><strong>Connector Catalog</strong> — every external API connector available to skills, with declared cost, rate limit, and current health status. The catalog rejects skills that request connectors not present (or currently unhealthy).</li>
-        <li><strong>Eval Harness</strong> — golden-test runner. Every skill ships with at least three test cases; CI runs the full suite on every change. Replay can also re-run last week's prod traffic against any new skill or prompt version and diff outputs — no skill or prompt change ships without this gate passing.</li>
-        <li><strong>Cost + Token Telemetry</strong> — every skill and workflow records token usage, latency, model choice, and dollar cost so the system can optimize for efficiency as well as quality.</li>
-        <li><strong>Feature Flags</strong> — turn skills on/off, route a percentage of traffic to a canary version, gate experimental connectors.</li>
-      </ul>
-      <p>Keeping the two planes separate matters because the data plane needs to be fast and stable; the control plane needs to be flexible and frequently updated. Mixing them — hardcoded prompts inside skill code, connector configs scattered across files, no eval gate — is what turns small agent prototypes into systems no one can change without breaking.</p>
-
-      <h3>The 4-tier resolver</h3>
-      <p>Cheapest-first. Most inputs resolve without an LLM call.</p>
-      <ol>
-        <li><strong>Slash</strong> — e.g. <code>/oslo bd.daily-leads</code> maps direct to skill ID.</li>
-        <li><strong>Channel + tag</strong> — e.g. <code>@oslo refresh leads</code> in <code>#bd</code> narrows to BD skills.</li>
-        <li><strong>Lunr index</strong> — keyword search over skill descriptions and triggers, deterministic.</li>
-        <li><strong>Small-model classifier</strong> — a small fast model returns <code>{skill_id, args, confidence}</code>. Free-tier inference is enough for routing; we don't burn paid frontier calls on classification. Below threshold → confirm-and-edit.</li>
-      </ol>
-
-      <h3>Streaming back</h3>
-      <p>Skill progress events stream to the originating entry point as they happen — Discord typing indicator, Telegram message edits, Codex stdout, Claude Code partial MCP responses. The operator can also call <code>oslo status &lt;job_id&gt;</code> from any entry point or list active jobs with <code>oslo jobs</code>.</p>
-
-      <p class="note">Note: When you drive Oslo from Codex or Claude Code, dispatch is trivial — the host model has already produced a structured tool call. The deterministic ladder (tier 1 / tier 2 / tier 3, with LLM fallback at tier 4) exists for chat surfaces (Discord, Telegram) where there is no host model upstream. Other agent frameworks (OpenAI Agents, Microsoft Agent Framework, LangGraph) put an LLM at the front of every dispatch regardless of source — for Oslo, that would mean running two LLMs in series (host model + dispatcher LLM) when one has already done the work.</p>
     </section>
 
     <section>
-      <h2>2. Audience Graph</h2>
-      <p>The audience graph is where signals become useful. Dispatch normalizes the event. This layer decides whether the account behind it is a power user, a tourist, an integration partner, a lookalike, or noise. It enriches the profile, links it to similar accounts, and writes the result back to memory.</p>
-      <p>The job here is selection, not volume. Oslo scores which people matter, which roadmap moment they are closest to, and which opportunities deserve attention this week. Without the graph, every signal looks the same. With it, a like on a tweet might mean nothing — or it might mean a partner protocol's COO just engaged with a thread about haUSD.</p>
-      <p>Four primary classifications, plus a graph of relationships between them:</p>
-      <ul>
-        <li><strong>Power users</strong> — the small set of users that produce most of the value. Identity-resolved across surfaces — the same person can have a handle on X, a wallet on chain, a Discord ID, a Telegram ID, and Oslo merges them. The strongest user-quality signals are <strong>large deposits and leaving those deposits in over time</strong>. Everything else (app sessions, withdrawals, reactions) helps explain those two.</li>
-        <li><strong>Tourists</strong> — accounts that touch the protocol but do not retain capital. Small deposits, fast withdrawals, low session depth. Useful as a contrast set; not a target. The graph should bias hard toward power users and away from tourists.</li>
-        <li><strong>Integration partners</strong> — growth and integration partners that can move real numbers for us. Think Superform or Clearstar. The strongest partner signal is the ability to bring <strong>TVL, users, transactions, revenue, deposits, and MAU</strong>. The graph tracks warm-intro paths, last-touched dates, partnership status, and interaction sentiment.</li>
-        <li><strong>Lookalikes</strong> — accounts whose profile, follower overlap, and on-chain or content signals resemble power users or integration partners but have not yet engaged. Ranked by ICP fit.</li>
-      </ul>
-      <p>Each entry holds: handle, resolved identity, classification, score, source events, last interaction, projected next-best-action, and a list of edges (warm intros, mutual followers, shared partner orgs).</p>
-
-      <h3>How the graph is built</h3>
-      <p>Three analysis skills run on cron and write to the graph. They do not propose actions — only update what is known. On top of that, Oslo should run a daily research loop that looks for new information, proposes updates to the graph and memory, and writes accepted changes back into the system. That keeps the graph current without turning every memory write into an uncontrolled side effect.</p>
-      <ul>
-        <li><strong><code>bd.audience-analyzer</code></strong> (daily) — reads marketing post events + reactor profiles, enriches each handle (bio, follower overlap, what they post about), updates user/partner classification.</li>
-        <li><strong><code>bd.partner-lookalikes</code></strong> (weekly) — for each user/partner cohort, queries x-api for handles with overlapping followers and similar topic vectors. Scores by ICP fit. Stages new candidates with provenance ("matches the cohort that includes Vincent Wang and Jordi Alexander").</li>
-        <li><strong><code>bd.partner-graph</code></strong> (weekly) — reads BD episodic memory (every interaction with every partner contact) and builds a graph of relationships, warm-intro paths, last-touched dates, sentiment scores. Writes the partner table and the partner-graph edge table.</li>
-      </ul>
-
-      <h3>Why the graph matters</h3>
-      <p>Without it, Oslo treats every signal in isolation. A reaction on a tweet would just be a reaction. With the graph, the same reaction means <em>"the COO of an integration partner just liked this thread about haUSD"</em> — and that's a different signal entirely.</p>
-      <p>Every other unit reads the graph. Marketing's <code>marketing.suggest-content</code> references which audience tier it's writing for. BD's <code>bd.suggest-contacts</code> ranks proposals by graph score and biases toward power users + integration partners. Ops' weekly brief surfaces partner-graph anomalies (a power user who used to deposit stopped depositing, an integration partner who used to push volume slowed down, a new lookalike keeps showing up).</p>
-
-      <p class="note">Note: The graph is shared company memory. Skills declare reads against <code>audience_graph</code> like any other memory; the capability token enforces it. Updates happen only via the analysis skills above. Skills cannot mutate the graph as a side effect.</p>
+      <h2>2. Agent core</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">The shared conversation loop. One brain across every surface. Codex, Discord, Telegram, scheduled briefs all hit the same loop — the messenger changes, the loop doesn't.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li>Receive normalized input from the entry point.</li>
+            <li>Build the right context (Layer 3).</li>
+            <li>Choose the right model path (Layer 4).</li>
+            <li>Call tools when needed (Layer 5).</li>
+            <li>Loop until the job is complete.</li>
+            <li>Return the result to the surface that asked.</li>
+            <li>Three IDs stamped at parse time: <code>trace_id</code> (random, replayable), <code>idempotency_key</code> (deterministic, deduplicates retries), <code>capability_token</code> (issued at run, enumerates allowed reads / writes / connectors).</li>
+            <li>A request moves through six steps inside the core: <strong>parse → classify → resolve → validate → confirm → run</strong>. No business logic — only routing, validation, classification, capability-token issuance, and logging.</li>
+          </ul>
+        </div>
+      </div>
+      <p>Classification is what makes the core more than a router. Before any skill runs, it answers: <em>who or what is this signal about?</em> An X reaction goes through identity resolution — does the handle match a known user, partner, lookalike, power user, tourist, or stranger? An app event matches against the user table and gets weighted by deposit size and retained capital. A roadmap webhook matches against current roadmap state. Classification writes its result onto the input, so by the time a skill receives the call it already knows whether the signal is high-priority or background noise. Skills don't reclassify — they trust the core's output.</p>
+      <p class="note">When you drive Oslo from Codex or Claude Code, the host model has already produced a structured tool call. The deterministic ladder in Layer 4 exists for chat surfaces where there is no host model upstream. Other agent frameworks put an LLM at the front of every dispatch regardless of source — for Oslo that would mean running two LLMs in series when one has already done the work.</p>
     </section>
 
     <section>
-      <h2>3. Recommendations</h2>
-      <p>Oslo doesn't just execute work. It proposes work — what to do next, and why. The recommendation queue is the output of analysis skills that read the audience graph, recent activity, and roadmap state, find patterns, and post proposals to Discord for operator review.</p>
-
-      <h3>The daily brief</h3>
-      <p>Every morning, Oslo posts one short brief with the five calls that matter today:</p>
-      <ul>
-        <li><strong>Top power users to watch</strong> — who deposited, who's quiet, who's at risk of leaving.</li>
-        <li><strong>Top integration partners to push</strong> — who can move TVL, users, transactions, revenue, deposits, MAU.</li>
-        <li><strong>Top content idea for the day</strong> — the one post most likely to land with the right audience.</li>
-        <li><strong>Top funnel / ops issue hurting growth</strong> — the bottleneck most worth fixing today.</li>
-        <li><strong>Top improvement Oslo itself should make</strong> — the one change that would make the system more useful tomorrow.</li>
-      </ul>
-
-      <h3>The proposal loop</h3>
-      <p>Three unit-level proposal skills feed the brief and run on cron:</p>
-      <ul>
-        <li><strong><code>bd.suggest-contacts</code></strong> — produces a list of <em>"contact these 5 people, here's why for each"</em>, biased toward power users and integration partners. Each entry includes: handle, classification (power user / integration partner / lookalike), audience-graph score, the specific signal that triggered the proposal (recent activity, roadmap moment, warm path), and a draft opening line.</li>
-        <li><strong><code>marketing.suggest-content</code></strong> — produces post topics for the next 7 days. Each entry includes: hook, format (text / chart / video), target time, expected engagement range based on <code>marketing.engagement_patterns</code>, and rationale ("works on the power-user cohort, ties to the v2 roadmap shipping next week").</li>
-        <li><strong><code>ops.suggest-priorities</code></strong> — produces a "focus on these 3 things; defer these 2" call. Each entry includes: rationale, dependencies, projected outcome, and what gets blocked if it slips.</li>
-      </ul>
-      <h3>The weekly strategy brief</h3>
-      <p>Sunday evening, a cross-unit aggregator (<code>ops.weekly-strategy-brief</code>) runs the three suggest skills in parallel, packages the output, and posts one digest to <code>#oslo-proposals</code>. Monday morning the operator reviews it. Daily brief is for today's calls. Weekly brief is for next week's posture: which partners to go after, which content arcs to plan, which roadmap items get the focus.</p>
-
-      <h3>What every recommendation looks like</h3>
-      <p>The point is not to output ranked lists. It is to make decisions <strong>legible</strong> — so the operator can approve, reject, edit, or postpone with full context, without having to dig. Every proposal — daily or weekly — renders in the same five-field shape:</p>
-      <ul>
-        <li><strong>What</strong> — the action being proposed.</li>
-        <li><strong>Why</strong> — the reason it's the right move now.</li>
-        <li><strong>Evidence</strong> — the specific signals from memory that support it (deposit size, retention curve, partner reach, last-touched date, content performance).</li>
-        <li><strong>Suggested action</strong> — the next step Oslo would take if approved (draft DM, schedule post, open issue).</li>
-        <li><strong>Confidence</strong> — how sure Oslo is, with the threshold that downgrades it to confirm-and-edit instead of accept-as-is.</li>
-      </ul>
-
-      <h3>The operator review</h3>
-      <p>Each proposal renders with four buttons in Discord: <strong>accept</strong>, <strong>reject</strong>, <strong>edit</strong>, <strong>postpone</strong>. Accepting fires the next skill (e.g., <code>bd.draft-outreach</code> for an accepted contact). Rejecting writes a "rejected, reason: …" entry to the decisions log. Editing opens a follow-up dialog where the operator can adjust args. Postponing parks the proposal for a later cycle (default: next morning's brief) without dropping the context — the next run sees it again with fresh evidence and updated confidence.</p>
-      <p>The operator is the human loop. Their job is to review, steer, correct, approve, and improve the system over time. At minimum, the operator should be responsible for approving important actions, correcting bad recommendations, and improving the AI itself.</p>
-      <p>The decisions log is critical — it's how the analysis side learns what's good and what's not. Next week's <code>bd.suggest-contacts</code> reads last week's accept/reject pattern. If you keep rejecting "warm intro through @x because @x replied to a thread once," the analyzer downweights that signal.</p>
-
-      <p class="note">Note: Proposals never fire actions automatically. Even with high confidence and operator approval, write actions go through the standard HITL flow with capability-token gating. The recommendation loop produces "what should happen" — the operator and the safety layer both decide whether it does. Oslo should never send important external messages, make financial or trading actions, change strategy or memory in a major way, publish outputs on its own, or make information public on its own without approval.</p>
+      <h2>3. Prompt + context assembly</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">What Oslo actually sees before it reasons. The layer that takes everything we know and packs it into a single prompt sized for the model that will run.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>System rules + tone</strong> — the constitution every skill operates under.</li>
+            <li><strong>Public architecture context</strong> — the system explained in the open (this document).</li>
+            <li><strong>Private team context</strong> — real team memory, heuristics, playbooks. Never leaves the runtime.</li>
+            <li><strong>Memory excerpts</strong> — pulled by relevance, scoped by the request's capability token. Not dumped wholesale.</li>
+            <li><strong>Attached skills</strong> — the procedural memory that applies right now.</li>
+            <li><strong>Tool list</strong> — only the connectors the skill is authorized to call.</li>
+            <li>The public/private split matters: architecture is shareable, the playbooks behind it are not. Both feed the prompt; only the former feeds the world.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section>
-      <h2>4. Units &amp; Skills</h2>
+      <h2>4. Provider + routing layer</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">Decides which model handles which job. Balances quality, speed, token usage, and cost. The cheapest path that does the job well, with escalation when stakes rise.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li>Default to a small free-tier model (Groq Llama 3.1-8b is a working example).</li>
+            <li>Escalate to a larger model only when: confidence is low, the task is high-stakes, or output quality really matters.</li>
+            <li>Every call records <code>tokens_in</code>, <code>tokens_out</code>, <code>model</code>, <code>cost_usd</code>, <code>latency_ms</code> to <code>oslo_skill_calls</code>, keyed by <code>trace_id</code> and <code>skill_id</code>. Four rollups fall out of that: cost per skill, per trace, per model, per unit per day.</li>
+            <li>Per-skill daily dollar caps. Breach the cap and the skill auto-pauses until the next UTC day.</li>
+            <li>For chat surfaces, a 4-tier resolver picks the skill before any model call:</li>
+          </ul>
+          <ol style="margin: 8px 0 0 36px; font-size: 14.5px;">
+            <li><strong>Slash</strong> — <code>/oslo bd.daily-leads</code> maps direct to a skill ID.</li>
+            <li><strong>Channel + tag</strong> — <code>@oslo refresh leads</code> in <code>#bd</code> narrows to BD skills.</li>
+            <li><strong>Lunr index</strong> — keyword search over skill descriptions and triggers. Deterministic.</li>
+            <li><strong>Small-model classifier</strong> — a free-tier model returns <code>{skill_id, args, confidence}</code>. Below threshold → confirm-and-edit before running.</li>
+          </ol>
+        </div>
+      </div>
+      <p>Most inputs resolve without an LLM call. The classifier exists for genuinely new chat input — and even then, free-tier inference is enough for routing. Paid frontier calls are reserved for the actual work.</p>
+    </section>
+
+    <section>
+      <h2>5. Tool + connector layer</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">How Oslo touches anything outside its own process. Skills don't make raw HTTP calls — they go through typed connectors that handle retry, rate limiting, caching, identity resolution, cost tracking, and capability-token checks.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>Top connectors:</strong> X (audience + content), Supabase (memory home), Discord (shared log + review surface), GitHub (roadmap state, PRs), product analytics (deposits, withdrawals, conversion, retention).</li>
+            <li><strong>Long tail:</strong> Telegram, Notion, Hyperliquid, defillama, coingecko, harmonix-brain, address-reputation.</li>
+            <li>Skills call <code>ctx.connectors.&lt;name&gt;</code>; every call is checked against the skill's capability token before it is made. Anything outside the token is rejected at the boundary.</li>
+            <li>Connectors are structured as published packages with hot reload (Activepieces pattern) so skills, runtime, and any future marketplace install them uniformly.</li>
+            <li><strong>18 safety rules</strong> fire automatically based on what a skill is doing — secrets-and-env, input-validation, llm-endpoint-safety, output-voice-check, cross-unit-read-policy, cost-and-rate-cap, dead-man-switch, secret-egress-scan, and more. Severity is <strong>block</strong> (halt + ask) or <strong>warn</strong> (log + continue).</li>
+            <li><strong>Hyperliquid trade guard</strong> adds 10 extra rules on top — per-trade size cap, pre-flight simulation, two-step + 60-second window, echo-back code phrase, position cap, address-reputation pre-check. The only connector where Oslo can write to a chain.</li>
+          </ul>
+        </div>
+      </div>
+      <p>The capability token issued by the agent core is the foundation of the safety layer. Every memory access and connector call presents the token; anything outside what the token allows is rejected at the boundary, before the call is even attempted. Token is short-lived (expires when the skill finishes), scoped to a single skill run, and includes the actor on whose behalf the skill runs.</p>
+      <p class="note">There are no manual HTTP calls in skill code. Every external interaction is forced through one of two dozen typed methods, each gated by capability-token verification and wrapped by symptom-triggered rules. Skills cannot bypass safety because there is no path that does so.</p>
+    </section>
+
+    <section>
+      <h2>6. Execution backends</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">Where tools actually run. The connector defines the contract; this layer is the substrate that fulfills it. The interface above stays identical even as the substrate changes.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>Local runtime</strong> — single laptop today. The default execution path during Phase 1.</li>
+            <li><strong>Background jobs</strong> — work queue (BullMQ / Inngest pattern) for skills that take more than a few seconds. Long-running calls don't block the IDE or the chat surface; they return a <code>job_id</code> and stream progress.</li>
+            <li><strong>Remote / cloud execution</strong> — Phase 3. The same skill that ran locally moves to a hosted process when the team wants 24/7 uptime, and the entry-point surfaces don't notice.</li>
+            <li>Replayability is a property of this layer too. Any past <code>trace_id</code> can be re-run on a different backend, with a different model, against a different prompt version, and the results compared.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>7. Memory layer</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">What Oslo knows. The temporal company context — what matters today, what mattered in the past, what is about to matter next.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>Audience graph</strong> — the shared company graph of users, partners, and lookalikes. Read by every unit; written only by Data and BD analysis skills.</li>
+            <li><strong>Semantic memory</strong> — what each unit knows. Leads, target accounts, segments, roadmap state, vault theses, watchlists, brand kit specs. Lives in Supabase, prefixed by unit.</li>
+            <li><strong>Episodic memory</strong> — what happened. Outreach sent, posts published, reactions received, meetings held, alerts fired. Vector-embedded so similar past events surface by meaning, not keyword match.</li>
+            <li><strong>Procedural memory</strong> — how the unit works. Playbooks, prompts, templates, scoring rubrics, contact heuristics. Markdown in <code>units/&lt;unit&gt;/knowledge/</code>, version-controlled. The daily <code>consolidate</code> skill extends procedural from successful episodic patterns.</li>
+            <li><strong>Working memory</strong> — what's active right now. In-flight drafts, today's queue, pending replies. Lives in Supabase with a TTL.</li>
+            <li><strong>Decisions log</strong> — markdown per unit. Episodic captures what happened; the log captures what was decided and why. The recommendation loop closes through this log.</li>
+            <li><strong>Global memory</strong> — Harmonix-wide context plus context exposed by external agent systems via the open <strong>Agent2Agent (A2A) protocol</strong> (Linux Foundation; supported by Microsoft, Google, AWS). Each external system publishes an <strong>Agent Card</strong>; Oslo reads it and calls the documented skills. Either side can move machines or replace stack — only the contract has to hold.</li>
+            <li>Memory is curated, not dumped. Durable facts, successful workflows, decision reasons in. Raw noise, duplicate entries, prompt-like text out — rejected before they land.</li>
+          </ul>
+        </div>
+      </div>
+      <p>Memory should answer three temporal questions, not just one. <strong>Today</strong> = working memory + the audience-graph snapshot. <strong>Past</strong> = episodic + the decisions log. <strong>Future</strong> = roadmap state, partner pipelines, content calendars, projected outcomes. A recommendation that ignores the past is naïve. One that ignores the future is short-sighted. One that ignores today is irrelevant.</p>
+      <pre><code>src/units/bd/
+  knowledge/                   # procedural — markdown
+    icp.md
+    outreach-templates.md
+    scoring-rubric.md
+    objection-handling.md
+  memory/
+    semantic.ts                # bd_leads, bd_accounts → Supabase
+    episodic.ts                # bd_events → Supabase + vector
+    working.ts                 # bd_queue → Supabase with TTL
+  decisions.md                 # the "why" log
+  consolidate.skill.ts         # daily: episodic → procedural</code></pre>
+      <p class="note">Skills compose across units, but they cannot bypass the rules. A weekly digest does not query BD's table directly; it asks BD's skill for the data, with the read explicitly declared and the capability token verifying it.</p>
+    </section>
+
+    <section>
+      <h2>8. Audience + recommendation layer</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">Where Oslo decides who matters and what to do next. Not volume — selection. Builds an audience graph, scores it, and turns it into legible proposals an operator can approve.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>Four classifications</strong> in the audience graph: <strong>power users</strong> (large deposits + retained over time), <strong>tourists</strong> (small deposits, fast withdrawals — contrast set, not target), <strong>integration partners</strong> (TVL, users, transactions, revenue, deposits, MAU), <strong>lookalikes</strong> (resemble power users or partners but haven't engaged yet).</li>
+            <li><strong>Three analysis skills</strong> on cron build the graph: <code>bd.audience-analyzer</code> (daily, enriches handles), <code>bd.partner-lookalikes</code> (weekly, finds new candidates by follower overlap + topic similarity), <code>bd.partner-graph</code> (weekly, builds the relationship + warm-path graph from BD episodic memory).</li>
+            <li><strong>Daily brief</strong> at 8:05 — five calls that matter today: top power users to watch, top integration partners to push, top content idea, top funnel/ops issue, top self-improvement Oslo itself should make.</li>
+            <li><strong>Weekly strategy brief</strong> Sunday evening — <code>ops.weekly-strategy-brief</code> runs the three suggest skills in parallel and posts one digest. Daily is today's calls; weekly is next week's posture.</li>
+            <li><strong>Every proposal</strong> renders in five fields: <strong>what / why / evidence / suggested action / confidence</strong>. Below the confidence threshold, downgraded to confirm-and-edit instead of accept-as-is.</li>
+            <li><strong>Operator review</strong> — four buttons in Discord: accept, reject, edit, postpone. Accept fires the next skill. Reject writes to the decisions log. Edit opens a dialog. Postpone parks for the next cycle with context preserved.</li>
+            <li><strong>Repeat-rejected candidates: ask, don't discard.</strong> Second reject without a captured reason opens a modal — free-form reason, structured tags (<code>out_of_icp</code>, <code>timing</code>, <code>already_engaged</code>, ...), optional resurface date. Score gets multiplied by 0.3; the candidate stays in the pool with the prior reason attached.</li>
+          </ul>
+        </div>
+      </div>
+      <p>Without the graph, every signal looks the same. With it, a like on a tweet might mean nothing — or it might mean a partner protocol's COO just engaged with a thread about haUSD. Every other unit reads the graph. Marketing's <code>marketing.suggest-content</code> references which audience tier it's writing for. BD's <code>bd.suggest-contacts</code> ranks proposals by graph score. Ops' weekly brief surfaces partner-graph anomalies — a power user who stopped depositing, a partner that slowed down, a lookalike that keeps showing up.</p>
+      <p class="note">Proposals never fire actions automatically. Even with high confidence and operator approval, write actions go through the standard HITL flow with capability-token gating. The recommendation loop produces "what should happen" — the operator and the safety layer both decide whether it does. Oslo should never send important external messages, make financial or trading actions, change strategy or memory in a major way, publish outputs on its own, or make information public on its own without approval.</p>
+    </section>
+
+    <section>
+      <h2>9. Unit workflows</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">Who owns the work. Six departments running the company in parallel — each with its own goals, memory, skills, and daily research loop. The system acts like one company, not six separate bots.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>BD</strong> — partners, target accounts, outreach, contact recommendations, why-now logic. <em>Daily: identify top integration partners, suggest who to contact, keep the partner graph current.</em></li>
+            <li><strong>Marketing</strong> — content calendar, daily posts, reaction analysis, brand voice, distribution, design (banner specs, brand kit, social graphics). <em>Daily: track customer conversation, log what content worked.</em></li>
+            <li><strong>Engineering</strong> — protocol notes, technical explanations, vault checks, roadmap state, product milestones. <em>Daily: track roadmap progress and surface blockers.</em></li>
+            <li><strong>Security</strong> — watchlists, exploit monitoring, threat briefs, real-time on-chain alerts. <em>Daily: track trust and risk signals.</em></li>
+            <li><strong>Ops</strong> — activity logs, weekly reports, market briefs, coordination, roadmap cadence. <em>Daily: identify bottlenecks, keep departments in sync.</em></li>
+            <li><strong>Data</strong> — account scoring, ICP clustering, lookalikes, customer + partner segmentation. <em>Daily: refresh scoring, detect pattern changes, keep every unit aligned.</em></li>
+            <li>Each unit has a foundational <code>&lt;unit&gt;.context</code> skill loaded by every other skill in that unit — ICP, partner criteria, brand voice, protocol rules, scoring rubrics, content heuristics.</li>
+            <li>Each unit also runs a <code>&lt;unit&gt;.daily-research</code> skill (cron between 7:00–7:25 UTC) so the morning brief at 8:05 reads fresh status from every department.</li>
+          </ul>
+        </div>
+      </div>
       <p>Recommendations are the output of the scoring system. Skills are how the work gets done. Units are who owns it. Same call, three different layers.</p>
 
       <h3>Skills: reusable company workflows</h3>
@@ -796,139 +912,31 @@ footer a { color: var(--text3); border-bottom: none; }
     </section>
 
     <section>
-      <h2>5. Memory</h2>
-      <p>Memory is the company context layer. It's what makes Oslo more than a script that runs the same way every time. Memory remembers:</p>
-      <ul>
-        <li>who customers are</li>
-        <li>who partners are</li>
-        <li>what the product is</li>
-        <li>who the key contacts are</li>
-        <li>what happened before</li>
-        <li>what content worked</li>
-        <li>what did not work</li>
-        <li>how the team likes to operate</li>
-      </ul>
-      <p>Marketing memory adds two more: what customers are talking about and how content performed across surfaces. Unit memory stays scoped, but Oslo also maintains a shared operating graph so it can answer higher-order questions like who our best users are, which partners resemble them, what shipped last week, and what content or outreach actually moved the right audience.</p>
-
-      <h3>Today, past, future</h3>
-      <p>Memory should answer three temporal questions, not just one:</p>
-      <ul>
-        <li><strong>What matters today</strong> — working memory + the audience-graph snapshot. Active proposals, top accounts to reach this week, the roadmap items shipping now.</li>
-        <li><strong>What mattered in the past</strong> — episodic memory + the decisions log. What worked, what didn't, what got rejected and why.</li>
-        <li><strong>What will matter in the future</strong> — roadmap state, partner pipelines, content calendars, projected outcomes attached to accepted proposals. The forward-looking layer that lets today's choice account for what's coming.</li>
-      </ul>
-      <p>The feedback loop reads all three. A recommendation that ignores the past is naïve. One that ignores the future is short-sighted. One that ignores today is irrelevant.</p>
-      <p>Memory should also be curated, not dumped. Durable facts, successful workflows, partner context, content patterns, and decision reasons belong in memory. Raw noise, duplicate entries, and unsafe prompt-like text do not. If a memory write could poison the system prompt or expose secrets, it should be rejected before it lands.</p>
-
-      <h3>Memory types per unit</h3>
-      <p>Each unit has five memory types:</p>
-      <ul>
-        <li><strong>Audience graph</strong> — the shared company graph of users, partners, and lookalikes (Section 3). Read by every unit; written only by Data and BD analysis skills.</li>
-        <li><strong>Semantic</strong> — what the unit knows. Leads, target accounts, audience segments, roadmap state, vault theses, watchlists, brand kit specs. Lives in Supabase, prefixed by unit.</li>
-        <li><strong>Episodic</strong> — what happened. Outreach sent, posts published, reactions received, meetings held, alerts fired. Lives in Supabase with vector embeddings (numerical fingerprints of text, used to find similar past events by meaning rather than keyword match).</li>
-        <li><strong>Procedural</strong> — how the unit works. Playbooks, prompts, templates, scoring rubrics, contact heuristics, content heuristics. Lives as markdown in <code>units/&lt;unit&gt;/knowledge/</code>. Version-controlled. The daily <code>consolidate</code> skill extends procedural memory from successful episodic patterns.</li>
-        <li><strong>Working</strong> — what's active right now. In-flight drafts, today's queue, pending replies, top accounts to contact, roadmap-linked content ideas. Lives in Supabase with a TTL ("time to live" — auto-deletes after a set window).</li>
-      </ul>
-
-      <h3>Worked example: BD's directory</h3>
-      <pre><code>src/units/bd/
-  knowledge/                   # procedural — markdown
-    icp.md
-    outreach-templates.md
-    scoring-rubric.md
-    objection-handling.md
-  memory/
-    semantic.ts                # bd_leads, bd_accounts → Supabase
-    episodic.ts                # bd_events → Supabase + vector
-    working.ts                 # bd_queue → Supabase with TTL
-  decisions.md                 # the "why" log
-  consolidate.skill.ts         # daily: episodic → procedural</code></pre>
-
-      <h3>Global memory and multi-agent contracts</h3>
-      <p>One memory store sits outside the units: <strong>global memory</strong>. It holds Harmonix-wide context plus context exposed by external agent systems Oslo connects to. In practice, this becomes the audience graph and company graph: the merged view of accounts, relationships, roadmap state, and external signals that every unit can reason against through declared reads.</p>
-      <p>Each external system is reached through the open <strong>Agent2Agent (A2A) protocol</strong> — a standard hosted by the Linux Foundation, supported by Microsoft, Google, and AWS. Each external system publishes an <strong>Agent Card</strong> (JSON metadata describing its identity, skills, endpoint, auth). Oslo's connector reads the Agent Card and calls the documented skills. Either side can run on different machines, change stack, or be replaced — only the contract has to hold. This is the foundation for multi-agent collaboration as the protocol scales.</p>
-
-      <h3>Decisions log</h3>
-      <p>Each unit also keeps a decisions log — a markdown file recording the reason behind judgment calls. E.g. <em>"Paused outreach to Acme because they raised; revisit Q4."</em> Episodic memory captures what happened. The decisions log captures what was decided and why. The log is also where the recommendation loop closes — every accept / reject of a proposal lands here with the reason, and next week's analysis reads the log to adjust scoring weights.</p>
-
-      <p class="note">Note: Skills compose across units, but they cannot bypass the rules. A weekly digest does not query BD's table directly; it asks BD's skill for the data, with the read explicitly declared and the capability token verifying it.</p>
-    </section>
-
-    <section>
-      <h2>6. Connectors</h2>
-      <p>Connectors are how Oslo touches anything outside its own process. Skills don't make raw HTTP calls. They go through a typed connector that handles retry, rate limiting, caching, identity resolution, cost tracking, and capability-token checks. The top-priority connectors are:</p>
-      <ul>
-        <li><strong>X</strong> — audience, reactions, content distribution, partner conversations.</li>
-        <li><strong>Supabase</strong> — the home of memory: semantic, episodic, working, audience graph, audit log.</li>
-        <li><strong>Discord</strong> — the team's shared log + the surface where every recommendation lands for review.</li>
-        <li><strong>GitHub</strong> — roadmap state, PRs, ship notes, the source of truth for what's actually changing.</li>
-        <li><strong>Product analytics</strong> — deposits, withdrawals, conversion, retention. The signals that tell us if anything Oslo proposed actually worked.</li>
-      </ul>
-      <p><strong>Telegram</strong> stays important for partner and reply workflows. Hyperliquid, Notion, defillama, coingecko, harmonix-brain, and address-reputation round out the long tail.</p>
-      <p>Every external API plus the LLM connector is wrapped in a typed client that handles retry, rate limiting, caching, identity resolution, and cost tracking. Skills do not make raw HTTP calls. They go through <code>ctx.connectors.&lt;name&gt;</code>, and every call is checked against the skill's capability token before it is made. Connectors are structured as published packages with hot reload (pattern from <a href="https://github.com/activepieces/activepieces">Activepieces</a>) so skills, the runtime, and any future marketplace can install them uniformly.</p>
-
-      <h3>Capability tokens as the safety primitive</h3>
-      <p>The capability token issued by dispatch is the foundation of the safety layer. Every memory access and connector call presents the token; anything outside what the token allows is rejected at the boundary, before the call is even attempted. Token is short-lived (expires when the skill finishes), scoped to a single skill run, and includes the actor on whose behalf the skill runs.</p>
-      <p>On top of the token, eighteen symptom-triggered rules fire automatically based on what the skill is doing. Six are distinctive enough to call out:</p>
-      <ul>
-        <li><strong><code>llm-endpoint-safety</code></strong> — scans every prompt for injection patterns and every output for leaked PII.</li>
-        <li><strong><code>output-voice-check</code></strong> — for outputs going to public surfaces (X, Discord channels, DMs), a small judging model rates the output 1–5 against the unit's voice and claim guidelines. Below threshold, output is held for review.</li>
-        <li><strong><code>cross-unit-read-policy</code></strong> — enforced via the capability token. A Marketing skill cannot read BD's working memory unless its token includes <code>bd.working</code>.</li>
-        <li><strong><code>cost-and-rate-cap</code></strong> — each skill has a daily dollar cap and a per-minute call limit. Breach the cap and the skill auto-pauses.</li>
-        <li><strong><code>dead-man-switch</code></strong> — global halt that trips when anomaly thresholds breach. All skills stop until cleared.</li>
-        <li><strong><code>secret-egress-scan</code></strong> — every output checked for patterns matching any secret loaded into the runtime.</li>
-      </ul>
-      <p>Each rule declares severity. <strong>block</strong> halts the skill and surfaces it for review; <strong>warn</strong> logs and continues. The full eighteen rules are in <code>src/safety/rules/</code> in the (private) oslo repo.</p>
-
-      <h3>The Hyperliquid trade guard</h3>
-      <p>Hyperliquid is the only connector where Oslo can write to a chain. Because a single bad call has irreversible cost, the trade guard adds ten rules on top of the standard layer (the tenth is <strong>pre-flight transaction simulation</strong>, inspired by <a href="https://www.hypernative.io/">Hypernative</a>'s Guardian product). Four worth detailing:</p>
-      <ul>
-        <li><strong>Per-trade size cap.</strong> Every order checked against a hardcoded ceiling. Even with HITL approval, an order over the cap is rejected at the connector. Changing the cap requires a code commit.</li>
-        <li><strong>Pre-flight simulation.</strong> Before sending, the connector simulates the trade and rejects if outcome diverges from the plan or if expected slippage exceeds threshold (e.g., 0.5%). Stops fat-finger orders, stale quotes, and thin-book moments.</li>
-        <li><strong>Two-step + 60-second window.</strong> A trade approval doesn't fire the order; it enqueues it. Sixty seconds later, the connector asks for a second confirmation. Only then does it send.</li>
-        <li><strong>Echo-back confirmation.</strong> When the second approval is requested, Oslo restates the order in full — <code>{asset, side, size, expected fill, slippage, position after}</code> — and asks for a code phrase, not just "y". Defeats accidental confirmations.</li>
-      </ul>
-      <p>The remaining six (volume cap, asset whitelist, position cap, time-window guard, circuit breaker, address-reputation pre-check) are in <code>src/safety/rules/hyperliquid-trade-guard.ts</code>.</p>
-
-      <h3>Cost + token efficiency</h3>
-      <p>Every LLM call records <code>tokens_in</code>, <code>tokens_out</code>, <code>model</code>, <code>cost_usd</code>, and <code>latency_ms</code> to <code>oslo_skill_calls</code>, keyed by <code>trace_id</code> and <code>skill_id</code>. That gives you four rollups for free: cost per skill, cost per trace, cost per model, and cost per unit per day.</p>
-      <p>The point is not just to know the bill. It's to optimize. Oslo improves on quality <em>and</em> efficiency:</p>
-      <ul>
-        <li><strong>Use the cheapest path that does the job well.</strong> Default to a small free-tier model (Groq Llama 3.1-8b). Escalate to a larger model only when confidence is low, the task is high-stakes, or the output quality matters.</li>
-        <li><strong>Compress context.</strong> Memory is reused, not re-explained. Procedural memory (markdown playbooks) sits in the system prompt once; episodic snippets are pulled by relevance, not dumped wholesale.</li>
-        <li><strong>Avoid redundant reasoning.</strong> A skill that already classified an account doesn't reclassify it next time. Dispatch writes the classification onto the input so downstream skills trust it.</li>
-        <li><strong>Cap per skill.</strong> Each skill has a daily dollar cap. Breach the cap and it auto-pauses until the next UTC day. Stops a runaway prompt from burning the whole budget.</li>
-      </ul>
-      <p>The <code>ops.cost-report</code> skill rolls all of this up over a day, week, or month. <code>oslo.suggest-self-improvement</code> reads the same data and proposes which skill to cheap-tier next — that's the 5th slot in the daily morning brief.</p>
-      <p>Another good Hermes-style upgrade is replayability. If a brief or recommendation was wrong, the team should be able to replay the trace against a new prompt, a new skill version, or a cheaper model path and compare outcomes without guessing.</p>
-
-      <p class="note">Note: Connectors are the only path Oslo has to anything outside its own process. There are no manual HTTP calls in skill code. Every external interaction is forced through one of two dozen typed methods, each gated by capability-token verification and wrapped by symptom-triggered rules. Skills cannot bypass safety because there is no path that does so.</p>
-    </section>
-
-    <section>
-      <h2>Closing Loop</h2>
+      <h2>10. Feedback + research loop</h2>
+      <div class="layer-card">
+        <div class="what">
+          <div class="label">What it is</div>
+          <div class="body">What makes Oslo compound. The layer that sits over the whole system — improving signals, scores, recommendations, memory, and skills based on real outcomes, not engagement.</div>
+        </div>
+        <div class="how">
+          <div class="label">How it works</div>
+          <ul>
+            <li><strong>Learn from outcomes, not engagement.</strong> A post that drives a deposit matters more than likes. An outreach that drives retention matters more than a reply. A partner conversation that moves measurable TVL matters more than meeting count.</li>
+            <li><strong><code>data.weight-decisions</code></strong> (weekly) — reads 28 days of accept / reject / postpone decisions. For every signal source × pattern, computes accept rate. Writes per-signal weights to <code>oslo_signal_weights</code>.</li>
+            <li><strong><code>data.weight-outcomes</code></strong> (weekly) — reads accepted proposals from 7–30 days ago. Joins against on-chain activity (<code>oslo_app_wallets</code>) and content performance (market-adjusted via <code>oslo_market_state</code>). Combines with the decisions-side weight via geometric mean.</li>
+            <li><strong>Daily research per unit.</strong> Every unit runs a <code>&lt;unit&gt;.daily-research</code> skill (cheap, no LLM, pure aggregation). Counts shifts, flags movers, surfaces anomalies. Every department has a heartbeat.</li>
+            <li><strong>Decisions log feeds back.</strong> Next week's <code>bd.suggest-contacts</code> reads last week's accept/reject pattern. If "warm intro through @x replied once" gets rejected 5 times and accepted zero, that signal weight drops toward 0.3.</li>
+            <li><strong>Replayability.</strong> Any past <code>trace_id</code> can be re-run with a different model, prompt, or skill version — and outputs diffed against the original. Wrong recommendations get analyzed; right ones get amplified.</li>
+            <li><strong>Self-improvement.</strong> <code>oslo.suggest-self-improvement</code> reads cost + outcome data and proposes which skill to cheap-tier next, which prompt to revise, which connector to retire. That's the 5th slot in the daily morning brief.</li>
+          </ul>
+        </div>
+      </div>
       <div class="flow">
-        <span class="step">signal</span><span class="arrow">→</span><span class="step">dispatch normalizes</span><span class="arrow">→</span><span class="step">audience graph classifies + enriches</span><span class="arrow">→</span><span class="step">system scores who matters and why</span><span class="arrow">→</span><span class="step">unit gets a recommendation</span><span class="arrow">→</span><span class="step">operator approves / edits / postpones</span><span class="arrow">→</span><span class="step">action is taken</span><span class="arrow">→</span><span class="step">result logged to memory</span><span class="arrow">→</span><span class="step">next signal starts smarter</span>
+        <span class="step">signal</span><span class="arrow">→</span><span class="step">core normalizes</span><span class="arrow">→</span><span class="step">audience graph classifies + enriches</span><span class="arrow">→</span><span class="step">system scores who matters and why</span><span class="arrow">→</span><span class="step">unit gets a recommendation</span><span class="arrow">→</span><span class="step">operator approves / edits / postpones</span><span class="arrow">→</span><span class="step">action is taken</span><span class="arrow">→</span><span class="step">result logged to memory</span><span class="arrow">→</span><span class="step">next signal starts smarter</span>
       </div>
-      <p>That's the loop. Observe, score, prioritize, act, learn.</p>
-      <p>The feedback loop isn't just the last box. It sits over the whole system. It improves memory, skills, automation, unit strategy, and the recommendations themselves. It learns from <strong>business outcomes, not engagement</strong>. If a post leads to a deposit, that matters more than likes. If an outreach leads to retention, that matters more than a reply. If a partner conversation leads to measurable TVL, that matters more than the meeting count.</p>
-      <p>Over time, Oslo gets better at three things: <strong>self-improvement, sharper suggestions, and higher conversion</strong>. Every accept, reject, edit, and postpone feeds back into the scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually moved the audience. A small team can't outwork a big one. It can out-select one.</p>
+      <p>That's the loop. Observe, score, prioritize, act, learn. Over time, Oslo gets better at three things: <strong>self-improvement, sharper suggestions, and higher conversion</strong>. Every accept, reject, edit, and postpone feeds back into scoring. Every deposit, withdrawal, and retention event feeds back into who counts as a power user. Every shipped roadmap item feeds back into what content actually moved the audience. A small team can't outwork a big one. It can out-select one.</p>
 
-      <h3>How the loop closes in code</h3>
-      <p>Two skills run weekly to make this concrete:</p>
-      <div class="compare">
-        <div class="col">
-          <div class="label">data.weight-decisions</div>
-          <div class="body">Reads the last 28 days of accept / reject / postpone decisions on <code>oslo_proposals</code>. For every signal source × pattern, computes the accept rate. Writes a per-signal weight to <code>oslo_signal_weights</code>. If "warm intro through @x replied once" gets rejected 5 times and accepted zero, that signal's weight drops toward 0.3 and stops dominating future BD recommendations.</div>
-        </div>
-        <div class="col">
-          <div class="label">data.weight-outcomes</div>
-          <div class="body">Reads accepted proposals from 7-30 days ago. For each, checks downstream signals that the action moved a number. Computes outcome correlation per signal source × pattern. Combines with the decisions-side weight via geometric mean. The merged weight is what suggest-* skills read on the next run.</div>
-        </div>
-      </div>
-
-      <h3>What "outcome" actually means</h3>
-      <p>Engagement is not the goal. Money moving is the goal. Two more skills feed the outcome side with real data, market-adjusted:</p>
+      <h3>How "outcome" is measured (with real data)</h3>
       <div class="compare">
         <div class="col">
           <div class="label">data.app-activity-sync</div>
@@ -939,10 +947,7 @@ footer a { color: var(--text3); border-bottom: none; }
           <div class="body">Hourly. Captures HYPE / BTC / ETH price + 24h change, Hyperliquid 24h volume, Harmonix TVL. Writes to <code>oslo_market_state</code>. Lets the outcome evaluator normalize: <em>"a post that got 80 likes on a -8% HYPE day is stronger than the same 80 likes on a +5% pump day."</em></div>
         </div>
       </div>
-      <p>So when a BD proposal is accepted and the @user behind it deposits to a Harmonix vault within 14 days, <code>data.weight-outcomes</code> joins <code>oslo_app_wallets.linked_handle</code> against <code>oslo_app_activity</code>, sees the deposit, and credits the signals that supported the proposal. When a marketing post is judged, the engagement number is divided by a market-adjustment multiplier read from <code>oslo_market_state</code> — a flat-day winner stays a winner, a pump-day winner gets adjusted down.</p>
-
-      <h3>Surfacing the loop on every proposal</h3>
-      <p>Suggest skills (<code>bd.suggest-contacts</code>, eventually <code>marketing.suggest-content</code> and <code>ops.suggest-priorities</code>) read <code>oslo_signal_weights</code> at scoring time and multiply each candidate's score by the product of weights for the evidence behind it. The operator sees the multiplier on the proposal — so if last week's <em>"AUM &gt;$50M"</em> signal was a strong predictor and this week's candidate has it, the proposal explicitly notes <code>learned multiplier=1.42 → adjusted_score=120</code>.</p>
+      <p>So when a BD proposal is accepted and the @user behind it deposits to a Harmonix vault within 14 days, <code>data.weight-outcomes</code> joins <code>oslo_app_wallets.linked_handle</code> against <code>oslo_app_activity</code>, sees the deposit, and credits the signals that supported the proposal. When a marketing post is judged, the engagement number is divided by a market-adjustment multiplier — a flat-day winner stays a winner; a pump-day winner gets adjusted down.</p>
 
       <h3>Repeat-rejected candidates: ask, don't discard</h3>
       <p>Suppose Oslo keeps recommending @vincent because his audience-graph score is high and the learned weights still favor him, but you reject him every week. Two of the three options are wrong:</p>
@@ -951,15 +956,7 @@ footer a { color: var(--text3); border-bottom: none; }
         <li><strong>(b) auto-suppress after N rejects</strong> — discards a candidate who might still be good once a missing piece of context resolves.</li>
         <li><strong>(c) ask why, redo the score, keep him in the pool with adjusted weight</strong> — the operator's call.</li>
       </ul>
-      <p>So that's what Oslo does. On the second reject of the same target without a captured reason, Discord opens a modal: <em>"Why isn't @vincent a fit?"</em> Three fields:</p>
-      <ul>
-        <li><strong>Reason</strong> — free-form. <em>"They raised in Q3, won't fit until next round."</em></li>
-        <li><strong>Tags</strong> — structured: <code>out_of_icp</code>, <code>timing</code>, <code>already_engaged</code>, <code>wrong_signal</code>, <code>low_priority</code>, <code>needs_warm_intro</code>, <code>not_now_revisit</code>. Lets us downweight whole classes of mistake.</li>
-        <li><strong>Resurface after</strong> — optional date. <em>"Revisit 2026-08-01 once their round closes."</em></li>
-      </ul>
-      <p>The reason persists in <code>oslo_target_feedback</code>. On the next run of <code>bd.suggest-contacts</code>, @vincent's score gets multiplied by 0.3 and the proposal carries the prior context as evidence:</p>
-      <pre><code>oslo_target_feedback: prior reject (3×): they raised in Q3, won't fit until next round [out_of_icp, timing]</code></pre>
-      <p>If the resurface date passes, the multiplier clears and @vincent comes back — with the prior reason still attached so the operator has the full thread. If the operator accepts on a future round, the feedback row clears entirely. The candidate is never deleted from the pool. The score adjusts. The reason stays in memory. The system learns by being asked, not by being silent.</p>
+      <p>So that's what Oslo does. On the second reject of the same target without a captured reason, Discord opens a modal: <em>"Why isn't @vincent a fit?"</em> Three fields: free-form reason, structured tags (<code>out_of_icp</code>, <code>timing</code>, <code>already_engaged</code>, <code>wrong_signal</code>, <code>low_priority</code>, <code>needs_warm_intro</code>, <code>not_now_revisit</code>), optional resurface date. The reason persists in <code>oslo_target_feedback</code>. On the next run, score gets multiplied by 0.3 and the proposal carries the prior reason as evidence. The candidate is never deleted from the pool. The score adjusts. The reason stays in memory. The system learns by being asked, not by being silent.</p>
 
       <p>The loop closes itself. Decisions feed weights. Outcomes feed weights. Operator feedback feeds weights. Weights feed scoring. Scoring feeds decisions. The system gets sharper from the work it already did.</p>
     </section>
