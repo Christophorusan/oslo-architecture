@@ -143,14 +143,12 @@ p.note {
   font-style: normal;
 }
 .diagram-wrap {
-  /* Full-bleed break-out: takes 100% of the viewport width regardless of
-     the article's column. Inner .diagram caps at max-width and centers. */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  margin-top: 24px;
-  margin-bottom: 24px;
-  padding: 14px 24px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px 18px;
   background: var(--card);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -158,24 +156,24 @@ p.note {
   box-sizing: border-box;
 }
 .diagram-wrap .diagram-inner {
-  max-width: 1280px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 .diagram-title {
   text-align: center;
   color: var(--text3);
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1.1px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   font-weight: 700;
 }
-.diagram { display: flex; flex-direction: column; gap: 10px; }
+.diagram { display: flex; flex-direction: column; gap: 8px; }
 .control-plane, .layer, .safety-layer, .center {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px 14px;
+  padding: 10px 12px;
 }
 [data-theme="light"] .center {
   background: linear-gradient(135deg, #EDF9F2 0%, #E8EDEC 100%);
@@ -185,28 +183,28 @@ p.note {
   border-color: rgba(226,246,161,0.28);
 }
 .control-plane h4, .layer h4, .safety-layer h4, .center h4 {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.1px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .layer h4, .safety-layer h4, .control-plane h4 { color: var(--text3); }
 .center h4 { color: var(--text); }
 .layer .sub, .safety-layer .sub, .control-plane .items, .center p, .obs p, .layer .body, .unit .desc, .door .desc, .pill, .rules span {
   color: var(--text2);
 }
-.control-plane .items { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; font-size: 11px; }
+.control-plane .items { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; font-size: 10px; }
 .control-plane .items span, .rules span, .pill, .unit, .door, .split > div {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
 }
-.control-plane .items span { padding: 4px 10px; }
-.arrow { display: flex; justify-content: center; height: 12px; }
-.arrow::after { content: ''; width: 2px; height: 12px; background: var(--accent-line); }
-.doors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.door { padding: 12px; text-align: center; }
+.control-plane .items span { padding: 4px 8px; }
+.arrow { display: flex; justify-content: center; height: 8px; }
+.arrow::after { content: ''; width: 2px; height: 8px; background: var(--accent-line); }
+.doors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.door { padding: 10px; text-align: center; }
 .door.host, .door.headless { border-color: var(--border); }
 .door .tag {
   font-size: 9px;
@@ -221,27 +219,27 @@ p.note {
   margin-bottom: 3px;
   font-weight: 700;
 }
-.center p, .pill, .rules span { font-family: 'Aeonik Mono', ui-monospace, monospace; font-size: 10px; }
-.pills { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.center p, .pill, .rules span { font-family: 'Aeonik Mono', ui-monospace, monospace; font-size: 9px; }
+.pills { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
 .pill { padding: 8px 6px; text-align: center; }
 .pill .u, .layer .body .accent { color: var(--accent); font-weight: 700; }
-.units { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
-.unit { padding: 10px; text-align: center; }
-.unit .desc { font-size: 10px; line-height: 1.55; }
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.layer .body { font-size: 11px; line-height: 1.7; }
+.units { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.unit { padding: 9px; text-align: center; }
+.unit .desc { font-size: 9px; line-height: 1.45; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.layer .body { font-size: 10px; line-height: 1.6; }
 .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .rules span { padding: 6px 7px; font-size: 9px; }
 .obs {
   background: var(--bg2);
   border: 1px dashed var(--border2);
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 .obs h5 {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -375,6 +373,7 @@ footer a { color: var(--text3); border-bottom: none; }
       <h2>Architecture Spec</h2>
       <p>Oslo is built from <strong>memory, skills, unit workflows, automation loops, and a feedback loop</strong>. It watches what's happening in the company, decides what matters, acts on the right thing, writes the result back to memory, and uses that result to do better next time.</p>
       <p>The point is not to automate everything. It's to pick the right thing to do. A small team can't outwork a big one. It can out-select one. Oslo helps you decide who to talk to, what to post, what to ship, what to drop, and what to do tomorrow. It finds leads, suggests improvements, writes reports, drafts content, and gets sharper over time from the work it already did.</p>
+      <p>The cleanest way to think about it is <strong>one core agent loop, many entry points</strong>. Codex, Claude Code, Discord, Telegram, cron, and APIs should all hit the same underlying brain. The messenger changes. The memory, skills, routing, and feedback loop do not.</p>
       <p>Three layers do most of the work. They blur together if you don't separate them:</p>
       <div class="defs">
         <div class="def">
@@ -391,8 +390,8 @@ footer a { color: var(--text3); border-bottom: none; }
         </div>
       </div>
       <p>The split matters. Memory knows <em>who the partner is</em>. The skill knows <em>how to score them and how to reach out</em>. The BD unit <em>owns that workflow</em>. Same call, three different layers doing three different jobs.</p>
-      <p>Team members extend Oslo by adding new skills. The more skills the company teaches it, the more useful it gets — new workflows, new playbooks, new operating habits, all reusable.</p>
-      <p>Oslo runs online, like a protocol. People connect to it through Codex, Claude Code, Discord, and Telegram. All four reach the same dispatcher. Dispatch doesn't just pick a skill. It captures the signal, classifies it, enriches it, scores it, and routes it to the right unit. The unit runs Plan → Act → Verify, streams progress back, and writes the result to memory so the next run starts smarter.</p>
+      <p>Team members extend Oslo by adding new skills. The more skills the company teaches it, the more useful it gets — new workflows, new playbooks, new operating habits, all reusable. The best skills should become <strong>procedural memory</strong>: once the company figures out a non-trivial workflow, Oslo should be able to save it, improve it, and reuse it.</p>
+      <p>Oslo runs online, like a protocol. People connect to it through Codex, Claude Code, Discord, Telegram, cron, and APIs. All of them reach the same agent core through a thin gateway layer. Dispatch doesn't just pick a skill. It captures the signal, classifies it, enriches it, scores it, and routes it to the right unit. The unit runs Plan → Act → Verify, streams progress back, and writes the result to memory so the next run starts smarter.</p>
       <p>Two paths into Oslo, depending on where the request comes from:</p>
       <div class="compare">
         <div class="col">
@@ -420,36 +419,37 @@ footer a { color: var(--text3); border-bottom: none; }
         <div class="diagram">
 
           <div class="layer">
-            <h4>Signals</h4>
-            <div class="sub">operator surfaces · non-operator triggers · all signals reach the same dispatcher</div>
+            <h4>Entry Points</h4>
+            <div class="sub">thin surfaces · same agent core behind every door</div>
             <div class="doors">
               <div class="door host"><div class="tag">host model</div><div class="name">Claude Code</div><div class="desc">review<br>reasoning<br>edits</div></div>
               <div class="door host"><div class="tag">host model</div><div class="name">Codex</div><div class="desc">automation<br>review<br>commands</div></div>
               <div class="door headless"><div class="tag">chat surface</div><div class="name">Discord</div><div class="desc">team context<br>approvals<br>shared log</div></div>
               <div class="door headless"><div class="tag">chat surface</div><div class="name">Telegram</div><div class="desc">replies<br>partners<br>on the go</div></div>
+              <div class="door headless"><div class="tag">runtime</div><div class="name">Cron / API</div><div class="desc">scheduled<br>briefs<br>webhooks</div></div>
             </div>
-            <div style="font-size:10px;color:#777;text-align:center;margin-top:10px;font-style:italic;">+ X reactions · app activity · cron · webhooks · replay</div>
+            <div style="font-size:9px;color:#777;text-align:center;margin-top:8px;font-style:italic;">+ X reactions · app activity · webhooks · replay</div>
           </div>
 
           <div class="arrow"></div>
 
           <div class="center">
-            <h4>Dispatch + Classification (part of Signals)</h4>
-            <p>capture signal → classify user or partner → enrich profile → rank opportunity → route to unit</p>
+            <h4>Agent Core + Gateway</h4>
+            <p>normalize input → load context → route model → call tools → stream result → save session</p>
           </div>
 
           <div class="arrow"></div>
 
           <div class="layer" style="text-align:center;max-width:720px;margin:0 auto;">
-            <h4 style="margin-bottom:2px;">Recommendation Queue</h4>
-            <div class="sub" style="margin:0;">who to contact · why now · what to post · what roadmap item to push · durable retries + progress streaming</div>
+            <h4 style="margin-bottom:2px;">Signals + Dispatch</h4>
+            <div class="sub" style="margin:0;">watch revenue · deposits · withdrawals · conversion · retention → classify user or partner → enrich profile → route to unit</div>
           </div>
 
           <div class="arrow"></div>
 
           <div class="layer">
             <h4>Skills</h4>
-            <div class="sub">flat verb namespace · research, recommend, draft, track, measure · Plan → Act → Verify with checkpointing</div>
+            <div class="sub">flat verb namespace · research, recommend, draft, track, measure · skills become procedural memory</div>
             <div class="pills">
               <div class="pill"><span class="u">bd.</span>partner-lookalikes</div>
               <div class="pill"><span class="u">marketing.</span>reaction-clusters</div>
@@ -480,7 +480,7 @@ footer a { color: var(--text3); border-bottom: none; }
           <div class="split">
             <div class="layer">
               <h4>Memory</h4>
-              <div class="sub">per-unit + shared company graph</div>
+              <div class="sub">per-unit + shared company graph · remembers today, past, future</div>
               <div class="body">
                 · audience graph: power users · tourists · integration partners · lookalikes<br>
                 · semantic: facts, roadmap, product state<br>
@@ -494,7 +494,7 @@ footer a { color: var(--text3); border-bottom: none; }
             </div>
             <div class="layer">
               <h4>Connectors</h4>
-              <div class="sub">typed clients · real signals in, recommendations out</div>
+              <div class="sub">typed clients · real signals in, recommendations out · token and cost telemetry</div>
               <div class="body">
                 <span class="accent">x-api · supabase · discord</span><br>
                 <span class="accent">github · product analytics</span><br>
@@ -511,7 +511,7 @@ footer a { color: var(--text3); border-bottom: none; }
 
           <div class="safety-layer">
             <h4>Safety Layer</h4>
-            <div class="sub">capability_token verified at every boundary · 18 symptom-triggered rules + Hyperliquid trade guard (10 rules incl. pre-flight sim)</div>
+            <div class="sub">capability_token verified at every boundary · approval gates · memory safety scanning · Hyperliquid trade guard</div>
             <div class="rules">
               <span>secrets-and-env</span><span>input-validation</span><span>llm-endpoint-safety</span>
               <span>database-query-safety</span><span>webhooks</span><span>observability</span>
@@ -528,7 +528,7 @@ footer a { color: var(--text3); border-bottom: none; }
           <div class="layer">
             <h4>Outputs</h4>
             <div class="split">
-              <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Recommendations</div><div style="font-size:11px;color:#ccc;">top accounts to contact · why now · roadmap-linked suggestions · content opportunities</div></div>
+              <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Daily + Weekly Briefs</div><div style="font-size:11px;color:#ccc;">top power users · partner pushes · content ideas · bottlenecks · self-improvements</div></div>
               <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Actions</div><div style="font-size:11px;color:#ccc;">drafts · DMs · reports · roadmap updates · posts · files · logged outcomes</div></div>
             </div>
           </div>
@@ -541,12 +541,13 @@ footer a { color: var(--text3); border-bottom: none; }
               <span>Connector Catalog</span>
               <span>Eval Harness</span>
               <span>Feature Flags</span>
+              <span>Session Routing</span>
             </div>
           </div>
 
           <div class="obs">
             <h5>Observability Spine</h5>
-            <p>traces (OTel) · structured logs · metrics · events · per-skill token usage / cost / latency / success rate · prompt + response logged</p>
+            <p>traces (OTel) · structured logs · metrics · events · per-skill token usage / cost / latency / success rate · prompt + response logged · replayable runs</p>
           </div>
 
         </div>
@@ -569,6 +570,7 @@ footer a { color: var(--text3); border-bottom: none; }
       </ul>
 
       <p>Long-running handling is async-first: dispatch returns a <code>job_id</code> immediately and streams results back as they happen. A ninety-second skill does not block the IDE or the chat.</p>
+      <p>Signals also need time-awareness. Oslo should know <strong>what matters today</strong>, <strong>what mattered in the past</strong>, and <strong>what is about to matter next</strong>. That is what turns signal collection into operating context instead of just a dashboard feed.</p>
 
       <h3>Operator-driven signals</h3>
       <p>Two of these come with their own model loaded — the host model in your coding agent does the natural-language interpretation. The other two are chat surfaces with no upstream model.</p>
@@ -637,7 +639,7 @@ footer a { color: var(--text3); border-bottom: none; }
       <p>Each entry holds: handle, resolved identity, classification, score, source events, last interaction, projected next-best-action, and a list of edges (warm intros, mutual followers, shared partner orgs).</p>
 
       <h3>How the graph is built</h3>
-      <p>Three analysis skills run on cron and write to the graph. They do not propose actions — only update what is known. On top of that, Oslo should run a daily research loop that looks for new information, proposes updates to the graph and memory, and writes accepted changes back into the system.</p>
+      <p>Three analysis skills run on cron and write to the graph. They do not propose actions — only update what is known. On top of that, Oslo should run a daily research loop that looks for new information, proposes updates to the graph and memory, and writes accepted changes back into the system. That keeps the graph current without turning every memory write into an uncontrolled side effect.</p>
       <ul>
         <li><strong><code>bd.audience-analyzer</code></strong> (daily) — reads marketing post events + reactor profiles, enriches each handle (bio, follower overlap, what they post about), updates user/partner classification.</li>
         <li><strong><code>bd.partner-lookalikes</code></strong> (weekly) — for each user/partner cohort, queries x-api for handles with overlapping followers and similar topic vectors. Scores by ICP fit. Stages new candidates with provenance ("matches the cohort that includes Vincent Wang and Jordi Alexander").</li>
@@ -707,6 +709,7 @@ footer a { color: var(--text3); border-bottom: none; }
         <li><strong>A unit owner</strong> (the department responsible for it)</li>
         <li><strong>A way to improve over time</strong> (golden tests, replay against prod traffic, decisions-log feedback)</li>
       </ul>
+      <p>The strongest Hermes-style idea to borrow here is that skills should become <strong>procedural memory</strong>. When Oslo or the team discovers a non-trivial workflow that works, it should not disappear into chat history. It should become a skill the system can call again, improve, and eventually route automatically.</p>
       <p>And every skill encodes three things, not just one:</p>
       <ul>
         <li><strong>How we do the task</strong> — the procedure, the prompts, the heuristics, the order of operations.</li>
@@ -815,6 +818,7 @@ footer a { color: var(--text3); border-bottom: none; }
         <li><strong>What will matter in the future</strong> — roadmap state, partner pipelines, content calendars, projected outcomes attached to accepted proposals. The forward-looking layer that lets today's choice account for what's coming.</li>
       </ul>
       <p>The feedback loop reads all three. A recommendation that ignores the past is naïve. One that ignores the future is short-sighted. One that ignores today is irrelevant.</p>
+      <p>Memory should also be curated, not dumped. Durable facts, successful workflows, partner context, content patterns, and decision reasons belong in memory. Raw noise, duplicate entries, and unsafe prompt-like text do not. If a memory write could poison the system prompt or expose secrets, it should be rejected before it lands.</p>
 
       <h3>Memory types per unit</h3>
       <p>Each unit has five memory types:</p>
@@ -896,6 +900,7 @@ footer a { color: var(--text3); border-bottom: none; }
         <li><strong>Cap per skill.</strong> Each skill has a daily dollar cap. Breach the cap and it auto-pauses until the next UTC day. Stops a runaway prompt from burning the whole budget.</li>
       </ul>
       <p>The <code>ops.cost-report</code> skill rolls all of this up over a day, week, or month. <code>oslo.suggest-self-improvement</code> reads the same data and proposes which skill to cheap-tier next — that's the 5th slot in the daily morning brief.</p>
+      <p>Another good Hermes-style upgrade is replayability. If a brief or recommendation was wrong, the team should be able to replay the trace against a new prompt, a new skill version, or a cheaper model path and compare outcomes without guessing.</p>
 
       <p class="note">Note: Connectors are the only path Oslo has to anything outside its own process. There are no manual HTTP calls in skill code. Every external interaction is forced through one of two dozen typed methods, each gated by capability-token verification and wrapped by symptom-triggered rules. Skills cannot bypass safety because there is no path that does so.</p>
     </section>
@@ -978,15 +983,16 @@ footer a { color: var(--text3); border-bottom: none; }
     <section>
       <h2>How it scales</h2>
       <p>Oslo is built deliberately small at the start. The architecture supports three additive scaling phases — none requires rewriting what already works.</p>
+      <p>It should scale in three directions at once: more surfaces, better memory, and cheaper execution. The key is that the core loop stays the same while the entry points, skills, and connectors multiply around it.</p>
 
       <h3>Phase 1 — The runtime (in progress)</h3>
-      <p>Skills are scaffolded; the runtime that makes them callable is what we're building now: dispatcher, work queue, capability tokens, the safety layer, the connector wrappers, and the memory layer. CLI entry point first (every skill invocable from a terminal), then the MCP server (stdio mode), then the Discord and Telegram bots. The seven day-one skills become real work, one unit at a time.</p>
+      <p>Skills are scaffolded; the runtime that makes them callable is what we're building now: one shared agent core, dispatcher, work queue, capability tokens, the safety layer, the connector wrappers, and the memory layer. CLI entry point first (every skill invocable from a terminal), then the MCP server (stdio mode), then the Discord and Telegram bots. The seven day-one skills become real work, one unit at a time.</p>
 
       <h3>Phase 2 — Multi-surface depth</h3>
-      <p>Each unit grows from one skill to ten or twenty (BD pulls from coreyhaines/marketingskills as a reference shape). The eval harness with replay-against-prod becomes the default merge gate for any prompt or skill change. The Hyperliquid trade guard ships with all ten rules including the pre-flight simulation. Langfuse traces every run; the daily activity log writes itself.</p>
+      <p>Each unit grows from one skill to ten or twenty (BD pulls from coreyhaines/marketingskills as a reference shape). The eval harness with replay-against-prod becomes the default merge gate for any prompt or skill change. Memory safety rules and curated memory writes become strict defaults. The Hyperliquid trade guard ships with all ten rules including the pre-flight simulation. Langfuse traces every run; the daily activity log writes itself.</p>
 
       <h3>Phase 3 — Hosted and multi-agent</h3>
-      <p>Oslo moves from one laptop to a hosted service. The <code>actor</code> field already on every input becomes meaningful — anyone the team grants access can drive Oslo from any of the four entry points. Two-way A2A contracts let Oslo and external agent systems exchange messages, not just read each other's state. The skill format becomes portable enough to share with the Harmonix ecosystem; partner protocols run their own variants of <code>bd.daily-leads</code> and <code>marketing.daily-post-draft</code> against their own data.</p>
+      <p>Oslo moves from one laptop to a hosted service. The <code>actor</code> field already on every input becomes meaningful — anyone the team grants access can drive Oslo from any of the entry points. Two-way A2A contracts let Oslo and external agent systems exchange messages, not just read each other's state. Replayable traces, session routing, and portable skills make the system shareable enough that partner protocols can run their own variants of <code>bd.daily-leads</code> and <code>marketing.daily-post-draft</code> against their own data.</p>
 
       <h3>Out of scope, by design</h3>
       <p>Hyperliquid auto-execute is not on the roadmap. Reads, drafts, paper trades, and simulations are supported. Automated execution of real orders without a human in the loop is not, and will not be. The trade guard exists to bound what HITL can approve, not to replace HITL.</p>
