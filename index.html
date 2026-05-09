@@ -143,37 +143,32 @@ p.note {
   font-style: normal;
 }
 .diagram-wrap {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 10px 18px;
+  margin: 28px 0;
+  padding: 18px 20px;
   background: var(--card);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  border-radius: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   box-sizing: border-box;
 }
 .diagram-wrap .diagram-inner {
-  max-width: 1120px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .diagram-title {
   text-align: center;
   color: var(--text3);
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1.1px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   font-weight: 700;
 }
-.diagram { display: flex; flex-direction: column; gap: 8px; }
+.diagram { display: flex; flex-direction: column; gap: 10px; }
 .control-plane, .layer, .safety-layer, .center {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 14px 16px;
 }
 [data-theme="light"] .center {
   background: linear-gradient(135deg, #EDF9F2 0%, #E8EDEC 100%);
@@ -183,68 +178,72 @@ p.note {
   border-color: rgba(226,246,161,0.28);
 }
 .control-plane h4, .layer h4, .safety-layer h4, .center h4 {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.1px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .layer h4, .safety-layer h4, .control-plane h4 { color: var(--text3); }
 .center h4 { color: var(--text); }
 .layer .sub, .safety-layer .sub, .control-plane .items, .center p, .obs p, .layer .body, .unit .desc, .door .desc, .pill, .rules span {
   color: var(--text2);
 }
-.control-plane .items { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; font-size: 10px; }
+.layer .sub, .safety-layer .sub { font-size: 12px; line-height: 1.55; margin-bottom: 8px; }
+.control-plane .items { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; font-size: 11px; }
 .control-plane .items span, .rules span, .pill, .unit, .door, .split > div {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
 }
-.control-plane .items span { padding: 4px 8px; }
-.arrow { display: flex; justify-content: center; height: 8px; }
-.arrow::after { content: ''; width: 2px; height: 8px; background: var(--accent-line); }
+.control-plane .items span { padding: 5px 10px; }
+.arrow { display: flex; justify-content: center; height: 10px; }
+.arrow::after { content: ''; width: 2px; height: 10px; background: var(--accent-line); }
 .doors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-.door { padding: 10px; text-align: center; }
+.door { padding: 10px 8px; text-align: center; }
 .door.host, .door.headless { border-color: var(--border); }
 .door .tag {
-  font-size: 9px;
+  font-size: 9.5px;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 4px;
   color: var(--text3);
 }
 .door .name, .unit h5 {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text);
   margin-bottom: 3px;
   font-weight: 700;
 }
-.center p, .pill, .rules span { font-family: 'Aeonik Mono', ui-monospace, monospace; font-size: 9px; }
-.pills { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
-.pill { padding: 8px 6px; text-align: center; }
+.door .desc { font-size: 11px; line-height: 1.45; }
+.center p, .pill, .rules span { font-family: 'Aeonik Mono', ui-monospace, monospace; font-size: 11px; }
+.center p { line-height: 1.55; }
+.pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.pill { padding: 9px 8px; text-align: center; }
 .pill .u, .layer .body .accent { color: var(--accent); font-weight: 700; }
-.units { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
-.unit { padding: 9px; text-align: center; }
-.unit .desc { font-size: 9px; line-height: 1.45; }
+.units { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.unit { padding: 12px 10px; text-align: center; }
+.unit .desc { font-size: 11px; line-height: 1.5; }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.layer .body { font-size: 10px; line-height: 1.6; }
-.rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-.rules span { padding: 6px 7px; font-size: 9px; }
+.layer .body { font-size: 12px; line-height: 1.6; }
+.rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.rules span { padding: 7px 9px; font-size: 11px; text-align: center; }
 .obs {
   background: var(--bg2);
   border: 1px dashed var(--border2);
   border-radius: 12px;
-  padding: 10px;
+  padding: 12px 14px;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 .obs h5 {
-  font-size: 9px;
+  font-size: 10.5px;
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
+.obs p { font-size: 11px; line-height: 1.55; }
 .defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
 .defs .def {
   background: var(--bg2);
@@ -372,19 +371,11 @@ footer a { color: var(--text3); border-bottom: none; }
   .article { padding: 28px 24px 96px; }
   .article-header h1 { font-size: 34px; }
   .defs, .split { grid-template-columns: 1fr; }
-  /* Disable the diagram break-out on narrow screens. Let it sit inside the
-     article column with horizontal scroll if needed. */
-  .diagram-wrap {
-    width: auto;
-    margin-left: 0;
-    margin-right: 0;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow-x: auto;
-  }
-  .diagram-wrap .diagram-inner { max-width: 100%; }
+  /* Mobile: stack the dense grids tighter so cells stay readable. */
+  .diagram-wrap { padding: 14px 14px; }
   .doors, .pills, .units { grid-template-columns: repeat(2, 1fr) !important; }
   .rules { grid-template-columns: repeat(2, 1fr) !important; }
+  .split { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
