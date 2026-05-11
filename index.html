@@ -464,6 +464,153 @@ footer a { color: var(--text3); border-bottom: none; }
       <p>Many ways to reach it; one brain underneath. Ten layers, each with one job. Read on for what each does and how they connect.</p>
     </section>
 
+
+    <section>
+      <h2>The Architecture</h2>
+      <p>The whole system in one picture. Each block below is detailed in its own section underneath.</p>
+
+      <div class="diagram-wrap">
+       <div class="diagram-inner">
+        <div class="diagram-title">Oslo — Growth Intelligence Architecture</div>
+        <div class="diagram">
+
+          <div class="layer">
+            <h4>Entry Points</h4>
+            <div class="sub">thin surfaces · same agent core behind every door</div>
+            <div class="doors">
+              <div class="door host"><div class="tag">host model</div><div class="name">Claude Code</div><div class="desc">review<br>reasoning<br>edits</div></div>
+              <div class="door host"><div class="tag">host model</div><div class="name">Codex</div><div class="desc">automation<br>review<br>commands</div></div>
+              <div class="door headless"><div class="tag">chat surface</div><div class="name">Discord</div><div class="desc">team context<br>approvals<br>shared log</div></div>
+              <div class="door headless"><div class="tag">chat surface</div><div class="name">Telegram</div><div class="desc">replies<br>partners<br>on the go</div></div>
+              <div class="door headless"><div class="tag">runtime</div><div class="name">Cron / API</div><div class="desc">scheduled<br>briefs<br>webhooks</div></div>
+            </div>
+            <div style="font-size:9px;color:#777;text-align:center;margin-top:8px;font-style:italic;">+ X reactions · app activity · webhooks · replay</div>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="center">
+            <h4>Agent Core + Gateway</h4>
+            <p>normalize input → load context → route model → call tools → stream result → save session</p>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="layer" style="text-align:center;max-width:720px;margin:0 auto;">
+            <h4 style="margin-bottom:2px;">Signals + Dispatch</h4>
+            <div class="sub" style="margin:0;">watch revenue · deposits · withdrawals · conversion · retention → classify user or partner → enrich profile → route to unit</div>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="layer">
+            <h4>Skills</h4>
+            <div class="sub">flat verb namespace · research, recommend, draft, track, measure · skills become procedural memory</div>
+            <div class="pills">
+              <div class="pill"><span class="u">bd.</span>partner-lookalikes</div>
+              <div class="pill"><span class="u">marketing.</span>reaction-clusters</div>
+              <div class="pill"><span class="u">marketing.</span>content-winners</div>
+              <div class="pill"><span class="u">ops.</span>roadmap-sync</div>
+              <div class="pill"><span class="u">data.</span>audience-score</div>
+              <div class="pill"><span class="u">bd.</span>contact-why-now</div>
+            </div>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="layer">
+            <h4>Units</h4>
+            <div class="sub">six departments · each owns one slice of the learning loop and writes back to shared company memory</div>
+            <div class="units">
+              <div class="unit"><h5>BD</h5><div class="desc">partners<br>contact map<br>why now</div></div>
+              <div class="unit"><h5>Marketing</h5><div class="desc">reactions<br>content<br>distribution</div></div>
+              <div class="unit"><h5>Engineering</h5><div class="desc">product state<br>vaults<br>ship notes</div></div>
+              <div class="unit"><h5>Security</h5><div class="desc">watchlists<br>trust<br>risk context</div></div>
+              <div class="unit"><h5>Ops</h5><div class="desc">roadmap<br>timing<br>cadence</div></div>
+              <div class="unit"><h5>Data</h5><div class="desc">scoring<br>lookalikes<br>ICP clusters</div></div>
+            </div>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="split">
+            <div class="layer">
+              <h4>Memory</h4>
+              <div class="sub">per-unit + shared company graph · remembers today, past, future</div>
+              <div class="body">
+                · audience graph: power users · tourists · integration partners · lookalikes<br>
+                · semantic: facts, roadmap, product state<br>
+                · episodic: reactions, meetings, replies, posts<br>
+                · working: active queue and next actions<br>
+                · procedural: markdown playbooks and heuristics<br>
+                <br>
+                <span class="accent">Shared memory answers:</span><br>
+                who reacted · who matters · who is similar · what shipped · what should happen next
+              </div>
+            </div>
+            <div class="layer">
+              <h4>Connectors</h4>
+              <div class="sub">typed clients · real signals in, recommendations out · token and cost telemetry</div>
+              <div class="body">
+                <span class="accent">x-api · supabase · discord</span><br>
+                <span class="accent">github · product analytics</span><br>
+                telegram · notion · roadmap tracker<br>
+                hyperliquid · defillama · coingecko<br>
+                harmonix-brain · address-reputation<br>
+                <br>
+                <span style="color:#777;">identity resolution · retry · cache · rate-limit · cost</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="safety-layer">
+            <h4>Safety Layer</h4>
+            <div class="sub">capability_token verified at every boundary · approval gates · memory safety scanning · Hyperliquid trade guard</div>
+            <div class="rules">
+              <span>secrets-and-env</span><span>input-validation</span><span>llm-endpoint-safety</span>
+              <span>database-query-safety</span><span>webhooks</span><span>observability</span>
+              <span>error-handling</span><span>output-voice-check</span><span>cross-unit-read-policy</span>
+              <span>cost-and-rate-cap</span><span>circuit-breaker</span><span>dead-man-switch</span>
+              <span>idempotency-enforce</span><span>adversarial-input-scan</span><span>audit-log-immutable</span>
+              <span>secret-egress-scan</span><span>hyperliquid-trade-guard</span><span>dry-run-mode</span>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#999;margin-top:10px;">severity: <span style="color:#E2F6A1;font-weight:700;">block</span> (halt + ask) / warn (log + continue)</div>
+          </div>
+
+          <div class="arrow"></div>
+
+          <div class="layer">
+            <h4>Outputs</h4>
+            <div class="split">
+              <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Daily + Weekly Briefs</div><div style="font-size:11px;color:#ccc;">top power users · partner pushes · content ideas · bottlenecks · self-improvements</div></div>
+              <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Actions</div><div style="font-size:11px;color:#ccc;">drafts · DMs · reports · roadmap updates · posts · files · logged outcomes</div></div>
+            </div>
+          </div>
+
+          <div class="control-plane" style="margin-top:18px;">
+            <h4>Control Plane — Configuration the Data Plane Above Reads From</h4>
+            <div class="items">
+              <span>Skill Registry (versioned)</span>
+              <span>Prompt Registry</span>
+              <span>Connector Catalog</span>
+              <span>Eval Harness</span>
+              <span>Feature Flags</span>
+              <span>Session Routing</span>
+            </div>
+          </div>
+
+          <div class="obs">
+            <h5>Observability Spine</h5>
+            <p>traces (OTel) · structured logs · metrics · events · per-skill token usage / cost / latency / success rate · prompt + response logged · replayable runs</p>
+          </div>
+
+        </div>
+       </div>
+      </div>
+    </section>
+
     <section>
       <h2>1. Entry points</h2>
       <p>Five ways to reach Oslo: Codex, Claude Code, Discord, Telegram, or scheduled jobs. All five hit the same brain. The messenger changes; what's underneath doesn't.</p>
