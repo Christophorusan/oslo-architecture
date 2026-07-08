@@ -179,14 +179,80 @@ footer a { color: var(--ink-soft); }
 /* ---- Benji liveline × X capital board ---- */
 @keyframes harPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
 @keyframes livePing { 0%{transform:scale(1);opacity:.55} 70%{transform:scale(2.2);opacity:0} 100%{opacity:0} }
+.cap-pin {
+  /* reserves space; sticky pin target */
+  position: relative;
+  z-index: 200;
+  margin-bottom: 28px;
+  scroll-margin-top: 8px;
+}
 .cap-board {
-  position: sticky; top: 8px; z-index: 40;
-  scroll-margin-top: 12px; margin-bottom: 28px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
   border: 1px solid var(--border);
-  background: #000;
+  background: rgba(0,0,0,0.94);
+  border-radius: 16px;
+  /* overflow visible so sticky isn't clipped by self */
+  overflow: visible;
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  transition: box-shadow .2s var(--ease-smooth), border-radius .2s ease, border-color .2s ease;
+}
+.cap-board-inner {
   border-radius: 16px;
   overflow: hidden;
+  background: #000;
+  border: 0;
 }
+.cap-board.is-stuck {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(47,51,54,0.9);
+  border-radius: 0 0 16px 16px;
+  border-top: 0;
+  top: 0;
+}
+.cap-board.is-stuck .cap-board-inner {
+  border-radius: 0 0 16px 16px;
+}
+/* Compact strip while following scroll */
+.cap-board.is-stuck .cap-heroes,
+.cap-board.is-stuck .cap-metrics {
+  display: none !important;
+}
+.cap-compact {
+  display: none;
+  align-items: center;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.cap-board.is-stuck .cap-compact {
+  display: flex;
+}
+.cap-compact-cell {
+  flex: 1 0 auto;
+  min-width: 110px;
+  padding: 10px 14px;
+  border-right: 1px solid var(--border);
+}
+.cap-compact-cell:last-child { border-right: 0; }
+.cap-compact-cell .k {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-mute);
+}
+.cap-compact-cell .v {
+  margin-top: 2px; font-size: 16px; font-weight: 700;
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--ink);
+  white-space: nowrap;
+}
+.cap-compact-cell .d {
+  margin-top: 2px; font-size: 11px; font-weight: 700;
+  font-variant-numeric: tabular-nums; color: var(--ink-fade);
+}
+.cap-compact-cell .d.up { color: var(--green); }
+.cap-compact-cell .d.down { color: var(--hot); }
+
 .cap-head {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border);
@@ -353,7 +419,9 @@ footer a { color: var(--ink-soft); }
     
 
     <!-- ========== CAPITAL SCOREBOARD ========== -->
+    <div class="cap-pin" id="cap-pin">
     <div id="an-capital" class="cap-board">
+      <div class="cap-board-inner">
       <div class="cap-head">
         <div class="cap-head-left">
           <span class="cap-live"><span class="dot"></span>Live</span>
@@ -388,7 +456,19 @@ footer a { color: var(--ink-soft); }
       <div class="cap-metrics" id="cap-metrics">
         <!-- filled by script from harmonix-dashboard.json -->
       </div>
-    </div>
+    
+      <div class="cap-compact" id="cap-compact" aria-hidden="true">
+        <div class="cap-compact-cell"><div class="k">AUM</div><div class="v tabular" id="cap-c-aum">—</div><div class="d flat" id="cap-c-aum-d">7d</div></div>
+        <div class="cap-compact-cell"><div class="k">HAR</div><div class="v tabular" id="cap-c-har">—</div><div class="d flat" id="cap-c-har-d">live</div></div>
+        <div class="cap-compact-cell"><div class="k">HYPE vault</div><div class="v tabular" id="cap-c-hype">—</div><div class="d flat" id="cap-c-hype-d">—</div></div>
+        <div class="cap-compact-cell"><div class="k">kHYPE</div><div class="v tabular" id="cap-c-khype">—</div><div class="d flat" id="cap-c-khype-d">—</div></div>
+        <div class="cap-compact-cell"><div class="k">Staked</div><div class="v tabular" id="cap-c-stake">—</div><div class="d flat" id="cap-c-stake-d">—</div></div>
+        <div class="cap-compact-cell"><div class="k">Vault TVL</div><div class="v tabular" id="cap-c-tvl">—</div><div class="d flat" id="cap-c-tvl-d">—</div></div>
+      </div>
+      </div><!-- /.cap-board-inner -->
+    </div><!-- /.cap-board -->
+    </div><!-- /.cap-pin -->
+</div>
 
 
     <!-- ========== HAR LIVE PRICE (Hyperliquid) ========== -->
@@ -1757,6 +1837,17 @@ renderXAnalytics();
           +'<div class="delta '+m.d.c+'">'+m.d.t+'</div></div>';
       }).join('');
     }
+    // compact sticky strip mirrors
+    setTxt('cap-c-aum', fmtUsdc(aum));
+    var ad2=deltaUsd(d7.combined_aum_usd); setTxt('cap-c-aum-d', ad2.t); setCls('cap-c-aum-d','d', ad2.c);
+    setTxt('cap-c-hype', fmtNative(pr.hype_deposited,'HYPE'));
+    var hd=deltaNat(d7.hype_deposited,'HYPE'); setTxt('cap-c-hype-d', hd.t); setCls('cap-c-hype-d','d', hd.c);
+    setTxt('cap-c-khype', fmtNative(pr.khype_deposited,'kHYPE'));
+    var kd=deltaNat(d7.khype_deposited,'kHYPE'); setTxt('cap-c-khype-d', kd.t); setCls('cap-c-khype-d','d', kd.c);
+    setTxt('cap-c-stake', fmtNative(s.total_hype,'HYPE'));
+    var sd=deltaNat(d7.hype_staked,'HYPE'); setTxt('cap-c-stake-d', sd.t); setCls('cap-c-stake-d','d', sd.c);
+    setTxt('cap-c-tvl', fmtUsdc(pr.tvl_all_vaults_usd));
+    var td=deltaUsd(d7.vault_tvl_usd); setTxt('cap-c-tvl-d', td.t); setCls('cap-c-tvl-d','d', td.c);
   }
 
   // load dashboard + history
@@ -1773,6 +1864,10 @@ renderXAnalytics();
     var mom=chg==null?'flat':chg>0.05?'up':chg<-0.05?'down':'flat';
     var col=mom==='up'?'#00ba7c':mom==='down'?'#f4212e':'#1d9bf0';
     setTxt('cap-har-price', fmtPrice(price));
+    setTxt('cap-c-har', fmtPrice(price));
+    if(chg==null){ setTxt('cap-c-har-d','live'); setCls('cap-c-har-d','d','flat'); }
+    else { setTxt('cap-c-har-d', (chg>=0?'+':'')+chg.toFixed(2)+'%'); setCls('cap-c-har-d','d', mom); }
+    var cel=document.getElementById('cap-c-har'); if(cel) cel.style.color=col;
     var el=document.getElementById('cap-har-price');
     if(el){ el.className='cap-hero-value'; el.style.color=col; }
     if(chg==null){ setTxt('cap-har-chg','fetching…'); setCls('cap-har-chg','cap-hero-delta','flat'); }
@@ -1818,6 +1913,129 @@ renderXAnalytics();
   }
   tickHar();
   setInterval(tickHar, 12000);
+})();
+
+</script>
+<script>
+
+/* CAP_STICKY — keep capital board pinned while scrolling Analytics */
+(function capitalSticky(){
+  var board = document.getElementById('an-capital');
+  var pin = document.getElementById('cap-pin');
+  if(!board || !pin) return;
+
+  function measure(){
+    // spacer height = board current height so layout doesn't jump when fixed
+    return board.offsetHeight;
+  }
+
+  function applyStuck(stuck){
+    if(stuck){
+      if(!board.classList.contains('is-stuck')){
+        board.classList.add('is-stuck');
+        pin.style.minHeight = measure() + 'px';
+      }
+      // while stuck as sticky, minHeight tracks compact height
+      pin.style.minHeight = board.offsetHeight + 'px';
+    } else {
+      board.classList.remove('is-stuck');
+      pin.style.minHeight = '';
+    }
+  }
+
+  // Sentinel at top of pin: when it leaves viewport upward, we're stuck
+  var sens = document.createElement('div');
+  sens.setAttribute('aria-hidden','true');
+  sens.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+  pin.style.position = 'relative';
+  pin.insertBefore(sens, pin.firstChild);
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      var e = entries[0];
+      // stuck when sentinel is above viewport (not intersecting and boundingClientRect.top < 0)
+      var stuck = e.boundingClientRect.top < 0;
+      applyStuck(stuck);
+    }, { threshold: [0,1], rootMargin: '0px' });
+    io.observe(sens);
+  }
+
+  // Fallback + continuous sync (fixed mode if sticky fails)
+  var usingFixed = false;
+  var homeTop = 0;
+  function recomputeHome(){
+    if(usingFixed) return;
+    var r = pin.getBoundingClientRect();
+    homeTop = window.scrollY + r.top;
+  }
+  recomputeHome();
+  window.addEventListener('resize', function(){ recomputeHome(); }, {passive:true});
+
+  function onScroll(){
+    // Only pin while Analytics view is active
+    var view = document.getElementById('view-analytics');
+    var analyticsOn = view && view.classList.contains('active');
+    if(!analyticsOn){
+      applyStuck(false);
+      if(usingFixed){
+        board.style.position = '';
+        board.style.left = '';
+        board.style.width = '';
+        board.style.top = '';
+        usingFixed = false;
+        pin.style.minHeight = '';
+      }
+      return;
+    }
+
+    var rect = pin.getBoundingClientRect();
+    var shouldStick = rect.top <= 0;
+
+    // Prefer CSS sticky; force fixed if sticky isn't holding (parent overflow etc.)
+    if(shouldStick){
+      applyStuck(true);
+      // Detect sticky failure: board should be at top≈0 when stuck
+      var br = board.getBoundingClientRect();
+      if(br.top > 2 || br.top < -2){
+        // sticky broken → fixed
+        usingFixed = true;
+        var wr = document.querySelector('.wrap');
+        var left = wr ? wr.getBoundingClientRect().left : 16;
+        var width = wr ? wr.clientWidth : (window.innerWidth - 32);
+        board.style.position = 'fixed';
+        board.style.top = '0px';
+        board.style.left = left + 'px';
+        board.style.width = width + 'px';
+        board.style.zIndex = '300';
+        pin.style.minHeight = board.offsetHeight + 'px';
+      } else if(usingFixed){
+        // keep fixed in sync with wrap width
+        var wr2 = document.querySelector('.wrap');
+        board.style.left = (wr2 ? wr2.getBoundingClientRect().left : 16) + 'px';
+        board.style.width = (wr2 ? wr2.clientWidth : window.innerWidth - 32) + 'px';
+        pin.style.minHeight = board.offsetHeight + 'px';
+      }
+    } else {
+      applyStuck(false);
+      if(usingFixed){
+        board.style.position = '';
+        board.style.left = '';
+        board.style.width = '';
+        board.style.top = '';
+        board.style.zIndex = '';
+        usingFixed = false;
+        pin.style.minHeight = '';
+      }
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  // re-run when switching to Analytics tab
+  document.querySelectorAll('#tabs button, #tabs a').forEach(function(b){
+    b.addEventListener('click', function(){ setTimeout(onScroll, 50); });
+  });
+  setTimeout(onScroll, 100);
 })();
 
 </script>
