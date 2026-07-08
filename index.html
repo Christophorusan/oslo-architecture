@@ -892,7 +892,13 @@ body:not([data-view="analytics"]) .cap-board {
       <div>
         <h1 class="page">Roadmap</h1>
         <p class="sub">Team calendar — click a day to add, click an event to edit. As simple as Google Calendar.</p>
-        <p class="sub" style="color:var(--warm)">Demo mode: tasks save to your browser only (localStorage) — nothing is sent anywhere, and they're lost if you clear site data. Production Oslo persists to Supabase.</p>
+        <div class="note" style="margin:12px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between">
+          <div style="max-width:52rem">
+            <strong style="color:var(--ink)">Team calendar lives in Oslo</strong>
+            <span style="color:var(--ink-mute)"> · This public page is a preview. Real tasks (shared for the whole team) save to Supabase in the live app — they survive refresh and work across machines.</span>
+          </div>
+          <a id="oslo-live-cal" href="http://127.0.0.1:3000/calendar" class="gcal-btn primary" style="text-decoration:none;white-space:nowrap">Open live calendar →</a>
+        </div>
       </div>
       <div class="page-meta">
         <div>Click day to create · click event to edit</div>
@@ -1455,6 +1461,21 @@ document.querySelectorAll('#analytics-subnav a').forEach(a => {
   } catch (_) {}
 })();
 
+
+// Live Oslo app URL (team calendar → Supabase). Override: localStorage.setItem('oslo-app-url','https://your-host')
+(function () {
+  var base = 'http://127.0.0.1:3000';
+  try {
+    var o = localStorage.getItem('oslo-app-url');
+    if (o) base = o.replace(/\/$/, '');
+  } catch (_) {}
+  var path = base + '/calendar';
+  document.querySelectorAll('#oslo-live-cal, #gcal-live-link').forEach(function (a) {
+    if (a) a.setAttribute('href', path);
+  });
+  window.__OSLO_APP__ = base;
+})();
+
 // ---- Calendar (Google-simple team roadmap) ----
 const TYPE_LABELS = {
   follow_up: "Follow-up", event: "Event", content: "Content",
@@ -1762,9 +1783,10 @@ function renderCalendar() {
           <div class="gcal-share">
             <button type="button" class="gcal-btn" id="gcal-share-btn">Share</button>
             <div class="gcal-share-menu" id="gcal-share-menu">
-              <button type="button" id="cal-copy">Copy for team</button>
-              <button type="button" id="cal-export">Export JSON</button>
-              <label>Import JSON<input type="file" id="cal-import" accept="application/json,.json" hidden></label>
+              <a href="http://127.0.0.1:3000/calendar" id="gcal-live-link" data-live-cal style="display:block;padding:8px 10px;border-radius:8px;color:var(--accent,#1d9bf0);font-size:13px;font-weight:600;text-decoration:none">Open live team calendar →</a>
+              <button type="button" id="cal-copy">Copy local draft</button>
+              <button type="button" id="cal-export">Export local JSON</button>
+              <label>Import local JSON<input type="file" id="cal-import" accept="application/json,.json" hidden></label>
             </div>
           </div>
         </div>
@@ -1799,6 +1821,12 @@ function renderCalendar() {
       };
       document.addEventListener("click", window.__gcalShareClose);
     }
+    // live team calendar (Supabase) link
+    const liveHref = (window.__OSLO_APP__ || "http://127.0.0.1:3000") + "/calendar";
+    root.querySelectorAll("#gcal-live-link, a[data-live-cal]").forEach((a) => a.setAttribute("href", liveHref));
+    const topLive = document.getElementById("oslo-live-cal");
+    if (topLive) topLive.setAttribute("href", liveHref);
+
     root.querySelector("#cal-export")?.addEventListener("click", exportJson);
     root.querySelector("#cal-copy")?.addEventListener("click", copyShare);
     root.querySelector("#cal-import")?.addEventListener("change", (e) => {
@@ -1885,7 +1913,7 @@ function renderCalendar() {
       selected = payload.occurs_on;
       viewMonth = payload.occurs_on.slice(0, 7);
       upsert(payload);
-      toast("Saved");
+      toast("Saved locally — open live calendar for team sync");
     });
 
 }
