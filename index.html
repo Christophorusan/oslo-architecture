@@ -187,9 +187,9 @@ footer a { color: var(--ink-soft); }
   scroll-margin-top: 8px;
 }
 .cap-board {
-  position: sticky;
-  top: 0;
-  z-index: 200;
+  position: relative;
+  top: auto;
+  z-index: 1;
   border: 1px solid var(--border);
   background: rgba(0,0,0,0.94);
   border-radius: 16px;
@@ -205,30 +205,19 @@ footer a { color: var(--ink-soft); }
   background: #000;
   border: 0;
 }
-.cap-board.is-stuck {
-  box-shadow: 0 12px 40px rgba(0,0,0,0.65), 0 0 0 1px rgba(47,51,54,0.9);
-  border-radius: 0 0 16px 16px;
-  border-top: 0;
-  top: 0;
-}
-.cap-board.is-stuck .cap-board-inner {
-  border-radius: 0 0 16px 16px;
-}
+.cap-board.is-stuck { /* disabled */ }
+.cap-board.is-stuck .cap-board-inner { /* disabled */ }
 /* Compact strip while following scroll */
-.cap-board.is-stuck .cap-heroes,
-.cap-board.is-stuck .cap-metrics {
-  display: none !important;
-}
 .cap-compact {
-  display: none;
+  display: none !important; /* no-scroll-live */
   align-items: center;
   gap: 0;
   border-top: 1px solid var(--border);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-.cap-board.is-stuck .cap-compact {
-  display: flex;
+.cap-compact {
+  display: none !important;
 }
 .cap-compact-cell {
   flex: 1 0 auto;
@@ -379,12 +368,7 @@ footer a { color: var(--ink-soft); }
   max-width: 100%;
   box-sizing: border-box;
 }
-.cap-board.is-fixed {
-  /* positioned by JS to match .wrap content box */
-  position: fixed !important;
-  z-index: 300 !important;
-  /* left/width set inline to align with .wrap */
-}
+.cap-board.is-fixed { position: relative !important; left: auto !important; width: 100% !important; }
 /* Center analytics grids so tiles don't feel edge-glued */
 #view-analytics .tiles,
 #view-analytics .grid2,
@@ -2006,120 +1990,7 @@ renderXAnalytics();
 <script>
 
 
-/* CAP_STICKY — pin capital only inside Analytics; never leak to Roadmap */
-(function capitalSticky(){
-  var board = document.getElementById('an-capital');
-  var pin = document.getElementById('cap-pin');
-  var view = document.getElementById('view-analytics');
-  if(!board || !pin || !view) return;
-
-  function analyticsOn(){
-    return view.classList.contains('active');
-  }
-
-  function wrapBox(){
-    var wr = document.querySelector('.wrap');
-    if(!wr) return { left: 24, width: Math.max(0, window.innerWidth - 48) };
-    var r = wr.getBoundingClientRect();
-    // match wrap content width (already padded)
-    return { left: r.left, width: r.width };
-  }
-
-  function clearFixed(){
-    board.classList.remove('is-fixed', 'is-stuck');
-    board.style.position = '';
-    board.style.left = '';
-    board.style.width = '';
-    board.style.top = '';
-    board.style.right = '';
-    board.style.zIndex = '';
-    board.style.maxWidth = '';
-    pin.style.minHeight = '';
-  }
-
-  function applyStuck(stuck){
-    if(!analyticsOn()){
-      clearFixed();
-      return;
-    }
-    if(stuck){
-      board.classList.add('is-stuck');
-    } else {
-      board.classList.remove('is-stuck', 'is-fixed');
-      board.style.position = '';
-      board.style.left = '';
-      board.style.width = '';
-      board.style.top = '';
-      board.style.zIndex = '';
-      pin.style.minHeight = '';
-    }
-  }
-
-  function onScroll(){
-    if(!analyticsOn()){
-      clearFixed();
-      return;
-    }
-
-    var rect = pin.getBoundingClientRect();
-    var shouldStick = rect.top <= 0;
-
-    if(!shouldStick){
-      applyStuck(false);
-      return;
-    }
-
-    applyStuck(true);
-
-    // Prefer CSS sticky; if it fails (board not at top), use fixed aligned to .wrap
-    var br = board.getBoundingClientRect();
-    var stickyOk = br.top >= -1 && br.top <= 2 && !board.classList.contains('is-fixed');
-    // After compact, height shrinks — sticky usually works. Only force fixed if clearly drifting.
-    if(br.top > 4 || br.top < -8 || board.classList.contains('is-fixed')){
-      var box = wrapBox();
-      board.classList.add('is-fixed');
-      board.style.position = 'fixed';
-      board.style.top = '0px';
-      board.style.left = box.left + 'px';
-      board.style.width = box.width + 'px';
-      board.style.maxWidth = box.width + 'px';
-      board.style.zIndex = '300';
-      pin.style.minHeight = board.offsetHeight + 'px';
-    } else {
-      // pure sticky — stay within wrap column
-      board.classList.remove('is-fixed');
-      board.style.position = '';
-      board.style.left = '';
-      board.style.width = '';
-      board.style.maxWidth = '';
-      pin.style.minHeight = board.offsetHeight + 'px';
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll, {passive:true});
-
-  // Tab switches: hard reset when leaving Analytics
-  function onTab(){
-    setTimeout(function(){
-      if(!analyticsOn()) clearFixed();
-      else onScroll();
-    }, 30);
-  }
-  document.querySelectorAll('#tabs button[data-view]').forEach(function(b){
-    b.addEventListener('click', onTab);
-  });
-
-  // Also observe class changes on the view
-  try {
-    var mo = new MutationObserver(function(){
-      if(!analyticsOn()) clearFixed();
-    });
-    mo.observe(view, { attributes: true, attributeFilter: ['class'] });
-  } catch(e) {}
-
-  setTimeout(onScroll, 80);
-})();
+/* CAP_STICKY disabled — capital scrolls with page, no live pin */
 
 </script>
 </body>
