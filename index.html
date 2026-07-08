@@ -283,24 +283,31 @@ footer a { color: var(--ink-soft); }
     
     <!-- ========== HARMONIX DASHBOARDS (API) ========== -->
     <div id="an-dashboards" style="scroll-margin-top:24px;margin-bottom:28px">
-      <h2 class="page" style="font-size:18px;margin-bottom:4px">Harmonix dashboards · product TVL + HYPE staked</h2>
-      <p class="sub" style="margin-bottom:16px">Live from <a href="https://app.harmonix.fi/dashboards" target="_blank" rel="noopener">app.harmonix.fi/dashboards</a> public API · as of 2026-07-08 22:01:59</p>
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">Harmonix dashboards · deposits + HYPE staked</h2>
+      <p class="sub" style="margin-bottom:16px">Live from <a href="https://app.harmonix.fi/dashboards" target="_blank" rel="noopener">app.harmonix.fi/dashboards</a> · as of 2026-07-08 22:04:39</p>
 
       <div class="tiles" style="margin-bottom:16px">
-        <div class="tile"><div class="label">Combined AUM</div><div class="value tabular">8.75M</div><div class="hint">USDC · vaults + HYPE staked</div></div>
-        <div class="tile"><div class="label">Vault TVL</div><div class="value tabular">6.47M</div><div class="hint">all products · 13,472 depositors</div></div>
-        <div class="tile"><div class="label">HYPE staked via frontend</div><div class="value tabular">34.0K HYPE</div><div class="hint">2.28M USDC · native stake</div></div>
+        <div class="tile"><div class="label">Combined AUM</div><div class="value tabular">8.76M</div><div class="hint">USDC · vaults + HYPE staked</div></div>
+        <div class="tile"><div class="label">HYPE deposited (vault)</div><div class="value tabular">33.3K HYPE</div><div class="hint">2.23M USDC · current</div></div>
+        <div class="tile"><div class="label">kHYPE deposited (vault)</div><div class="value tabular">48.1K kHYPE</div><div class="hint">3.29M USDC · current</div></div>
+        <div class="tile"><div class="label">HYPE staked via frontend</div><div class="value tabular">34.0K HYPE</div><div class="hint">2.29M USDC · native stake</div></div>
+      </div>
+
+      <div class="tiles" style="margin-bottom:16px">
+        <div class="tile"><div class="label">Vault TVL (all)</div><div class="value tabular">6.47M</div><div class="hint">13,472 depositors</div></div>
+        <div class="tile"><div class="label">USDC vault products</div><div class="value tabular">949.2K</div><div class="hint">delta-neutral + haUSDC + …</div></div>
         <div class="tile"><div class="label">Deposits 30d</div><div class="value tabular">28.7K</div><div class="hint">users 30d 244</div></div>
+        <div class="tile"><div class="label">Yield paid 30d</div><div class="value tabular">653</div><div class="hint">USDC terms</div></div>
       </div>
 
       <div class="grid2" style="margin-bottom:16px">
         <div class="panel">
-          <h2>Vault TVL (USDC)</h2>
+          <h2>Vault deposits (native + USDC)</h2>
           <div class="scrollx">
             <table>
-              <thead><tr><th>Product</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th><th>Slug</th></tr></thead>
+              <thead><tr><th>Product</th><th class="num">Deposited now</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th></tr></thead>
               <tbody>
-                <tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td><td class="dim">hyperevm-khype-v1</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td><td class="dim">hyperevm-delta-neutral-hype-v3</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td><td class="dim">hype-delta-neutral-v1</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td><td class="dim">hip3-usdc-vault</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td><td class="dim">kelpdao-restaking-delta-neutral-vault</td></tr>
+                <tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr>
               </tbody>
             </table>
           </div>
@@ -311,16 +318,17 @@ footer a { color: var(--ink-soft); }
             <table>
               <thead><tr><th>Route</th><th class="num">HYPE</th><th class="num">USDC</th><th class="num">%</th></tr></thead>
               <tbody>
-                <tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.98M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.2K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.5K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.6K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
-                <tr style="background:var(--bg-soft)"><td><strong>Total</strong></td><td class="num"><strong>34.0K</strong> HYPE</td><td class="num"><strong>2.28M</strong> USDC</td><td class="num">100%</td></tr>
+                <tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.99M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.4K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.7K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.8K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
+                <tr style="background:var(--bg-soft)"><td><strong>Total</strong></td><td class="num"><strong>34.0K</strong> HYPE</td><td class="num"><strong>2.29M</strong> USDC</td><td class="num">100%</td></tr>
               </tbody>
             </table>
           </div>
-          <div class="note" style="margin:0;border-radius:0">Native HYPE staked through Harmonix frontend — separate from haHYPE vault TVL.</div>
+          <div class="note" style="margin:0;border-radius:0">Native HYPE staked through Harmonix frontend — separate from HYPE vault deposits.</div>
         </div>
       </div>
     </div>
 
+    
     <!-- ========== PROTOCOL ========== -->
     <div id="an-protocol" style="scroll-margin-top:24px">
       <h2 class="page" style="font-size:18px;margin-bottom:4px">Protocol</h2>
