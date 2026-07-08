@@ -22,6 +22,8 @@
   --border: #25252a;
   --border-soft: #1c1c22;
   --hot: #fb923c;
+  --warm: #fbbf24;
+  --cool: #94a3b8;
   --green: #86efac;
   --chart-in: #16a34a;
   --chart-out: #ea580c;
@@ -104,6 +106,64 @@ footer { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 24p
 footer a { color: var(--ink-soft); }
 .view { display: none; }
 .view.active { display: block; }
+
+/* ---- Calendar (mirrors local / calendar-block) ---- */
+.cal-section { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-card); overflow: hidden; margin-bottom: 24px; }
+.cal-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--border); padding: 12px 16px; }
+.cal-head h2 { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-mute); }
+.cal-head p { font-size: 12px; color: var(--ink-soft); margin-top: 4px; max-width: 42rem; }
+.cal-head .meta { font-size: 11px; color: var(--ink-mute); margin-top: 4px; }
+.cal-legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: 11px; }
+.cal-legend span { border: 1px solid var(--border); border-radius: var(--radius-chip); padding: 2px 6px; }
+.chip-follow_up { color: var(--warm); border-color: rgb(251 191 36 / .4); background: rgb(251 191 36 / .05); }
+.chip-event { color: var(--green); border-color: rgb(134 239 172 / .4); background: rgb(134 239 172 / .05); }
+.chip-content { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
+.chip-task { color: var(--ink-soft); border-color: var(--border); background: var(--bg-soft); }
+.chip-meeting { color: var(--hot); border-color: rgb(251 146 60 / .4); background: rgb(251 146 60 / .05); }
+.chip-review { color: var(--ink-mute); border-color: var(--border-soft); background: var(--card); }
+.cal-grid-wrap { padding: 8px 16px 12px; }
+.cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-mute); }
+.cal-weekdays div { padding: 2px 4px; }
+.cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 4px; }
+.cal-pad { min-height: 100px; }
+.cal-cell { display: flex; flex-direction: column; min-height: 100px; border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-btn); padding: 4px; text-align: left; transition: border-color .12s, background .12s; }
+.cal-cell:hover { border-color: rgb(245 245 244 / .2); background: var(--bg-soft); }
+.cal-cell.selected { border-color: rgb(245 245 244 / .4); background: var(--bg-soft); }
+.cal-cell-top { display: flex; justify-content: space-between; align-items: baseline; border: 0; background: transparent; color: inherit; font: inherit; padding: 0; cursor: pointer; width: 100%; text-align: left; }
+.cal-daynum { font-size: 10px; color: var(--ink-soft); }
+.cal-daynum.today { background: var(--ink); color: var(--card); border-radius: 3px; padding: 0 4px; font-weight: 500; }
+.cal-wd { font-size: 8px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-fade); }
+.cal-chips { flex: 1; display: flex; flex-direction: column; gap: 1px; overflow: hidden; margin-top: 2px; min-height: 0; }
+.cal-chip { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; border: 1px solid; border-radius: 2px; padding: 0 4px; font-size: 9px; line-height: 14px; }
+.cal-chip.done { text-decoration: line-through; opacity: .6; }
+.cal-more { font-size: 8px; color: var(--ink-mute); }
+.cal-cell input.quick { height: 20px; width: 100%; margin-top: 4px; border: 1px solid var(--border-soft); background: var(--bg); border-radius: 4px; padding: 0 4px; font-size: 10px; color: var(--ink); font-family: inherit; }
+.cal-cell input.quick::placeholder { color: var(--ink-fade); }
+.cal-cell input.quick:focus { outline: none; border-color: rgb(245 245 244 / .4); }
+.cal-panel { border-top: 1px solid var(--border); background: var(--bg-soft); padding: 12px 16px; }
+.cal-panel-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.cal-panel-head h3 { font-size: 13px; font-weight: 500; }
+.cal-panel-head .badge { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-mute); margin-left: 8px; }
+.cal-panel-head .count { font-size: 11px; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.cal-empty { border: 1px solid var(--border-soft); background: var(--card); border-radius: var(--radius-btn); padding: 12px; font-size: 12px; color: var(--ink-mute); }
+.cal-items { list-style: none; display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; }
+.cal-item { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; border: 1px solid var(--border-soft); background: var(--card); border-radius: var(--radius-btn); padding: 8px 12px; }
+.cal-item .type { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid; border-radius: var(--radius-chip); padding: 2px 6px; flex-shrink: 0; }
+.cal-item .title { flex: 1; font-size: 13px; min-width: 120px; }
+.cal-item .rel { font-size: 11px; color: var(--ink-mute); }
+.cal-item .status { font-size: 11px; color: var(--ink-fade); text-transform: uppercase; letter-spacing: 0.04em; }
+.cal-item.done { opacity: .7; }
+.cal-item.skipped { opacity: .5; }
+.cal-add { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.cal-add input[type="text"] { flex: 1; min-width: 160px; height: 32px; border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-btn); padding: 0 10px; font-size: 12px; color: var(--ink); font-family: inherit; }
+.cal-add select { height: 32px; border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-btn); padding: 0 8px; font-size: 12px; color: var(--ink); font-family: inherit; }
+.cal-add button { height: 32px; border: 1px solid var(--ink); background: var(--ink); color: var(--card); border-radius: var(--radius-btn); padding: 0 12px; font-size: 12px; font-family: inherit; cursor: pointer; }
+.cal-add button:hover { opacity: .9; }
+@media (max-width: 720px) {
+  .cal-pad, .cal-cell { min-height: 84px; }
+  .cal-chip { font-size: 8px; }
+  .cal-cell input.quick { font-size: 9px; }
+}
 </style>
 </head>
 <body>
@@ -115,7 +175,8 @@ footer a { color: var(--ink-soft); }
     </div>
     <div class="controls">
       <nav class="tabs" id="tabs">
-        <button data-view="analytics" class="active">Analytics</button>
+        <button data-view="calendar" class="active">Calendar</button>
+        <button data-view="analytics">Analytics</button>
         <button data-view="operator">Operator</button>
         <button data-view="content">Content</button>
         <a href="docs/">Docs</a>
@@ -126,14 +187,31 @@ footer a { color: var(--ink-soft); }
 
   <div class="note">
     <strong>This is the actual operating system</strong> — a static replica of the
-    production Oslo app that runs locally against Supabase, Discord, and on-chain
-    indexers. Analytics figures are real on-chain aggregates from the Harmonix
-    vault event backfill (Hyperscan, HyperEVM). Pipeline accounts and content rows
-    are anonymized samples. How it works: <a href="docs/">read the docs</a>.
+    production Oslo app (localhost:3000). Calendar is the daily GTM surface;
+    type in a day cell and press Enter to add a task (saved in this browser only).
+    Analytics figures are real on-chain aggregates. Pipeline accounts and calendar
+    relationship names are anonymized samples. How it works: <a href="docs/">read the docs</a>.
   </div>
 
+  <!-- ================= CALENDAR ================= -->
+  <section class="view active" id="view-calendar">
+    <div class="page-head">
+      <div>
+        <h1 class="page">Calendar</h1>
+        <p class="sub">Next 30 days of GTM work — follow-ups, reviews, content, meetings, and relationship actions. Same surface as the live app home.</p>
+      </div>
+      <div class="page-meta">
+        <div>Window · next 30 days</div>
+        <div>Sample items · type + Enter works in-browser</div>
+      </div>
+    </div>
+    <div class="cal-section" id="calendar-root">
+      <!-- rendered by script -->
+    </div>
+  </section>
+
   <!-- ================= ANALYTICS ================= -->
-  <section class="view active" id="view-analytics">
+  <section class="view" id="view-analytics">
     <div class="page-head">
       <div>
         <h1 class="page">Analytics</h1>
@@ -308,6 +386,215 @@ tabs.forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + b.dataset.view).classList.add('active');
 }));
+
+// ---- Calendar (static replica of local calendar-block) ----
+const TYPE_LABELS = {
+  follow_up: "Follow-up", event: "Event", content: "Content",
+  task: "Task", meeting: "Meeting", review: "Review",
+};
+const TYPE_INITIAL = { follow_up: "F", event: "E", content: "C", task: "T", meeting: "M", review: "R" };
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const STORE_KEY = "oslo-replica-calendar-v1";
+
+function todayISO(d = new Date()) {
+  return [d.getFullYear(), String(d.getMonth() + 1).padStart(2, "0"), String(d.getDate()).padStart(2, "0")].join("-");
+}
+function addDaysISO(iso, n) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(y, m - 1, d + n);
+  return todayISO(dt);
+}
+function next30(iso) {
+  return Array.from({ length: 30 }, (_, i) => addDaysISO(iso, i));
+}
+function parseDay(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(y, m - 1, d);
+  const now = new Date();
+  const isToday = dt.getFullYear() === now.getFullYear() && dt.getMonth() === now.getMonth() && dt.getDate() === now.getDate();
+  return { weekday: WEEKDAYS[dt.getDay()], day: d, month: MONTHS_SHORT[m - 1], isToday, dow: dt.getDay() };
+}
+function uid() {
+  return "c_" + Math.random().toString(36).slice(2, 10);
+}
+
+// Seed relative to today so the grid always looks "live"
+function seedItems(today) {
+  const t = (offset, title, type, status = "planned", rel = null) => ({
+    id: uid(), title, occurs_on: addDaysISO(today, offset), type, status, relationship: rel,
+  });
+  return [
+    t(0, "Daily vault flow check", "task", "planned"),
+    t(0, "Discord funnel snapshot", "review", "planned"),
+    t(1, "Follow up fund-alpha intro", "follow_up", "planned", "fund-alpha"),
+    t(1, "haHYPE retention cohort note", "content", "planned"),
+    t(2, "Protocol-beta partnership call", "meeting", "planned", "protocol-beta"),
+    t(3, "Operator lead triage", "task", "planned"),
+    t(4, "Ecosystem meetup prep", "event", "planned"),
+    t(5, "Vault copy review (landing)", "review", "planned"),
+    t(6, "Follow up market-maker gamma", "follow_up", "planned", "mm-gamma"),
+    t(7, "Newsletter draft · issue 13", "content", "planned"),
+    t(8, "Onboarding checklist for fund-delta", "task", "planned", "fund-delta"),
+    t(10, "Weekly GTM sync", "meeting", "planned"),
+    t(12, "Churn alert deep-dive", "review", "planned"),
+    t(14, "X thread · depositor cohorts", "content", "planned"),
+    t(16, "Follow up protocol-epsilon", "follow_up", "planned", "protocol-epsilon"),
+    t(18, "Infra status with eng", "meeting", "planned"),
+    t(21, "Month-end metrics pack", "task", "planned"),
+    t(24, "Partner workshop", "event", "planned"),
+    t(27, "Roadmap note for docs", "content", "planned"),
+  ];
+}
+
+function loadItems(today) {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    }
+  } catch (_) {}
+  const seeded = seedItems(today);
+  localStorage.setItem(STORE_KEY, JSON.stringify(seeded));
+  return seeded;
+}
+function saveItems(items) {
+  localStorage.setItem(STORE_KEY, JSON.stringify(items));
+}
+
+function renderCalendar() {
+  const root = document.getElementById("calendar-root");
+  if (!root) return;
+  const today = todayISO();
+  let items = loadItems(today);
+  let selected = today;
+  const days = next30(today);
+  const firstDow = parseDay(days[0]).dow;
+
+  function byDate(iso) {
+    return items.filter(i => i.occurs_on === iso);
+  }
+  function counts() {
+    const planned = items.filter(i => i.status === "planned").length;
+    const done = items.filter(i => i.status === "done").length;
+    return { planned, done, total: items.length };
+  }
+  function addItem(occurs_on, title, type = "task") {
+    const t = title.trim();
+    if (!t) return;
+    items = [{ id: uid(), title: t.slice(0, 200), occurs_on, type, status: "planned", relationship: null }, ...items];
+    saveItems(items);
+    selected = occurs_on;
+    paint();
+  }
+  function setStatus(id, status) {
+    items = items.map(i => i.id === id ? { ...i, status } : i);
+    saveItems(items);
+    paint();
+  }
+
+  function paint() {
+    const c = counts();
+    const selectedItems = byDate(selected);
+    const { weekday, day, month, isToday } = parseDay(selected);
+
+    const legend = Object.keys(TYPE_LABELS).map(t =>
+      `<span class="chip-${t}"><strong>${TYPE_INITIAL[t]}</strong> <span style="color:var(--ink-mute)">${TYPE_LABELS[t]}</span></span>`
+    ).join("");
+
+    let pads = "";
+    for (let i = 0; i < firstDow; i++) pads += `<div class="cal-pad"></div>`;
+
+    const cells = days.map(iso => {
+      const p = parseDay(iso);
+      const dayItems = byDate(iso);
+      const compact = dayItems.slice(0, 2);
+      const overflow = dayItems.length - compact.length;
+      const chips = compact.map(it =>
+        `<span class="cal-chip chip-${it.type}${it.status === "done" ? " done" : ""}" title="${TYPE_LABELS[it.type]} · ${escapeHtml(it.title)}">${escapeHtml(it.title)}</span>`
+      ).join("") + (overflow > 0 ? `<span class="cal-more">+${overflow}</span>` : "");
+      return `<div class="cal-cell${selected === iso ? " selected" : ""}" data-iso="${iso}">
+        <button type="button" class="cal-cell-top" data-select="${iso}" aria-label="Select ${iso}">
+          <span class="cal-daynum${p.isToday ? " today" : ""}">${p.day}</span>
+          <span class="cal-wd">${p.weekday}</span>
+        </button>
+        <div class="cal-chips">${chips}</div>
+        <input class="quick" type="text" maxlength="200" placeholder="Type + Enter" data-quick="${iso}" aria-label="Quick add for ${iso}">
+      </div>`;
+    }).join("");
+
+    const list = selectedItems.length === 0
+      ? `<p class="cal-empty">Nothing on ${weekday}, ${month} ${day}. Type in a day cell or use the form below.</p>`
+      : `<ul class="cal-items">${selectedItems.map(it => `
+          <li class="cal-item ${it.status}">
+            <span class="type chip-${it.type}">${TYPE_LABELS[it.type]}</span>
+            <span class="title">${escapeHtml(it.title)}</span>
+            ${it.relationship ? `<span class="rel">${escapeHtml(it.relationship)}</span>` : ""}
+            <span class="status">${it.status}</span>
+            ${it.status === "planned" ? `<button type="button" class="pill" data-done="${it.id}" style="cursor:pointer">Done</button>` : ""}
+          </li>`).join("")}</ul>`;
+
+    root.innerHTML = `
+      <div class="cal-head">
+        <div>
+          <h2>Next 30 days</h2>
+          <p>Track follow-ups, reviews, content, meetings, and relationship actions. Same layout as the production app calendar.</p>
+          <div class="meta">${c.planned} planned · ${c.done} done · ${c.total} total</div>
+        </div>
+        <div class="cal-legend">${legend}</div>
+      </div>
+      <div class="cal-grid-wrap">
+        <div class="cal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
+        <div class="cal-days">${pads}${cells}</div>
+      </div>
+      <div class="cal-panel">
+        <div class="cal-panel-head">
+          <h3>${weekday}, ${month} ${day}${isToday ? '<span class="badge">today</span>' : ""}</h3>
+          <span class="count">${selectedItems.length} ${selectedItems.length === 1 ? "item" : "items"}</span>
+        </div>
+        ${list}
+        <form class="cal-add" id="cal-add-form">
+          <input type="text" name="title" maxlength="200" placeholder="Add item for this day" required>
+          <select name="type">
+            ${Object.keys(TYPE_LABELS).map(t => `<option value="${t}">${TYPE_LABELS[t]}</option>`).join("")}
+          </select>
+          <button type="submit">Add</button>
+        </form>
+      </div>`;
+
+    root.querySelectorAll("[data-select]").forEach(btn => {
+      btn.addEventListener("click", () => { selected = btn.getAttribute("data-select"); paint(); });
+    });
+    root.querySelectorAll("input.quick").forEach(inp => {
+      inp.addEventListener("focus", () => {
+        const iso = inp.getAttribute("data-quick");
+        if (selected !== iso) { selected = iso; paint(); root.querySelector(`input.quick[data-quick="${iso}"]`)?.focus(); }
+      });
+      inp.addEventListener("keydown", e => {
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+        addItem(inp.getAttribute("data-quick"), inp.value, "task");
+      });
+    });
+    root.querySelectorAll("[data-done]").forEach(btn => {
+      btn.addEventListener("click", () => setStatus(btn.getAttribute("data-done"), "done"));
+    });
+    const form = root.querySelector("#cal-add-form");
+    form?.addEventListener("submit", e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      addItem(selected, String(fd.get("title") || ""), String(fd.get("type") || "task"));
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  paint();
+}
+renderCalendar();
 
 // ---- real monthly aggregates from the on-chain backfill ----
 const MONTHS = [{"m":"2025-07","d":1,"w":1,"a":2,"n":2},{"m":"2025-08","d":30,"w":13,"a":36,"n":36},{"m":"2025-09","d":1063,"w":229,"a":770,"n":757},{"m":"2025-10","d":2069,"w":453,"a":1158,"n":923},{"m":"2025-11","d":1832,"w":595,"a":1437,"n":964},{"m":"2025-12","d":1217,"w":898,"a":1617,"n":927},{"m":"2026-01","d":392,"w":405,"a":562,"n":202},{"m":"2026-02","d":80,"w":197,"a":226,"n":36},{"m":"2026-03","d":155,"w":179,"a":270,"n":72},{"m":"2026-04","d":131,"w":173,"a":248,"n":56},{"m":"2026-05","d":106,"w":201,"a":249,"n":65},{"m":"2026-06","d":58,"w":132,"a":167,"n":34}];
