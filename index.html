@@ -271,6 +271,7 @@ footer a { color: var(--ink-soft); }
       </div>
     </div>
 
+    
     <!-- ========== HAR LIVE PRICE (Hyperliquid) ========== -->
     <div id="an-har" style="scroll-margin-top:24px;margin-bottom:28px">
       <div class="panel" style="border:1px solid var(--accent, #1d9bf0);overflow:hidden">
@@ -482,7 +483,7 @@ footer a { color: var(--ink-soft); }
       </div>
     </div>
 
-                <!-- ========== MINDSHARE ARENA ========== -->
+                    <!-- ========== MINDSHARE ARENA ========== -->
     <div id="an-mindshare" style="scroll-margin-top:24px;margin-top:40px;margin-bottom:24px">
       <div class="page-head" style="margin-bottom:16px">
         <div>
@@ -1446,6 +1447,16 @@ renderXAnalytics();
     var circ = n(d.circulatingSupply), total = n(d.totalSupply);
     var chg = (price!=null && prev!=null && prev>0) ? ((price-prev)/prev)*100 : null;
     set('har-price', fmtP(price));
+    /* CAP_HAR_MIRROR — capital scoreboard cell */
+    set('cap-har-price', fmtP(price));
+    var capChg = document.getElementById('cap-har-chg');
+    if(capChg){
+      if(chg==null){ capChg.textContent='Hyperliquid'; capChg.style.color='var(--ink-mute)'; }
+      else {
+        capChg.textContent = (chg>=0?'+':'') + chg.toFixed(2) + '% vs prev day';
+        capChg.style.color = chg>=0 ? 'var(--green,#00ba7c)' : 'var(--hot,#f4212e)';
+      }
+    }
     /* CAP_HAR_MIRROR — capital scoreboard cell */
     set('cap-har-price', fmtP(price));
     var capChg = document.getElementById('cap-har-chg');
