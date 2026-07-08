@@ -106,6 +106,9 @@ footer { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 24p
 footer a { color: var(--ink-soft); }
 .view { display: none; }
 .view.active { display: block; }
+#analytics-subnav a { color: var(--ink-mute); }
+#analytics-subnav a:hover { color: var(--ink); }
+
 
 /* ---- Calendar (mirrors local / calendar-block) ---- */
 .cal-section { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-card); overflow: hidden; margin-bottom: 24px; }
@@ -182,10 +185,10 @@ footer a { color: var(--ink-soft); }
     </div>
     <div class="controls">
       <nav class="tabs" id="tabs">
-        <button data-view="calendar" class="active">Calendar</button>
+        <button data-view="calendar" class="active">Roadmap</button>
         <button data-view="analytics">Analytics</button>
         <button data-view="operator">Operator</button>
-        <button data-view="content">X analytics</button>
+        <button data-view="content">Content</button>
         <a href="docs/">Docs</a>
       </nav>
       <span class="chip">Replica</span>
@@ -194,17 +197,17 @@ footer a { color: var(--ink-soft); }
 
   <div class="note">
     <strong>This is the actual operating system</strong> — static replica of production Oslo.
-    <strong>Analytics</strong> = real on-chain vault aggregates.
-    <strong>X analytics</strong> = official X Analytics CSV (year) + public post metrics (no account login).
-    Pipeline names are anonymized. How it works: <a href="docs/">read the docs</a>.
+    <strong>Analytics</strong> combines protocol activity, per-vault flows, and X (@harmonixfi) performance.
+    On-chain figures from the vault event backfill; X from official Analytics CSV + public post metrics (no account login).
+    Pipeline names are anonymized. <a href="docs/">Docs</a>.
   </div>
 
   <!-- ================= CALENDAR ================= -->
   <section class="view active" id="view-calendar">
     <div class="page-head">
       <div>
-        <h1 class="page">Calendar</h1>
-        <p class="sub">Next 30 days of GTM work — follow-ups, reviews, content, meetings, and relationship actions. Same surface as the live app home.</p>
+        <h1 class="page">Roadmap</h1>
+        <p class="sub">GTM roadmap by day — follow-ups, reviews, content, meetings, and relationship actions.</p>
       </div>
       <div class="page-meta">
         <div>Window · next 30 days</div>
@@ -221,54 +224,134 @@ footer a { color: var(--ink-soft); }
     <div class="page-head">
       <div>
         <h1 class="page">Analytics</h1>
-        <p class="sub">Product side of the funnel: on-chain vault flows, users, and retention.</p>
+        <p class="sub">Full funnel: protocol activity, per-vault flows, and X channel performance for @harmonixfi.</p>
       </div>
       <div class="page-meta">
-        <div>Coverage · Jul 2025 to Jun 2026</div>
-        <div>Source · on-chain event backfill</div>
+        <div>On-chain · Jul 2025 → Jun 2026</div>
+        <div>X CSV · Jul 2025 → Jul 2026</div>
       </div>
     </div>
 
-    <div class="tiles">
-      <div class="tile"><div class="label">Users (all time)</div><div class="value tabular">4,074</div><div class="hint">unique depositor wallets</div></div>
-      <div class="tile"><div class="label">Monthly active</div><div class="value tabular">244</div><div class="hint">trailing 30d of indexed data</div></div>
-      <div class="tile"><div class="label">Deposits</div><div class="value tabular">7,134</div><div class="hint">events, all vaults</div></div>
-      <div class="tile"><div class="label">Withdrawals</div><div class="value tabular">3,476</div><div class="hint">events, all vaults</div></div>
-      <div class="tile"><div class="label">Depositors vs withdrawers 30d</div><div class="value tabular">64 / 187</div><div class="hint">acquisition vs churn signal</div></div>
-      <div class="tile"><div class="label">Transactions</div><div class="value tabular">10.6K</div><div class="hint">vault events indexed</div></div>
+    <!-- in-page section nav -->
+    <div class="controls" style="margin-bottom:24px">
+      <nav class="tabs" id="analytics-subnav">
+        <a href="#an-protocol" style="text-decoration:none">Protocol</a>
+        <a href="#an-vaults" style="text-decoration:none">Vaults</a>
+        <a href="#an-x" style="text-decoration:none">X · Social</a>
+      </nav>
     </div>
 
-    <div class="grid2">
-      <div class="panel">
-        <h2>Deposits vs withdrawals by month</h2>
-        <div class="pad">
-          <div class="legend">
-            <span><span class="swatch" style="background:var(--chart-in)"></span>Deposits</span>
-            <span><span class="swatch" style="background:var(--chart-out)"></span>Withdrawals</span>
+    <!-- ========== PROTOCOL ========== -->
+    <div id="an-protocol" style="scroll-margin-top:24px">
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">Protocol</h2>
+      <p class="sub" style="margin-bottom:16px">Product-side funnel: unique users, activity, and deposit/withdraw volume across Harmonix vaults.</p>
+
+      <div class="tiles">
+        <div class="tile"><div class="label">Users (all time)</div><div class="value tabular">4,074</div><div class="hint">unique depositor wallets</div></div>
+        <div class="tile"><div class="label">Monthly active</div><div class="value tabular">244</div><div class="hint">trailing 30d of indexed data</div></div>
+        <div class="tile"><div class="label">Deposits</div><div class="value tabular">7,134</div><div class="hint">events, all vaults</div></div>
+        <div class="tile"><div class="label">Withdrawals</div><div class="value tabular">3,476</div><div class="hint">events, all vaults</div></div>
+        <div class="tile"><div class="label">Depositors vs withdrawers 30d</div><div class="value tabular">64 / 187</div><div class="hint">acquisition vs churn signal</div></div>
+        <div class="tile"><div class="label">Transactions</div><div class="value tabular">10.6K</div><div class="hint">vault events indexed</div></div>
+      </div>
+
+      <div class="grid2" style="margin-bottom:40px">
+        <div class="panel">
+          <h2>Deposits vs withdrawals by month</h2>
+          <div class="pad">
+            <div class="legend">
+              <span><span class="swatch" style="background:var(--chart-in)"></span>Deposits</span>
+              <span><span class="swatch" style="background:var(--chart-out)"></span>Withdrawals</span>
+            </div>
+            <div class="chartbox" id="chart-bars"></div>
           </div>
-          <div class="chartbox" id="chart-bars"></div>
+        </div>
+        <div class="panel">
+          <h2>Monthly active wallets</h2>
+          <div class="pad"><div class="chartbox" id="chart-mau"></div></div>
+        </div>
+        <div class="panel">
+          <h2>New depositor wallets by month</h2>
+          <div class="pad"><div class="chartbox" id="chart-new"></div></div>
         </div>
       </div>
-      <div class="panel">
-        <h2>Monthly active wallets</h2>
-        <div class="pad"><div class="chartbox" id="chart-mau"></div></div>
-      </div>
-      <div class="panel">
-        <h2>New depositor wallets by month</h2>
-        <div class="pad"><div class="chartbox" id="chart-new"></div></div>
-      </div>
+    </div>
+
+    <!-- ========== VAULTS ========== -->
+    <div id="an-vaults" style="scroll-margin-top:24px;margin-bottom:40px">
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">Vaults</h2>
+      <p class="sub" style="margin-bottom:16px">Per-vault deposit/withdraw flows (native units). haHYPE / hakHYPE / haUSDC from the on-chain backfill.</p>
+
       <div class="panel">
         <h2>Per-vault flows (native units)</h2>
         <div class="scrollx">
           <table>
-            <thead><tr><th>Vault</th><th class="num">Wallets</th><th class="num">Deposited</th><th class="num">Withdrawn</th><th class="num">Net</th></tr></thead>
+            <thead><tr><th>Vault</th><th>Asset</th><th class="num">Wallets</th><th class="num">Deposited</th><th class="num">Withdrawn</th><th class="num">Net</th></tr></thead>
             <tbody>
-              <tr><td>haHYPE</td><td class="num">3,333</td><td class="num">227.3K HYPE</td><td class="num">268.6K HYPE</td><td class="num neg">-41.3K HYPE</td></tr>
-              <tr><td>hakHYPE</td><td class="num">1,718</td><td class="num">292.8K kHYPE</td><td class="num">250.3K kHYPE</td><td class="num pos">+42.5K kHYPE</td></tr>
-              <tr><td>haUSDC</td><td class="num">10</td><td class="num">382 USDC</td><td class="num">91 USDC</td><td class="num pos">+291 USDC</td></tr>
+              <tr><td>haHYPE</td><td class="dim">HYPE</td><td class="num">3,333</td><td class="num">227.3K</td><td class="num">268.6K</td><td class="num neg">-41.3K</td></tr>
+              <tr><td>hakHYPE</td><td class="dim">kHYPE</td><td class="num">1,718</td><td class="num">292.8K</td><td class="num">250.3K</td><td class="num pos">+42.5K</td></tr>
+              <tr><td>haUSDC</td><td class="dim">USDC</td><td class="num">10</td><td class="num">382</td><td class="num">91</td><td class="num pos">+291</td></tr>
             </tbody>
           </table>
         </div>
+      </div>
+      <p class="sub" style="margin-top:12px;font-size:12px">Note: HIP-3 haUSDC product TVL on app (~$314K) is a broader surface than the share contract tracked in this backfill (~$300 sample). Delta-neutral vault not yet indexed.</p>
+    </div>
+
+    <!-- ========== X / SOCIAL ========== -->
+    <div id="an-x" style="scroll-margin-top:24px">
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">X · Social · @harmonixfi</h2>
+      <p class="sub" style="margin-bottom:16px">Official X Analytics CSV (impressions, follows) + public post metrics. Safe sources only — no account login scrape.</p>
+
+      <div class="tiles" id="x-tiles">
+        <div class="tile"><div class="label">Followers</div><div class="value tabular" id="x-followers">—</div><div class="hint">public · fxtwitter</div></div>
+        <div class="tile"><div class="label">Impressions (year)</div><div class="value tabular" id="x-imp-year">—</div><div class="hint">official · X Analytics CSV</div></div>
+        <div class="tile"><div class="label">Impressions 30d</div><div class="value tabular" id="x-imp-30">—</div><div class="hint">official · trailing window</div></div>
+        <div class="tile"><div class="label">Eng. rate 30d</div><div class="value tabular" id="x-rate-30">—</div><div class="hint">engagements / impressions</div></div>
+        <div class="tile"><div class="label">New follows (year)</div><div class="value tabular" id="x-fol-year">—</div><div class="hint">official · CSV</div></div>
+        <div class="tile"><div class="label">New follows 30d</div><div class="value tabular" id="x-fol-30">—</div><div class="hint">official · CSV</div></div>
+        <div class="tile"><div class="label">Posts (year)</div><div class="value tabular" id="x-posts-year">—</div><div class="hint">days with posts in export</div></div>
+        <div class="tile"><div class="label">Recent sample views</div><div class="value tabular" id="x-views">—</div><div class="hint">public · last scraped posts</div></div>
+      </div>
+
+      <div class="grid2" style="margin-bottom:24px">
+        <div class="panel">
+          <h2>Impressions vs engagements by month</h2>
+          <div class="pad">
+            <div class="legend">
+              <span><span class="swatch" style="background:var(--chart-in)"></span>Impressions</span>
+              <span><span class="swatch" style="background:var(--chart-out)"></span>Engagements</span>
+            </div>
+            <div class="chartbox" id="chart-x-bars"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Approx. followers (CSV new-follows + live count)</h2>
+          <div class="pad"><div class="chartbox" id="chart-x-followers"></div></div>
+        </div>
+        <div class="panel">
+          <h2>New follows by month</h2>
+          <div class="pad"><div class="chartbox" id="chart-x-follows"></div></div>
+        </div>
+        <div class="panel">
+          <h2>Posts published by month</h2>
+          <div class="pad"><div class="chartbox" id="chart-x-posts"></div></div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:16px">
+        <h2>Top posts <span class="pill">public scrape</span></h2>
+        <div class="scrollx">
+          <table>
+            <thead><tr><th>Post</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Reposts</th><th class="num">Replies</th><th>Date</th></tr></thead>
+            <tbody id="x-top-posts-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="note" style="margin-bottom:0">
+        <strong>X sources</strong> · Official totals from X Analytics account-overview CSV.
+        Live followers and post views from public mirrors (nitter + fxtwitter) — never logged into the Harmonix account.
       </div>
     </div>
   </section>
@@ -328,69 +411,26 @@ footer a { color: var(--ink-soft); }
     </div>
   </section>
 
-  <!-- ================= CONTENT / X ANALYTICS ================= -->
+  <!-- ================= CONTENT ================= -->
   <section class="view" id="view-content">
     <div class="page-head">
       <div>
-        <h1 class="page">X analytics · @harmonixfi</h1>
-        <p class="sub">Official account overview (X Analytics export) plus public post performance. Safe sources only — no login scrape of the Harmonix account.</p>
+        <h1 class="page">Content</h1>
+        <p class="sub">Editorial ship plan — threads, newsletters, longform. Channel performance lives under Analytics → X · Social.</p>
       </div>
       <div class="page-meta">
-        <div>CSV coverage · 2025-07-08 → 2026-07-07</div>
-        <div>Public scrape · 2026-07-08</div>
+        <div>Calendar · next 30 days</div>
+        <div><a href="#an-x" id="goto-x-analytics" style="color:var(--ink-soft)">See Analytics → X · Social</a></div>
       </div>
     </div>
 
-    <div class="tiles" id="x-tiles">
-      <div class="tile"><div class="label">Followers</div><div class="value tabular" id="x-followers">—</div><div class="hint">public · fxtwitter</div></div>
-      <div class="tile"><div class="label">Impressions (year)</div><div class="value tabular" id="x-imp-year">—</div><div class="hint">official · X Analytics CSV</div></div>
-      <div class="tile"><div class="label">Impressions 30d</div><div class="value tabular" id="x-imp-30">—</div><div class="hint">official · trailing window</div></div>
-      <div class="tile"><div class="label">Eng. rate 30d</div><div class="value tabular" id="x-rate-30">—</div><div class="hint">engagements / impressions</div></div>
-      <div class="tile"><div class="label">New follows (year)</div><div class="value tabular" id="x-fol-year">—</div><div class="hint">official · CSV</div></div>
-      <div class="tile"><div class="label">New follows 30d</div><div class="value tabular" id="x-fol-30">—</div><div class="hint">official · CSV</div></div>
-      <div class="tile"><div class="label">Posts (year)</div><div class="value tabular" id="x-posts-year">—</div><div class="hint">days with posts in export</div></div>
-      <div class="tile"><div class="label">Recent sample views</div><div class="value tabular" id="x-views">—</div><div class="hint">public · last scraped posts</div></div>
-    </div>
-
-    <div class="grid2" style="margin-bottom:24px">
-      <div class="panel">
-        <h2>Impressions vs engagements by month</h2>
-        <div class="pad">
-          <div class="legend">
-            <span><span class="swatch" style="background:var(--chart-in)"></span>Impressions</span>
-            <span><span class="swatch" style="background:var(--chart-out)"></span>Engagements</span>
-          </div>
-          <div class="chartbox" id="chart-x-bars"></div>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>Approx. followers (from CSV new-follows + live count)</h2>
-        <div class="pad"><div class="chartbox" id="chart-x-followers"></div></div>
-      </div>
-      <div class="panel">
-        <h2>New follows by month</h2>
-        <div class="pad"><div class="chartbox" id="chart-x-follows"></div></div>
-      </div>
-      <div class="panel">
-        <h2>Posts published by month</h2>
-        <div class="pad"><div class="chartbox" id="chart-x-posts"></div></div>
-      </div>
-    </div>
-
-    <div class="panel" style="margin-bottom:24px">
-      <h2>Top posts <span class="pill">public scrape</span></h2>
-      <div class="scrollx">
-        <table>
-          <thead><tr><th>Post</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Reposts</th><th class="num">Replies</th><th>Date</th></tr></thead>
-          <tbody id="x-top-posts-body"></tbody>
-        </table>
-      </div>
+    <div class="cal-section" id="content-calendar-root" style="margin-bottom:24px">
+      <!-- content calendar rendered by script -->
     </div>
 
     <div class="note" style="margin-bottom:0">
-      <strong>Sources</strong> · Official totals from X Analytics account-overview CSV (365 days).
-      Live followers and post views from public mirrors (nitter + fxtwitter) — never logged into the Harmonix account.
-      Re-export CSV + re-run public scrape, then redeploy this page to refresh.
+      Performance metrics (impressions, followers, top posts) are on the
+      <strong>Analytics</strong> tab under <strong>X · Social</strong>.
     </div>
   </section>
 
@@ -403,12 +443,28 @@ footer a { color: var(--ink-soft); }
 <script>
 // ---- tabs ----
 const tabs = document.querySelectorAll('#tabs button');
-tabs.forEach(b => b.addEventListener('click', () => {
-  tabs.forEach(x => x.classList.remove('active'));
-  b.classList.add('active');
+function showView(name) {
+  tabs.forEach(x => x.classList.toggle('active', x.dataset.view === name));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-' + b.dataset.view).classList.add('active');
-}));
+  const el = document.getElementById('view-' + name);
+  if (el) el.classList.add('active');
+}
+tabs.forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
+document.getElementById('goto-x-analytics')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  showView('analytics');
+  setTimeout(() => document.getElementById('an-x')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+});
+// Subnav smooth scroll within Analytics
+document.querySelectorAll('#analytics-subnav a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href')?.slice(1);
+    if (!id) return;
+    e.preventDefault();
+    showView('analytics');
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  });
+});
 
 // ---- Calendar (static replica of local calendar-block) ----
 const TYPE_LABELS = {
