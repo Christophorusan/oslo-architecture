@@ -851,6 +851,17 @@ body:not([data-view="analytics"]) .cap-board {
   .gcal-top h2 { font-size: 16px; min-width: 0; }
 }
 
+
+/* Content calendar event colors (same shell as roadmap) */
+.gcal-ev.t-thread { background: #1d9bf0; }
+.gcal-ev.t-newsletter { background: #10b981; }
+.gcal-ev.t-longform { background: #f59e0b; }
+.gcal-ev.t-diagram { background: #ec4899; }
+.gcal-modal .types button.on.t-thread { background: #1d9bf0; }
+.gcal-modal .types button.on.t-newsletter { background: #10b981; }
+.gcal-modal .types button.on.t-longform { background: #f59e0b; }
+.gcal-modal .types button.on.t-diagram { background: #ec4899; }
+
 /* Content calendar formats */
 .chip-thread { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
 .chip-newsletter { color: var(--green); border-color: rgb(134 239 172 / .4); background: rgb(134 239 172 / .05); }
@@ -1390,15 +1401,15 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
     <div class="page-head">
       <div>
         <h1 class="page">Content</h1>
-        <p class="sub">Editorial ship plan — threads, newsletters, longform, diagrams. Month grid like Roadmap. Channel performance lives under Analytics → X · Social.</p>
+        <p class="sub">Editorial calendar — same style as Roadmap. Click a day to schedule, click a piece to edit or ship.</p>
       </div>
       <div class="page-meta">
-        <div>Calendar · full month grid</div>
-        <div><a href="#an-x" id="goto-x-analytics" style="color:var(--ink-soft)">See Analytics → X · Social</a></div>
+        <div>Click day to create · click piece to edit</div>
+        <div><a href="#an-x" id="goto-x-analytics" style="color:var(--ink-soft)">Analytics → X · Social</a></div>
       </div>
     </div>
 
-    <div class="cal-section" id="content-calendar-root" style="margin-bottom:24px">
+    <div id="content-calendar-root" style="margin-bottom:24px">
       <!-- content calendar rendered by script -->
     </div>
 
@@ -1941,18 +1952,26 @@ function renderCalendar() {
 renderCalendar();
 
 
-// ---- Content calendar (editorial ship plan) ----
+// ---- Content calendar (Google-simple, same aesthetic as Roadmap) ----
 const CONTENT_FORMATS = {
   thread: "Thread",
   newsletter: "Newsletter",
   longform: "Longform",
   diagram: "Diagram",
 };
-const CONTENT_STORE = "oslo-replica-content-cal-v1";
+const CONTENT_CHANNELS = ["X", "blog", "email", "Discord", "other"];
+const CONTENT_STORE = "oslo-replica-content-cal-v2";
 
 function seedContent(today) {
   const t = (offset, title, format, status = "planned", channel = "X") => ({
-    id: uid(), title, occurs_on: addDaysISO(today, offset), format, status, channel,
+    id: uid(),
+    title,
+    occurs_on: addDaysISO(today, offset),
+    format,
+    status,
+    channel,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   });
   return [
     t(0, "Vault milestone recap thread", "thread", "scheduled", "X"),
@@ -1972,12 +1991,32 @@ function seedContent(today) {
   ];
 }
 
+function normalizeContent(it) {
+  return {
+    id: it.id || uid(),
+    title: String(it.title || "").slice(0, 200),
+    occurs_on: it.occurs_on || todayISO(),
+    format: CONTENT_FORMATS[it.format] ? it.format : "thread",
+    status: ["planned", "drafted", "scheduled", "shipped"].includes(it.status)
+      ? it.status
+      : "planned",
+    channel: String(it.channel || "X").slice(0, 40),
+    created_at: it.created_at || new Date().toISOString(),
+    updated_at: it.updated_at || new Date().toISOString(),
+  };
+}
+
 function loadContentItems(today) {
   try {
-    const raw = localStorage.getItem(CONTENT_STORE);
+    let raw = localStorage.getItem(CONTENT_STORE);
+    if (!raw) raw = localStorage.getItem("oslo-replica-content-cal-v1");
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length) return parsed;
+      if (Array.isArray(parsed) && parsed.length) {
+        const items = parsed.map(normalizeContent);
+        localStorage.setItem(CONTENT_STORE, JSON.stringify(items));
+        return items;
+      }
     }
   } catch (_) {}
   const seeded = seedContent(today);
@@ -1995,35 +2034,132 @@ function renderContentCalendar() {
   let items = loadContentItems(today);
   let selected = today;
   let viewMonth = monthKey();
+  let modal = null; // { mode: 'create'|'edit', iso?, item? }
 
-  function byDate(iso) { return items.filter(i => i.occurs_on === iso); }
-  function monthItems() { return items.filter(i => i.occurs_on.startsWith(viewMonth)); }
+  function byDate(iso) {
+    return items
+      .filter((i) => i.occurs_on === iso)
+      .sort(
+        (a, b) =>
+          (a.status === "shipped") - (b.status === "shipped") ||
+          a.title.localeCompare(b.title),
+      );
+  }
+  function persist() {
+    saveContentItems(items);
+  }
   function counts() {
-    const mi = monthItems();
+    const mi = items.filter((i) => i.occurs_on.startsWith(viewMonth));
     return {
-      planned: mi.filter(i => i.status === "planned" || i.status === "drafted" || i.status === "scheduled").length,
-      shipped: mi.filter(i => i.status === "shipped").length,
+      planned: mi.filter((i) => i.status !== "shipped").length,
+      shipped: mi.filter((i) => i.status === "shipped").length,
       total: mi.length,
     };
   }
-  function addItem(occurs_on, title, format = "thread") {
-    const t = title.trim();
-    if (!t) return;
-    items = [{
-      id: uid(), title: t.slice(0, 200), occurs_on, format, status: "planned", channel: "X",
-    }, ...items];
-    saveContentItems(items);
-    selected = occurs_on;
-    viewMonth = occurs_on.slice(0, 7);
+  function upsert(item) {
+    const now = new Date().toISOString();
+    if (item.id && items.some((i) => i.id === item.id)) {
+      items = items.map((i) =>
+        i.id === item.id ? { ...i, ...item, updated_at: now } : i,
+      );
+    } else {
+      items = [
+        {
+          id: item.id || uid(),
+          title: item.title,
+          occurs_on: item.occurs_on,
+          format: item.format || "thread",
+          status: item.status || "planned",
+          channel: item.channel || "X",
+          created_at: now,
+          updated_at: now,
+        },
+        ...items,
+      ];
+    }
+    persist();
+    modal = null;
     paint();
   }
-  function ship(id) {
-    items = items.map(i => i.id === id ? { ...i, status: "shipped" } : i);
-    saveContentItems(items);
+  function removeItem(id) {
+    items = items.filter((i) => i.id !== id);
+    persist();
+    modal = null;
     paint();
+    toast("Deleted");
   }
   function escapeHtml(s) {
-    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function renderModal() {
+    if (!modal) return "";
+    const isEdit = modal.mode === "edit" && modal.item;
+    const item = isEdit
+      ? modal.item
+      : {
+          title: "",
+          occurs_on: modal.iso || selected,
+          format: "thread",
+          channel: "X",
+          status: "planned",
+        };
+    const fmtBtns = Object.keys(CONTENT_FORMATS)
+      .map(
+        (t) =>
+          `<button type="button" class="t-${t}${item.format === t ? " on" : ""}" data-fmt="${t}">${CONTENT_FORMATS[t]}</button>`,
+      )
+      .join("");
+    const chOpts = CONTENT_CHANNELS.map(
+      (c) =>
+        `<option value="${c}"${item.channel === c ? " selected" : ""}>${c}</option>`,
+    ).join("");
+    const stOpts = ["planned", "drafted", "scheduled", "shipped"]
+      .map(
+        (s) =>
+          `<option value="${s}"${item.status === s ? " selected" : ""}>${s}</option>`,
+      )
+      .join("");
+
+    return `
+    <div class="gcal-modal-bg" data-cbackdrop>
+      <div class="gcal-modal" role="dialog" aria-modal="true" aria-label="${isEdit ? "Edit" : "Schedule"} content">
+        <div class="gcal-modal-bar">
+          <span style="font-size:13px;color:var(--ink-mute);padding-left:6px">${isEdit ? "Content piece" : "New content"}</span>
+          <button type="button" data-cclose aria-label="Close">×</button>
+        </div>
+        <form id="ccal-form">
+          <input class="title" name="title" type="text" maxlength="200" placeholder="Add title" value="${escapeHtml(item.title)}" required autocomplete="off">
+          <div class="row">
+            <label>When</label>
+            <input type="date" name="occurs_on" value="${escapeHtml(item.occurs_on)}" required>
+          </div>
+          <div class="row" style="align-items:flex-start">
+            <label style="padding-top:6px">Format</label>
+            <div class="types" id="ccal-fmts">${fmtBtns}</div>
+          </div>
+          <input type="hidden" name="format" value="${escapeHtml(item.format)}">
+          <div class="row">
+            <label>Channel</label>
+            <select name="channel">${chOpts}</select>
+          </div>
+          <div class="row">
+            <label>Status</label>
+            <select name="status">${stOpts}</select>
+          </div>
+          <div class="gcal-modal-actions">
+            ${isEdit ? `<button type="button" class="danger" data-cdel="${escapeHtml(item.id)}">Delete</button>` : ""}
+            ${isEdit && item.status !== "shipped" ? `<button type="button" data-cship="${escapeHtml(item.id)}">Mark shipped</button>` : ""}
+            <button type="button" data-cclose>Cancel</button>
+            <button type="submit" class="primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>`;
   }
 
   function paint() {
@@ -2033,118 +2169,160 @@ function renderContentCalendar() {
       selected = today.startsWith(viewMonth) ? today : days[0];
     }
     const c = counts();
-    const selectedItems = byDate(selected);
-    const { weekday, day, month, isToday } = parseDay(selected);
     const [vy, vm] = viewMonth.split("-").map(Number);
-    const legend = Object.entries(CONTENT_FORMATS).map(([k, lab]) =>
-      `<span class="chip-${k}"><strong>${lab[0]}</strong> <span style="color:var(--ink-mute)">${lab}</span></span>`
-    ).join("");
 
     let pads = "";
-    for (let i = 0; i < firstDow; i++) pads += `<div class="cal-pad"></div>`;
+    for (let i = 0; i < firstDow; i++) pads += `<div class="gcal-pad"></div>`;
 
-    const cells = days.map(iso => {
-      const p = parseDay(iso);
-      const dayItems = byDate(iso);
-      const compact = dayItems.slice(0, 2);
-      const overflow = dayItems.length - compact.length;
-      const chips = compact.map(it =>
-        `<span class="cal-chip chip-${it.format}${it.status === "shipped" ? " chip-shipped" : ""}" title="${CONTENT_FORMATS[it.format] || it.format} · ${escapeHtml(it.title)}">${escapeHtml(it.title)}</span>`
-      ).join("") + (overflow > 0 ? `<span class="cal-more">+${overflow}</span>` : "");
-      return `<div class="cal-cell${selected === iso ? " selected" : ""}" data-iso="${iso}">
-        <button type="button" class="cal-cell-top" data-cselect="${iso}" aria-label="Select ${iso}">
-          <span class="cal-daynum${p.isToday ? " today" : ""}">${p.day}</span>
-          <span class="cal-wd">${p.weekday}</span>
-        </button>
-        <div class="cal-chips">${chips}</div>
-        <input class="quick" type="text" maxlength="200" placeholder="Type + Enter" data-cquick="${iso}" aria-label="Quick add content for ${iso}">
+    const cells = days
+      .map((iso) => {
+        const p = parseDay(iso);
+        const dayItems = byDate(iso);
+        const show = dayItems.slice(0, 3);
+        const overflow = dayItems.length - show.length;
+        const evs = show
+          .map(
+            (it) =>
+              `<button type="button" class="gcal-ev t-${it.format}${it.status === "shipped" ? " done" : ""}" data-cev="${escapeHtml(it.id)}" title="${escapeHtml(CONTENT_FORMATS[it.format] || it.format)}${it.channel ? " · " + escapeHtml(it.channel) : ""}">${escapeHtml(it.title)}</button>`,
+          )
+          .join("");
+        return `<div class="gcal-day${selected === iso ? " is-selected" : ""}${p.isToday ? " is-today" : ""}" data-cday="${iso}">
+        <div class="gcal-day-head"><span class="gcal-daynum">${p.day}</span></div>
+        <div class="gcal-events">${evs}${overflow > 0 ? `<div class="gcal-more">+${overflow} more</div>` : ""}</div>
+        <div class="gcal-add-hint">+ schedule</div>
       </div>`;
-    }).join("");
-
-    const list = selectedItems.length === 0
-      ? `<p class="cal-empty">No content scheduled for ${weekday}, ${month} ${day}. Type in a cell or use the form below.</p>`
-      : `<ul class="cal-items">${selectedItems.map(it => `
-          <li class="cal-item ${it.status === "shipped" ? "done" : ""}">
-            <span class="type chip-${it.format}">${CONTENT_FORMATS[it.format] || it.format}</span>
-            <span class="title">${escapeHtml(it.title)}</span>
-            <span class="rel">${escapeHtml(it.channel || "")}</span>
-            <span class="status">${it.status}</span>
-            ${it.status !== "shipped" ? `<button type="button" class="pill" data-ship="${it.id}" style="cursor:pointer">Ship</button>` : ""}
-          </li>`).join("")}</ul>`;
+      })
+      .join("");
 
     root.innerHTML = `
-      <div class="cal-head">
-        <div>
-          <h2>Content calendar</h2>
-          <p>Editorial ship plan — threads, newsletters, longform, diagrams. Type in a day and press Enter. Arrows move months.</p>
-          <div class="meta">${c.planned} in pipeline · ${c.shipped} shipped · ${c.total} this month</div>
+      <div class="gcal">
+        <div class="gcal-top">
+          <button type="button" class="gcal-btn primary" id="ccal-create">+ Create</button>
+          <div class="gcal-nav">
+            <button type="button" id="ccal-today">Today</button>
+            <button type="button" class="icon" id="ccal-prev" aria-label="Previous month">‹</button>
+            <button type="button" class="icon" id="ccal-next" aria-label="Next month">›</button>
+          </div>
+          <h2>${MONTHS_LONG[vm - 1]} ${vy}</h2>
+          <div class="gcal-spacer"></div>
+          <span class="gcal-meta">${c.planned} in pipeline · ${c.shipped} shipped</span>
         </div>
-        <div class="cal-legend">${legend}</div>
+        <div class="gcal-weekdays">${WEEKDAYS.map((w) => `<div>${w}</div>`).join("")}</div>
+        <div class="gcal-grid">${pads}${cells}</div>
       </div>
-      <div class="cal-nav" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;border-bottom:1px solid var(--border)">
-        <div style="display:flex;gap:6px;align-items:center">
-          <button type="button" id="content-cal-prev" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">←</button>
-          <button type="button" id="content-cal-next" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">→</button>
-          <button type="button" id="content-cal-today" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">Today</button>
-        </div>
-        <div style="font-size:17px;font-weight:600;letter-spacing:-0.02em">${MONTHS_LONG[vm - 1]} ${vy}</div>
-        <div style="width:88px"></div>
-      </div>
-      <div class="cal-grid-wrap">
-        <div class="cal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
-        <div class="cal-days">${pads}${cells}</div>
-      </div>
-      <div class="cal-panel">
-        <div class="cal-panel-head">
-          <h3>${weekday}, ${month} ${day}${isToday ? '<span class="badge">today</span>' : ""}</h3>
-          <span class="count">${selectedItems.length} ${selectedItems.length === 1 ? "piece" : "pieces"}</span>
-        </div>
-        ${list}
-        <form class="cal-add" id="content-add-form">
-          <input type="text" name="title" maxlength="200" placeholder="Schedule content for this day" required>
-          <select name="format">
-            ${Object.entries(CONTENT_FORMATS).map(([k, lab]) => `<option value="${k}">${lab}</option>`).join("")}
-          </select>
-          <button type="submit">Schedule</button>
-        </form>
-      </div>`;
+      ${renderModal()}`;
 
-    root.querySelector("#content-cal-prev")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, -1); paint(); });
-    root.querySelector("#content-cal-next")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, 1); paint(); });
-    root.querySelector("#content-cal-today")?.addEventListener("click", () => { viewMonth = monthKey(); selected = today; paint(); });
-    root.querySelectorAll("[data-cselect]").forEach(btn => {
-      btn.addEventListener("click", () => { selected = btn.getAttribute("data-cselect"); paint(); });
+    root.querySelector("#ccal-prev")?.addEventListener("click", () => {
+      viewMonth = shiftMonth(viewMonth, -1);
+      paint();
     });
-    root.querySelectorAll("input[data-cquick]").forEach(inp => {
-      inp.addEventListener("focus", () => {
-        const iso = inp.getAttribute("data-cquick");
-        if (selected !== iso) {
-          selected = iso;
-          paint();
-          root.querySelector(`input[data-cquick="${iso}"]`)?.focus();
-        }
+    root.querySelector("#ccal-next")?.addEventListener("click", () => {
+      viewMonth = shiftMonth(viewMonth, 1);
+      paint();
+    });
+    root.querySelector("#ccal-today")?.addEventListener("click", () => {
+      viewMonth = monthKey();
+      selected = today;
+      paint();
+    });
+    root.querySelector("#ccal-create")?.addEventListener("click", () => {
+      modal = { mode: "create", iso: selected };
+      paint();
+      setTimeout(() => root.querySelector("#ccal-form input[name=title]")?.focus(), 30);
+    });
+
+    root.querySelectorAll("[data-cday]").forEach((dayEl) => {
+      dayEl.addEventListener("click", (e) => {
+        if (e.target.closest("[data-cev]")) return;
+        const iso = dayEl.getAttribute("data-cday");
+        selected = iso;
+        modal = { mode: "create", iso };
+        paint();
+        setTimeout(() => root.querySelector("#ccal-form input[name=title]")?.focus(), 30);
       });
-      inp.addEventListener("keydown", e => {
-        if (e.key !== "Enter") return;
-        e.preventDefault();
-        addItem(inp.getAttribute("data-cquick"), inp.value, "thread");
+    });
+
+    root.querySelectorAll("[data-cev]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute("data-cev");
+        const item = items.find((i) => i.id === id);
+        if (!item) return;
+        selected = item.occurs_on;
+        modal = { mode: "edit", item: { ...item } };
+        paint();
+        setTimeout(() => root.querySelector("#ccal-form input[name=title]")?.focus(), 30);
       });
     });
-    root.querySelectorAll("[data-ship]").forEach(btn => {
-      btn.addEventListener("click", () => ship(btn.getAttribute("data-ship")));
+
+    const backdrop = root.querySelector("[data-cbackdrop]");
+    backdrop?.addEventListener("click", (e) => {
+      if (e.target === backdrop) {
+        modal = null;
+        paint();
+      }
     });
-    const form = root.querySelector("#content-add-form");
-    form?.addEventListener("submit", e => {
+    root.querySelectorAll("[data-cclose]").forEach((b) => {
+      b.addEventListener("click", () => {
+        modal = null;
+        paint();
+      });
+    });
+    root.querySelectorAll("#ccal-fmts [data-fmt]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const t = b.getAttribute("data-fmt");
+        const hidden = root.querySelector('#ccal-form input[name="format"]');
+        if (hidden) hidden.value = t;
+        root.querySelectorAll("#ccal-fmts [data-fmt]").forEach((x) => {
+          x.classList.toggle("on", x.getAttribute("data-fmt") === t);
+        });
+      });
+    });
+    root.querySelector("[data-cdel]")?.addEventListener("click", (e) => {
+      const id = e.currentTarget.getAttribute("data-cdel");
+      if (confirm("Delete this content piece?")) removeItem(id);
+    });
+    root.querySelector("[data-cship]")?.addEventListener("click", (e) => {
+      const id = e.currentTarget.getAttribute("data-cship");
+      const it = items.find((i) => i.id === id);
+      if (it) upsert({ ...it, status: "shipped" });
+      toast("Marked shipped");
+    });
+
+    const form = root.querySelector("#ccal-form");
+    form?.addEventListener("submit", (e) => {
       e.preventDefault();
       const fd = new FormData(form);
-      addItem(selected, String(fd.get("title") || ""), String(fd.get("format") || "thread"));
+      const title = String(fd.get("title") || "").trim();
+      if (!title) return;
+      const payload = {
+        id: modal && modal.item ? modal.item.id : undefined,
+        title,
+        occurs_on: String(fd.get("occurs_on") || selected),
+        format: String(fd.get("format") || "thread"),
+        channel: String(fd.get("channel") || "X"),
+        status: String(fd.get("status") || "planned"),
+      };
+      selected = payload.occurs_on;
+      viewMonth = payload.occurs_on.slice(0, 7);
+      upsert(payload);
+      toast("Saved");
+    });
+  }
+
+  if (!window.__ccalEscBound) {
+    window.__ccalEscBound = true;
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const rootEl = document.getElementById("content-calendar-root");
+      const cancel = rootEl && rootEl.querySelector("[data-cclose]");
+      if (cancel) cancel.click();
     });
   }
 
   paint();
 }
 renderContentCalendar();
-
 
 
 // ---- X analytics (official CSV + public scrape) ----
