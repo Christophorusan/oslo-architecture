@@ -941,7 +941,7 @@ function renderXAnalytics() {
   set('x-imp-30', fmtX(t30.impressions));
   set('x-rate-30', t30.engagement_rate != null ? (t30.engagement_rate * 100).toFixed(2) + '%' : '—');
   set('x-fol-year', fmtX(y.follows));
-  set('x-fol-30', fmtX(t30.follows));
+  set('x-fol-30', fmtX(t30.new_follows != null ? t30.new_follows : t30.follows));
   set('x-posts-year', fmtX(y.posts));
   set('x-views', fmtX((X.recent_posts_agg || {}).views));
   const cmp = X.compare_30d || {};
@@ -950,7 +950,6 @@ function renderXAnalytics() {
   set('x-eng-delta', labels.engagements || '—');
   set('x-fol-delta', labels.follows || '—');
   set('x-posts-delta', labels.posts || '—');
-  const t30 = X.trailing_30d || {};
   const p30 = X.prior_30d || {};
   const hint = (cur, prior, key) => {
     const el = document.getElementById(key);
@@ -958,7 +957,7 @@ function renderXAnalytics() {
   };
   hint(t30.impressions, p30.impressions, 'x-imp-delta-hint');
   hint(t30.engagements, p30.engagements, 'x-eng-delta-hint');
-  hint(t30.new_follows, p30.new_follows, 'x-fol-delta-hint');
+  hint(t30.new_follows != null ? t30.new_follows : t30.follows, p30.new_follows != null ? p30.new_follows : p30.follows, 'x-fol-delta-hint');
   hint(t30.posts, p30.posts, 'x-posts-delta-hint');
   const stale = document.getElementById('x-stale-note');
   if (stale) {
