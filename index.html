@@ -235,6 +235,7 @@ footer a { color: var(--ink-soft); }
     <!-- in-page section nav -->
     <div class="controls" style="margin-bottom:24px">
       <nav class="tabs" id="analytics-subnav">
+        <a href="#an-har" style="text-decoration:none">HAR · Live</a>
         <a href="#an-protocol" style="text-decoration:none">Protocol</a>
         <a href="#an-vaults" style="text-decoration:none">Vaults</a>
         <a href="#an-x" style="text-decoration:none">X · Social</a>
@@ -242,6 +243,41 @@ footer a { color: var(--ink-soft); }
         <a href="#an-narratives" style="text-decoration:none">Narratives</a>
       </nav>
     </div>
+
+    <!-- ========== HAR LIVE PRICE (Hyperliquid) ========== -->
+    <div id="an-har" style="scroll-margin-top:24px;margin-bottom:28px">
+      <div class="panel" style="border:1px solid var(--accent, #1d9bf0);overflow:hidden">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:rgba(29,155,240,0.08);border-bottom:1px solid var(--border)">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+            <span class="pill" style="background:var(--card);border:1px solid var(--accent, #1d9bf0);color:var(--accent, #1d9bf0)">
+              <span style="display:inline-block;width:8px;height:8px;border-radius:99px;background:var(--green,#00ba7c);margin-right:6px;vertical-align:middle;animation:harPulse 1.2s infinite"></span>
+              Live · Hyperliquid
+            </span>
+            <span style="font-weight:700;font-size:15px;color:var(--ink)">HAR</span>
+            <span id="har-price" class="tabular" style="font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-0.02em">—</span>
+            <span id="har-chg" class="tabular" style="font-size:14px;font-weight:600;color:var(--ink-mute)">—</span>
+          </div>
+          <div class="dim" style="font-size:12px;text-align:right">
+            <div id="har-asof">fetching…</div>
+            <div>Harmonix Finance token</div>
+          </div>
+        </div>
+        <div class="tiles" style="margin:0;border:0;border-radius:0">
+          <div class="tile" style="border-radius:0"><div class="label">Mark</div><div class="value tabular" id="har-mark" style="font-size:18px">—</div><div class="hint">tokenDetails</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">Mid</div><div class="value tabular" id="har-mid" style="font-size:18px">—</div><div class="hint">tokenDetails</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">Market cap</div><div class="value tabular" id="har-mcap" style="font-size:18px">—</div><div class="hint">price × circ supply</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">FDV</div><div class="value tabular" id="har-fdv" style="font-size:18px">—</div><div class="hint">price × total supply</div></div>
+        </div>
+        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0">
+          <strong>Source</strong> · Hyperliquid public API <code>tokenDetails</code> · tokenId <code>0x9325…4cda</code> ·
+          <a href="https://hyperevmscan.io/token/0x391121d817da42ed3434d281aedbbcc416a2af18" target="_blank" rel="noopener">HyperEVM contract</a> ·
+          refreshes every 12s · free, no key
+        </div>
+      </div>
+    </div>
+    <style>
+      @keyframes harPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    </style>
 
     <!-- ========== PROTOCOL ========== -->
     <div id="an-protocol" style="scroll-margin-top:24px">
@@ -279,26 +315,31 @@ footer a { color: var(--ink-soft); }
       </div>
     </div>
 
-    <!-- ========== VAULTS ========== -->
+        <!-- ========== VAULTS ========== -->
     <div id="an-vaults" style="scroll-margin-top:24px;margin-bottom:40px">
-      <h2 class="page" style="font-size:18px;margin-bottom:4px">Vaults</h2>
-      <p class="sub" style="margin-bottom:16px">Per-vault deposit/withdraw flows (native units). haHYPE / hakHYPE / haUSDC from the on-chain backfill.</p>
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">Vaults · current TVL (USDC)</h2>
+      <p class="sub" style="margin-bottom:16px">Aggregate and per-vault TVL in USDC terms. Share supply × mark + native deposit/withdraw flows.</p>
+
+      <div class="tiles" style="margin-bottom:16px">
+        <div class="tile"><div class="label">Aggregate vault TVL</div><div class="value tabular">$5.12M</div><div class="hint">USDC terms · haHYPE+hakHYPE+haUSDC</div></div>
+        <div class="tile"><div class="label">Protocol TVL</div><div class="value tabular">$6.13M</div><div class="hint">DefiLlama · all chains</div></div>
+        <div class="tile"><div class="label">Gap (protocol − vaults)</div><div class="value tabular">$1.01M</div><div class="hint">other products / chains</div></div>
+      </div>
 
       <div class="panel">
-        <h2>Per-vault flows (native units)</h2>
+        <h2>Per-vault TVL (USDC) + flows (native)</h2>
         <div class="scrollx">
           <table>
-            <thead><tr><th>Vault</th><th>Asset</th><th class="num">Wallets</th><th class="num">Deposited</th><th class="num">Withdrawn</th><th class="num">Net</th></tr></thead>
+            <thead><tr><th>Vault</th><th>Asset</th><th class="num">Wallets</th><th class="num">TVL (USDC)</th><th class="num">% total</th><th class="num">Deposited</th><th class="num">Withdrawn</th><th class="num">Net</th></tr></thead>
             <tbody>
-              <tr><td>haHYPE</td><td class="dim">HYPE</td><td class="num">3,333</td><td class="num">227.3K</td><td class="num">268.6K</td><td class="num neg">-41.3K</td></tr>
-              <tr><td>hakHYPE</td><td class="dim">kHYPE</td><td class="num">1,718</td><td class="num">292.8K</td><td class="num">250.3K</td><td class="num pos">+42.5K</td></tr>
-              <tr><td>haUSDC</td><td class="dim">USDC</td><td class="num">10</td><td class="num">382</td><td class="num">91</td><td class="num pos">+291</td></tr>
+              <tr><td>haHYPE</td><td class="dim">HYPE</td><td class="num">3,333</td><td class="num"><strong>$2.09M</strong> <span class="dim">USDC</span></td><td class="num">40.9%</td><td class="num">227.3K</td><td class="num">268.6K</td><td class="num neg">-41.3K</td></tr><tr><td>hakHYPE</td><td class="dim">kHYPE</td><td class="num">1,718</td><td class="num"><strong>$2.76M</strong> <span class="dim">USDC</span></td><td class="num">53.8%</td><td class="num">292.8K</td><td class="num">250.3K</td><td class="num pos">+42.5K</td></tr><tr><td>haUSDC</td><td class="dim">USDC</td><td class="num">10</td><td class="num"><strong>$269.1K</strong> <span class="dim">USDC</span></td><td class="num">5.3%</td><td class="num">382</td><td class="num">91</td><td class="num pos">+291</td></tr>
+              <tr style="background:var(--bg-soft)"><td colspan="3"><strong>Aggregate</strong></td><td class="num"><strong>$5.12M</strong> USDC</td><td class="num">100%</td><td colspan="3" class="dim">Protocol $6.13M USDC</td></tr>
             </tbody>
           </table>
         </div>
       </div>
-      <p class="sub" style="margin-top:12px;font-size:12px">Note: HIP-3 haUSDC product TVL on app (~$314K) is a broader surface than the share contract tracked in this backfill (~$300 sample). Delta-neutral vault not yet indexed.</p>
     </div>
+
 
     <!-- ========== X / SOCIAL ========== -->
     <div id="an-x" style="scroll-margin-top:24px">
@@ -1317,6 +1358,65 @@ bars("chart-bars");
 line("chart-mau", "a", "Active wallets");
 line("chart-new", "n", "New wallets");
 renderXAnalytics();
+
+/* HAR live price — Hyperliquid public /info */
+(function harLivePrice(){
+  var TOKEN_ID = '0x9325025f805731935c1df7f97e654cda';
+  var URL = 'https://api.hyperliquid.xyz/info';
+  function n(x){ var v = Number(x); return isFinite(v) ? v : null; }
+  function fmtP(x){
+    if(x==null) return '—';
+    if(x < 0.01) return '$' + x.toFixed(6);
+    if(x < 1) return '$' + x.toFixed(4);
+    return '$' + x.toFixed(2);
+  }
+  function fmtU(x){
+    if(x==null) return '—';
+    if(Math.abs(x)>=1e9) return '$'+(x/1e9).toFixed(2)+'B';
+    if(Math.abs(x)>=1e6) return '$'+(x/1e6).toFixed(2)+'M';
+    if(Math.abs(x)>=1e3) return '$'+(x/1e3).toFixed(1)+'K';
+    return '$'+Math.round(x).toLocaleString();
+  }
+  function set(id, text){
+    var el = document.getElementById(id);
+    if(el) el.textContent = text;
+  }
+  function paint(d){
+    var mid = n(d.midPx), mark = n(d.markPx), prev = n(d.prevDayPx);
+    var price = mid != null ? mid : mark;
+    var circ = n(d.circulatingSupply), total = n(d.totalSupply);
+    var chg = (price!=null && prev!=null && prev>0) ? ((price-prev)/prev)*100 : null;
+    set('har-price', fmtP(price));
+    set('har-mark', fmtP(mark));
+    set('har-mid', fmtP(mid));
+    set('har-mcap', (price!=null && circ!=null) ? fmtU(price*circ) : '—');
+    set('har-fdv', (price!=null && total!=null) ? fmtU(price*total) : '—');
+    var chEl = document.getElementById('har-chg');
+    if(chEl){
+      if(chg==null){ chEl.textContent='—'; chEl.style.color='var(--ink-mute)'; }
+      else {
+        chEl.textContent = (chg>=0?'+':'') + chg.toFixed(2) + '%';
+        chEl.style.color = chg>=0 ? 'var(--green,#00ba7c)' : 'var(--hot,#f4212e)';
+      }
+    }
+    var asof = document.getElementById('har-asof');
+    if(asof) asof.textContent = 'as of ' + new Date().toLocaleTimeString();
+  }
+  function tick(){
+    fetch(URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'tokenDetails', tokenId: TOKEN_ID })
+    }).then(function(r){ return r.json(); }).then(paint).catch(function(e){
+      var asof = document.getElementById('har-asof');
+      if(asof) asof.textContent = 'error · retrying';
+      console.warn('[HAR]', e);
+    });
+  }
+  tick();
+  setInterval(tick, 12000);
+})();
+
 </script>
 </body>
 </html>
