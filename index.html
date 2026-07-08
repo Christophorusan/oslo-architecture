@@ -164,6 +164,13 @@ footer a { color: var(--ink-soft); }
   .cal-chip { font-size: 8px; }
   .cal-cell input.quick { font-size: 9px; }
 }
+
+/* Content calendar formats */
+.chip-thread { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
+.chip-newsletter { color: var(--green); border-color: rgb(134 239 172 / .4); background: rgb(134 239 172 / .05); }
+.chip-longform { color: var(--warm); border-color: rgb(251 191 36 / .4); background: rgb(251 191 36 / .05); }
+.chip-diagram { color: var(--hot); border-color: rgb(251 146 60 / .4); background: rgb(251 146 60 / .05); }
+.chip-shipped { opacity: .75; text-decoration: line-through; }
 </style>
 </head>
 <body>
@@ -327,8 +334,16 @@ footer a { color: var(--ink-soft); }
     <div class="page-head">
       <div>
         <h1 class="page">Content</h1>
-        <p class="sub">Channel side of the funnel: every post and newsletter that ships, with views and engagement. Populated by the X performance sync and the marketing unit.</p>
+        <p class="sub">Editorial calendar plus channel performance: what ships when, then posts and newsletters with views and engagement.</p>
       </div>
+      <div class="page-meta">
+        <div>Calendar · next 30 days ship plan</div>
+        <div>Below · indexed performance samples</div>
+      </div>
+    </div>
+
+    <div class="cal-section" id="content-calendar-root" style="margin-bottom:24px">
+      <!-- content calendar rendered by script -->
     </div>
 
     <div class="tiles">
@@ -595,6 +610,190 @@ function renderCalendar() {
   paint();
 }
 renderCalendar();
+
+// ---- Content calendar (editorial ship plan) ----
+const CONTENT_FORMATS = {
+  thread: "Thread",
+  newsletter: "Newsletter",
+  longform: "Longform",
+  diagram: "Diagram",
+};
+const CONTENT_STORE = "oslo-replica-content-cal-v1";
+
+function seedContent(today) {
+  const t = (offset, title, format, status = "planned", channel = "X") => ({
+    id: uid(), title, occurs_on: addDaysISO(today, offset), format, status, channel,
+  });
+  return [
+    t(0, "Vault milestone recap thread", "thread", "scheduled", "X"),
+    t(1, "Weekly yield report · haHYPE / haUSDC", "thread", "planned", "X"),
+    t(2, "Funding-rate market structure piece", "longform", "drafted", "blog"),
+    t(3, "Rebalance diagram for Discord pin", "diagram", "planned", "Discord"),
+    t(5, "Newsletter · vault strategies issue 13", "newsletter", "drafted", "email"),
+    t(7, "Depositor cohort retention breakdown", "thread", "planned", "X"),
+    t(9, "Partnership explainer (integration)", "thread", "planned", "X"),
+    t(11, "How the vault rebalances — short video notes", "longform", "planned", "blog"),
+    t(14, "Ecosystem update newsletter issue 14", "newsletter", "planned", "email"),
+    t(16, "TVL vs peers one-pager diagram", "diagram", "planned", "X"),
+    t(18, "Month-in-review thread", "thread", "planned", "X"),
+    t(21, "Operator FAQ longform", "longform", "planned", "blog"),
+    t(24, "Community AMA promo thread", "thread", "planned", "X"),
+    t(27, "End-of-month performance pack", "newsletter", "planned", "email"),
+  ];
+}
+
+function loadContentItems(today) {
+  try {
+    const raw = localStorage.getItem(CONTENT_STORE);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    }
+  } catch (_) {}
+  const seeded = seedContent(today);
+  localStorage.setItem(CONTENT_STORE, JSON.stringify(seeded));
+  return seeded;
+}
+function saveContentItems(items) {
+  localStorage.setItem(CONTENT_STORE, JSON.stringify(items));
+}
+
+function renderContentCalendar() {
+  const root = document.getElementById("content-calendar-root");
+  if (!root) return;
+  const today = todayISO();
+  let items = loadContentItems(today);
+  let selected = today;
+  const days = next30(today);
+  const firstDow = parseDay(days[0]).dow;
+
+  function byDate(iso) { return items.filter(i => i.occurs_on === iso); }
+  function counts() {
+    return {
+      planned: items.filter(i => i.status === "planned" || i.status === "drafted" || i.status === "scheduled").length,
+      shipped: items.filter(i => i.status === "shipped").length,
+      total: items.length,
+    };
+  }
+  function addItem(occurs_on, title, format = "thread") {
+    const t = title.trim();
+    if (!t) return;
+    items = [{
+      id: uid(), title: t.slice(0, 200), occurs_on, format, status: "planned", channel: "X",
+    }, ...items];
+    saveContentItems(items);
+    selected = occurs_on;
+    paint();
+  }
+  function ship(id) {
+    items = items.map(i => i.id === id ? { ...i, status: "shipped" } : i);
+    saveContentItems(items);
+    paint();
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function paint() {
+    const c = counts();
+    const selectedItems = byDate(selected);
+    const { weekday, day, month, isToday } = parseDay(selected);
+    const legend = Object.entries(CONTENT_FORMATS).map(([k, lab]) =>
+      `<span class="chip-${k}"><strong>${lab[0]}</strong> <span style="color:var(--ink-mute)">${lab}</span></span>`
+    ).join("");
+
+    let pads = "";
+    for (let i = 0; i < firstDow; i++) pads += `<div class="cal-pad"></div>`;
+
+    const cells = days.map(iso => {
+      const p = parseDay(iso);
+      const dayItems = byDate(iso);
+      const compact = dayItems.slice(0, 2);
+      const overflow = dayItems.length - compact.length;
+      const chips = compact.map(it =>
+        `<span class="cal-chip chip-${it.format}${it.status === "shipped" ? " chip-shipped" : ""}" title="${CONTENT_FORMATS[it.format] || it.format} · ${escapeHtml(it.title)}">${escapeHtml(it.title)}</span>`
+      ).join("") + (overflow > 0 ? `<span class="cal-more">+${overflow}</span>` : "");
+      return `<div class="cal-cell${selected === iso ? " selected" : ""}" data-iso="${iso}">
+        <button type="button" class="cal-cell-top" data-cselect="${iso}" aria-label="Select ${iso}">
+          <span class="cal-daynum${p.isToday ? " today" : ""}">${p.day}</span>
+          <span class="cal-wd">${p.weekday}</span>
+        </button>
+        <div class="cal-chips">${chips}</div>
+        <input class="quick" type="text" maxlength="200" placeholder="Type + Enter" data-cquick="${iso}" aria-label="Quick add content for ${iso}">
+      </div>`;
+    }).join("");
+
+    const list = selectedItems.length === 0
+      ? `<p class="cal-empty">No content scheduled for ${weekday}, ${month} ${day}. Type in a cell or use the form below.</p>`
+      : `<ul class="cal-items">${selectedItems.map(it => `
+          <li class="cal-item ${it.status === "shipped" ? "done" : ""}">
+            <span class="type chip-${it.format}">${CONTENT_FORMATS[it.format] || it.format}</span>
+            <span class="title">${escapeHtml(it.title)}</span>
+            <span class="rel">${escapeHtml(it.channel || "")}</span>
+            <span class="status">${it.status}</span>
+            ${it.status !== "shipped" ? `<button type="button" class="pill" data-ship="${it.id}" style="cursor:pointer">Ship</button>` : ""}
+          </li>`).join("")}</ul>`;
+
+    root.innerHTML = `
+      <div class="cal-head">
+        <div>
+          <h2>Content calendar</h2>
+          <p>Editorial ship plan for the next 30 days — threads, newsletters, longform, diagrams. Type in a day cell and press Enter to schedule.</p>
+          <div class="meta">${c.planned} in pipeline · ${c.shipped} shipped · ${c.total} total</div>
+        </div>
+        <div class="cal-legend">${legend}</div>
+      </div>
+      <div class="cal-grid-wrap">
+        <div class="cal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
+        <div class="cal-days">${pads}${cells}</div>
+      </div>
+      <div class="cal-panel">
+        <div class="cal-panel-head">
+          <h3>${weekday}, ${month} ${day}${isToday ? '<span class="badge">today</span>' : ""}</h3>
+          <span class="count">${selectedItems.length} ${selectedItems.length === 1 ? "piece" : "pieces"}</span>
+        </div>
+        ${list}
+        <form class="cal-add" id="content-add-form">
+          <input type="text" name="title" maxlength="200" placeholder="Schedule content for this day" required>
+          <select name="format">
+            ${Object.entries(CONTENT_FORMATS).map(([k, lab]) => `<option value="${k}">${lab}</option>`).join("")}
+          </select>
+          <button type="submit">Schedule</button>
+        </form>
+      </div>`;
+
+    root.querySelectorAll("[data-cselect]").forEach(btn => {
+      btn.addEventListener("click", () => { selected = btn.getAttribute("data-cselect"); paint(); });
+    });
+    root.querySelectorAll("input[data-cquick]").forEach(inp => {
+      inp.addEventListener("focus", () => {
+        const iso = inp.getAttribute("data-cquick");
+        if (selected !== iso) {
+          selected = iso;
+          paint();
+          root.querySelector(`input[data-cquick="${iso}"]`)?.focus();
+        }
+      });
+      inp.addEventListener("keydown", e => {
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+        addItem(inp.getAttribute("data-cquick"), inp.value, "thread");
+      });
+    });
+    root.querySelectorAll("[data-ship]").forEach(btn => {
+      btn.addEventListener("click", () => ship(btn.getAttribute("data-ship")));
+    });
+    const form = root.querySelector("#content-add-form");
+    form?.addEventListener("submit", e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      addItem(selected, String(fd.get("title") || ""), String(fd.get("format") || "thread"));
+    });
+  }
+
+  paint();
+}
+renderContentCalendar();
 
 // ---- real monthly aggregates from the on-chain backfill ----
 const MONTHS = [{"m":"2025-07","d":1,"w":1,"a":2,"n":2},{"m":"2025-08","d":30,"w":13,"a":36,"n":36},{"m":"2025-09","d":1063,"w":229,"a":770,"n":757},{"m":"2025-10","d":2069,"w":453,"a":1158,"n":923},{"m":"2025-11","d":1832,"w":595,"a":1437,"n":964},{"m":"2025-12","d":1217,"w":898,"a":1617,"n":927},{"m":"2026-01","d":392,"w":405,"a":562,"n":202},{"m":"2026-02","d":80,"w":197,"a":226,"n":36},{"m":"2026-03","d":155,"w":179,"a":270,"n":72},{"m":"2026-04","d":131,"w":173,"a":248,"n":56},{"m":"2026-05","d":106,"w":201,"a":249,"n":65},{"m":"2026-06","d":58,"w":132,"a":167,"n":34}];
