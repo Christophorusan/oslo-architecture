@@ -41,6 +41,9 @@
 html, body {
   background: var(--bg);
   color: var(--ink);
+  margin: 0;
+  min-height: 100%;
+
   font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   font-size: 15px;
   line-height: 1.4;
@@ -48,7 +51,20 @@ html, body {
 }
 .mono { font-family: 'AeonikMono', ui-monospace, "SF Mono", Menlo, monospace; }
 .tabular { font-variant-numeric: tabular-nums; }
-.wrap { max-width: 1280px; margin: 0 auto; padding: 40px 24px; width: 100%; box-sizing: border-box; overflow-x: clip; }
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 48px 64px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+@media (max-width: 900px) {
+  .wrap { padding: 32px 28px 48px; }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 24px 18px 40px; }
+}
 
 header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .wordmark { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
@@ -329,11 +345,49 @@ footer a { color: var(--ink-soft); }
 }
 
 
+
+/* ---- Page gutters: boxes never kiss the window edge ---- */
+body {
+  padding-left: 0;
+  padding-right: 0;
+}
+.wrap > * {
+  max-width: 100%;
+}
+.tiles,
+.grid2,
+.panel,
+.cal-section,
+.cap-pin,
+.cap-board,
+.note,
+.page-head,
+#an-har > .panel,
+#an-dashboards,
+#an-protocol,
+#an-vaults,
+#an-x,
+#an-mindshare,
+#an-narratives {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+/* Slightly roomier tile grid so cards breathe */
+.tiles {
+  gap: 14px;
+}
+.grid2 {
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .grid2 { grid-template-columns: 1fr; }
+}
+
 /* ---- Layout containment (no edge spill) ---- */
 .wrap {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 24px;
+  padding: 48px 48px 64px;
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
