@@ -862,6 +862,21 @@ body:not([data-view="analytics"]) .cap-board {
 .gcal-modal .types button.on.t-longform { background: #f59e0b; }
 .gcal-modal .types button.on.t-diagram { background: #ec4899; }
 
+
+/* Always-visible site disclaimer (all tabs) */
+.site-disclaimer {
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  padding-bottom: 8px;
+}
+.site-disclaimer .note {
+  margin-bottom: 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-mute);
+}
+
 /* Content calendar formats */
 .chip-thread { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
 .chip-newsletter { color: var(--green); border-color: rgb(134 239 172 / .4); background: rgb(134 239 172 / .05); }
@@ -888,14 +903,6 @@ body:not([data-view="analytics"]) .cap-board {
       <span class="chip">Replica</span>
     </div>
   </header>
-
-  <div class="note">
-    <strong>This is the actual operating system</strong> — static replica of production Oslo.
-    <strong>Analytics</strong> combines protocol activity, per-vault flows, and X (@harmonixfi) performance.
-    On-chain figures from the vault event backfill; X from official Analytics CSV + public post metrics (no account login).
-    Pipeline names are anonymized.
-    <strong>Production adds</strong>: Supabase persistence, Discord vault alerts, automated indexer refresh, and agent-drafted outreach — this replica serves static JSON snapshots. <a href="docs/">Docs</a>.
-  </div>
 
   <!-- ================= CALENDAR ================= -->
   <section class="view active" id="view-calendar">
@@ -1418,6 +1425,17 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
       <strong>Analytics</strong> tab under <strong>X · Social</strong>.
     </div>
   </section>
+
+
+  <div class="site-disclaimer">
+    <div class="note">
+      <strong>This is the actual operating system</strong> — static replica of production Oslo.
+      <strong>Analytics</strong> combines protocol activity, per-vault flows, and X (@harmonixfi) performance.
+      On-chain figures from the vault event backfill; X from official Analytics CSV + public post metrics (no account login).
+      Pipeline names are anonymized.
+      <strong>Production adds</strong>: Supabase persistence, Discord vault alerts, automated indexer refresh, and agent-drafted outreach — this replica serves static JSON snapshots. <a href="docs/">Docs</a>.
+    </div>
+  </div>
 
   <footer>
     <span>Oslo · built by Cristobal Silva · Mastra + discord.js + Supabase + HyperEVM indexers</span>
