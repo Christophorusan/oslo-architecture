@@ -207,11 +207,11 @@ footer a { color: var(--ink-soft); }
     <div class="page-head">
       <div>
         <h1 class="page">Roadmap</h1>
-        <p class="sub">GTM roadmap by day — follow-ups, reviews, content, meetings, and relationship actions.</p>
+        <p class="sub">Month calendar for GTM work — type in a day + Enter to add. Use ← → to move months.</p>
       </div>
       <div class="page-meta">
-        <div>Window · next 30 days</div>
-        <div>Sample items · type + Enter works in-browser</div>
+        <div>Calendar · full month grid</div>
+        <div>Type + Enter · local only (browser)</div>
       </div>
     </div>
     <div class="cal-section" id="calendar-root">
@@ -503,6 +503,22 @@ function addDaysISO(iso, n) {
   const dt = new Date(y, m - 1, d + n);
   return todayISO(dt);
 }
+const MONTHS_LONG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function monthKey(d = new Date()) {
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+}
+function shiftMonth(key, delta) {
+  const [y, m] = key.split("-").map(Number);
+  const dt = new Date(y, m - 1 + delta, 1);
+  return monthKey(dt);
+}
+function daysInMonth(key) {
+  const [y, m] = key.split("-").map(Number);
+  const last = new Date(y, m, 0).getDate();
+  const out = [];
+  for (let d = 1; d <= last; d++) out.push(todayISO(new Date(y, m - 1, d)));
+  return out;
+}
 function next30(iso) {
   return Array.from({ length: 30 }, (_, i) => addDaysISO(iso, i));
 }
@@ -567,23 +583,27 @@ function renderCalendar() {
   const today = todayISO();
   let items = loadItems(today);
   let selected = today;
-  const days = next30(today);
-  const firstDow = parseDay(days[0]).dow;
+  let viewMonth = monthKey();
 
   function byDate(iso) {
     return items.filter(i => i.occurs_on === iso);
   }
-  function counts() {
-    const planned = items.filter(i => i.status === "planned").length;
-    const done = items.filter(i => i.status === "done").length;
-    return { planned, done, total: items.length };
+  function monthItems() {
+    return items.filter(i => i.occurs_on.startsWith(viewMonth));
   }
-  function addItem(occurs_on, title, type = "task") {
+  function counts() {
+    const mi = monthItems();
+    const planned = mi.filter(i => i.status === "planned").length;
+    const done = mi.filter(i => i.status === "done").length;
+    return { planned, done, total: mi.length };
+  }
+  function addItem(occurs_on, title, type = "event") {
     const t = title.trim();
     if (!t) return;
     items = [{ id: uid(), title: t.slice(0, 200), occurs_on, type, status: "planned", relationship: null }, ...items];
     saveItems(items);
     selected = occurs_on;
+    viewMonth = occurs_on.slice(0, 7);
     paint();
   }
   function setStatus(id, status) {
@@ -593,9 +613,15 @@ function renderCalendar() {
   }
 
   function paint() {
+    const days = daysInMonth(viewMonth);
+    const firstDow = parseDay(days[0]).dow;
+    if (!selected.startsWith(viewMonth)) {
+      selected = today.startsWith(viewMonth) ? today : days[0];
+    }
     const c = counts();
     const selectedItems = byDate(selected);
     const { weekday, day, month, isToday } = parseDay(selected);
+    const [vy, vm] = viewMonth.split("-").map(Number);
 
     const legend = Object.keys(TYPE_LABELS).map(t =>
       `<span class="chip-${t}"><strong>${TYPE_INITIAL[t]}</strong> <span style="color:var(--ink-mute)">${TYPE_LABELS[t]}</span></span>`
@@ -636,11 +662,20 @@ function renderCalendar() {
     root.innerHTML = `
       <div class="cal-head">
         <div>
-          <h2>Next 30 days</h2>
-          <p>Track follow-ups, reviews, content, meetings, and relationship actions. Same layout as the production app calendar.</p>
-          <div class="meta">${c.planned} planned · ${c.done} done · ${c.total} total</div>
+          <h2>Roadmap calendar</h2>
+          <p>Month grid for GTM work. Type in a day and press Enter to add. Arrows move months.</p>
+          <div class="meta">${c.planned} planned · ${c.done} done · ${c.total} this month</div>
         </div>
         <div class="cal-legend">${legend}</div>
+      </div>
+      <div class="cal-nav" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;gap:6px;align-items:center">
+          <button type="button" id="cal-prev" class="pill" style="cursor:pointer;padding:6px 12px">←</button>
+          <button type="button" id="cal-next" class="pill" style="cursor:pointer;padding:6px 12px">→</button>
+          <button type="button" id="cal-today" class="pill" style="cursor:pointer;padding:6px 12px">Today</button>
+        </div>
+        <div style="font-size:17px;font-weight:600;letter-spacing:-0.02em">${MONTHS_LONG[vm - 1]} ${vy}</div>
+        <div style="width:88px"></div>
       </div>
       <div class="cal-grid-wrap">
         <div class="cal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
@@ -655,11 +690,15 @@ function renderCalendar() {
         <form class="cal-add" id="cal-add-form">
           <input type="text" name="title" maxlength="200" placeholder="Add item for this day" required>
           <select name="type">
-            ${Object.keys(TYPE_LABELS).map(t => `<option value="${t}">${TYPE_LABELS[t]}</option>`).join("")}
+            ${Object.keys(TYPE_LABELS).map(t => `<option value="${t}" ${t === "event" ? "selected" : ""}>${TYPE_LABELS[t]}</option>`).join("")}
           </select>
           <button type="submit">Add</button>
         </form>
       </div>`;
+
+    root.querySelector("#cal-prev")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, -1); paint(); });
+    root.querySelector("#cal-next")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, 1); paint(); });
+    root.querySelector("#cal-today")?.addEventListener("click", () => { viewMonth = monthKey(); selected = today; paint(); });
 
     root.querySelectorAll("[data-select]").forEach(btn => {
       btn.addEventListener("click", () => { selected = btn.getAttribute("data-select"); paint(); });
@@ -672,7 +711,7 @@ function renderCalendar() {
       inp.addEventListener("keydown", e => {
         if (e.key !== "Enter") return;
         e.preventDefault();
-        addItem(inp.getAttribute("data-quick"), inp.value, "task");
+        addItem(inp.getAttribute("data-quick"), inp.value, "event");
       });
     });
     root.querySelectorAll("[data-done]").forEach(btn => {
@@ -682,7 +721,7 @@ function renderCalendar() {
     form?.addEventListener("submit", e => {
       e.preventDefault();
       const fd = new FormData(form);
-      addItem(selected, String(fd.get("title") || ""), String(fd.get("type") || "task"));
+      addItem(selected, String(fd.get("title") || ""), String(fd.get("type") || "event"));
     });
   }
 
