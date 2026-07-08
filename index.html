@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Understanding AI Agents with Harmonix</title>
+<title>Oslo Architecture</title>
+<meta name="description" content="A living index for Oslo, the Harmonix GTM and lifecycle operator.">
 <style>
 @font-face { font-family: 'Aeonik'; src: url('fonts/Aeonik-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Aeonik'; src: url('fonts/Aeonik-RegularItalic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
@@ -11,818 +12,465 @@
 @font-face { font-family: 'Aeonik Mono'; src: url('fonts/AeonikMono-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Aeonik Mono'; src: url('fonts/AeonikMono-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
 
-:root, [data-theme="light"] {
-  --bg: #FFFFFF;
-  --bg2: #F9FAF9;
-  --card: #FFFFFF;
-  --border: #E5E7E5;
-  --border2: #CDD0CD;
-  --text: #173132;
-  --text2: #3D5E5F;
-  --text3: #8AA3A4;
-  --accent: #173132;
-  --accent-soft: rgba(23,49,50,0.06);
-  --accent-line: rgba(23,49,50,0.14);
-  --lime: #E2F6A1;
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --ink: #111111;
+  --muted: #767676;
+  --faint: #adadad;
+  --line: #e9e9e9;
+  --soft: #f7f7f7;
+  --green: #2a7f62;
+  --red: #9b2f2f;
+  --amber: #8b6f1f;
+  --blue: #265f9f;
 }
-[data-theme="dark"] {
-  --bg: #172B2C;
-  --bg2: #1E3839;
-  --card: #1E3839;
-  --border: #264546;
-  --border2: #305858;
-  --text: #FFFFFF;
-  --text2: #A8BDB0;
-  --text3: #6B8577;
-  --accent: #E2F6A1;
-  --accent-soft: rgba(194,250,97,0.08);
-  --accent-line: rgba(194,250,97,0.18);
-  --lime: #E2F6A1;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
+
+* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
+  margin: 0;
   background: var(--bg);
-  color: var(--text2);
-  font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15.5px;
-  line-height: 1.75;
+  color: var(--ink);
+  font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.58;
+  padding: 92px 24px 88px;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-.article {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 72px 48px 120px;
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.22);
 }
-.article-header {
-  margin-bottom: 56px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid var(--border);
-}
-.article-header h1 {
-  font-size: 42px;
-  line-height: 1.1;
-  letter-spacing: -1.1px;
-  color: var(--text);
-  margin-bottom: 18px;
-  font-weight: 700;
-}
-.article-header .subtitle {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 14px;
-}
-.article-header .lede {
-  font-size: 18px;
-  line-height: 1.7;
-  max-width: 680px;
-  color: var(--text2);
-}
-h2 {
-  font-size: 24px;
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  margin: 64px 0 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  font-weight: 700;
-}
-h3 {
-  font-size: 18px;
-  line-height: 1.35;
-  letter-spacing: -0.2px;
-  color: var(--text);
-  margin: 42px 0 14px;
-  font-weight: 700;
-}
-h4, h5 { color: var(--text); }
-p { color: var(--text2); margin-bottom: 20px; }
-strong { color: var(--text); font-weight: 700; }
-em { color: var(--text2); font-style: italic; }
-a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(23,49,50,0.2); }
-a:hover { text-decoration: none; border-bottom-color: var(--accent); }
-ul, ol { margin: 12px 0 20px 20px; color: var(--text2); }
-li { margin-bottom: 8px; }
-code {
-  font-family: 'Aeonik Mono', ui-monospace, monospace;
-  font-size: 13px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  color: var(--accent);
-  padding: 2px 7px;
-  border-radius: 6px;
-}
-pre {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 20px;
-  margin: 18px 0;
-  overflow-x: auto;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: var(--text2);
-  font-family: 'Aeonik Mono', ui-monospace, monospace;
-}
-pre code { background: none; border: none; padding: 0; color: inherit; }
-p.note {
-  background: rgba(23,49,50,0.03);
-  border: 1px solid rgba(23,49,50,0.08);
-  border-left: 3px solid rgba(23,49,50,0.3);
-  border-radius: 12px;
-  padding: 18px 22px;
-  margin: 28px 0;
-  font-size: 13.5px;
-  color: var(--text2);
-  font-style: normal;
-}
-.diagram-wrap {
-  margin: 28px 0;
-  padding: 18px 20px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-sizing: border-box;
-}
-.diagram-wrap .diagram-inner {
-  max-width: 100%;
+a:hover { border-bottom-color: var(--ink); }
+
+.page {
+  max-width: 820px;
   margin: 0 auto;
 }
-.diagram-title {
-  text-align: center;
-  color: var(--text3);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  margin-bottom: 14px;
-  font-weight: 700;
-}
-.diagram { display: flex; flex-direction: column; gap: 10px; }
-.control-plane, .layer, .safety-layer, .center {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px 16px;
-}
-[data-theme="light"] .center {
-  background: linear-gradient(135deg, #EDF9F2 0%, #E8EDEC 100%);
-}
-[data-theme="dark"] .center {
-  background: linear-gradient(135deg, rgba(226,246,161,0.18) 0%, rgba(226,246,161,0.08) 100%);
-  border-color: rgba(226,246,161,0.28);
-}
-.control-plane h4, .layer h4, .safety-layer h4, .center h4 {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  margin-bottom: 6px;
-}
-.layer h4, .safety-layer h4, .control-plane h4 { color: var(--text3); }
-.center h4 { color: var(--text); }
-.layer .sub, .safety-layer .sub, .control-plane .items, .center p, .obs p, .layer .body, .unit .desc, .door .desc, .pill, .rules span {
-  color: var(--text2);
-}
-.layer .sub, .safety-layer .sub { font-size: 12px; line-height: 1.55; margin-bottom: 8px; }
-.control-plane .items { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; font-size: 11px; }
-.control-plane .items span, .rules span, .pill, .unit, .door, .split > div {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-.control-plane .items span { padding: 5px 10px; }
-.arrow { display: flex; justify-content: center; height: 10px; }
-.arrow::after { content: ''; width: 2px; height: 10px; background: var(--accent-line); }
-.doors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-.door { padding: 10px 8px; text-align: center; }
-.door.host, .door.headless { border-color: var(--border); }
-.door .tag {
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-  color: var(--text3);
-}
-.door .name, .unit h5 {
-  font-size: 13px;
-  color: var(--text);
-  margin-bottom: 3px;
-  font-weight: 700;
-}
-.door .desc { font-size: 11px; line-height: 1.45; }
-.center p, .pill, .rules span { font-family: 'Aeonik Mono', ui-monospace, monospace; font-size: 11px; }
-.center p { line-height: 1.55; }
-.pills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.pill { padding: 9px 8px; text-align: center; }
-.pill .u, .layer .body .accent { color: var(--accent); font-weight: 700; }
-.units { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.unit { padding: 12px 10px; text-align: center; }
-.unit .desc { font-size: 11px; line-height: 1.5; }
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.layer .body { font-size: 12px; line-height: 1.6; }
-.rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-.rules span { padding: 7px 9px; font-size: 11px; text-align: center; }
-.obs {
-  background: var(--bg2);
-  border: 1px dashed var(--border2);
-  border-radius: 12px;
-  padding: 12px 14px;
-  text-align: center;
-  margin-top: 12px;
-}
-.obs h5 {
-  font-size: 10.5px;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 5px;
-}
-.obs p { font-size: 11px; line-height: 1.55; }
-.defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
-.defs .def {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-left: 3px solid rgba(23,49,50,0.3);
-  border-radius: 12px;
-  padding: 18px 18px 18px 16px;
-}
-.defs .def .label {
-  color: var(--text3);
-  font-weight: 700;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  margin-bottom: 6px;
-}
-.defs .def .body { color: var(--text2); font-size: 14px; line-height: 1.6; }
-/* CD-article-style comparison block: two-column "X vs Y" labeled bullets. */
-.compare {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 22px 0;
-}
-.compare .col {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent-line);
-  border-radius: 12px;
-  padding: 18px 20px;
-}
-.compare .col .label {
-  color: var(--text);
-  font-weight: 700;
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-.compare .col .body { color: var(--text2); font-size: 14.5px; line-height: 1.65; }
-@media (max-width: 700px) { .compare { grid-template-columns: 1fr; } }
 
-/* Flow chain — a styled mono line that reads like a system loop. */
-.flow {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin: 22px 0;
-  font-family: 'Aeonik Mono', ui-monospace, monospace;
-  font-size: 13.5px;
-  line-height: 1.85;
-  color: var(--text2);
-  word-spacing: 2px;
-}
-.flow .step { color: var(--text); font-weight: 500; }
-.flow .arrow { color: var(--accent); font-weight: 700; padding: 0 6px; height: auto; display: inline; }
-.flow .arrow::after { display: none; }
-
-[data-theme="dark"] .compare .col {
-  border-left-color: rgba(226,246,161,0.32);
-}
-[data-theme="dark"] .flow {
-  background: rgba(226,246,161,0.04);
-  border-color: rgba(226,246,161,0.18);
+header {
+  margin-bottom: 64px;
 }
 
-/* Per-layer mini-diagrams — same visual language as the main diagram,
-   but compact and inline so each layer gets its own picture. The prose
-   sits as plain paragraphs around the diagram, never inside a box. */
-.mini {
-  margin: 18px 0 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.mini-row {
-  display: flex;
-  gap: 8px;
-  align-items: stretch;
-  flex-wrap: wrap;
-}
-.mini-node {
-  flex: 1 1 0;
-  min-width: 110px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
-  text-align: center;
-}
-.mini-node.accent {
-  background: var(--accent-soft);
-  border-color: var(--accent-line);
-}
-.mini-node .tag {
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text3);
-  margin-bottom: 4px;
-  font-weight: 700;
-}
-.mini-node .name {
-  font-size: 12.5px;
-  color: var(--text);
-  font-weight: 700;
-  margin-bottom: 3px;
-}
-.mini-node .desc { color: var(--text2); font-size: 11px; line-height: 1.45; }
-.mini-arrow-down {
-  display: flex;
-  justify-content: center;
-  height: 16px;
-  position: relative;
-}
-.mini-arrow-down::after {
-  content: '↓';
-  color: var(--accent);
-  font-size: 14px;
-  line-height: 1;
-}
-.mini-flow {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+.eyebrow {
+  color: var(--faint);
   font-family: 'Aeonik Mono', ui-monospace, monospace;
   font-size: 12px;
+  margin-bottom: 14px;
+}
+
+h1 {
+  max-width: 720px;
+  margin: 0 0 20px;
+  font-size: clamp(36px, 7vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.052em;
+  line-height: 0.96;
+}
+
+.lede {
+  max-width: 690px;
+  color: #222;
+  font-size: 19px;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 12px;
+}
+
+section {
+  border-top: 1px solid var(--line);
+  margin-top: 48px;
+  padding-top: 28px;
+}
+
+h2 {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0 0 18px;
+  color: #252525;
+}
+
+.doc-list {
+  border-bottom: 1px solid var(--line);
+}
+
+.doc {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 118px;
+  gap: 20px;
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding: 18px 0 20px;
+}
+
+.num,
+.status,
+.mono {
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.num {
+  color: var(--faint);
+}
+
+.status {
+  justify-self: end;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.doc p {
+  max-width: 560px;
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
   line-height: 1.5;
 }
-.mini-flow .step {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 10px;
-  color: var(--text);
-}
-.mini-flow .step.accent {
-  background: var(--accent-soft);
-  border-color: var(--accent-line);
-  color: var(--text);
-}
-.mini-flow .sep { color: var(--accent); font-weight: 700; padding: 0 2px; }
-.mini-stack { display: flex; flex-direction: column; gap: 6px; }
-.mini-stack .tier {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 12px;
-  align-items: center;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 8px 12px;
-}
-.mini-stack .tier .badge {
-  font-family: 'Aeonik Mono', ui-monospace, monospace;
-  font-size: 10.5px;
-  color: var(--text3);
-  text-align: center;
-  font-weight: 700;
-}
-.mini-stack .tier .label { color: var(--text); font-size: 13px; font-weight: 700; }
-.mini-stack .tier .desc { color: var(--text2); font-size: 12px; line-height: 1.5; }
 
-.voice {
-  background: rgba(23,49,50,0.03);
-  border: 1px solid rgba(23,49,50,0.08);
-  border-left: 3px solid rgba(23,49,50,0.3);
-  border-radius: 12px;
-  padding: 20px 22px;
-  margin: 16px 0;
+.signal {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
 }
-.voice .who {
-  color: var(--text3);
-  font-weight: 700;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-  margin-bottom: 8px;
+
+.metric {
+  border-top: 1px solid var(--line);
+  padding-top: 13px;
 }
-.voice .what { color: var(--text2); font-style: italic; font-size: 15px; line-height: 1.7; }
-footer {
-  text-align: center;
-  margin-top: 88px;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  color: var(--text3);
+
+.metric strong {
+  display: block;
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.metric span {
+  color: var(--muted);
+  display: block;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.flow {
+  display: grid;
+  gap: 0;
+  margin-top: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 18px;
+  border-top: 1px solid var(--line);
+  padding: 14px 0;
+}
+
+.step p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+.note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.note-list li {
+  border-top: 1px solid var(--line);
+  padding: 13px 0;
+  color: #242424;
+}
+
+.tag {
+  color: var(--muted);
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
   font-size: 12px;
+  margin-right: 8px;
 }
-footer a { color: var(--text3); border-bottom: none; }
-@media (max-width: 900px) {
-  .topbar { padding: 18px 24px 0; }
-  .article { padding: 28px 24px 96px; }
-  .article-header h1 { font-size: 34px; }
-  .defs, .split { grid-template-columns: 1fr; }
-  /* Mobile: stack the dense grids tighter so cells stay readable. */
-  .diagram-wrap { padding: 14px 14px; }
-  .doors, .pills, .units { grid-template-columns: repeat(2, 1fr) !important; }
-  .rules { grid-template-columns: repeat(2, 1fr) !important; }
-  .split { grid-template-columns: 1fr !important; }
+
+.ok { color: var(--green); }
+.warn { color: var(--amber); }
+.block { color: var(--red); }
+.info { color: var(--blue); }
+
+.line {
+  height: 84px;
+  margin: 28px 0 0;
+  overflow: visible;
+}
+
+.line path {
+  fill: none;
+  stroke: #111;
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+}
+
+.line .ghost {
+  stroke: #e4e4e4;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 12px;
+  margin-top: 62px;
+  padding-top: 18px;
+}
+
+@media (max-width: 720px) {
+  body { padding: 64px 22px 72px; }
+  header { margin-bottom: 52px; }
+  .doc { grid-template-columns: 42px 1fr; gap: 12px; }
+  .status { grid-column: 2; justify-self: start; margin-top: 5px; }
+  .signal,
+  .two-col { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 42px 1fr; }
 }
 </style>
 </head>
-<body>
-  <div class="topbar">
-    <button class="theme-toggle" id="themeToggle" type="button">Switch to light</button>
-  </div>
-  <main class="article">
 
-    <header class="article-header">
-      <h1>Understanding AI Agents with Harmonix</h1>
-      <p class="subtitle">10 layers · entry points · agent core · prompt + context · routing · connectors · execution · memory · audience + recommendations · units · feedback loop</p>
-      <p class="lede">An AI agent that helps a small team run a company like a bigger one. It watches what's happening, decides what matters, acts on the right thing, and gets better at all of it over time. The whole system is ten layers — each with one job, each readable in isolation.</p>
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Oslo Architecture / updated 08 July 2026</div>
+      <h1>Oslo is becoming a lifecycle operator.</h1>
+      <p class="lede">
+        This is the public index for the Harmonix Oslo system: market research, X analysis, holder lead discovery,
+        lifecycle reporting, PMM launch packets, and internal Discord review. The point is not more content. The point
+        is a repeatable operating layer that notices useful signals and turns them into approved next actions.
+      </p>
+      <div class="meta">
+        <span>owner: Harmonix GTM</span>
+        <span>runtime: Mac Oslo bot</span>
+        <span>default report channel: internal #growth</span>
+      </div>
+
+      <svg class="line" viewBox="0 0 820 84" role="img" aria-label="Signal line showing Oslo turning market signals into lifecycle actions">
+        <path class="ghost" d="M0 54 C90 54 95 54 150 54 S230 54 286 54 S382 54 430 54 S518 54 572 54 S704 54 820 54" />
+        <path d="M0 58 C48 58 68 46 102 46 S160 62 198 52 S252 25 304 32 S386 64 438 50 S512 39 566 43 S646 70 700 42 S770 30 820 34" />
+      </svg>
     </header>
 
-    <section>
-      <h2>What Oslo is</h2>
-      <p>Oslo is a company agent. It watches what's happening, decides what matters, runs the work, and learns from results.</p>
-      <p>Many ways to reach it; one brain underneath. Ten layers, each with one job. Read on for what each does and how they connect.</p>
-    </section>
-
-
-    <section>
-      <h2>The Architecture</h2>
-      <p>The whole system in one picture. Each block below is detailed in its own section underneath.</p>
-
-      <div class="diagram-wrap">
-       <div class="diagram-inner">
-        <div class="diagram-title">Oslo — Growth Intelligence Architecture</div>
-        <div class="diagram">
-
-          <div class="layer">
-            <h4>Entry Points</h4>
-            <div class="sub">thin surfaces · same agent core behind every door</div>
-            <div class="doors">
-              <div class="door host"><div class="tag">host model</div><div class="name">Claude Code</div><div class="desc">review<br>reasoning<br>edits</div></div>
-              <div class="door host"><div class="tag">host model</div><div class="name">Codex</div><div class="desc">automation<br>review<br>commands</div></div>
-              <div class="door headless"><div class="tag">chat surface</div><div class="name">Discord</div><div class="desc">team context<br>approvals<br>shared log</div></div>
-              <div class="door headless"><div class="tag">chat surface</div><div class="name">Telegram</div><div class="desc">replies<br>partners<br>on the go</div></div>
-              <div class="door headless"><div class="tag">runtime</div><div class="name">Cron / API</div><div class="desc">scheduled<br>briefs<br>webhooks</div></div>
-            </div>
-            <div style="font-size:9px;color:#777;text-align:center;margin-top:8px;font-style:italic;">+ X reactions · app activity · webhooks · replay</div>
+    <section id="documents">
+      <h2>01 / documents</h2>
+      <div class="doc-list">
+        <article class="doc">
+          <div class="num">00</div>
+          <div>
+            <h3>Frank brief and roadmap</h3>
+            <p>The first GTM framing: what Harmonix needs from Oslo, what belongs in the growth system, and which work should come first.</p>
           </div>
+          <div class="status ok">drafted</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="center">
-            <h4>Agent Core + Gateway</h4>
-            <p>normalize input → load context → route model → call tools → stream result → save session</p>
+        <article class="doc">
+          <div class="num">01</div>
+          <div>
+            <h3>Harmonix Growth System Playbook</h3>
+            <p>Turns proof, market structure, BD, X, and vault data into a weekly operating loop instead of isolated marketing tasks.</p>
           </div>
+          <div class="status ok">drafted</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="layer" style="text-align:center;max-width:720px;margin:0 auto;">
-            <h4 style="margin-bottom:2px;">Signals + Dispatch</h4>
-            <div class="sub" style="margin:0;">watch revenue · deposits · withdrawals · conversion · retention → classify user or partner → enrich profile → route to unit</div>
+        <article class="doc">
+          <div class="num">02</div>
+          <div>
+            <h3>Lead system spec</h3>
+            <p>The lead engine: signals, scores, outreach drafts, review cards, and outcome logging. No automatic DMs.</p>
           </div>
+          <div class="status ok">drafted</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="layer">
-            <h4>Skills</h4>
-            <div class="sub">flat verb namespace · research, recommend, draft, track, measure · skills become procedural memory</div>
-            <div class="pills">
-              <div class="pill"><span class="u">bd.</span>partner-lookalikes</div>
-              <div class="pill"><span class="u">marketing.</span>reaction-clusters</div>
-              <div class="pill"><span class="u">marketing.</span>content-winners</div>
-              <div class="pill"><span class="u">ops.</span>roadmap-sync</div>
-              <div class="pill"><span class="u">data.</span>audience-score</div>
-              <div class="pill"><span class="u">bd.</span>contact-why-now</div>
-            </div>
+        <article class="doc">
+          <div class="num">03</div>
+          <div>
+            <h3>Oslo / Olson operating handoff</h3>
+            <p>Defines the boundary. Mac Olson stays canonical. Oslo executes Harmonix work. No VM bot, no credential migration.</p>
           </div>
+          <div class="status ok">drafted</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="layer">
-            <h4>Units</h4>
-            <div class="sub">six departments · each owns one slice of the learning loop and writes back to shared company memory</div>
-            <div class="units">
-              <div class="unit"><h5>BD</h5><div class="desc">partners<br>contact map<br>why now</div></div>
-              <div class="unit"><h5>Marketing</h5><div class="desc">reactions<br>content<br>distribution</div></div>
-              <div class="unit"><h5>Engineering</h5><div class="desc">product state<br>vaults<br>ship notes</div></div>
-              <div class="unit"><h5>Security</h5><div class="desc">watchlists<br>trust<br>risk context</div></div>
-              <div class="unit"><h5>Ops</h5><div class="desc">roadmap<br>timing<br>cadence</div></div>
-              <div class="unit"><h5>Data</h5><div class="desc">scoring<br>lookalikes<br>ICP clusters</div></div>
-            </div>
+        <article class="doc">
+          <div class="num">04</div>
+          <div>
+            <h3>Harmonix X + Oslo Bot Automation Audit</h3>
+            <p>Analyzes @harmonixfi as a proof and lead surface. Adds X source-health tracking, RSS fallback, and proposal generation.</p>
           </div>
+          <div class="status ok">built</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="split">
-            <div class="layer">
-              <h4>Memory</h4>
-              <div class="sub">per-unit + shared company graph · remembers today, past, future</div>
-              <div class="body">
-                · audience graph: power users · tourists · integration partners · lookalikes<br>
-                · semantic: facts, roadmap, product state<br>
-                · episodic: reactions, meetings, replies, posts<br>
-                · working: active queue and next actions<br>
-                · procedural: markdown playbooks and heuristics<br>
-                <br>
-                <span class="accent">Shared memory answers:</span><br>
-                who reacted · who matters · who is similar · what shipped · what should happen next
-              </div>
-            </div>
-            <div class="layer">
-              <h4>Connectors</h4>
-              <div class="sub">typed clients · real signals in, recommendations out · token and cost telemetry</div>
-              <div class="body">
-                <span class="accent">x-api · supabase · discord</span><br>
-                <span class="accent">github · product analytics</span><br>
-                telegram · notion · roadmap tracker<br>
-                hyperliquid · defillama · coingecko<br>
-                harmonix-brain · address-reputation<br>
-                <br>
-                <span style="color:#777;">identity resolution · retry · cache · rate-limit · cost</span>
-              </div>
-            </div>
+        <article class="doc">
+          <div class="num">05</div>
+          <div>
+            <h3>Holder Lead Onboarding Plan</h3>
+            <p>Starts from revealed behavior: HYPE, kHYPE, USDC, Harmonix vaults, recency, and multi-vault use. Routes leads into internal review.</p>
           </div>
+          <div class="status warn">blocked</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="safety-layer">
-            <h4>Safety Layer</h4>
-            <div class="sub">capability_token verified at every boundary · approval gates · memory safety scanning · Hyperliquid trade guard</div>
-            <div class="rules">
-              <span>secrets-and-env</span><span>input-validation</span><span>llm-endpoint-safety</span>
-              <span>database-query-safety</span><span>webhooks</span><span>observability</span>
-              <span>error-handling</span><span>output-voice-check</span><span>cross-unit-read-policy</span>
-              <span>cost-and-rate-cap</span><span>circuit-breaker</span><span>dead-man-switch</span>
-              <span>idempotency-enforce</span><span>adversarial-input-scan</span><span>audit-log-immutable</span>
-              <span>secret-egress-scan</span><span>hyperliquid-trade-guard</span><span>dry-run-mode</span>
-            </div>
-            <div style="text-align:center;font-size:10px;color:#999;margin-top:10px;">severity: <span style="color:#E2F6A1;font-weight:700;">block</span> (halt + ask) / warn (log + continue)</div>
+        <article class="doc">
+          <div class="num">06</div>
+          <div>
+            <h3>Lifecycle marketing operator spec</h3>
+            <p>Maps OKX lifecycle, xAI lifecycle, and Stripe Radar PMM patterns into a Harmonix lifecycle system.</p>
           </div>
+          <div class="status ok">built v1</div>
+        </article>
 
-          <div class="arrow"></div>
-
-          <div class="layer">
-            <h4>Outputs</h4>
-            <div class="split">
-              <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Daily + Weekly Briefs</div><div style="font-size:11px;color:#ccc;">top power users · partner pushes · content ideas · bottlenecks · self-improvements</div></div>
-              <div style="background:#1a1d1a;border:1px solid #333;border-radius:6px;padding:10px;"><div style="color:#E2F6A1;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700;">Actions</div><div style="font-size:11px;color:#ccc;">drafts · DMs · reports · roadmap updates · posts · files · logged outcomes</div></div>
-            </div>
+        <article class="doc">
+          <div class="num">07</div>
+          <div>
+            <h3>Lifecycle Operator Benchmark Report</h3>
+            <p>Names the operating model: user behavior data, segmentation, triggered journeys, PMM, experiments, and internal reporting.</p>
           </div>
-
-          <div class="control-plane" style="margin-top:18px;">
-            <h4>Control Plane — Configuration the Data Plane Above Reads From</h4>
-            <div class="items">
-              <span>Skill Registry (versioned)</span>
-              <span>Prompt Registry</span>
-              <span>Connector Catalog</span>
-              <span>Eval Harness</span>
-              <span>Feature Flags</span>
-              <span>Session Routing</span>
-            </div>
-          </div>
-
-          <div class="obs">
-            <h5>Observability Spine</h5>
-            <p>traces (OTel) · structured logs · metrics · events · per-skill token usage / cost / latency / success rate · prompt + response logged · replayable runs</p>
-          </div>
-
-        </div>
-       </div>
+          <div class="status ok">posted</div>
+        </article>
       </div>
     </section>
 
-    <section>
-      <h2>1. Entry points</h2>
-      <p>Five ways to reach Oslo: Codex, Claude Code, Discord, Telegram, or scheduled jobs. All five hit the same brain. The messenger changes; what's underneath doesn't.</p>
-      <p>Whether a person types or a timer fires, every request is normalized into the same shape before anything else happens. Slow jobs return a ticket and stream progress back — they don't block the IDE or the chat.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">Codex</div><div class="desc">terminal</div></div>
-          <div class="mini-node"><div class="name">Claude Code</div><div class="desc">IDE</div></div>
-          <div class="mini-node"><div class="name">Discord</div><div class="desc">team chat</div></div>
-          <div class="mini-node"><div class="name">Telegram</div><div class="desc">mobile</div></div>
-          <div class="mini-node"><div class="name">Cron / API</div><div class="desc">scheduled · webhooks</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-row">
-          <div class="mini-node accent"><div class="name">Same brain behind every door</div></div>
-        </div>
+    <section id="live">
+      <h2>02 / current state</h2>
+      <p>
+        The architecture has crossed from notes into code. Oslo can now generate a lifecycle report and post it to the internal Harmonix
+        growth channel. The report currently surfaces the main blocker: the new lifecycle and holder tables have not been applied in production.
+      </p>
+
+      <div class="signal" aria-label="Current Oslo implementation metrics">
+        <div class="metric"><strong>3</strong><span>new skills / systems</span></div>
+        <div class="metric"><strong>2</strong><span>new migrations drafted</span></div>
+        <div class="metric"><strong>1</strong><span>internal report posted</span></div>
+        <div class="metric"><strong>0</strong><span>automatic outbound DMs</span></div>
       </div>
     </section>
 
-    <section>
-      <h2>2. Agent core</h2>
-      <p>The single loop that runs every request. Six steps, every time: read the input, figure out what it's about, pick the right skill, check the inputs, confirm if unsure, run.</p>
-      <p>The core only routes and tracks — no business logic lives here. The figure-out-what-it's-about step is what makes it useful: by the time a skill receives a request, it already knows whether the signal is high-priority or background noise.</p>
-      <div class="mini">
-        <div class="mini-flow">
-          <span class="step">read</span><span class="sep">→</span>
-          <span class="step">classify</span><span class="sep">→</span>
-          <span class="step">pick skill</span><span class="sep">→</span>
-          <span class="step">check inputs</span><span class="sep">→</span>
-          <span class="step">confirm</span><span class="sep">→</span>
-          <span class="step accent">run</span>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>3. Prompt + context</h2>
-      <p>What Oslo reads before it thinks. Six sources merge into one prompt: rules and tone, the public architecture, private team playbooks, scoped memory, the active skill, and only the tools the request is allowed to call.</p>
-      <p>Public stays shareable, private never leaves. Memory is pulled by relevance, not dumped wholesale.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">rules + tone</div></div>
-          <div class="mini-node"><div class="name">public architecture</div></div>
-          <div class="mini-node"><div class="name">private playbooks</div></div>
-        </div>
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">scoped memory</div></div>
-          <div class="mini-node"><div class="name">active skill</div></div>
-          <div class="mini-node"><div class="name">allowed tools</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-row">
-          <div class="mini-node accent"><div class="name">one prompt</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>4. Routing</h2>
-      <p>Which model handles which job. Cheap by default; bigger model only when stakes are high or the answer is unclear.</p>
-      <p>Most chat requests resolve without any model call at all — a slash command, a tag in a channel, or a keyword match is enough. The model only steps in when those fail. Every call's cost gets tracked, and each skill has a daily spend cap.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">small free model</div><div class="desc">default</div></div>
-          <div class="mini-node accent"><div class="name">bigger model</div><div class="desc">when stakes are high</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>5. Tools and connectors</h2>
-      <p>Everything outside Oslo's process: X, Supabase, Discord, GitHub, Hyperliquid, and the rest. Skills don't make raw API calls — every external call goes through a typed wrapper that checks permission before firing and gets wrapped by safety rules.</p>
-      <p>Hyperliquid is the only path that touches a chain. It gets ten extra checks: trade size cap, pre-flight simulation, two-step confirmation with a code phrase, address reputation check, and more.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node accent"><div class="name">permission check</div><div class="desc">every external call</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">X</div></div>
-          <div class="mini-node"><div class="name">Supabase</div></div>
-          <div class="mini-node"><div class="name">Discord</div></div>
-          <div class="mini-node"><div class="name">GitHub</div></div>
-          <div class="mini-node"><div class="name">Hyperliquid</div><div class="desc">+ trade guard</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">safety rules wrap every write</div></div>
-        </div>
-      </div>
-      <p class="note">There are no manual HTTP calls in skill code. Every external interaction is forced through one of two dozen typed methods, each gated by capability-token verification and wrapped by symptom-triggered rules. Skills cannot bypass safety because there is no path that does so.</p>
-    </section>
-
-    <section>
-      <h2>6. Where it runs</h2>
-      <p>Today: your laptop. Soon: a background queue so slow jobs don't block. Later: hosted in the cloud. The skill stays the same; only the substrate changes.</p>
-      <p>Any past request can be replayed somewhere else against a new prompt or model and the outputs compared.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">laptop</div><div class="desc">today</div></div>
-          <div class="mini-node"><div class="name">queue</div><div class="desc">soon</div></div>
-          <div class="mini-node"><div class="name">cloud</div><div class="desc">later</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>7. Memory</h2>
-      <p>What Oslo knows. Three time horizons — what matters today (active queue), what mattered in the past (events + decisions), what's coming next (roadmap, pipelines, plans).</p>
-      <p>Each team has its own memory; shared maps of customers, partners, and external agents sit on top. Memory is curated, not dumped — raw noise gets rejected before it lands.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">today</div><div class="desc">active queue</div></div>
-          <div class="mini-node"><div class="name">past</div><div class="desc">events + decisions</div></div>
-          <div class="mini-node"><div class="name">future</div><div class="desc">roadmap + plans</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-row">
-          <div class="mini-node accent"><div class="name">shared maps</div><div class="desc">customers · partners · external agents</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>8. Who matters, what to do</h2>
-      <p>Selection, not volume. Every account gets sorted into four buckets: power users, tourists, partners, lookalikes. From there, Oslo builds a daily brief — the five calls that matter today — and a weekly strategy brief for next week's posture.</p>
-      <p>Every proposal includes the same five things: what to do, why now, what evidence supports it, the suggested next step, and how confident Oslo is. You accept, reject, edit, or postpone. That's the learning signal.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node accent"><div class="name">power users</div></div>
-          <div class="mini-node"><div class="name">tourists</div></div>
-          <div class="mini-node accent"><div class="name">partners</div></div>
-          <div class="mini-node"><div class="name">lookalikes</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">daily brief</div><div class="desc">top 5 calls</div></div>
-          <div class="mini-node"><div class="name">weekly brief</div><div class="desc">next week's posture</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-flow">
-          <span class="step">accept</span>
-          <span class="step">reject</span>
-          <span class="step">edit</span>
-          <span class="step">postpone</span>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>9. Units</h2>
-      <p>Six teams own the work: BD, marketing, engineering, security, ops, data. Each has its own goals, memory, skills, and a daily research pass.</p>
-      <p>Every morning each team checks in (7:00 to 7:20 UTC), so the 8:05 daily brief reads fresh status from every department.</p>
-      <div class="mini">
-        <div class="mini-row">
-          <div class="mini-node"><div class="name">BD</div></div>
-          <div class="mini-node"><div class="name">Marketing</div></div>
-          <div class="mini-node"><div class="name">Engineering</div></div>
-          <div class="mini-node"><div class="name">Security</div></div>
-          <div class="mini-node"><div class="name">Ops</div></div>
-          <div class="mini-node"><div class="name">Data</div></div>
-        </div>
-        <div class="mini-arrow-down"></div>
-        <div class="mini-flow">
-          <span class="step">7:00</span><span class="sep">→</span>
-          <span class="step">7:20</span><span class="sep">→</span>
-          <span class="step accent">8:05 brief</span>
-        </div>
-      </div>
-
-    </section>
-
-    <section>
-      <h2>10. Feedback loop</h2>
-      <p>What makes Oslo compound. Sits over the whole system and learns from outcomes — a deposit, a retained user — not from engagement like likes.</p>
-      <p>Every accept and reject changes the next recommendation. Every deposit changes who counts as a power user. Any past request can be replayed against a new prompt or model to see what would have worked better. A small team can\'t outwork a big one — it can out-select one.</p>
+    <section id="loop">
+      <h2>03 / lifecycle loop</h2>
       <div class="flow">
-        <span class="step">signal</span><span class="arrow">→</span><span class="step">brain reads</span><span class="arrow">→</span><span class="step">classify</span><span class="arrow">→</span><span class="step">score</span><span class="arrow">→</span><span class="step">recommend</span><span class="arrow">→</span><span class="step">you decide</span><span class="arrow">→</span><span class="step">act</span><span class="arrow">→</span><span class="step">log</span><span class="arrow">→</span><span class="step">next signal smarter</span>
+        <div class="step">
+          <div class="num">01</div>
+          <div>
+            <h3>Discover</h3>
+            <p>Find HYPE, kHYPE, USDC, vault users, X conversations, partner signals, and allocator attention.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <div>
+            <h3>Qualify</h3>
+            <p>Score by fit, timing, proof relevance, risk, recency, and relationship path. Attach evidence to every score.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <div>
+            <h3>Draft</h3>
+            <p>Generate onboarding, activation, retention, win-back, and PMM launch touchpoints. Drafts only.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <div>
+            <h3>Review</h3>
+            <p>Post internal report cards to Discord. Humans approve, edit, reject, or postpone.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">05</div>
+          <div>
+            <h3>Measure</h3>
+            <p>Track reply, meeting, deposit, repeat deposit, TVL retained, expansion, withdrawal recovery, and approval quality.</p>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section id="implementation">
+      <h2>04 / implementation</h2>
+      <div class="two-col">
+        <div>
+          <ul class="note-list">
+            <li><span class="tag ok">built</span><code>marketing.x-performance-audit</code></li>
+            <li><span class="tag ok">built</span><code>bd.holder-lead-discovery</code></li>
+            <li><span class="tag ok">built</span><code>lifecycle.weekly-report</code></li>
+            <li><span class="tag ok">built</span><code>src/shared/internal-discord-report.ts</code></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="note-list">
+            <li><span class="tag warn">pending</span>apply migration 035</li>
+            <li><span class="tag warn">pending</span>apply migration 036</li>
+            <li><span class="tag block">blocked</span>HyperEVM explorer endpoint returns 404</li>
+            <li><span class="tag warn">pending</span>chunked HyperEVM RPC scanner</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="principles">
+      <h2>05 / rules</h2>
+      <ul class="note-list">
+        <li><span class="tag">rule</span>Mac Oslo is the production runtime for Harmonix. No VM bot.</li>
+        <li><span class="tag">rule</span>Internal lifecycle, lead, X-performance, and benchmark reports post to <span class="mono">MARKETING &amp; COMMUNITY / #growth</span>.</li>
+        <li><span class="tag">rule</span>No automatic X, Telegram, Discord, or email DMs.</li>
+        <li><span class="tag">rule</span>No public wallet balance disclosure.</li>
+        <li><span class="tag">rule</span>Every draft needs evidence, a reason now, and a clear next measurement.</li>
+      </ul>
+    </section>
+
+    <section id="next">
+      <h2>06 / next</h2>
+      <p>
+        Apply migrations 035 and 036. Patch holder ingestion to use chunked HyperEVM RPC logs. Run holder discovery.
+        Then let <code>lifecycle.weekly-report</code> post a real segment report with actual wallets, lifecycle stages, and approval cards.
+      </p>
     </section>
 
     <footer>
-      <p><a href="https://github.com/Christophorusan/oslo-architecture">github.com/Christophorusan/oslo-architecture</a> · Harmonix · Hyperliquid</p>
+      Oslo architecture index. Sparse on purpose. The live system should speak through proof, not decoration.
     </footer>
-
   </main>
-<script>
-(function(){
-  const root = document.documentElement;
-  const btn = document.getElementById("themeToggle");
-  const KEY = "oslo-architecture-theme";
-  const VERSION_KEY = "oslo-architecture-theme-default-v";
-  const CURRENT_DEFAULT_VERSION = "2";
-  // Force dark as the first edition for everyone, including returning visitors
-  // who may have a stale "light" preference saved. Bump CURRENT_DEFAULT_VERSION
-  // to roll out a new default again later.
-  const lastSeenDefault = localStorage.getItem(VERSION_KEY);
-  if (lastSeenDefault !== CURRENT_DEFAULT_VERSION) {
-    localStorage.removeItem(KEY);
-    localStorage.setItem(VERSION_KEY, CURRENT_DEFAULT_VERSION);
-  }
-  const saved = localStorage.getItem(KEY);
-  const setTheme = (theme) => {
-    root.setAttribute("data-theme", theme);
-    btn.textContent = theme === "dark" ? "Switch to light" : "Switch to dark";
-    localStorage.setItem(KEY, theme);
-  };
-  setTheme(saved || "dark");
-  btn.addEventListener("click", () => {
-    setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
-  });
-})();
-</script>
 </body>
 </html>
