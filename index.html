@@ -1447,17 +1447,7 @@ renderXAnalytics();
     var circ = n(d.circulatingSupply), total = n(d.totalSupply);
     var chg = (price!=null && prev!=null && prev>0) ? ((price-prev)/prev)*100 : null;
     set('har-price', fmtP(price));
-    /* CAP_HAR_MIRROR — capital scoreboard cell */
-    set('cap-har-price', fmtP(price));
-    var capChg = document.getElementById('cap-har-chg');
-    if(capChg){
-      if(chg==null){ capChg.textContent='Hyperliquid'; capChg.style.color='var(--ink-mute)'; }
-      else {
-        capChg.textContent = (chg>=0?'+':'') + chg.toFixed(2) + '% vs prev day';
-        capChg.style.color = chg>=0 ? 'var(--green,#00ba7c)' : 'var(--hot,#f4212e)';
-      }
-    }
-    /* CAP_HAR_MIRROR — capital scoreboard cell */
+    /* CAP_HAR_MIRROR */
     set('cap-har-price', fmtP(price));
     var capChg = document.getElementById('cap-har-chg');
     if(capChg){
