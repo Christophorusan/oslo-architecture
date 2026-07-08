@@ -235,6 +235,7 @@ footer a { color: var(--ink-soft); }
     <!-- in-page section nav -->
     <div class="controls" style="margin-bottom:24px">
       <nav class="tabs" id="analytics-subnav">
+        <a href="#an-capital" style="text-decoration:none">Capital</a>
         <a href="#an-har" style="text-decoration:none">HAR · Live</a>
         <a href="#an-dashboards" style="text-decoration:none">Dashboards</a>
         <a href="#an-protocol" style="text-decoration:none">Protocol</a>
@@ -243,6 +244,31 @@ footer a { color: var(--ink-soft); }
         <a href="#an-mindshare" style="text-decoration:none">Mindshare</a>
         <a href="#an-narratives" style="text-decoration:none">Narratives</a>
       </nav>
+    </div>
+
+    
+    <!-- ========== CAPITAL SCOREBOARD ========== -->
+    <div id="an-capital" style="scroll-margin-top:12px;margin-bottom:20px;position:sticky;top:8px;z-index:40">
+      <div class="panel" style="border:2px solid var(--accent,#1d9bf0);overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.08)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;background:rgba(29,155,240,0.10);border-bottom:1px solid var(--border)">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+            <span class="pill" style="background:var(--card);border:1px solid var(--accent,#1d9bf0);color:var(--accent,#1d9bf0)">
+              <span style="display:inline-block;width:8px;height:8px;border-radius:99px;background:var(--green,#00ba7c);margin-right:6px;vertical-align:middle;animation:harPulse 1.2s infinite"></span>
+              Capital scoreboard
+            </span>
+            <span style="font-size:12px;color:var(--ink-mute)">Monday strip · dashboards API + live HAR</span>
+          </div>
+          <div class="dim" style="font-size:11px">as of 2026-07-08 22:12:10 · 1d history</div>
+        </div>
+        <div class="tiles" style="margin:0;border:0;border-radius:0">
+          <div class="tile" style="border-radius:0;background:rgba(29,155,240,0.06)"><div class="label">Combined AUM</div><div class="value tabular" style="font-size:22px">8.76M</div><div class="hint">USDC · vaults + staked</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">HYPE vault</div><div class="value tabular" style="font-size:20px">33.3K HYPE</div><div class="hint">2.23M USDC</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">kHYPE vault</div><div class="value tabular" style="font-size:20px">48.1K kHYPE</div><div class="hint">3.29M USDC</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">HYPE staked</div><div class="value tabular" style="font-size:20px">34.0K HYPE</div><div class="hint">2.29M USDC · frontend</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
+          <div class="tile" style="border-radius:0"><div class="label">Vault TVL</div><div class="value tabular" style="font-size:20px">6.47M</div><div class="hint">13,472 depositors</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
+          <div class="tile" style="border-radius:0"><div class="label"><span style="display:inline-block;width:6px;height:6px;border-radius:99px;background:var(--green,#00ba7c);margin-right:4px;vertical-align:middle;animation:harPulse 1.2s infinite"></span>HAR · live</div><div class="value tabular" style="font-size:20px" id="cap-har-price">—</div><div class="hint" id="cap-har-chg">Hyperliquid</div><div class="hint" style="margin-top:4px;font-weight:600;color:var(--ink-mute)">live feed</div></div>
+        </div>
+      </div>
     </div>
 
     <!-- ========== HAR LIVE PRICE (Hyperliquid) ========== -->
@@ -283,47 +309,30 @@ footer a { color: var(--ink-soft); }
     
     <!-- ========== HARMONIX DASHBOARDS (API) ========== -->
     <div id="an-dashboards" style="scroll-margin-top:24px;margin-bottom:28px">
-      <h2 class="page" style="font-size:18px;margin-bottom:4px">Harmonix dashboards · deposits + HYPE staked</h2>
-      <p class="sub" style="margin-bottom:16px">Live from <a href="https://app.harmonix.fi/dashboards" target="_blank" rel="noopener">app.harmonix.fi/dashboards</a> · as of 2026-07-08 22:04:39</p>
-
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">Harmonix dashboards · product TVL + HYPE staked</h2>
+      <p class="sub" style="margin-bottom:16px">Live from <a href="https://app.harmonix.fi/dashboards" target="_blank" rel="noopener">app.harmonix.fi/dashboards</a> · as of 2026-07-08 22:12:10</p>
       <div class="tiles" style="margin-bottom:16px">
         <div class="tile"><div class="label">Combined AUM</div><div class="value tabular">8.76M</div><div class="hint">USDC · vaults + HYPE staked</div></div>
         <div class="tile"><div class="label">HYPE deposited (vault)</div><div class="value tabular">33.3K HYPE</div><div class="hint">2.23M USDC · current</div></div>
         <div class="tile"><div class="label">kHYPE deposited (vault)</div><div class="value tabular">48.1K kHYPE</div><div class="hint">3.29M USDC · current</div></div>
         <div class="tile"><div class="label">HYPE staked via frontend</div><div class="value tabular">34.0K HYPE</div><div class="hint">2.29M USDC · native stake</div></div>
       </div>
-
       <div class="tiles" style="margin-bottom:16px">
         <div class="tile"><div class="label">Vault TVL (all)</div><div class="value tabular">6.47M</div><div class="hint">13,472 depositors</div></div>
         <div class="tile"><div class="label">USDC vault products</div><div class="value tabular">949.2K</div><div class="hint">delta-neutral + haUSDC + …</div></div>
         <div class="tile"><div class="label">Deposits 30d</div><div class="value tabular">28.7K</div><div class="hint">users 30d 244</div></div>
         <div class="tile"><div class="label">Yield paid 30d</div><div class="value tabular">653</div><div class="hint">USDC terms</div></div>
       </div>
-
       <div class="grid2" style="margin-bottom:16px">
-        <div class="panel">
-          <h2>Vault deposits (native + USDC)</h2>
-          <div class="scrollx">
-            <table>
-              <thead><tr><th>Product</th><th class="num">Deposited now</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th></tr></thead>
-              <tbody>
-                <tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="panel">
-          <h2>HYPE staked by validator</h2>
-          <div class="scrollx">
-            <table>
-              <thead><tr><th>Route</th><th class="num">HYPE</th><th class="num">USDC</th><th class="num">%</th></tr></thead>
-              <tbody>
-                <tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.99M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.4K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.7K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.8K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
-                <tr style="background:var(--bg-soft)"><td><strong>Total</strong></td><td class="num"><strong>34.0K</strong> HYPE</td><td class="num"><strong>2.29M</strong> USDC</td><td class="num">100%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="note" style="margin:0;border-radius:0">Native HYPE staked through Harmonix frontend — separate from HYPE vault deposits.</div>
+        <div class="panel"><h2>Vault deposits (native + USDC)</h2><div class="scrollx"><table>
+          <thead><tr><th>Product</th><th class="num">Deposited now</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th></tr></thead>
+          <tbody><tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr></tbody></table></div></div>
+        <div class="panel"><h2>HYPE staked by validator</h2><div class="scrollx"><table>
+          <thead><tr><th>Route</th><th class="num">HYPE</th><th class="num">USDC</th><th class="num">%</th></tr></thead>
+          <tbody><tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.99M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.3K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.6K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.7K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
+          <tr style="background:var(--bg-soft)"><td><strong>Total</strong></td><td class="num"><strong>34.0K</strong> HYPE</td><td class="num"><strong>2.29M</strong> USDC</td><td class="num">100%</td></tr>
+          </tbody></table></div>
+          <div class="note" style="margin:0;border-radius:0">Native HYPE staked through Harmonix frontend — separate from haHYPE vault TVL.</div>
         </div>
       </div>
     </div>
@@ -473,7 +482,7 @@ footer a { color: var(--ink-soft); }
       </div>
     </div>
 
-            <!-- ========== MINDSHARE ARENA ========== -->
+                <!-- ========== MINDSHARE ARENA ========== -->
     <div id="an-mindshare" style="scroll-margin-top:24px;margin-top:40px;margin-bottom:24px">
       <div class="page-head" style="margin-bottom:16px">
         <div>
@@ -1437,6 +1446,16 @@ renderXAnalytics();
     var circ = n(d.circulatingSupply), total = n(d.totalSupply);
     var chg = (price!=null && prev!=null && prev>0) ? ((price-prev)/prev)*100 : null;
     set('har-price', fmtP(price));
+    /* CAP_HAR_MIRROR — capital scoreboard cell */
+    set('cap-har-price', fmtP(price));
+    var capChg = document.getElementById('cap-har-chg');
+    if(capChg){
+      if(chg==null){ capChg.textContent='Hyperliquid'; capChg.style.color='var(--ink-mute)'; }
+      else {
+        capChg.textContent = (chg>=0?'+':'') + chg.toFixed(2) + '% vs prev day';
+        capChg.style.color = chg>=0 ? 'var(--green,#00ba7c)' : 'var(--hot,#f4212e)';
+      }
+    }
     set('har-mark', fmtP(mark));
     set('har-mid', fmtP(mid));
     set('har-mcap', (price!=null && circ!=null) ? fmtU(price*circ) : '—');
