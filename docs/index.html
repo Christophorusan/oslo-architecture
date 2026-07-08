@@ -700,6 +700,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <a class="nav-link" href="#data" data-nav><span class="dot"></span>Data contracts</a>
         <a class="nav-link" href="#workers" data-nav><span class="dot"></span>Workers &amp; skills</a>
         <a class="nav-link" href="#interfaces" data-nav><span class="dot"></span>Interfaces</a>
+        <a class="nav-link" href="#teamapp" data-nav><span class="dot"></span>Team app</a>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">Operations</div>
@@ -734,17 +735,19 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       <article id="top">
         <!-- HERO -->
         <div class="hero">
-          <div class="eyebrow">Protocol docs · v0.3</div>
+          <div class="eyebrow">Protocol docs · v0.4</div>
           <h1>Full Lifecycle Operating System</h1>
           <p class="lede">
             Technical documentation for Oslo: ingestion, signal normalization, wallet lead scoring,
-            lifecycle memory, Discord review, and measurement. Designed as a backend protocol for growth
-            operations — not an autonomous outbound bot.
+            lifecycle memory, Discord review, and measurement — plus the live team app (Operator hub,
+            shared calendars, analytics) on Vercel + Supabase. A backend protocol for growth operations,
+            not an autonomous outbound bot.
           </p>
           <div class="meta-row">
             <span class="chip"><strong>Runtime</strong> · Mac Oslo bot</span>
             <span class="chip"><strong>Storage</strong> · Supabase + brain</span>
             <span class="chip"><strong>Ingress</strong> · X · HyperEVM · Discord</span>
+            <span class="chip"><strong>Team app</strong> · Vercel + Supabase</span>
             <span class="chip"><strong>Updated</strong> · 08 Jul 2026</span>
           </div>
         </div>
@@ -1039,9 +1042,48 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <ul class="note-card">
               <li><span class="tag">write</span><span>Internal Discord reports and review cards.</span></li>
               <li><span class="tag">manual</span><span>Human approval before X, Telegram, Discord, email, or BD outreach.</span></li>
-              <li><span class="tag">future</span><span>Oslo web app dashboard for review queues, segments, and outcomes.</span></li>
+              <li><span class="tag">live</span><span>Oslo team app on Vercel — Operator hub (contacts, conversion, weekly intelligence, OKRs), shared Roadmap/Content calendars, analytics. <a href="https://oslo-teamview-git-main-chrisportugals-projects.vercel.app/operator" target="_blank" rel="noopener">Open →</a></span></li>
               <li><span class="tag">future</span><span>Olson web UI merge after the Mac Olson runtime is preserved.</span></li>
             </ul>
+          </div>
+        </section>
+
+        <!-- TEAM APP -->
+        <section class="doc-section" id="teamapp">
+          <h2>Team app · one link</h2>
+          <p class="section-desc">The live operating surface on Vercel + Supabase. Same IA as this portfolio (Roadmap · Analytics · Operator · Content); everything the team edits saves to the <code>gtm</code> schema.</p>
+          <div class="rows">
+            <details class="row" open>
+              <summary><strong>Routes &amp; IA</strong></summary>
+              <div class="row-body">
+                <ul class="note-card">
+                  <li><span class="tag">home</span><span><code>/</code> → <code>/operator</code> — Operator is the home. Sub-tabs: Contacts · Conversion · Weekly · OKRs/priorities.</span></li>
+                  <li><span class="tag">route</span><span><code>/operator/contacts</code> — Motion 1 + Motion 2 merged: <strong>Deepen</strong> (warm/existing) and <strong>Outreach</strong> (prospects, agent_v1.3) filter tabs.</span></li>
+                  <li><span class="tag">route</span><span><code>/operator/conversion</code> — funnel board on <code>relationships.stage</code> (target → outreached → replied → engaged → pilot → live).</span></li>
+                  <li><span class="tag">route</span><span><code>/operator/weekly</code> — weekly intelligence: suggested moves, follow-ups, stale tier-1, digests.</span></li>
+                  <li><span class="tag">route</span><span><code>/calendar</code> + <code>/content</code> — Google-simple month grids on shared <code>calendar_items</code>; content pieces carry format + channel.</span></li>
+                  <li><span class="tag">301</span><span>Old bookmarks redirect: <code>/motion-1</code>, <code>/motion-2</code>, <code>/relationships</code> → contact list · <code>/this-week</code> → weekly.</span></li>
+                </ul>
+              </div>
+            </details>
+            <details class="row">
+              <summary><strong>Calendar data model (migration 046)</strong></summary>
+              <div class="row-body">
+                <p class="prose"><code>gtm.calendar_items</code> gained nullable <code>format</code> (<code>thread · newsletter · longform · diagram</code>) and <code>channel</code> (X, blog, email, Discord) for content-type items. Status <code>done</code> renders as <em>shipped</em> in content mode. RLS: members create/edit their own rows, admins edit any.</p>
+              </div>
+            </details>
+            <details class="row">
+              <summary><strong>Analytics data path</strong></summary>
+              <div class="row-body">
+                <p class="prose">Panel loaders search <code>tmp/x-analytics</code> (local dev) first, then fall back to snapshots bundled in <code>web/data/</code> so the Vercel build serves real numbers. Refresh: <code>bash scripts/publish-web-data.sh</code>, commit, push — the deploy carries the new snapshots.</p>
+              </div>
+            </details>
+            <details class="row">
+              <summary><strong>Access mode</strong></summary>
+              <div class="row-body">
+                <p class="prose"><code>OSLO_PUBLIC_VIEW=1</code> keeps the app open without login (writes allowed via anon RLS grants). Revert recipe: delete the env var on Vercel and drop the <code>public_*_anon</code> policies — magic-link team login is already built.</p>
+              </div>
+            </details>
           </div>
         </section>
 
@@ -1088,6 +1130,11 @@ body.sidebar-open .sidebar-backdrop { display: block; }
               <h3>Write outcomes</h3>
               <p>Record approvals, replies, meetings, deposits, retention, and rejections so the next run improves.</p>
             </div>
+            <div class="step">
+              <span class="n">06</span>
+              <h3>Publish web snapshots</h3>
+              <p>Run <code>bash scripts/publish-web-data.sh</code> then commit + push <code>web/</code> so the deployed analytics serve fresh data.</p>
+            </div>
           </div>
         </section>
 
@@ -1097,7 +1144,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             Technical operating docs for lifecycle growth infrastructure.
           </div>
           <div>
-            Version 0.3 · Updated 08 July 2026<br>
+            Version 0.4 · Updated 08 July 2026<br>
             Runtime: Mac Oslo
           </div>
           <div>
@@ -1115,6 +1162,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
         <a href="#data">Data contracts</a>
         <a href="#workers">Workers &amp; skills</a>
         <a href="#interfaces">Interfaces</a>
+        <a href="#teamapp">Team app</a>
         <a href="#controls">Safety controls</a>
         <a href="#runbook">Runbook</a>
       </aside>
