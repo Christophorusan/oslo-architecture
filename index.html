@@ -485,6 +485,48 @@ body:not([data-view="analytics"]) .cap-board {
   pointer-events: none !important;
 }
 
+
+/* ---- Team roadmap calendar ---- */
+.cal-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--bg-soft);
+}
+.cal-toolbar .who {
+  display: flex; align-items: center; gap: 6px; flex: 1; min-width: 160px;
+}
+.cal-toolbar .who label { font-size: 11px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.04em; }
+.cal-toolbar .who input {
+  flex: 1; min-width: 100px; height: 30px; border: 1px solid var(--border); background: var(--card);
+  border-radius: 8px; padding: 0 10px; color: var(--ink); font: inherit; font-size: 12px;
+}
+.cal-toolbar button, .cal-toolbar label.file-btn {
+  height: 30px; border: 1px solid var(--border); background: var(--card); color: var(--ink);
+  border-radius: 8px; padding: 0 10px; font: inherit; font-size: 12px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.cal-toolbar button:hover, .cal-toolbar label.file-btn:hover { border-color: var(--ink-mute); background: var(--bg); }
+.cal-toolbar button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.cal-toolbar .hint { font-size: 11px; color: var(--ink-fade); }
+.cal-item .owner {
+  font-size: 11px; color: var(--cool, #1d9bf0); border: 1px solid rgba(29,155,240,.35);
+  border-radius: 9999px; padding: 2px 8px;
+}
+.cal-item .actions { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.cal-item button.act {
+  height: 26px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--ink-mute);
+  border-radius: 6px; padding: 0 8px; font: inherit; font-size: 11px; cursor: pointer;
+}
+.cal-item button.act:hover { color: var(--ink); border-color: var(--ink-mute); }
+.cal-item button.act.danger:hover { color: var(--hot); border-color: var(--hot); }
+.cal-add { flex-wrap: wrap; }
+.cal-add input[name="owner"], .cal-add input[name="title"] { min-width: 120px; }
+.cal-toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 9999px;
+  font-size: 13px; z-index: 999; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.cal-toast.show { opacity: 1; }
+
 /* Content calendar formats */
 .chip-thread { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
 .chip-newsletter { color: var(--green); border-color: rgb(134 239 172 / .4); background: rgb(134 239 172 / .05); }
@@ -1013,6 +1055,7 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
 // ---- tabs ----
 const tabs = document.querySelectorAll('#tabs button');
 function showView(name) {
+  if (!name) name = 'calendar';
   document.body.setAttribute("data-view", name);
   // never leave capital floating over Roadmap
   var cap = document.getElementById('an-capital');
@@ -1027,6 +1070,12 @@ function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   const el = document.getElementById('view-' + name);
   if (el) el.classList.add('active');
+  // keep deep links shareable
+  try {
+    const u = new URL(window.location.href);
+    u.searchParams.set('view', name);
+    history.replaceState(null, '', u.pathname + u.search + u.hash);
+  } catch (_) {}
 }
 tabs.forEach(b => b.addEventListener('click', () => showView(b.dataset.view)));
 document.getElementById('goto-x-analytics')?.addEventListener('click', (e) => {
@@ -1044,8 +1093,16 @@ document.querySelectorAll('#analytics-subnav a').forEach(a => {
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   });
 });
+// Deep-link: ?view=calendar|analytics|operator|content (from Docs "Get started")
+(function bootView() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const v = params.get('view') || (location.hash === '#calendar' ? 'calendar' : null);
+    if (v && document.getElementById('view-' + v)) showView(v);
+  } catch (_) {}
+})();
 
-// ---- Calendar (static replica of local calendar-block) ----
+// ---- Calendar (interactive team roadmap) ----
 const TYPE_LABELS = {
   follow_up: "Follow-up", event: "Event", content: "Content",
   task: "Task", meeting: "Meeting", review: "Review",
@@ -1053,7 +1110,8 @@ const TYPE_LABELS = {
 const TYPE_INITIAL = { follow_up: "F", event: "E", content: "C", task: "T", meeting: "M", review: "R" };
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const STORE_KEY = "oslo-replica-calendar-v1";
+const STORE_KEY = "oslo-replica-calendar-v2";
+const OWNER_KEY = "oslo-replica-calendar-owner";
 
 function todayISO(d = new Date()) {
   return [d.getFullYear(), String(d.getMonth() + 1).padStart(2, "0"), String(d.getDate()).padStart(2, "0")].join("-");
@@ -1090,43 +1148,77 @@ function parseDay(iso) {
   return { weekday: WEEKDAYS[dt.getDay()], day: d, month: MONTHS_SHORT[m - 1], isToday, dow: dt.getDay() };
 }
 function uid() {
-  return "c_" + Math.random().toString(36).slice(2, 10);
+  return "c_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+}
+function toast(msg) {
+  let el = document.getElementById("cal-toast");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "cal-toast";
+    el.className = "cal-toast";
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 2200);
 }
 
 // Seed relative to today so the grid always looks "live"
 function seedItems(today) {
-  const t = (offset, title, type, status = "planned", rel = null) => ({
-    id: uid(), title, occurs_on: addDaysISO(today, offset), type, status, relationship: rel,
+  const t = (offset, title, type, status = "planned", owner = "", rel = null) => ({
+    id: uid(), title, occurs_on: addDaysISO(today, offset), type, status,
+    owner, relationship: rel, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
   });
   return [
-    t(0, "Daily vault flow check", "task", "planned"),
-    t(0, "Discord funnel snapshot", "review", "planned"),
-    t(1, "Follow up fund-alpha intro", "follow_up", "planned", "fund-alpha"),
-    t(1, "haHYPE retention cohort note", "content", "planned"),
-    t(2, "Protocol-beta partnership call", "meeting", "planned", "protocol-beta"),
-    t(3, "Operator lead triage", "task", "planned"),
-    t(4, "Ecosystem meetup prep", "event", "planned"),
-    t(5, "Vault copy review (landing)", "review", "planned"),
-    t(6, "Follow up market-maker gamma", "follow_up", "planned", "mm-gamma"),
-    t(7, "Newsletter draft · issue 13", "content", "planned"),
-    t(8, "Onboarding checklist for fund-delta", "task", "planned", "fund-delta"),
-    t(10, "Weekly GTM sync", "meeting", "planned"),
-    t(12, "Churn alert deep-dive", "review", "planned"),
-    t(14, "X thread · depositor cohorts", "content", "planned"),
-    t(16, "Follow up protocol-epsilon", "follow_up", "planned", "protocol-epsilon"),
-    t(18, "Infra status with eng", "meeting", "planned"),
-    t(21, "Month-end metrics pack", "task", "planned"),
-    t(24, "Partner workshop", "event", "planned"),
-    t(27, "Roadmap note for docs", "content", "planned"),
+    t(0, "Daily vault flow check", "task", "planned", "Ops"),
+    t(0, "Discord funnel snapshot", "review", "planned", "Growth"),
+    t(1, "Follow up fund-alpha intro", "follow_up", "planned", "BD", "fund-alpha"),
+    t(1, "haHYPE retention cohort note", "content", "planned", "Content"),
+    t(2, "Protocol-beta partnership call", "meeting", "planned", "BD", "protocol-beta"),
+    t(3, "Operator lead triage", "task", "planned", "Ops"),
+    t(4, "Ecosystem meetup prep", "event", "planned", "Growth"),
+    t(5, "Vault copy review (landing)", "review", "planned", "Content"),
+    t(6, "Follow up market-maker gamma", "follow_up", "planned", "BD", "mm-gamma"),
+    t(7, "Newsletter draft · issue 13", "content", "planned", "Content"),
+    t(8, "Onboarding checklist for fund-delta", "task", "planned", "Ops", "fund-delta"),
+    t(10, "Weekly GTM sync", "meeting", "planned", "Team"),
+    t(12, "Churn alert deep-dive", "review", "planned", "Ops"),
+    t(14, "X thread · depositor cohorts", "content", "planned", "Content"),
+    t(16, "Follow up protocol-epsilon", "follow_up", "planned", "BD", "protocol-epsilon"),
+    t(18, "Infra status with eng", "meeting", "planned", "Eng"),
+    t(21, "Month-end metrics pack", "task", "planned", "Ops"),
+    t(24, "Partner workshop", "event", "planned", "BD"),
+    t(27, "Roadmap note for docs", "content", "planned", "Content"),
   ];
 }
 
+function normalizeItem(it) {
+  return {
+    id: it.id || uid(),
+    title: String(it.title || "").slice(0, 200),
+    occurs_on: it.occurs_on || todayISO(),
+    type: TYPE_LABELS[it.type] ? it.type : "task",
+    status: it.status === "done" || it.status === "skipped" ? it.status : "planned",
+    owner: String(it.owner || "").slice(0, 40),
+    relationship: it.relationship || null,
+    created_at: it.created_at || new Date().toISOString(),
+    updated_at: it.updated_at || new Date().toISOString(),
+  };
+}
+
 function loadItems(today) {
+  // migrate v1 → v2
   try {
-    const raw = localStorage.getItem(STORE_KEY);
+    let raw = localStorage.getItem(STORE_KEY);
+    if (!raw) raw = localStorage.getItem("oslo-replica-calendar-v1");
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length) return parsed;
+      if (Array.isArray(parsed) && parsed.length) {
+        const items = parsed.map(normalizeItem);
+        localStorage.setItem(STORE_KEY, JSON.stringify(items));
+        return items;
+      }
     }
   } catch (_) {}
   const seeded = seedItems(today);
@@ -1136,6 +1228,12 @@ function loadItems(today) {
 function saveItems(items) {
   localStorage.setItem(STORE_KEY, JSON.stringify(items));
 }
+function getOwner() {
+  try { return localStorage.getItem(OWNER_KEY) || ""; } catch (_) { return ""; }
+}
+function setOwner(name) {
+  try { localStorage.setItem(OWNER_KEY, name); } catch (_) {}
+}
 
 function renderCalendar() {
   const root = document.getElementById("calendar-root");
@@ -1144,9 +1242,10 @@ function renderCalendar() {
   let items = loadItems(today);
   let selected = today;
   let viewMonth = monthKey();
+  let myName = getOwner();
 
   function byDate(iso) {
-    return items.filter(i => i.occurs_on === iso);
+    return items.filter(i => i.occurs_on === iso).sort((a, b) => (a.status === "done") - (b.status === "done"));
   }
   function monthItems() {
     return items.filter(i => i.occurs_on.startsWith(viewMonth));
@@ -1157,19 +1256,89 @@ function renderCalendar() {
     const done = mi.filter(i => i.status === "done").length;
     return { planned, done, total: mi.length };
   }
-  function addItem(occurs_on, title, type = "event") {
+  function persist() {
+    saveItems(items);
+  }
+  function addItem(occurs_on, title, type = "task", owner = "") {
     const t = title.trim();
     if (!t) return;
-    items = [{ id: uid(), title: t.slice(0, 200), occurs_on, type, status: "planned", relationship: null }, ...items];
-    saveItems(items);
+    const now = new Date().toISOString();
+    items = [{
+      id: uid(),
+      title: t.slice(0, 200),
+      occurs_on,
+      type: TYPE_LABELS[type] ? type : "task",
+      status: "planned",
+      owner: (owner || myName || "").slice(0, 40),
+      relationship: null,
+      created_at: now,
+      updated_at: now,
+    }, ...items];
+    persist();
     selected = occurs_on;
     viewMonth = occurs_on.slice(0, 7);
     paint();
+    toast("Added to roadmap");
   }
   function setStatus(id, status) {
-    items = items.map(i => i.id === id ? { ...i, status } : i);
-    saveItems(items);
+    items = items.map(i => i.id === id ? { ...i, status, updated_at: new Date().toISOString() } : i);
+    persist();
     paint();
+  }
+  function removeItem(id) {
+    items = items.filter(i => i.id !== id);
+    persist();
+    paint();
+    toast("Removed");
+  }
+  function exportJson() {
+    const blob = new Blob([JSON.stringify({ version: 2, exported_at: new Date().toISOString(), items }, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "oslo-roadmap-" + todayISO() + ".json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast("Exported roadmap JSON — share with the team");
+  }
+  function importJson(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(String(reader.result || "{}"));
+        const list = Array.isArray(data) ? data : (data.items || []);
+        if (!Array.isArray(list) || !list.length) throw new Error("empty");
+        const incoming = list.map(normalizeItem);
+        // merge by id; newer updated_at wins
+        const map = new Map(items.map(i => [i.id, i]));
+        let added = 0, updated = 0;
+        incoming.forEach(inc => {
+          const prev = map.get(inc.id);
+          if (!prev) { map.set(inc.id, inc); added++; }
+          else if ((inc.updated_at || "") >= (prev.updated_at || "")) { map.set(inc.id, { ...prev, ...inc }); updated++; }
+        });
+        items = Array.from(map.values());
+        persist();
+        paint();
+        toast("Merged " + added + " new · " + updated + " updated");
+      } catch (e) {
+        toast("Import failed — use a roadmap JSON export");
+      }
+    };
+    reader.readAsText(file);
+  }
+  async function copyShare() {
+    const payload = JSON.stringify({ version: 2, items });
+    try {
+      await navigator.clipboard.writeText(payload);
+      toast("Roadmap copied — paste into Slack / Notion for the team");
+    } catch (_) {
+      // fallback download
+      exportJson();
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   function paint() {
@@ -1196,7 +1365,7 @@ function renderCalendar() {
       const compact = dayItems.slice(0, 2);
       const overflow = dayItems.length - compact.length;
       const chips = compact.map(it =>
-        `<span class="cal-chip chip-${it.type}${it.status === "done" ? " done" : ""}" title="${TYPE_LABELS[it.type]} · ${escapeHtml(it.title)}">${escapeHtml(it.title)}</span>`
+        `<span class="cal-chip chip-${it.type}${it.status === "done" ? " done" : ""}" title="${TYPE_LABELS[it.type]}${it.owner ? " · " + escapeHtml(it.owner) : ""} · ${escapeHtml(it.title)}">${escapeHtml(it.title)}</span>`
       ).join("") + (overflow > 0 ? `<span class="cal-more">+${overflow}</span>` : "");
       return `<div class="cal-cell${selected === iso ? " selected" : ""}" data-iso="${iso}">
         <button type="button" class="cal-cell-top" data-select="${iso}" aria-label="Select ${iso}">
@@ -1204,35 +1373,49 @@ function renderCalendar() {
           <span class="cal-wd">${p.weekday}</span>
         </button>
         <div class="cal-chips">${chips}</div>
-        <input class="quick" type="text" maxlength="200" placeholder="Type + Enter" data-quick="${iso}" aria-label="Quick add for ${iso}">
+        <input class="quick" type="text" maxlength="200" placeholder="+ add (Enter)" data-quick="${iso}" aria-label="Quick add for ${iso}">
       </div>`;
     }).join("");
 
     const list = selectedItems.length === 0
-      ? `<p class="cal-empty">Nothing on ${weekday}, ${month} ${day}. Type in a day cell or use the form below.</p>`
+      ? `<p class="cal-empty">Nothing on ${weekday}, ${month} ${day}. Type in a day cell or use the form — assign an owner so the team knows who owns it.</p>`
       : `<ul class="cal-items">${selectedItems.map(it => `
           <li class="cal-item ${it.status}">
             <span class="type chip-${it.type}">${TYPE_LABELS[it.type]}</span>
             <span class="title">${escapeHtml(it.title)}</span>
+            ${it.owner ? `<span class="owner">@${escapeHtml(it.owner)}</span>` : ""}
             ${it.relationship ? `<span class="rel">${escapeHtml(it.relationship)}</span>` : ""}
             <span class="status">${it.status}</span>
-            ${it.status === "planned" ? `<button type="button" class="pill" data-done="${it.id}" style="cursor:pointer">Done</button>` : ""}
+            <span class="actions">
+              ${it.status === "planned" ? `<button type="button" class="act" data-done="${it.id}">Done</button>` : `<button type="button" class="act" data-reopen="${it.id}">Reopen</button>`}
+              <button type="button" class="act danger" data-del="${it.id}">Delete</button>
+            </span>
           </li>`).join("")}</ul>`;
 
     root.innerHTML = `
       <div class="cal-head">
         <div>
-          <h2>Roadmap calendar</h2>
-          <p>Month grid for GTM work. Type in a day and press Enter to add. Arrows move months.</p>
-          <div class="meta">${c.planned} planned · ${c.done} done · ${c.total} this month</div>
+          <h2>Team roadmap</h2>
+          <p>Interactive GTM calendar — click a day, add work, assign an owner. Export JSON to share with the team (merge on import).</p>
+          <div class="meta">${c.planned} planned · ${c.done} done · ${c.total} this month · stored in this browser</div>
         </div>
         <div class="cal-legend">${legend}</div>
       </div>
+      <div class="cal-toolbar">
+        <div class="who">
+          <label for="cal-owner">You</label>
+          <input id="cal-owner" type="text" maxlength="40" placeholder="Your name (Ana, Chris…)" value="${escapeHtml(myName)}">
+        </div>
+        <button type="button" id="cal-export">Export JSON</button>
+        <label class="file-btn">Import<input type="file" id="cal-import" accept="application/json,.json" hidden></label>
+        <button type="button" id="cal-copy">Copy for team</button>
+        <span class="hint">Tip: export → Slack/Drive → teammates import to merge</span>
+      </div>
       <div class="cal-nav" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;border-bottom:1px solid var(--border)">
         <div style="display:flex;gap:6px;align-items:center">
-          <button type="button" id="cal-prev" class="pill" style="cursor:pointer;padding:6px 12px">←</button>
-          <button type="button" id="cal-next" class="pill" style="cursor:pointer;padding:6px 12px">→</button>
-          <button type="button" id="cal-today" class="pill" style="cursor:pointer;padding:6px 12px">Today</button>
+          <button type="button" id="cal-prev" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">←</button>
+          <button type="button" id="cal-next" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">→</button>
+          <button type="button" id="cal-today" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">Today</button>
         </div>
         <div style="font-size:17px;font-weight:600;letter-spacing:-0.02em">${MONTHS_LONG[vm - 1]} ${vy}</div>
         <div style="width:88px"></div>
@@ -1248,17 +1431,33 @@ function renderCalendar() {
         </div>
         ${list}
         <form class="cal-add" id="cal-add-form">
-          <input type="text" name="title" maxlength="200" placeholder="Add item for this day" required>
+          <input type="text" name="title" maxlength="200" placeholder="What needs to happen?" required>
           <select name="type">
-            ${Object.keys(TYPE_LABELS).map(t => `<option value="${t}" ${t === "event" ? "selected" : ""}>${TYPE_LABELS[t]}</option>`).join("")}
+            ${Object.keys(TYPE_LABELS).map(t => `<option value="${t}" ${t === "task" ? "selected" : ""}>${TYPE_LABELS[t]}</option>`).join("")}
           </select>
-          <button type="submit">Add</button>
+          <input type="text" name="owner" maxlength="40" placeholder="Owner" value="${escapeHtml(myName)}">
+          <button type="submit">Add to day</button>
         </form>
       </div>`;
 
     root.querySelector("#cal-prev")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, -1); paint(); });
     root.querySelector("#cal-next")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, 1); paint(); });
     root.querySelector("#cal-today")?.addEventListener("click", () => { viewMonth = monthKey(); selected = today; paint(); });
+
+    const ownerInput = root.querySelector("#cal-owner");
+    ownerInput?.addEventListener("change", () => {
+      myName = ownerInput.value.trim();
+      setOwner(myName);
+      toast(myName ? "Signed in as " + myName : "Owner cleared");
+    });
+
+    root.querySelector("#cal-export")?.addEventListener("click", exportJson);
+    root.querySelector("#cal-copy")?.addEventListener("click", copyShare);
+    root.querySelector("#cal-import")?.addEventListener("change", (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (f) importJson(f);
+      e.target.value = "";
+    });
 
     root.querySelectorAll("[data-select]").forEach(btn => {
       btn.addEventListener("click", () => { selected = btn.getAttribute("data-select"); paint(); });
@@ -1271,22 +1470,28 @@ function renderCalendar() {
       inp.addEventListener("keydown", e => {
         if (e.key !== "Enter") return;
         e.preventDefault();
-        addItem(inp.getAttribute("data-quick"), inp.value, "event");
+        addItem(inp.getAttribute("data-quick"), inp.value, "task", myName);
       });
     });
     root.querySelectorAll("[data-done]").forEach(btn => {
       btn.addEventListener("click", () => setStatus(btn.getAttribute("data-done"), "done"));
     });
+    root.querySelectorAll("[data-reopen]").forEach(btn => {
+      btn.addEventListener("click", () => setStatus(btn.getAttribute("data-reopen"), "planned"));
+    });
+    root.querySelectorAll("[data-del]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (confirm("Delete this item?")) removeItem(btn.getAttribute("data-del"));
+      });
+    });
     const form = root.querySelector("#cal-add-form");
     form?.addEventListener("submit", e => {
       e.preventDefault();
       const fd = new FormData(form);
-      addItem(selected, String(fd.get("title") || ""), String(fd.get("type") || "event"));
+      const owner = String(fd.get("owner") || myName || "");
+      if (owner && owner !== myName) { myName = owner; setOwner(myName); }
+      addItem(selected, String(fd.get("title") || ""), String(fd.get("type") || "task"), owner);
     });
-  }
-
-  function escapeHtml(s) {
-    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   paint();
