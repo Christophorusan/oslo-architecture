@@ -486,46 +486,370 @@ body:not([data-view="analytics"]) .cap-board {
 }
 
 
-/* ---- Team roadmap calendar ---- */
-.cal-toolbar {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-  padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--bg-soft);
+/* ---- Google-simple team calendar ---- */
+.gcal {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
 }
-.cal-toolbar .who {
-  display: flex; align-items: center; gap: 6px; flex: 1; min-width: 160px;
+.gcal-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
 }
-.cal-toolbar .who label { font-size: 11px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.04em; }
-.cal-toolbar .who input {
-  flex: 1; min-width: 100px; height: 30px; border: 1px solid var(--border); background: var(--card);
-  border-radius: 8px; padding: 0 10px; color: var(--ink); font: inherit; font-size: 12px;
+.gcal-top h2 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  min-width: 160px;
 }
-.cal-toolbar button, .cal-toolbar label.file-btn {
-  height: 30px; border: 1px solid var(--border); background: var(--card); color: var(--ink);
-  border-radius: 8px; padding: 0 10px; font: inherit; font-size: 12px; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 4px;
+.gcal-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
-.cal-toolbar button:hover, .cal-toolbar label.file-btn:hover { border-color: var(--ink-mute); background: var(--bg); }
-.cal-toolbar button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.cal-toolbar .hint { font-size: 11px; color: var(--ink-fade); }
-.cal-item .owner {
-  font-size: 11px; color: var(--cool, #1d9bf0); border: 1px solid rgba(29,155,240,.35);
-  border-radius: 9999px; padding: 2px 8px;
+.gcal-nav button, .gcal-btn {
+  height: 34px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 9999px;
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
 }
-.cal-item .actions { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
-.cal-item button.act {
-  height: 26px; border: 1px solid var(--border); background: var(--bg-soft); color: var(--ink-mute);
-  border-radius: 6px; padding: 0 8px; font: inherit; font-size: 11px; cursor: pointer;
+.gcal-nav button.icon {
+  width: 34px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
 }
-.cal-item button.act:hover { color: var(--ink); border-color: var(--ink-mute); }
-.cal-item button.act.danger:hover { color: var(--hot); border-color: var(--hot); }
-.cal-add { flex-wrap: wrap; }
-.cal-add input[name="owner"], .cal-add input[name="title"] { min-width: 120px; }
+.gcal-nav button:hover, .gcal-btn:hover {
+  background: var(--bg-soft);
+  border-color: var(--ink-mute);
+}
+.gcal-btn.primary {
+  background: var(--accent, #1d9bf0);
+  border-color: var(--accent, #1d9bf0);
+  color: #fff;
+  font-weight: 600;
+}
+.gcal-btn.primary:hover {
+  filter: brightness(1.08);
+  background: var(--accent, #1d9bf0);
+  color: #fff;
+}
+.gcal-spacer { flex: 1; min-width: 8px; }
+.gcal-meta {
+  font-size: 12px;
+  color: var(--ink-mute);
+}
+.gcal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+.gcal-weekdays div {
+  padding: 8px 6px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+}
+.gcal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(108px, 1fr);
+}
+.gcal-pad {
+  border-right: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg);
+  min-height: 108px;
+  opacity: 0.45;
+}
+.gcal-day {
+  border-right: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  min-height: 108px;
+  padding: 4px 4px 6px;
+  cursor: pointer;
+  transition: background .1s;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+}
+.gcal-day:nth-child(7n) { border-right: 0; }
+.gcal-day:hover { background: var(--row-hover, rgba(231,233,234,0.04)); }
+.gcal-day.is-selected {
+  background: rgba(29, 155, 240, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(29, 155, 240, 0.35);
+}
+.gcal-day.is-today .gcal-daynum {
+  background: var(--accent, #1d9bf0);
+  color: #fff;
+}
+.gcal-day-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0 4px;
+}
+.gcal-daynum {
+  width: 26px;
+  height: 26px;
+  border-radius: 99px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.gcal-events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.gcal-ev {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #fff;
+}
+.gcal-ev.done {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.gcal-ev.t-task { background: #1d9bf0; }
+.gcal-ev.t-meeting { background: #8b5cf6; }
+.gcal-ev.t-follow_up { background: #f59e0b; }
+.gcal-ev.t-content { background: #10b981; }
+.gcal-ev.t-event { background: #ec4899; }
+.gcal-ev.t-review { background: #64748b; }
+.gcal-more {
+  font-size: 10px;
+  color: var(--ink-mute);
+  padding: 0 4px;
+  font-weight: 500;
+}
+.gcal-add-hint {
+  opacity: 0;
+  font-size: 11px;
+  color: var(--ink-fade);
+  padding: 2px 4px;
+  margin-top: auto;
+}
+.gcal-day:hover .gcal-add-hint { opacity: 1; }
+
+/* Modal — Google-simple create / edit */
+.gcal-modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 16px 24px;
+}
+.gcal-modal {
+  width: min(420px, 100%);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+  overflow: hidden;
+  animation: gcalIn .15s ease;
+}
+@keyframes gcalIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.gcal-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 0;
+}
+.gcal-modal-bar button {
+  width: 32px; height: 32px;
+  border: 0; background: transparent;
+  color: var(--ink-mute);
+  border-radius: 99px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.gcal-modal-bar button:hover { background: var(--bg-soft); color: var(--ink); }
+.gcal-modal form, .gcal-modal .body {
+  padding: 8px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gcal-modal input[type="text"],
+.gcal-modal input[type="date"],
+.gcal-modal select {
+  width: 100%;
+  height: 42px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  padding: 0 2px;
+  border-radius: 0;
+  outline: none;
+}
+.gcal-modal input.title {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  height: 48px;
+  border-bottom-color: var(--border);
+}
+.gcal-modal input:focus, .gcal-modal select:focus {
+  border-bottom-color: var(--accent, #1d9bf0);
+}
+.gcal-modal .row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-mute);
+  font-size: 13px;
+}
+.gcal-modal .row label {
+  width: 72px;
+  flex-shrink: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.gcal-modal .types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.gcal-modal .types button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink-mute);
+  border-radius: 9999px;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.gcal-modal .types button.on {
+  color: #fff;
+  border-color: transparent;
+}
+.gcal-modal .types button.on.t-task { background: #1d9bf0; }
+.gcal-modal .types button.on.t-meeting { background: #8b5cf6; }
+.gcal-modal .types button.on.t-follow_up { background: #f59e0b; }
+.gcal-modal .types button.on.t-content { background: #10b981; }
+.gcal-modal .types button.on.t-event { background: #ec4899; }
+.gcal-modal .types button.on.t-review { background: #64748b; }
+.gcal-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 8px;
+}
+.gcal-modal-actions button {
+  height: 36px;
+  border-radius: 9999px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+}
+.gcal-modal-actions button.primary {
+  background: var(--accent, #1d9bf0);
+  border-color: var(--accent, #1d9bf0);
+  color: #fff;
+}
+.gcal-modal-actions button.danger {
+  color: var(--hot, #f4212e);
+  margin-right: auto;
+}
+.gcal-share {
+  position: relative;
+}
+.gcal-share-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 180px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  padding: 6px;
+  z-index: 30;
+  display: none;
+}
+.gcal-share-menu.open { display: block; }
+.gcal-share-menu button, .gcal-share-menu label {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.gcal-share-menu button:hover, .gcal-share-menu label:hover {
+  background: var(--bg-soft);
+}
 .cal-toast {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
   background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 9999px;
   font-size: 13px; z-index: 999; opacity: 0; pointer-events: none; transition: opacity .2s;
 }
 .cal-toast.show { opacity: 1; }
+@media (max-width: 720px) {
+  .gcal-grid { grid-auto-rows: minmax(88px, auto); }
+  .gcal-day, .gcal-pad { min-height: 88px; }
+  .gcal-ev { font-size: 10px; }
+  .gcal-top h2 { font-size: 16px; min-width: 0; }
+}
 
 /* Content calendar formats */
 .chip-thread { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
@@ -558,7 +882,8 @@ body:not([data-view="analytics"]) .cap-board {
     <strong>This is the actual operating system</strong> — static replica of production Oslo.
     <strong>Analytics</strong> combines protocol activity, per-vault flows, and X (@harmonixfi) performance.
     On-chain figures from the vault event backfill; X from official Analytics CSV + public post metrics (no account login).
-    Pipeline names are anonymized. <a href="docs/">Docs</a>.
+    Pipeline names are anonymized.
+    <strong>Production adds</strong>: Supabase persistence, Discord vault alerts, automated indexer refresh, and agent-drafted outreach — this replica serves static JSON snapshots. <a href="docs/">Docs</a>.
   </div>
 
   <!-- ================= CALENDAR ================= -->
@@ -566,11 +891,12 @@ body:not([data-view="analytics"]) .cap-board {
     <div class="page-head">
       <div>
         <h1 class="page">Roadmap</h1>
-        <p class="sub">Month calendar for GTM work — type in a day + Enter to add. Use ← → to move months.</p>
+        <p class="sub">Team calendar — click a day to add, click an event to edit. As simple as Google Calendar.</p>
+        <p class="sub" style="color:var(--warm)">Demo mode: tasks save to your browser only (localStorage) — nothing is sent anywhere, and they're lost if you clear site data. Production Oslo persists to Supabase.</p>
       </div>
       <div class="page-meta">
-        <div>Calendar · full month grid</div>
-        <div>Type + Enter · local only (browser)</div>
+        <div>Click day to create · click event to edit</div>
+        <div>Share → export / import for the team</div>
       </div>
     </div>
     <div class="cal-section" id="calendar-root">
@@ -715,7 +1041,10 @@ body:not([data-view="analytics"]) .cap-board {
       <div class="grid2" style="margin-bottom:16px">
         <div class="panel"><h2>Vault deposits (native + USDC)</h2><div class="scrollx"><table>
           <thead><tr><th>Product</th><th class="num">Deposited now</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th></tr></thead>
-          <tbody><tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr></tbody></table></div></div>
+          <tbody><tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr></tbody></table></div>
+        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0">
+          <strong>APY context</strong> · haUSDC 8.93% sits above passive USDC lending on HL money markets because yield comes from HIP-3 carry + portfolio-margin funding capture, not token incentives. Peer-rate tracking (Pendle PT, HyperLend, Aave) is on the Mindshare watchlist — <a href="https://x.com/harmonixfi/status/2070248552643842071" target="_blank" rel="noopener">benchmark comparison post</a>.
+        </div></div>
         <div class="panel"><h2>HYPE staked by validator</h2><div class="scrollx"><table>
           <thead><tr><th>Route</th><th class="num">HYPE</th><th class="num">USDC</th><th class="num">%</th></tr></thead>
           <tbody><tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.99M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.3K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.6K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.7K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
@@ -771,7 +1100,7 @@ body:not([data-view="analytics"]) .cap-board {
       <div class="tiles" style="margin-bottom:16px">
         <div class="tile"><div class="label">Aggregate vault TVL</div><div class="value tabular">$5.12M</div><div class="hint">USDC terms · haHYPE+hakHYPE+haUSDC</div></div>
         <div class="tile"><div class="label">Protocol TVL</div><div class="value tabular">$6.13M</div><div class="hint">DefiLlama · all chains</div></div>
-        <div class="tile"><div class="label">Gap (protocol − vaults)</div><div class="value tabular">$1.01M</div><div class="hint">other products / chains</div></div>
+        <div class="tile"><div class="label">Gap (protocol − vaults)</div><div class="value tabular">$1.01M</div><div class="hint">≈$613K delta-neutral + $21K KelpDao + ~$375K legacy multi-chain — not in the HyperEVM event index</div></div>
       </div>
 
       <div class="panel">
@@ -784,6 +1113,9 @@ body:not([data-view="analytics"]) .cap-board {
               <tr style="background:var(--bg-soft)"><td colspan="3"><strong>Aggregate</strong></td><td class="num"><strong>$5.12M</strong> USDC</td><td class="num">100%</td><td colspan="3" class="dim">Protocol $6.13M USDC</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0">
+          <strong>Flow readout</strong> · haHYPE −41.3K and hakHYPE +42.5K are near-mirror flows — depositors rotating HYPE → kHYPE (LST keeps staking yield on top of vault APY), not exiting the protocol. This is a product-mix shift, not churn. <strong>Watch condition:</strong> if hakHYPE inflow stops offsetting haHYPE outflow, reclassify as churn and trigger the retention-trust narrative play.
         </div>
       </div>
     </div>
@@ -895,7 +1227,7 @@ body:not([data-view="analytics"]) .cap-board {
       </div>
       <div class="grid2" style="margin-bottom:16px">
         <div class="panel">
-          <h2>Topic heat</h2>
+          <h2>Topic heat <span class="pill">p = posts matching · v = voices posting · 30d</span></h2>
           <div class="pad"><div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:90px;font-size:12px">hype</span><div style="flex:1;height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden"><div style="width:100%;height:100%;background:var(--accent);border-radius:99px;opacity:0.7"></div></div><span class="dim" style="font-size:11px;width:70px;text-align:right">41p · 8v</span></div><div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:90px;font-size:12px">hyperliquid</span><div style="flex:1;height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden"><div style="width:95%;height:100%;background:var(--accent);border-radius:99px;opacity:0.7"></div></div><span class="dim" style="font-size:11px;width:70px;text-align:right">30p · 8v</span></div><div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:90px;font-size:12px">perp</span><div style="flex:1;height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden"><div style="width:64%;height:100%;background:var(--accent);border-radius:99px;opacity:0.7"></div></div><span class="dim" style="font-size:11px;width:70px;text-align:right">16p · 8v</span></div><div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:90px;font-size:12px">hip-3</span><div style="flex:1;height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden"><div style="width:3%;height:100%;background:var(--accent);border-radius:99px;opacity:0.7"></div></div><span class="dim" style="font-size:11px;width:70px;text-align:right">6p · 3v</span></div><div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:90px;font-size:12px">yield</span><div style="flex:1;height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden"><div style="width:3%;height:100%;background:var(--accent);border-radius:99px;opacity:0.7"></div></div><span class="dim" style="font-size:11px;width:70px;text-align:right">13p · 6v</span></div><div style="display:flex;align-items:center;gap:8px;margin:4px 0"><span style="width:90px;font-size:12px">harmonix</span><div style="flex:1;height:6px;background:var(--bg-soft);border-radius:99px;overflow:hidden"><div style="width:2%;height:100%;background:var(--accent);border-radius:99px;opacity:0.7"></div></div><span class="dim" style="font-size:11px;width:70px;text-align:right">12p · 1v</span></div></div>
         </div>
         <div class="panel">
@@ -943,7 +1275,7 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
         <div class="pad"><div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;color:var(--ink)">Under-indexed: “Risk / retention trust” (heat 23, own 0%) — Market heat 23 · ownership 0% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn</div><div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;color:var(--ink)">Defending: “Stablecoin yield on HL” at 100% ownership — use in outreach proof.</div></div>
       </div>
       <div class="grid2" style="margin-bottom:16px">
-        <div class="panel"><h2>Under-indexed (own)</h2><div class="pad"><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Risk / retention trust</span><span class="dim">heat 23 · own 0%</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>HIP-3 / equity perps</span><span class="dim">heat 10 · own 2%</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>LST / kHYPE</span><span class="dim">heat 4 · own 24%</span></div></div></div>
+        <div class="panel"><h2>Under-indexed (own)</h2><div class="pad"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>Risk / retention trust</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 23 · own 0%</span><span class="pill" style="color:var(--warm);border-color:rgb(251 191 36 / .4)">planned · risk + architecture docs → UTM docs_architecture</span></span></div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>HIP-3 / equity perps</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 10 · own 2%</span><span class="pill" style="color:var(--warm);border-color:rgb(251 191 36 / .4)">planned · haUSDC HIP-3 explainer thread</span></span></div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>LST / kHYPE</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 4 · own 24%</span><span class="pill" style="color:var(--cool);border-color:rgb(29 155 240 / .4)">active · ride HYPE→kHYPE rotation (see Vaults flow readout)</span></span></div></div></div>
         <div class="panel"><h2>Owning (defend / outreach)</h2><div class="pad"><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Stablecoin yield on HL</span><span style="color:var(--green)">100% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Yield capacity</span><span style="color:var(--green)">100% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Vault APY / proof</span><span style="color:var(--green)">89% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Delta-neutral / basis</span><span style="color:var(--green)">80% own</span></div></div></div>
       </div>
       <div class="panel">
@@ -958,7 +1290,7 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
         </div>
       </div>
       <div class="note" style="margin-top:12px;margin-bottom:0">
-        <strong>Method</strong> · Narrative patterns matched on public watchlist posts. Market = non-self voices; ownership = self score / total. Actions map to conversion stage + UTM campaign for outreach → deposit tracking.
+        <strong>Method</strong> · Narrative patterns matched on public watchlist posts. <strong>Heat</strong> = engagement-weighted volume of matching posts in the window (likes + 2×reposts + 3×replies, recency-decayed), normalized 0–100 against the hottest narrative. <strong>Own %</strong> = @harmonixfi share of that narrative's total score; market = non-self voices. Actions map to conversion stage + UTM campaign for outreach → deposit tracking.
         Edit: <code>config/narratives.json</code> · <code>npm run x:narratives</code>
       </div>
     </div>
@@ -985,9 +1317,30 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
       <div class="tile"><div class="label">Metrics 24h</div><div class="value tabular">40</div><div class="hint">computed KPIs</div></div>
     </div>
 
+    <div class="panel" style="margin-bottom:20px">
+      <h2>Pipeline conversion <span class="pill">30d window · replica sample</span></h2>
+      <div class="pad">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px">
+          <span style="border:1px solid var(--border);border-radius:10px;padding:8px 12px"><strong class="tabular">10</strong> <span class="dim">sourced</span></span>
+          <span class="dim">→ 50%</span>
+          <span style="border:1px solid var(--border);border-radius:10px;padding:8px 12px"><strong class="tabular">5</strong> <span class="dim">outreach drafted</span></span>
+          <span class="dim">→ 40%</span>
+          <span style="border:1px solid var(--border);border-radius:10px;padding:8px 12px"><strong class="tabular">2</strong> <span class="dim">replied</span></span>
+          <span class="dim">→ 50%</span>
+          <span style="border:1px solid var(--border);border-radius:10px;padding:8px 12px"><strong class="tabular">1</strong> <span class="dim">call booked</span></span>
+          <span class="dim">→ —</span>
+          <span style="border:1px solid var(--border);border-radius:10px;padding:8px 12px"><strong class="tabular">0</strong> <span class="dim">deposited</span></span>
+        </div>
+        <div class="row-sub" style="margin-top:10px">Deposit attribution joins outreach → on-chain via UTM-tagged app links (see Narratives board). Stage rates recompute daily in production; replica shows the current cohort snapshot.</div>
+      </div>
+    </div>
+
     <div class="grid2">
       <div class="panel">
         <h2>Lead source <span class="status green">green</span></h2>
+        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-top:0">
+          <strong>Fit score 0–100</strong> · weighted: segment match (LP / treasury / desk) + check-size range + asset overlap with live vaults + warm-intro path. ≥95 = outreach-ready.
+        </div>
         <div class="rows">
           <div><div class="row-head"><span class="mono">account:fund-alpha</span><span class="tabular">100</span></div><div class="row-sub">Stage-1 LP · writes $500K-$5M checks · assets HYPE, USDC</div></div>
           <div><div class="row-head"><span class="mono">account:protocol-beta</span><span class="tabular">100</span></div><div class="row-sub">Protocol treasury · HyperEVM-native, idle USDC</div></div>
@@ -1102,14 +1455,18 @@ document.querySelectorAll('#analytics-subnav a').forEach(a => {
   } catch (_) {}
 })();
 
-// ---- Calendar (interactive team roadmap) ----
+// ---- Calendar (Google-simple team roadmap) ----
 const TYPE_LABELS = {
   follow_up: "Follow-up", event: "Event", content: "Content",
   task: "Task", meeting: "Meeting", review: "Review",
 };
-const TYPE_INITIAL = { follow_up: "F", event: "E", content: "C", task: "T", meeting: "M", review: "R" };
+const TYPE_COLORS = {
+  task: "#1d9bf0", meeting: "#8b5cf6", follow_up: "#f59e0b",
+  content: "#10b981", event: "#ec4899", review: "#64748b",
+};
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS_LONG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 const STORE_KEY = "oslo-replica-calendar-v2";
 const OWNER_KEY = "oslo-replica-calendar-owner";
 
@@ -1118,17 +1475,14 @@ function todayISO(d = new Date()) {
 }
 function addDaysISO(iso, n) {
   const [y, m, d] = iso.split("-").map(Number);
-  const dt = new Date(y, m - 1, d + n);
-  return todayISO(dt);
+  return todayISO(new Date(y, m - 1, d + n));
 }
-const MONTHS_LONG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 function monthKey(d = new Date()) {
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
 }
 function shiftMonth(key, delta) {
   const [y, m] = key.split("-").map(Number);
-  const dt = new Date(y, m - 1 + delta, 1);
-  return monthKey(dt);
+  return monthKey(new Date(y, m - 1 + delta, 1));
 }
 function daysInMonth(key) {
   const [y, m] = key.split("-").map(Number);
@@ -1161,38 +1515,31 @@ function toast(msg) {
   el.textContent = msg;
   el.classList.add("show");
   clearTimeout(el._t);
-  el._t = setTimeout(() => el.classList.remove("show"), 2200);
+  el._t = setTimeout(() => el.classList.remove("show"), 2000);
+}
+function escapeHtml(s) {
+  return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-// Seed relative to today so the grid always looks "live"
 function seedItems(today) {
-  const t = (offset, title, type, status = "planned", owner = "", rel = null) => ({
-    id: uid(), title, occurs_on: addDaysISO(today, offset), type, status,
-    owner, relationship: rel, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+  const t = (offset, title, type, status = "planned", owner = "") => ({
+    id: uid(), title, occurs_on: addDaysISO(today, offset), type, status, owner,
+    relationship: null, created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
   });
   return [
     t(0, "Daily vault flow check", "task", "planned", "Ops"),
     t(0, "Discord funnel snapshot", "review", "planned", "Growth"),
-    t(1, "Follow up fund-alpha intro", "follow_up", "planned", "BD", "fund-alpha"),
-    t(1, "haHYPE retention cohort note", "content", "planned", "Content"),
-    t(2, "Protocol-beta partnership call", "meeting", "planned", "BD", "protocol-beta"),
+    t(1, "Follow up fund-alpha", "follow_up", "planned", "BD"),
+    t(2, "Protocol-beta call", "meeting", "planned", "BD"),
     t(3, "Operator lead triage", "task", "planned", "Ops"),
-    t(4, "Ecosystem meetup prep", "event", "planned", "Growth"),
-    t(5, "Vault copy review (landing)", "review", "planned", "Content"),
-    t(6, "Follow up market-maker gamma", "follow_up", "planned", "BD", "mm-gamma"),
-    t(7, "Newsletter draft · issue 13", "content", "planned", "Content"),
-    t(8, "Onboarding checklist for fund-delta", "task", "planned", "Ops", "fund-delta"),
+    t(5, "Vault copy review", "review", "planned", "Content"),
+    t(7, "Newsletter · issue 13", "content", "planned", "Content"),
     t(10, "Weekly GTM sync", "meeting", "planned", "Team"),
-    t(12, "Churn alert deep-dive", "review", "planned", "Ops"),
-    t(14, "X thread · depositor cohorts", "content", "planned", "Content"),
-    t(16, "Follow up protocol-epsilon", "follow_up", "planned", "BD", "protocol-epsilon"),
-    t(18, "Infra status with eng", "meeting", "planned", "Eng"),
-    t(21, "Month-end metrics pack", "task", "planned", "Ops"),
-    t(24, "Partner workshop", "event", "planned", "BD"),
-    t(27, "Roadmap note for docs", "content", "planned", "Content"),
+    t(14, "X thread · cohorts", "content", "planned", "Content"),
+    t(18, "Infra status", "meeting", "planned", "Eng"),
+    t(21, "Month-end metrics", "task", "planned", "Ops"),
   ];
 }
-
 function normalizeItem(it) {
   return {
     id: it.id || uid(),
@@ -1206,9 +1553,7 @@ function normalizeItem(it) {
     updated_at: it.updated_at || new Date().toISOString(),
   };
 }
-
 function loadItems(today) {
-  // migrate v1 → v2
   try {
     let raw = localStorage.getItem(STORE_KEY);
     if (!raw) raw = localStorage.getItem("oslo-replica-calendar-v1");
@@ -1243,54 +1588,52 @@ function renderCalendar() {
   let selected = today;
   let viewMonth = monthKey();
   let myName = getOwner();
+  let modal = null; // { mode: 'create'|'edit', iso, item? }
 
   function byDate(iso) {
-    return items.filter(i => i.occurs_on === iso).sort((a, b) => (a.status === "done") - (b.status === "done"));
+    return items
+      .filter(i => i.occurs_on === iso)
+      .sort((a, b) => (a.status === "done") - (b.status === "done") || a.title.localeCompare(b.title));
   }
-  function monthItems() {
-    return items.filter(i => i.occurs_on.startsWith(viewMonth));
-  }
+  function persist() { saveItems(items); }
   function counts() {
-    const mi = monthItems();
-    const planned = mi.filter(i => i.status === "planned").length;
-    const done = mi.filter(i => i.status === "done").length;
-    return { planned, done, total: mi.length };
+    const mi = items.filter(i => i.occurs_on.startsWith(viewMonth));
+    return {
+      planned: mi.filter(i => i.status === "planned").length,
+      done: mi.filter(i => i.status === "done").length,
+      total: mi.length,
+    };
   }
-  function persist() {
-    saveItems(items);
-  }
-  function addItem(occurs_on, title, type = "task", owner = "") {
-    const t = title.trim();
-    if (!t) return;
+
+  function upsert(item) {
     const now = new Date().toISOString();
-    items = [{
-      id: uid(),
-      title: t.slice(0, 200),
-      occurs_on,
-      type: TYPE_LABELS[type] ? type : "task",
-      status: "planned",
-      owner: (owner || myName || "").slice(0, 40),
-      relationship: null,
-      created_at: now,
-      updated_at: now,
-    }, ...items];
+    if (item.id && items.some(i => i.id === item.id)) {
+      items = items.map(i => i.id === item.id ? { ...i, ...item, updated_at: now } : i);
+    } else {
+      items = [{
+        id: item.id || uid(),
+        title: item.title,
+        occurs_on: item.occurs_on,
+        type: item.type || "task",
+        status: item.status || "planned",
+        owner: item.owner || myName || "",
+        relationship: null,
+        created_at: now,
+        updated_at: now,
+      }, ...items];
+    }
     persist();
-    selected = occurs_on;
-    viewMonth = occurs_on.slice(0, 7);
-    paint();
-    toast("Added to roadmap");
-  }
-  function setStatus(id, status) {
-    items = items.map(i => i.id === id ? { ...i, status, updated_at: new Date().toISOString() } : i);
-    persist();
+    modal = null;
     paint();
   }
   function removeItem(id) {
     items = items.filter(i => i.id !== id);
     persist();
+    modal = null;
     paint();
-    toast("Removed");
+    toast("Deleted");
   }
+
   function exportJson() {
     const blob = new Blob([JSON.stringify({ version: 2, exported_at: new Date().toISOString(), items }, null, 2)], { type: "application/json" });
     const a = document.createElement("a");
@@ -1298,7 +1641,7 @@ function renderCalendar() {
     a.download = "oslo-roadmap-" + todayISO() + ".json";
     a.click();
     URL.revokeObjectURL(a.href);
-    toast("Exported roadmap JSON — share with the team");
+    toast("Exported");
   }
   function importJson(file) {
     const reader = new FileReader();
@@ -1306,39 +1649,75 @@ function renderCalendar() {
       try {
         const data = JSON.parse(String(reader.result || "{}"));
         const list = Array.isArray(data) ? data : (data.items || []);
-        if (!Array.isArray(list) || !list.length) throw new Error("empty");
-        const incoming = list.map(normalizeItem);
-        // merge by id; newer updated_at wins
+        if (!list.length) throw new Error("empty");
         const map = new Map(items.map(i => [i.id, i]));
-        let added = 0, updated = 0;
-        incoming.forEach(inc => {
+        list.map(normalizeItem).forEach(inc => {
           const prev = map.get(inc.id);
-          if (!prev) { map.set(inc.id, inc); added++; }
-          else if ((inc.updated_at || "") >= (prev.updated_at || "")) { map.set(inc.id, { ...prev, ...inc }); updated++; }
+          if (!prev || (inc.updated_at || "") >= (prev.updated_at || "")) map.set(inc.id, { ...prev, ...inc });
         });
         items = Array.from(map.values());
         persist();
         paint();
-        toast("Merged " + added + " new · " + updated + " updated");
-      } catch (e) {
-        toast("Import failed — use a roadmap JSON export");
-      }
+        toast("Imported & merged");
+      } catch (_) { toast("Import failed"); }
     };
     reader.readAsText(file);
   }
   async function copyShare() {
-    const payload = JSON.stringify({ version: 2, items });
     try {
-      await navigator.clipboard.writeText(payload);
-      toast("Roadmap copied — paste into Slack / Notion for the team");
-    } catch (_) {
-      // fallback download
-      exportJson();
-    }
+      await navigator.clipboard.writeText(JSON.stringify({ version: 2, items }));
+      toast("Copied — share with the team");
+    } catch (_) { exportJson(); }
   }
 
-  function escapeHtml(s) {
-    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  function closeModal(e) {
+    if (e && e.target !== e.currentTarget && !e.target.closest("[data-close]")) return;
+    modal = null;
+    paint();
+  }
+
+  function renderModal() {
+    if (!modal) return "";
+    const isEdit = modal.mode === "edit" && modal.item;
+    const item = isEdit ? modal.item : {
+      title: "", occurs_on: modal.iso || selected, type: "task", owner: myName, status: "planned",
+    };
+    const typeBtns = Object.keys(TYPE_LABELS).map(t =>
+      `<button type="button" class="t-${t}${item.type === t ? " on" : ""}" data-type="${t}">${TYPE_LABELS[t]}</button>`
+    ).join("");
+
+    return `
+    <div class="gcal-modal-bg" data-backdrop>
+      <div class="gcal-modal" role="dialog" aria-modal="true" aria-label="${isEdit ? "Edit" : "Create"} event">
+        <div class="gcal-modal-bar">
+          <span style="font-size:13px;color:var(--ink-mute);padding-left:6px">${isEdit ? "Event" : "New event"}</span>
+          <button type="button" data-close aria-label="Close">×</button>
+        </div>
+        <form id="gcal-form">
+          <input class="title" name="title" type="text" maxlength="200" placeholder="Add title" value="${escapeHtml(item.title)}" required autocomplete="off">
+          <div class="row">
+            <label>When</label>
+            <input type="date" name="occurs_on" value="${escapeHtml(item.occurs_on)}" required>
+          </div>
+          <div class="row" style="align-items:flex-start">
+            <label style="padding-top:6px">Type</label>
+            <div class="types" id="gcal-types">${typeBtns}</div>
+          </div>
+          <input type="hidden" name="type" value="${escapeHtml(item.type)}">
+          <div class="row">
+            <label>Owner</label>
+            <input type="text" name="owner" maxlength="40" placeholder="Who owns this?" value="${escapeHtml(item.owner || myName)}">
+          </div>
+          <div class="gcal-modal-actions">
+            ${isEdit ? `<button type="button" class="danger" data-del="${escapeHtml(item.id)}">Delete</button>` : ""}
+            ${isEdit && item.status === "planned" ? `<button type="button" data-done="${escapeHtml(item.id)}">Mark done</button>` : ""}
+            ${isEdit && item.status === "done" ? `<button type="button" data-reopen="${escapeHtml(item.id)}">Reopen</button>` : ""}
+            <button type="button" data-close>Cancel</button>
+            <button type="submit" class="primary">${isEdit ? "Save" : "Save"}</button>
+          </div>
+        </form>
+      </div>
+    </div>`;
   }
 
   function paint() {
@@ -1348,109 +1727,78 @@ function renderCalendar() {
       selected = today.startsWith(viewMonth) ? today : days[0];
     }
     const c = counts();
-    const selectedItems = byDate(selected);
-    const { weekday, day, month, isToday } = parseDay(selected);
     const [vy, vm] = viewMonth.split("-").map(Number);
 
-    const legend = Object.keys(TYPE_LABELS).map(t =>
-      `<span class="chip-${t}"><strong>${TYPE_INITIAL[t]}</strong> <span style="color:var(--ink-mute)">${TYPE_LABELS[t]}</span></span>`
-    ).join("");
-
     let pads = "";
-    for (let i = 0; i < firstDow; i++) pads += `<div class="cal-pad"></div>`;
+    for (let i = 0; i < firstDow; i++) pads += `<div class="gcal-pad"></div>`;
 
     const cells = days.map(iso => {
       const p = parseDay(iso);
       const dayItems = byDate(iso);
-      const compact = dayItems.slice(0, 2);
-      const overflow = dayItems.length - compact.length;
-      const chips = compact.map(it =>
-        `<span class="cal-chip chip-${it.type}${it.status === "done" ? " done" : ""}" title="${TYPE_LABELS[it.type]}${it.owner ? " · " + escapeHtml(it.owner) : ""} · ${escapeHtml(it.title)}">${escapeHtml(it.title)}</span>`
-      ).join("") + (overflow > 0 ? `<span class="cal-more">+${overflow}</span>` : "");
-      return `<div class="cal-cell${selected === iso ? " selected" : ""}" data-iso="${iso}">
-        <button type="button" class="cal-cell-top" data-select="${iso}" aria-label="Select ${iso}">
-          <span class="cal-daynum${p.isToday ? " today" : ""}">${p.day}</span>
-          <span class="cal-wd">${p.weekday}</span>
-        </button>
-        <div class="cal-chips">${chips}</div>
-        <input class="quick" type="text" maxlength="200" placeholder="+ add (Enter)" data-quick="${iso}" aria-label="Quick add for ${iso}">
+      const show = dayItems.slice(0, 3);
+      const overflow = dayItems.length - show.length;
+      const evs = show.map(it =>
+        `<button type="button" class="gcal-ev t-${it.type}${it.status === "done" ? " done" : ""}" data-ev="${escapeHtml(it.id)}" title="${escapeHtml(TYPE_LABELS[it.type])}${it.owner ? " · " + escapeHtml(it.owner) : ""}">${escapeHtml(it.title)}</button>`
+      ).join("");
+      return `<div class="gcal-day${selected === iso ? " is-selected" : ""}${p.isToday ? " is-today" : ""}" data-day="${iso}">
+        <div class="gcal-day-head"><span class="gcal-daynum">${p.day}</span></div>
+        <div class="gcal-events">${evs}${overflow > 0 ? `<div class="gcal-more">+${overflow} more</div>` : ""}</div>
+        <div class="gcal-add-hint">+ add</div>
       </div>`;
     }).join("");
 
-    const list = selectedItems.length === 0
-      ? `<p class="cal-empty">Nothing on ${weekday}, ${month} ${day}. Type in a day cell or use the form — assign an owner so the team knows who owns it.</p>`
-      : `<ul class="cal-items">${selectedItems.map(it => `
-          <li class="cal-item ${it.status}">
-            <span class="type chip-${it.type}">${TYPE_LABELS[it.type]}</span>
-            <span class="title">${escapeHtml(it.title)}</span>
-            ${it.owner ? `<span class="owner">@${escapeHtml(it.owner)}</span>` : ""}
-            ${it.relationship ? `<span class="rel">${escapeHtml(it.relationship)}</span>` : ""}
-            <span class="status">${it.status}</span>
-            <span class="actions">
-              ${it.status === "planned" ? `<button type="button" class="act" data-done="${it.id}">Done</button>` : `<button type="button" class="act" data-reopen="${it.id}">Reopen</button>`}
-              <button type="button" class="act danger" data-del="${it.id}">Delete</button>
-            </span>
-          </li>`).join("")}</ul>`;
-
     root.innerHTML = `
-      <div class="cal-head">
-        <div>
-          <h2>Team roadmap</h2>
-          <p>Interactive GTM calendar — click a day, add work, assign an owner. Export JSON to share with the team (merge on import).</p>
-          <div class="meta">${c.planned} planned · ${c.done} done · ${c.total} this month · stored in this browser</div>
+      <div class="gcal">
+        <div class="gcal-top">
+          <button type="button" class="gcal-btn primary" id="gcal-create">+ Create</button>
+          <div class="gcal-nav">
+            <button type="button" id="cal-today">Today</button>
+            <button type="button" class="icon" id="cal-prev" aria-label="Previous month">‹</button>
+            <button type="button" class="icon" id="cal-next" aria-label="Next month">›</button>
+          </div>
+          <h2>${MONTHS_LONG[vm - 1]} ${vy}</h2>
+          <div class="gcal-spacer"></div>
+          <span class="gcal-meta">${c.planned} open · ${c.done} done</span>
+          <div class="gcal-share">
+            <button type="button" class="gcal-btn" id="gcal-share-btn">Share</button>
+            <div class="gcal-share-menu" id="gcal-share-menu">
+              <button type="button" id="cal-copy">Copy for team</button>
+              <button type="button" id="cal-export">Export JSON</button>
+              <label>Import JSON<input type="file" id="cal-import" accept="application/json,.json" hidden></label>
+            </div>
+          </div>
         </div>
-        <div class="cal-legend">${legend}</div>
+        <div class="gcal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
+        <div class="gcal-grid">${pads}${cells}</div>
       </div>
-      <div class="cal-toolbar">
-        <div class="who">
-          <label for="cal-owner">You</label>
-          <input id="cal-owner" type="text" maxlength="40" placeholder="Your name (Ana, Chris…)" value="${escapeHtml(myName)}">
-        </div>
-        <button type="button" id="cal-export">Export JSON</button>
-        <label class="file-btn">Import<input type="file" id="cal-import" accept="application/json,.json" hidden></label>
-        <button type="button" id="cal-copy">Copy for team</button>
-        <span class="hint">Tip: export → Slack/Drive → teammates import to merge</span>
-      </div>
-      <div class="cal-nav" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;border-bottom:1px solid var(--border)">
-        <div style="display:flex;gap:6px;align-items:center">
-          <button type="button" id="cal-prev" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">←</button>
-          <button type="button" id="cal-next" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">→</button>
-          <button type="button" id="cal-today" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">Today</button>
-        </div>
-        <div style="font-size:17px;font-weight:600;letter-spacing:-0.02em">${MONTHS_LONG[vm - 1]} ${vy}</div>
-        <div style="width:88px"></div>
-      </div>
-      <div class="cal-grid-wrap">
-        <div class="cal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
-        <div class="cal-days">${pads}${cells}</div>
-      </div>
-      <div class="cal-panel">
-        <div class="cal-panel-head">
-          <h3>${weekday}, ${month} ${day}${isToday ? '<span class="badge">today</span>' : ""}</h3>
-          <span class="count">${selectedItems.length} ${selectedItems.length === 1 ? "item" : "items"}</span>
-        </div>
-        ${list}
-        <form class="cal-add" id="cal-add-form">
-          <input type="text" name="title" maxlength="200" placeholder="What needs to happen?" required>
-          <select name="type">
-            ${Object.keys(TYPE_LABELS).map(t => `<option value="${t}" ${t === "task" ? "selected" : ""}>${TYPE_LABELS[t]}</option>`).join("")}
-          </select>
-          <input type="text" name="owner" maxlength="40" placeholder="Owner" value="${escapeHtml(myName)}">
-          <button type="submit">Add to day</button>
-        </form>
-      </div>`;
+      ${renderModal()}`;
 
+    // nav
     root.querySelector("#cal-prev")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, -1); paint(); });
     root.querySelector("#cal-next")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, 1); paint(); });
     root.querySelector("#cal-today")?.addEventListener("click", () => { viewMonth = monthKey(); selected = today; paint(); });
-
-    const ownerInput = root.querySelector("#cal-owner");
-    ownerInput?.addEventListener("change", () => {
-      myName = ownerInput.value.trim();
-      setOwner(myName);
-      toast(myName ? "Signed in as " + myName : "Owner cleared");
+    root.querySelector("#gcal-create")?.addEventListener("click", () => {
+      modal = { mode: "create", iso: selected };
+      paint();
+      setTimeout(() => root.querySelector('input[name="title"]')?.focus(), 30);
     });
 
+    // share menu
+    const shareBtn = root.querySelector("#gcal-share-btn");
+    const shareMenu = root.querySelector("#gcal-share-menu");
+    shareBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      shareMenu?.classList.toggle("open");
+    });
+    // close share menu when clicking elsewhere (single handler)
+    if (!window.__gcalShareClose) {
+      window.__gcalShareClose = (e) => {
+        document.querySelectorAll(".gcal-share-menu.open").forEach(m => {
+          if (!m.contains(e.target) && !e.target.closest("#gcal-share-btn")) m.classList.remove("open");
+        });
+      };
+      document.addEventListener("click", window.__gcalShareClose);
+    }
     root.querySelector("#cal-export")?.addEventListener("click", exportJson);
     root.querySelector("#cal-copy")?.addEventListener("click", copyShare);
     root.querySelector("#cal-import")?.addEventListener("change", (e) => {
@@ -1459,44 +1807,107 @@ function renderCalendar() {
       e.target.value = "";
     });
 
-    root.querySelectorAll("[data-select]").forEach(btn => {
-      btn.addEventListener("click", () => { selected = btn.getAttribute("data-select"); paint(); });
-    });
-    root.querySelectorAll("input.quick").forEach(inp => {
-      inp.addEventListener("focus", () => {
-        const iso = inp.getAttribute("data-quick");
-        if (selected !== iso) { selected = iso; paint(); root.querySelector(`input.quick[data-quick="${iso}"]`)?.focus(); }
-      });
-      inp.addEventListener("keydown", e => {
-        if (e.key !== "Enter") return;
-        e.preventDefault();
-        addItem(inp.getAttribute("data-quick"), inp.value, "task", myName);
+    // day click → create (if not on event)
+    root.querySelectorAll("[data-day]").forEach(dayEl => {
+      dayEl.addEventListener("click", (e) => {
+        if (e.target.closest("[data-ev]")) return;
+        const iso = dayEl.getAttribute("data-day");
+        selected = iso;
+        modal = { mode: "create", iso };
+        paint();
+        setTimeout(() => root.querySelector('input[name="title"]')?.focus(), 30);
       });
     });
-    root.querySelectorAll("[data-done]").forEach(btn => {
-      btn.addEventListener("click", () => setStatus(btn.getAttribute("data-done"), "done"));
-    });
-    root.querySelectorAll("[data-reopen]").forEach(btn => {
-      btn.addEventListener("click", () => setStatus(btn.getAttribute("data-reopen"), "planned"));
-    });
-    root.querySelectorAll("[data-del]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (confirm("Delete this item?")) removeItem(btn.getAttribute("data-del"));
+
+    // event click → edit
+    root.querySelectorAll("[data-ev]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute("data-ev");
+        const item = items.find(i => i.id === id);
+        if (!item) return;
+        selected = item.occurs_on;
+        modal = { mode: "edit", item: { ...item } };
+        paint();
+        setTimeout(() => root.querySelector('input[name="title"]')?.focus(), 30);
       });
     });
-    const form = root.querySelector("#cal-add-form");
-    form?.addEventListener("submit", e => {
+
+    // modal handlers
+    const backdrop = root.querySelector("[data-backdrop]");
+    backdrop?.addEventListener("click", (e) => {
+      if (e.target === backdrop) { modal = null; paint(); }
+    });
+    root.querySelectorAll("[data-close]").forEach(b => {
+      b.addEventListener("click", () => { modal = null; paint(); });
+    });
+    root.querySelectorAll("#gcal-types [data-type]").forEach(b => {
+      b.addEventListener("click", () => {
+        const t = b.getAttribute("data-type");
+        const hidden = root.querySelector('input[name="type"]');
+        if (hidden) hidden.value = t;
+        root.querySelectorAll("#gcal-types [data-type]").forEach(x => {
+          x.classList.toggle("on", x.getAttribute("data-type") === t);
+        });
+      });
+    });
+    root.querySelector("[data-del]")?.addEventListener("click", (e) => {
+      const id = e.currentTarget.getAttribute("data-del");
+      if (confirm("Delete this event?")) removeItem(id);
+    });
+    root.querySelector("[data-done]")?.addEventListener("click", (e) => {
+      const id = e.currentTarget.getAttribute("data-done");
+      const it = items.find(i => i.id === id);
+      if (it) upsert({ ...it, status: "done" });
+      toast("Marked done");
+    });
+    root.querySelector("[data-reopen]")?.addEventListener("click", (e) => {
+      const id = e.currentTarget.getAttribute("data-reopen");
+      const it = items.find(i => i.id === id);
+      if (it) upsert({ ...it, status: "planned" });
+    });
+    const form = root.querySelector("#gcal-form");
+    form?.addEventListener("submit", (e) => {
       e.preventDefault();
       const fd = new FormData(form);
-      const owner = String(fd.get("owner") || myName || "");
-      if (owner && owner !== myName) { myName = owner; setOwner(myName); }
-      addItem(selected, String(fd.get("title") || ""), String(fd.get("type") || "task"), owner);
+      const title = String(fd.get("title") || "").trim();
+      if (!title) return;
+      const owner = String(fd.get("owner") || "").trim();
+      if (owner) { myName = owner; setOwner(myName); }
+      const payload = {
+        id: modal && modal.item ? modal.item.id : undefined,
+        title,
+        occurs_on: String(fd.get("occurs_on") || selected),
+        type: String(fd.get("type") || "task"),
+        owner,
+        status: modal && modal.item ? modal.item.status : "planned",
+      };
+      selected = payload.occurs_on;
+      viewMonth = payload.occurs_on.slice(0, 7);
+      upsert(payload);
+      toast("Saved");
+    });
+
+}
+
+  // Esc closes modal once
+  if (!window.__gcalEscBound) {
+    window.__gcalEscBound = true;
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const rootEl = document.getElementById("calendar-root");
+      if (rootEl && rootEl.querySelector(".gcal-modal-bg")) {
+        // trigger close via synthetic: re-render without modal by clicking cancel if present
+        const cancel = rootEl.querySelector("[data-close]");
+        if (cancel) cancel.click();
+      }
     });
   }
 
   paint();
 }
 renderCalendar();
+
 
 // ---- Content calendar (editorial ship plan) ----
 const CONTENT_FORMATS = {
