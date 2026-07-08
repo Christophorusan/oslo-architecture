@@ -11,33 +11,39 @@
 @font-face { font-family: 'AeonikMono'; src: url('fonts/AeonikMono-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 
 :root {
-  --bg: #0b0b0c;
-  --bg-soft: #131316;
-  --card: #15151a;
-  --row-hover: #1c1c22;
-  --ink: #f5f5f4;
-  --ink-soft: #d4d4d0;
-  --ink-mute: #8a8a85;
-  --ink-fade: #525250;
-  --border: #25252a;
-  --border-soft: #1c1c22;
-  --hot: #fb923c;
-  --warm: #fbbf24;
-  --cool: #94a3b8;
-  --green: #86efac;
-  --chart-in: #16a34a;
-  --chart-out: #ea580c;
-  --radius-card: 12px;
-  --radius-btn: 8px;
-  --radius-chip: 6px;
+  /* X black × Benji liveline */
+  --bg: #000000;
+  --bg-soft: #16181c;
+  --card: #000000;
+  --row-hover: rgba(231, 233, 234, 0.03);
+  --ink: #e7e9ea;
+  --ink-soft: #e7e9ea;
+  --ink-mute: #71767b;
+  --ink-fade: #536471;
+  --border: #2f3336;
+  --border-soft: #1e2024;
+  --accent: #1d9bf0;
+  --accent-hover: #1a8cd8;
+  --accent-soft: rgba(29, 155, 240, 0.12);
+  --hot: #f4212e;
+  --warm: #ffd400;
+  --cool: #1d9bf0;
+  --green: #00ba7c;
+  --chart-in: #00ba7c;
+  --chart-out: #f4212e;
+  --radius-card: 16px;
+  --radius-btn: 9999px;
+  --radius-chip: 9999px;
+  --ease-swift: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --ease-smooth: cubic-bezier(0.19, 1, 0.22, 1);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body {
   background: var(--bg);
   color: var(--ink);
   font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
 }
 .mono { font-family: 'AeonikMono', ui-monospace, "SF Mono", Menlo, monospace; }
@@ -48,10 +54,10 @@ header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-cont
 .wordmark { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
 .tagline { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
 .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-nav.tabs { display: flex; align-items: center; gap: 2px; border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-btn); padding: 2px; font-size: 12px; }
-nav.tabs button, nav.tabs a { border: 0; background: transparent; color: var(--ink-mute); font: inherit; padding: 4px 10px; border-radius: 6px; cursor: pointer; text-decoration: none; }
+nav.tabs { display: flex; align-items: center; gap: 2px; border: 1px solid var(--border); background: var(--bg-soft); border-radius: 9999px; padding: 3px; font-size: 13px; }
+nav.tabs button, nav.tabs a { border: 0; background: transparent; color: var(--ink-mute); font: inherit; padding: 6px 14px; border-radius: 9999px; cursor: pointer; text-decoration: none; transition: color .15s var(--ease-swift), background .15s var(--ease-swift); }
 nav.tabs button:hover, nav.tabs a:hover { color: var(--ink); }
-nav.tabs button.active { background: var(--ink); color: var(--card); }
+nav.tabs button.active { background: var(--ink); color: #000; font-weight: 700; }
 .chip { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-btn); padding: 4px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-mute); }
 
 .note { border: 1px solid var(--border); background: var(--bg-soft); border-radius: var(--radius-card); padding: 12px 16px; font-size: 12px; color: var(--ink-mute); margin-bottom: 24px; }
@@ -64,9 +70,10 @@ p.sub { font-size: 13px; color: var(--ink-mute); margin-top: 4px; max-width: 720
 .page-meta { text-align: right; font-size: 12px; color: var(--ink-mute); }
 
 .tiles { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 24px; }
-.tile { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-card); padding: 16px; }
+.tile { border: 1px solid var(--border); background: var(--card); border-radius: var(--radius-card); padding: 16px; transition: border-color .15s ease, background .15s ease; }
+.tile:hover { border-color: rgba(231,233,234,.18); background: var(--bg-soft); }
 .tile .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-mute); }
-.tile .value { font-size: 30px; font-weight: 500; letter-spacing: -0.02em; margin-top: 8px; }
+.tile .value { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; margin-top: 6px; }
 .tile .hint { font-size: 11px; color: var(--ink-fade); margin-top: 4px; }
 
 .grid2 { display: grid; gap: 24px; grid-template-columns: 1fr; }
@@ -168,6 +175,103 @@ footer a { color: var(--ink-soft); }
   .cal-cell input.quick { font-size: 9px; }
 }
 
+
+/* ---- Benji liveline × X capital board ---- */
+@keyframes harPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+@keyframes livePing { 0%{transform:scale(1);opacity:.55} 70%{transform:scale(2.2);opacity:0} 100%{opacity:0} }
+.cap-board {
+  position: sticky; top: 8px; z-index: 40;
+  scroll-margin-top: 12px; margin-bottom: 28px;
+  border: 1px solid var(--border);
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.cap-head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border);
+}
+.cap-head-left { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.cap-live {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--border); background: var(--bg-soft);
+  border-radius: 9999px; padding: 3px 10px;
+  font-size: 12px; font-weight: 600; color: var(--ink);
+}
+.cap-live .dot { position: relative; width: 6px; height: 6px; }
+.cap-live .dot::before {
+  content: ""; position: absolute; inset: 0; border-radius: 99px; background: var(--green);
+  animation: livePing 1.4s ease-out infinite;
+}
+.cap-live .dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 99px; background: var(--green);
+}
+.cap-title { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.cap-sub { font-size: 13px; color: var(--ink-mute); }
+.cap-chip {
+  border: 1px solid var(--border); background: var(--bg-soft);
+  border-radius: 9999px; padding: 3px 10px;
+  font-size: 11px; font-weight: 600; color: var(--ink-mute);
+}
+.cap-meta { font-size: 12px; color: var(--ink-fade); font-variant-numeric: tabular-nums; }
+.cap-heroes {
+  display: grid; grid-template-columns: 1fr; border-bottom: 1px solid var(--border);
+}
+@media (min-width: 900px) {
+  .cap-heroes { grid-template-columns: 1fr 1fr; }
+  .cap-hero + .cap-hero { border-left: 1px solid var(--border); }
+}
+.cap-hero { padding: 16px 16px 12px; position: relative; min-height: 200px; }
+.cap-hero-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.cap-hero-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-mute);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.cap-hero-delta { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.cap-hero-delta.up { color: var(--green); }
+.cap-hero-delta.down { color: var(--hot); }
+.cap-hero-delta.flat { color: var(--ink-fade); }
+.cap-hero-value {
+  font-size: 40px; font-weight: 700; letter-spacing: -0.04em;
+  line-height: 1; font-variant-numeric: tabular-nums; color: var(--ink);
+}
+@media (min-width: 640px) { .cap-hero-value { font-size: 44px; } }
+.cap-hero-value.up { color: var(--green); }
+.cap-hero-value.down { color: var(--hot); }
+.cap-hero-hint { margin-top: 6px; font-size: 12px; color: var(--ink-mute); }
+.cap-chart { margin-top: 12px; height: 120px; position: relative; }
+.cap-chart canvas { width: 100%; height: 100%; display: block; cursor: crosshair; }
+.cap-metrics {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px) { .cap-metrics { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1100px) { .cap-metrics { grid-template-columns: repeat(5, 1fr); } }
+.cap-metric {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.cap-metric .label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-mute);
+}
+.cap-metric .value {
+  margin-top: 4px; font-size: 22px; font-weight: 700;
+  letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--ink);
+}
+.cap-metric .hint { margin-top: 2px; font-size: 12px; color: var(--ink-mute); }
+.cap-metric .delta {
+  margin-top: 6px; font-size: 11px; font-weight: 700;
+  font-variant-numeric: tabular-nums; color: var(--ink-fade);
+}
+.cap-metric .delta.up { color: var(--green); }
+.cap-metric .delta.down { color: var(--hot); }
+
+/* Fade edge like Benji scroll veil on sticky */
+.cap-board::before {
+  content: ""; pointer-events: none; position: absolute; left: 0; right: 0; top: -1px; height: 0;
+}
+
 /* Content calendar formats */
 .chip-thread { color: var(--cool); border-color: rgb(148 163 184 / .4); background: rgb(148 163 184 / .05); }
 .chip-newsletter { color: var(--green); border-color: rgb(134 239 172 / .4); background: rgb(134 239 172 / .05); }
@@ -247,31 +351,46 @@ footer a { color: var(--ink-soft); }
     </div>
 
     
+
     <!-- ========== CAPITAL SCOREBOARD ========== -->
-    <div id="an-capital" style="scroll-margin-top:12px;margin-bottom:20px;position:sticky;top:8px;z-index:40">
-      <div class="panel" style="border:2px solid var(--accent,#1d9bf0);overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.08)">
-        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px;background:rgba(29,155,240,0.10);border-bottom:1px solid var(--border)">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
-            <span class="pill" style="background:var(--card);border:1px solid var(--accent,#1d9bf0);color:var(--accent,#1d9bf0)">
-              <span style="display:inline-block;width:8px;height:8px;border-radius:99px;background:var(--green,#00ba7c);margin-right:6px;vertical-align:middle;animation:harPulse 1.2s infinite"></span>
-              Capital scoreboard
-            </span>
-            <span style="font-size:12px;color:var(--ink-mute)">Monday strip · dashboards API + live HAR</span>
+    <div id="an-capital" class="cap-board">
+      <div class="cap-head">
+        <div class="cap-head-left">
+          <span class="cap-live"><span class="dot"></span>Live</span>
+          <span class="cap-title">Capital</span>
+          <span class="cap-sub">dashboards API · Hyperliquid HAR</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="cap-chip">7d</span>
+          <span class="cap-meta" id="cap-asof">—</span>
+        </div>
+      </div>
+      <div class="cap-heroes">
+        <div class="cap-hero">
+          <div class="cap-hero-top">
+            <div class="cap-hero-label">Combined AUM</div>
+            <div class="cap-hero-delta flat" id="cap-aum-delta">7d pending</div>
           </div>
-          <div class="dim" style="font-size:11px">as of 2026-07-08 22:12:10 · 1d history</div>
+          <div class="cap-hero-value" id="cap-aum-value">—</div>
+          <div class="cap-hero-hint">USDC · vaults + HYPE staked</div>
+          <div class="cap-chart"><canvas id="cap-aum-chart"></canvas></div>
         </div>
-        <div class="tiles" style="margin:0;border:0;border-radius:0">
-          <div class="tile" style="border-radius:0;background:rgba(29,155,240,0.06)"><div class="label">Combined AUM</div><div class="value tabular" style="font-size:22px">8.76M</div><div class="hint">USDC · vaults + staked</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">HYPE vault</div><div class="value tabular" style="font-size:20px">33.3K HYPE</div><div class="hint">2.23M USDC</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">kHYPE vault</div><div class="value tabular" style="font-size:20px">48.1K kHYPE</div><div class="hint">3.29M USDC</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">HYPE staked</div><div class="value tabular" style="font-size:20px">34.0K HYPE</div><div class="hint">2.29M USDC · frontend</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">Vault TVL</div><div class="value tabular" style="font-size:20px">6.47M</div><div class="hint">13,472 depositors</div><div class="hint tabular" style="color:var(--ink-mute);font-weight:600;margin-top:4px">7d Δ pending</div></div>
-          <div class="tile" style="border-radius:0"><div class="label"><span style="display:inline-block;width:6px;height:6px;border-radius:99px;background:var(--green,#00ba7c);margin-right:4px;vertical-align:middle;animation:harPulse 1.2s infinite"></span>HAR · live</div><div class="value tabular" style="font-size:20px" id="cap-har-price">—</div><div class="hint" id="cap-har-chg">Hyperliquid</div><div class="hint" style="margin-top:4px;font-weight:600;color:var(--ink-mute)">live feed</div></div>
+        <div class="cap-hero">
+          <div class="cap-hero-top">
+            <div class="cap-hero-label"><span style="width:6px;height:6px;border-radius:99px;background:var(--green);display:inline-block;animation:harPulse 1.2s infinite"></span>HAR · live</div>
+            <div class="cap-hero-delta flat" id="cap-har-chg">fetching…</div>
+          </div>
+          <div class="cap-hero-value" id="cap-har-price">—</div>
+          <div class="cap-hero-hint">Hyperliquid · 12s poll</div>
+          <div class="cap-chart"><canvas id="cap-har-chart"></canvas></div>
         </div>
+      </div>
+      <div class="cap-metrics" id="cap-metrics">
+        <!-- filled by script from harmonix-dashboard.json -->
       </div>
     </div>
 
-    
+
     <!-- ========== HAR LIVE PRICE (Hyperliquid) ========== -->
     <div id="an-har" style="scroll-margin-top:24px;margin-bottom:28px">
       <div class="panel" style="border:1px solid var(--accent, #1d9bf0);overflow:hidden">
@@ -1485,6 +1604,220 @@ renderXAnalytics();
   }
   tick();
   setInterval(tick, 12000);
+})();
+
+</script>
+<script>
+
+/* CAP_LIVELINE — Benji-style capital board runtime */
+(function capitalLiveline(){
+  var TOKEN_ID = '0x9325025f805731935c1df7f97e654cda';
+  var HL = 'https://api.hyperliquid.xyz/info';
+
+  function n(x){ var v = Number(x); return isFinite(v) ? v : null; }
+  function fmtUsdc(x){
+    if(x==null) return '—';
+    var a=Math.abs(x);
+    if(a>=1e9) return '$'+(x/1e9).toFixed(2)+'B';
+    if(a>=1e6) return '$'+(x/1e6).toFixed(2)+'M';
+    if(a>=1e3) return '$'+(x/1e3).toFixed(1)+'K';
+    return '$'+Math.round(x).toLocaleString();
+  }
+  function fmtNative(x, unit){
+    if(x==null) return '—';
+    var a=Math.abs(x);
+    if(a>=1e6) return (x/1e6).toFixed(2)+'M '+unit;
+    if(a>=1e3) return (x/1e3).toFixed(1)+'K '+unit;
+    return x.toLocaleString(undefined,{maximumFractionDigits:1})+' '+unit;
+  }
+  function fmtPrice(x){
+    if(x==null) return '—';
+    if(x<0.01) return '$'+x.toFixed(6);
+    if(x<1) return '$'+x.toFixed(4);
+    return '$'+x.toFixed(2);
+  }
+  function deltaUsd(v){
+    if(v==null||!isFinite(v)) return {t:'7d pending', c:'flat'};
+    var pos=v>=0, a=Math.abs(v);
+    var body=a>=1e6?(a/1e6).toFixed(2)+'M':a>=1e3?(a/1e3).toFixed(1)+'K':Math.round(a).toLocaleString();
+    return {t:'7d '+(pos?'+':'−')+'$'+body, c:v>0?'up':v<0?'down':'flat'};
+  }
+  function deltaNat(v, unit){
+    if(v==null||!isFinite(v)) return {t:'7d pending', c:'flat'};
+    var pos=v>=0;
+    return {t:'7d '+(pos?'+':'−')+Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0})+' '+unit, c:v>0?'up':v<0?'down':'flat'};
+  }
+  function setTxt(id, t){ var el=document.getElementById(id); if(el) el.textContent=t; }
+  function setCls(id, base, extra){ var el=document.getElementById(id); if(el) el.className=base+(extra?' '+extra:''); }
+
+  /* ---- liveline canvas ---- */
+  function makeLine(canvas, color){
+    if(!canvas) return { set:function(){}, destroy:function(){} };
+    var ctx=canvas.getContext('2d');
+    var target=[], display=[], raf=0, col=color||'#1d9bf0', dead=false;
+    function resize(){
+      var dpr=window.devicePixelRatio||1;
+      var w=canvas.clientWidth, h=canvas.clientHeight;
+      if(w<2||h<2) return {w:0,h:0,dpr:1};
+      canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      return {w:w,h:h,dpr:dpr};
+    }
+    function draw(){
+      if(dead) return;
+      var s=resize(); if(!s.w){ raf=requestAnimationFrame(draw); return; }
+      var w=s.w, h=s.h;
+      if(display.length!==target.length){
+        display=target.map(function(v,i){ return display[i]!=null?display[i]:v; });
+      }
+      var lerp=0.1;
+      for(var i=0;i<target.length;i++) display[i]+=(target[i]-display[i])*lerp;
+      var pad={t:8,r:8,b:8,l:8};
+      var mn=Math.min.apply(null,display), mx=Math.max.apply(null,display);
+      var span=(mx-mn)||Math.abs(mx)*0.02||1;
+      var yMin=mn-span*0.12, yMax=mx+span*0.12;
+      function xAt(i){ return pad.l+(i/Math.max(1,display.length-1))*(w-pad.l-pad.r); }
+      function yAt(v){ return pad.t+(1-(v-yMin)/(yMax-yMin))*(h-pad.t-pad.b); }
+      ctx.clearRect(0,0,w,h);
+      ctx.strokeStyle='rgba(231,233,234,0.06)'; ctx.lineWidth=1;
+      for(var g=0;g<3;g++){
+        var yy=pad.t+((g+1)/4)*(h-pad.t-pad.b);
+        ctx.beginPath(); ctx.moveTo(pad.l,yy); ctx.lineTo(w-pad.r,yy); ctx.stroke();
+      }
+      var grad=ctx.createLinearGradient(0,pad.t,0,h-pad.b);
+      grad.addColorStop(0, col+'55'); grad.addColorStop(1, col+'00');
+      ctx.beginPath();
+      display.forEach(function(v,i){ var x=xAt(i), y=yAt(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.lineTo(xAt(display.length-1), h-pad.b); ctx.lineTo(xAt(0), h-pad.b); ctx.closePath();
+      ctx.fillStyle=grad; ctx.fill();
+      ctx.beginPath();
+      display.forEach(function(v,i){ var x=xAt(i), y=yAt(v); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.strokeStyle=col; ctx.lineWidth=2; ctx.lineJoin='round'; ctx.lineCap='round'; ctx.stroke();
+      var lx=xAt(display.length-1), ly=yAt(display[display.length-1]);
+      var t=(performance.now()%1400)/1400;
+      var pulse=0.35+0.65*Math.abs(Math.sin(t*Math.PI));
+      ctx.beginPath(); ctx.arc(lx,ly,8*pulse,0,Math.PI*2); ctx.fillStyle=col+'33'; ctx.fill();
+      ctx.beginPath(); ctx.arc(lx,ly,3.5,0,Math.PI*2); ctx.fillStyle=col; ctx.fill();
+      ctx.strokeStyle='#000'; ctx.lineWidth=1.5; ctx.stroke();
+      raf=requestAnimationFrame(draw);
+    }
+    raf=requestAnimationFrame(draw);
+    return {
+      set: function(pts, c){ if(pts&&pts.length) target=pts.slice(); if(c) col=c; if(!display.length) display=target.slice(); },
+      destroy: function(){ dead=true; cancelAnimationFrame(raf); }
+    };
+  }
+
+  var aumLine = makeLine(document.getElementById('cap-aum-chart'), '#1d9bf0');
+  var harLine = makeLine(document.getElementById('cap-har-chart'), '#1d9bf0');
+  var harSeries = [];
+
+  function breath(base, n){
+    n=n||28; var out=[];
+    for(var i=0;i<n;i++){
+      var w=Math.sin(i/3.2)*0.004+Math.sin(i/7.1)*0.002;
+      out.push(base*(1+w));
+    }
+    return out;
+  }
+
+  function renderDash(d){
+    if(!d) return;
+    var pr=d.protocol||{}, s=d.hype_staked||{}, d7=d.deltas_7d||{};
+    var aum=n(d.combined_aum_usd);
+    setTxt('cap-aum-value', fmtUsdc(aum));
+    var ad=deltaUsd(d7.combined_aum_usd);
+    setTxt('cap-aum-delta', ad.t);
+    setCls('cap-aum-delta', 'cap-hero-delta', ad.c);
+    setCls('cap-aum-value', 'cap-hero-value', ad.c==='flat'?'':ad.c);
+    setTxt('cap-asof', (d.as_of? new Date(d.as_of).toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—')
+      + (d.history_days!=null? ' · '+d.history_days+'d hist':''));
+
+    if(d7.combined_aum_usd!=null && aum!=null){
+      var start=aum-d7.combined_aum_usd, pts=[], N=24;
+      for(var i=0;i<N;i++){ var t=i/(N-1); pts.push(start+(aum-start)*(0.15+0.85*t*t)); }
+      aumLine.set(pts, '#1d9bf0');
+    } else if(aum!=null){
+      aumLine.set(breath(aum), '#1d9bf0');
+    }
+
+    var metrics=[
+      {label:'HYPE vault', primary:fmtNative(pr.hype_deposited,'HYPE'), hint:fmtUsdc(pr.hype_deposited_usd)+' USDC', d:deltaNat(d7.hype_deposited,'HYPE')},
+      {label:'kHYPE vault', primary:fmtNative(pr.khype_deposited,'kHYPE'), hint:fmtUsdc(pr.khype_deposited_usd)+' USDC', d:deltaNat(d7.khype_deposited,'kHYPE')},
+      {label:'HYPE staked', primary:fmtNative(s.total_hype,'HYPE'), hint:fmtUsdc(s.total_usd)+' · frontend', d:deltaNat(d7.hype_staked,'HYPE')},
+      {label:'Vault TVL', primary:fmtUsdc(pr.tvl_all_vaults_usd), hint:Number(pr.total_depositors||0).toLocaleString()+' depositors', d:deltaUsd(d7.vault_tvl_usd)},
+      {label:'USDC vaults', primary:fmtUsdc(pr.usdc_vaults_usd), hint:'delta-neutral + haUSDC', d:{t:'product stack', c:'flat'}}
+    ];
+    var root=document.getElementById('cap-metrics');
+    if(root){
+      root.innerHTML=metrics.map(function(m){
+        return '<div class="cap-metric"><div class="label">'+m.label+'</div>'
+          +'<div class="value tabular">'+m.primary+'</div>'
+          +'<div class="hint">'+m.hint+'</div>'
+          +'<div class="delta '+m.d.c+'">'+m.d.t+'</div></div>';
+      }).join('');
+    }
+  }
+
+  // load dashboard + history
+  fetch('harmonix-dashboard.json', {cache:'no-store'}).then(function(r){return r.json();}).then(renderDash).catch(function(){});
+  fetch('capital-history.json', {cache:'no-store'}).then(function(r){return r.json();}).then(function(h){
+    var pts=(Array.isArray(h)?h:(h.points||[])).map(function(p){return n(p.combined_aum_usd);}).filter(function(v){return v!=null;});
+    if(pts.length>=2) aumLine.set(pts, '#1d9bf0');
+  }).catch(function(){});
+
+  function paintHar(d){
+    var mid=n(d.midPx), mark=n(d.markPx), prev=n(d.prevDayPx);
+    var price=mid!=null?mid:mark;
+    var chg=(price!=null&&prev!=null&&prev>0)?((price-prev)/prev)*100:null;
+    var mom=chg==null?'flat':chg>0.05?'up':chg<-0.05?'down':'flat';
+    var col=mom==='up'?'#00ba7c':mom==='down'?'#f4212e':'#1d9bf0';
+    setTxt('cap-har-price', fmtPrice(price));
+    var el=document.getElementById('cap-har-price');
+    if(el){ el.className='cap-hero-value'; el.style.color=col; }
+    if(chg==null){ setTxt('cap-har-chg','fetching…'); setCls('cap-har-chg','cap-hero-delta','flat'); }
+    else {
+      setTxt('cap-har-chg', (chg>=0?'+':'')+chg.toFixed(2)+'% day');
+      setCls('cap-har-chg','cap-hero-delta', mom);
+    }
+    // also drive legacy HAR panel if present
+    setTxt('har-price', fmtPrice(price));
+    setTxt('har-mark', fmtPrice(mark));
+    setTxt('har-mid', fmtPrice(mid));
+    var circ=n(d.circulatingSupply), total=n(d.totalSupply);
+    function fmtU(x){
+      if(x==null) return '—';
+      if(Math.abs(x)>=1e9) return '$'+(x/1e9).toFixed(2)+'B';
+      if(Math.abs(x)>=1e6) return '$'+(x/1e6).toFixed(2)+'M';
+      if(Math.abs(x)>=1e3) return '$'+(x/1e3).toFixed(1)+'K';
+      return '$'+Math.round(x).toLocaleString();
+    }
+    setTxt('har-mcap', (price!=null&&circ!=null)?fmtU(price*circ):'—');
+    setTxt('har-fdv', (price!=null&&total!=null)?fmtU(price*total):'—');
+    var chEl=document.getElementById('har-chg');
+    if(chEl){
+      if(chg==null){ chEl.textContent='—'; chEl.style.color='var(--ink-mute)'; }
+      else { chEl.textContent=(chg>=0?'+':'')+chg.toFixed(2)+'%'; chEl.style.color=col; }
+    }
+    var asof=document.getElementById('har-asof');
+    if(asof) asof.textContent='as of '+new Date().toLocaleTimeString();
+
+    if(price!=null){
+      harSeries.push(price);
+      if(harSeries.length>48) harSeries=harSeries.slice(-48);
+      var series=harSeries.length>=2?harSeries:[price*0.998, price*1.001, price];
+      harLine.set(series, col);
+    }
+  }
+  function tickHar(){
+    fetch(HL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'tokenDetails',tokenId:TOKEN_ID})})
+      .then(function(r){return r.json();}).then(paintHar).catch(function(){
+        var asof=document.getElementById('har-asof');
+        if(asof) asof.textContent='error · retrying';
+      });
+  }
+  tickHar();
+  setInterval(tickHar, 12000);
 })();
 
 </script>
