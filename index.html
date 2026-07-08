@@ -185,7 +185,7 @@ footer a { color: var(--ink-soft); }
         <button data-view="calendar" class="active">Calendar</button>
         <button data-view="analytics">Analytics</button>
         <button data-view="operator">Operator</button>
-        <button data-view="content">Content</button>
+        <button data-view="content">X analytics</button>
         <a href="docs/">Docs</a>
       </nav>
       <span class="chip">Replica</span>
@@ -193,11 +193,10 @@ footer a { color: var(--ink-soft); }
   </header>
 
   <div class="note">
-    <strong>This is the actual operating system</strong> — a static replica of the
-    production Oslo app (localhost:3000). Calendar is the daily GTM surface;
-    type in a day cell and press Enter to add a task (saved in this browser only).
-    Analytics figures are real on-chain aggregates. Pipeline accounts and calendar
-    relationship names are anonymized samples. How it works: <a href="docs/">read the docs</a>.
+    <strong>This is the actual operating system</strong> — static replica of production Oslo.
+    <strong>Analytics</strong> = real on-chain vault aggregates.
+    <strong>X analytics</strong> = official X Analytics CSV (year) + public post metrics (no account login).
+    Pipeline names are anonymized. How it works: <a href="docs/">read the docs</a>.
   </div>
 
   <!-- ================= CALENDAR ================= -->
@@ -329,60 +328,69 @@ footer a { color: var(--ink-soft); }
     </div>
   </section>
 
-  <!-- ================= CONTENT ================= -->
+  <!-- ================= CONTENT / X ANALYTICS ================= -->
   <section class="view" id="view-content">
     <div class="page-head">
       <div>
-        <h1 class="page">Content</h1>
-        <p class="sub">Editorial calendar plus channel performance: what ships when, then posts and newsletters with views and engagement.</p>
+        <h1 class="page">X analytics · @harmonixfi</h1>
+        <p class="sub">Official account overview (X Analytics export) plus public post performance. Safe sources only — no login scrape of the Harmonix account.</p>
       </div>
       <div class="page-meta">
-        <div>Calendar · next 30 days ship plan</div>
-        <div>Below · indexed performance samples</div>
+        <div>CSV coverage · 2025-07-08 → 2026-07-07</div>
+        <div>Public scrape · 2026-07-08</div>
       </div>
     </div>
 
-    <div class="cal-section" id="content-calendar-root" style="margin-bottom:24px">
-      <!-- content calendar rendered by script -->
+    <div class="tiles" id="x-tiles">
+      <div class="tile"><div class="label">Followers</div><div class="value tabular" id="x-followers">—</div><div class="hint">public · fxtwitter</div></div>
+      <div class="tile"><div class="label">Impressions (year)</div><div class="value tabular" id="x-imp-year">—</div><div class="hint">official · X Analytics CSV</div></div>
+      <div class="tile"><div class="label">Impressions 30d</div><div class="value tabular" id="x-imp-30">—</div><div class="hint">official · trailing window</div></div>
+      <div class="tile"><div class="label">Eng. rate 30d</div><div class="value tabular" id="x-rate-30">—</div><div class="hint">engagements / impressions</div></div>
+      <div class="tile"><div class="label">New follows (year)</div><div class="value tabular" id="x-fol-year">—</div><div class="hint">official · CSV</div></div>
+      <div class="tile"><div class="label">New follows 30d</div><div class="value tabular" id="x-fol-30">—</div><div class="hint">official · CSV</div></div>
+      <div class="tile"><div class="label">Posts (year)</div><div class="value tabular" id="x-posts-year">—</div><div class="hint">days with posts in export</div></div>
+      <div class="tile"><div class="label">Recent sample views</div><div class="value tabular" id="x-views">—</div><div class="hint">public · last scraped posts</div></div>
     </div>
 
-    <div class="tiles">
-      <div class="tile"><div class="label">Posts tracked</div><div class="value tabular">24</div><div class="hint">latest indexed X posts</div></div>
-      <div class="tile"><div class="label">Posts last 30d</div><div class="value tabular">9</div><div class="hint">published in window</div></div>
-      <div class="tile"><div class="label">Engagement 30d</div><div class="value tabular">3.1K</div><div class="hint">likes + reposts + replies</div></div>
-      <div class="tile"><div class="label">Top post</div><div class="value tabular">41K</div><div class="hint">views, vault milestone thread</div></div>
+    <div class="grid2" style="margin-bottom:24px">
+      <div class="panel">
+        <h2>Impressions vs engagements by month</h2>
+        <div class="pad">
+          <div class="legend">
+            <span><span class="swatch" style="background:var(--chart-in)"></span>Impressions</span>
+            <span><span class="swatch" style="background:var(--chart-out)"></span>Engagements</span>
+          </div>
+          <div class="chartbox" id="chart-x-bars"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Approx. followers (from CSV new-follows + live count)</h2>
+        <div class="pad"><div class="chartbox" id="chart-x-followers"></div></div>
+      </div>
+      <div class="panel">
+        <h2>New follows by month</h2>
+        <div class="pad"><div class="chartbox" id="chart-x-follows"></div></div>
+      </div>
+      <div class="panel">
+        <h2>Posts published by month</h2>
+        <div class="pad"><div class="chartbox" id="chart-x-posts"></div></div>
+      </div>
     </div>
 
     <div class="panel" style="margin-bottom:24px">
-      <h2>Posts <span class="pill">sample rows</span></h2>
+      <h2>Top posts <span class="pill">public scrape</span></h2>
       <div class="scrollx">
         <table>
-          <thead><tr><th>Post</th><th>Topic</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Reposts</th><th class="num">Engagement</th><th>Date</th></tr></thead>
-          <tbody>
-            <tr><td>Vault milestone thread: TVL, depositor growth, and what changed this quarter</td><td class="dim">product</td><td class="num">41.2K</td><td class="num">312</td><td class="num">88</td><td class="num">486</td><td class="dim">Jul 02</td></tr>
-            <tr><td>How the vault rebalances during funding-rate flips, explained in one diagram</td><td class="dim">education</td><td class="num">18.9K</td><td class="num">204</td><td class="num">51</td><td class="num">297</td><td class="dim">Jun 27</td></tr>
-            <tr><td>Weekly yield report: haHYPE and haUSDC performance vs benchmark</td><td class="dim">performance</td><td class="num">9.4K</td><td class="num">96</td><td class="num">22</td><td class="num">141</td><td class="dim">Jun 24</td></tr>
-            <tr><td>Partnership announcement thread with ecosystem integration details</td><td class="dim">partnership</td><td class="num">27.6K</td><td class="num">268</td><td class="num">74</td><td class="num">402</td><td class="dim">Jun 19</td></tr>
-          </tbody>
+          <thead><tr><th>Post</th><th class="num">Views</th><th class="num">Likes</th><th class="num">Reposts</th><th class="num">Replies</th><th>Date</th></tr></thead>
+          <tbody id="x-top-posts-body"></tbody>
         </table>
       </div>
     </div>
 
-    <div class="grid2">
-      <div class="panel">
-        <h2>Newsletters</h2>
-        <div class="rows">
-          <div><div class="row-head"><span>Vault strategies deep dive, issue 12</span><span class="pill">sent</span></div><div class="row-sub">email · all subscribers · open rate tracked on send</div></div>
-          <div><div class="row-head"><span>Ecosystem update: integrations and TVL, issue 11</span><span class="pill">sent</span></div><div class="row-sub">email · all subscribers</div></div>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>Content pipeline</h2>
-        <div class="rows">
-          <div><div class="row-head"><span>Funding-rate market structure piece</span><span class="pill">drafted</span></div><div class="row-sub">longform · X + blog · expected 15K views</div></div>
-          <div><div class="row-head"><span>Depositor cohort retention breakdown</span><span class="pill">planned</span></div><div class="row-sub">thread · X · expected 8K views</div></div>
-        </div>
-      </div>
+    <div class="note" style="margin-bottom:0">
+      <strong>Sources</strong> · Official totals from X Analytics account-overview CSV (365 days).
+      Live followers and post views from public mirrors (nitter + fxtwitter) — never logged into the Harmonix account.
+      Re-export CSV + re-run public scrape, then redeploy this page to refresh.
     </div>
   </section>
 
@@ -795,6 +803,124 @@ function renderContentCalendar() {
 }
 renderContentCalendar();
 
+
+// ---- X analytics (official CSV + public scrape) ----
+const X_ANALYTICS = {"handle": "harmonixfi", "as_of": "2026-07-07", "scraped_at": "2026-07-08T20:41:11.297Z", "followers": 11905, "following": 345, "tweets": 2961, "year": {"impressions": 2298206, "engagements": 115069, "likes": 12917, "follows": 5524, "posts": 253, "days": 365}, "trailing_30d": {"impressions": 66535, "engagements": 2039, "likes": 327, "follows": 74, "posts": 22, "engagement_rate": 0.0306}, "months": [{"m": "2025-07", "impressions": 99131, "engagements": 3632, "likes": 744, "follows": 412, "posts": 14, "profile": 753}, {"m": "2025-08", "impressions": 121738, "engagements": 7341, "likes": 871, "follows": 1372, "posts": 15, "profile": 839}, {"m": "2025-09", "impressions": 143844, "engagements": 7011, "likes": 1040, "follows": 429, "posts": 21, "profile": 943}, {"m": "2025-10", "impressions": 227830, "engagements": 9878, "likes": 1808, "follows": 720, "posts": 18, "profile": 1696}, {"m": "2025-11", "impressions": 700280, "engagements": 37969, "likes": 2479, "follows": 1279, "posts": 18, "profile": 5050}, {"m": "2025-12", "impressions": 634420, "engagements": 29023, "likes": 2741, "follows": 758, "posts": 27, "profile": 4155}, {"m": "2026-01", "impressions": 78826, "engagements": 2983, "likes": 457, "follows": 119, "posts": 13, "profile": 425}, {"m": "2026-02", "impressions": 78817, "engagements": 4507, "likes": 1028, "follows": 125, "posts": 26, "profile": 474}, {"m": "2026-03", "impressions": 49465, "engagements": 3969, "likes": 525, "follows": 83, "posts": 24, "profile": 306}, {"m": "2026-04", "impressions": 36196, "engagements": 3340, "likes": 305, "follows": 59, "posts": 22, "profile": 280}, {"m": "2026-05", "impressions": 52634, "engagements": 3009, "likes": 540, "follows": 77, "posts": 30, "profile": 390}, {"m": "2026-06", "impressions": 63112, "engagements": 2032, "likes": 305, "follows": 73, "posts": 20, "profile": 238}, {"m": "2026-07", "impressions": 11913, "engagements": 375, "likes": 74, "follows": 18, "posts": 5, "profile": 47}], "follower_series": [{"d": "2025-07-08", "f": 6409}, {"d": "2025-07-15", "f": 6535}, {"d": "2025-07-22", "f": 6626}, {"d": "2025-07-29", "f": 6758}, {"d": "2025-08-05", "f": 6855}, {"d": "2025-08-12", "f": 6942}, {"d": "2025-08-19", "f": 7002}, {"d": "2025-08-26", "f": 7146}, {"d": "2025-09-02", "f": 8192}, {"d": "2025-09-09", "f": 8284}, {"d": "2025-09-16", "f": 8429}, {"d": "2025-09-23", "f": 8529}, {"d": "2025-09-30", "f": 8594}, {"d": "2025-10-07", "f": 8803}, {"d": "2025-10-14", "f": 8995}, {"d": "2025-10-21", "f": 9167}, {"d": "2025-10-28", "f": 9281}, {"d": "2025-11-04", "f": 9351}, {"d": "2025-11-11", "f": 9444}, {"d": "2025-11-18", "f": 10006}, {"d": "2025-11-25", "f": 10389}, {"d": "2025-12-02", "f": 10728}, {"d": "2025-12-09", "f": 10916}, {"d": "2025-12-16", "f": 11137}, {"d": "2025-12-23", "f": 11316}, {"d": "2025-12-30", "f": 11342}, {"d": "2026-01-06", "f": 11380}, {"d": "2026-01-13", "f": 11398}, {"d": "2026-01-20", "f": 11424}, {"d": "2026-01-27", "f": 11454}, {"d": "2026-02-03", "f": 11529}, {"d": "2026-02-10", "f": 11544}, {"d": "2026-02-17", "f": 11572}, {"d": "2026-02-24", "f": 11589}, {"d": "2026-03-03", "f": 11601}, {"d": "2026-03-10", "f": 11615}, {"d": "2026-03-17", "f": 11644}, {"d": "2026-03-24", "f": 11669}, {"d": "2026-03-31", "f": 11678}, {"d": "2026-04-07", "f": 11697}, {"d": "2026-04-14", "f": 11708}, {"d": "2026-04-21", "f": 11723}, {"d": "2026-04-28", "f": 11732}, {"d": "2026-05-05", "f": 11743}, {"d": "2026-05-12", "f": 11754}, {"d": "2026-05-19", "f": 11769}, {"d": "2026-05-26", "f": 11796}, {"d": "2026-06-02", "f": 11824}, {"d": "2026-06-09", "f": 11834}, {"d": "2026-06-16", "f": 11855}, {"d": "2026-06-23", "f": 11871}, {"d": "2026-06-30", "f": 11887}, {"d": "2026-07-07", "f": 11905}], "recent_posts_agg": {"likes": 165, "reposts": 19, "replies": 32, "engagement_score": 235, "views": 23513}, "top_posts": [{"id": "2070598206342451452", "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 \u2192", "likes": 19, "reposts": 6, "replies": 4, "views": 3221, "created_at": "2026-06-26T20:00:56.000Z"}, {"id": "2072344674459885635", "text": "The kHYPE vault just crossed $3.1M TVL 3.57% APY on kHYPE. \ud83d\udc49 https://app.harmonix.fi/vaults/hyperevm-khype-v1", "likes": 20, "reposts": 2, "replies": 5, "views": 1304, "created_at": "2026-07-01T15:40:47.000Z"}, {"id": "2070248552643842071", "text": "Article Vault APY Returns: USDC 9.77% \u00b7 kHYPE 3.52% \u00b7 HYPE 3.8% APY, share price, and benchmark comparison across Harmonix vaults Harmonix h", "likes": 13, "reposts": 3, "replies": 6, "views": 2752, "created_at": "Thu Jun 25 20:51:32 +0000 2026"}, {"id": "2073965041477452077", "text": "Harmonix TVL crossed 9.28m today", "likes": 17, "reposts": 3, "replies": 1, "views": 1210, "created_at": "2026-07-06T02:59:32.000Z"}, {"id": "2074568138717311039", "text": "Hyperliquid yield capacity is starting to look more real.  Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is ", "likes": 15, "reposts": 2, "replies": 4, "views": 1090, "created_at": "Tue Jul 07 18:56:02 +0000 2026"}, {"id": "2071707929619685602", "text": "If hyperliquid:native reaches Multicoin\u2019s 2028 targets, current Harmonix HYPE-kHYPE TVL could generate up to $5.6M in extra value for users ", "likes": 18, "reposts": 1, "replies": 2, "views": 1583, "created_at": "2026-06-29T21:30:35.000Z"}]};
+
+function fmtX(n) {
+  if (n == null || !isFinite(n)) return '—';
+  const a = Math.abs(n);
+  if (a >= 1e6) return (n/1e6).toFixed(2) + 'M';
+  if (a >= 1e4) return (n/1e3).toFixed(1) + 'K';
+  if (a >= 1000) return (n/1e3).toFixed(1) + 'K';
+  return String(Math.round(n * 100) / 100);
+}
+
+function renderXAnalytics() {
+  const X = X_ANALYTICS;
+  if (!X) return;
+  const t30 = X.trailing_30d || {};
+  const y = X.year || {};
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('x-followers', fmtX(X.followers));
+  set('x-imp-year', fmtX(y.impressions));
+  set('x-imp-30', fmtX(t30.impressions));
+  set('x-rate-30', t30.engagement_rate != null ? (t30.engagement_rate * 100).toFixed(2) + '%' : '—');
+  set('x-fol-year', fmtX(y.follows));
+  set('x-fol-30', fmtX(t30.follows));
+  set('x-posts-year', fmtX(y.posts));
+  set('x-views', fmtX((X.recent_posts_agg || {}).views));
+
+  // charts reuse MONTH-style helpers with custom series
+  const months = X.months || [];
+  if (months.length && typeof bars === 'function') {
+    // temporary override of MONTHS for x charts via inline SVG builders
+  }
+  drawXBars('chart-x-bars', months);
+  drawXLine('chart-x-follows', months.map(m => ({ m: m.m, v: m.follows })), 'New follows');
+  drawXLine('chart-x-posts', months.map(m => ({ m: m.m, v: m.posts })), 'Posts');
+  const fs = X.follower_series || [];
+  drawXLine('chart-x-followers', fs.map(p => ({ m: p.d, v: p.f })), 'Followers');
+
+  const tb = document.getElementById('x-top-posts-body');
+  if (tb) {
+    tb.innerHTML = (X.top_posts || []).map(p => {
+      const dt = p.created_at ? new Date(p.created_at) : null;
+      const ds = dt && !isNaN(dt) ? dt.toLocaleDateString('en', { month: 'short', day: '2-digit' }) : '—';
+      const url = 'https://x.com/' + X.handle + '/status/' + p.id;
+      return '<tr><td><a href="' + url + '" target="_blank" rel="noopener" style="color:var(--ink);text-decoration:none">' +
+        (p.text || '').replace(/</g,'&lt;') + '</a></td>' +
+        '<td class="num">' + fmtX(p.views) + '</td>' +
+        '<td class="num">' + fmtX(p.likes) + '</td>' +
+        '<td class="num">' + fmtX(p.reposts) + '</td>' +
+        '<td class="num">' + fmtX(p.replies) + '</td>' +
+        '<td class="dim">' + ds + '</td></tr>';
+    }).join('') || '<tr><td colspan="6" class="dim">No public posts scraped yet</td></tr>';
+  }
+}
+
+function drawXBars(elId, months) {
+  const box = document.getElementById(elId);
+  if (!box || !months.length) return;
+  const max = Math.max(...months.map(d => Math.max(d.impressions, d.engagements)), 1);
+  const gw = (W - PL * 2) / months.length;
+  const bw = Math.min(14, gw / 2 - 3);
+  const ph = H - PB - PT;
+  const y = v => PT + ph - (v / max) * ph;
+  let marks = '';
+  months.forEach((d, i) => {
+    const gx = PL + i * gw + gw / 2;
+    marks += `<g>
+      <rect x="${gx - bw - 1}" y="${y(d.impressions)}" width="${bw}" height="${Math.max(1, PT + ph - y(d.impressions))}" rx="3" fill="${css('--chart-in')}"/>
+      <rect x="${gx + 1}" y="${y(d.engagements)}" width="${bw}" height="${Math.max(1, PT + ph - y(d.engagements))}" rx="3" fill="${css('--chart-out')}"/>
+      <rect class="hit" data-i="${i}" x="${PL + i * gw}" y="0" width="${gw}" height="${H}" fill="transparent"/>
+      <text x="${gx}" y="${H - 6}" text-anchor="middle" font-size="10" fill="${css('--ink-fade')}">${mShort(d.m)}</text>
+    </g>`;
+  });
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="width:100%" role="img">${grid(max, y)}${marks}</svg>`;
+  const tip = makeTip(box);
+  box.querySelectorAll('.hit').forEach(r => {
+    const i = +r.dataset.i, d = months[i];
+    r.addEventListener('mouseenter', () => tip(true, (PL + i * gw + gw / 2) / W,
+      `${mShort(d.m)}\nImpressions: ${fmtX(d.impressions)}\nEngagements: ${fmtX(d.engagements)}\nFollows: ${fmtX(d.follows)}`));
+    r.addEventListener('mouseleave', () => tip(false, 0, ''));
+  });
+}
+
+function drawXLine(elId, pts, label) {
+  const box = document.getElementById(elId);
+  if (!box || pts.length < 2) {
+    if (box) box.innerHTML = '<p class="dim" style="font-size:12px;padding:8px">Not enough points</p>';
+    return;
+  }
+  const max = Math.max(...pts.map(d => d.v), 1);
+  const sx = (W - PL * 2) / (pts.length - 1);
+  const ph = H - PB - PT;
+  const y = v => PT + ph - (v / max) * ph;
+  const x = i => PL + i * sx;
+  const poly = pts.map((d, i) => `${x(i)},${y(d.v)}`).join(' ');
+  let marks = '';
+  // label every ~nth tick
+  const step = Math.max(1, Math.floor(pts.length / 8));
+  pts.forEach((d, i) => {
+    marks += `<circle cx="${x(i)}" cy="${y(d.v)}" r="2.5" fill="${css('--chart-in')}" stroke="${css('--card')}" stroke-width="1"/>`;
+    if (i % step === 0 || i === pts.length - 1) {
+      const lab = d.m.length === 10 ? d.m.slice(5) : mShort(d.m);
+      marks += `<text x="${x(i)}" y="${H - 6}" text-anchor="middle" font-size="9" fill="${css('--ink-fade')}">${lab}</text>`;
+    }
+    marks += `<rect class="hit" data-i="${i}" x="${x(i) - sx/2}" y="0" width="${sx}" height="${H}" fill="transparent"/>`;
+  });
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="width:100%" role="img">${grid(max, y)}<polyline points="${poly}" fill="none" stroke="${css('--chart-in')}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${marks}</svg>`;
+  const tip = makeTip(box);
+  box.querySelectorAll('.hit').forEach(r => {
+    const i = +r.dataset.i, d = pts[i];
+    r.addEventListener('mouseenter', () => tip(true, x(i) / W, `${d.m}\n${label}: ${fmtX(d.v)}`));
+    r.addEventListener('mouseleave', () => tip(false, 0, ''));
+  });
+}
+
+// render after vault charts init
+
 // ---- real monthly aggregates from the on-chain backfill ----
 const MONTHS = [{"m":"2025-07","d":1,"w":1,"a":2,"n":2},{"m":"2025-08","d":30,"w":13,"a":36,"n":36},{"m":"2025-09","d":1063,"w":229,"a":770,"n":757},{"m":"2025-10","d":2069,"w":453,"a":1158,"n":923},{"m":"2025-11","d":1832,"w":595,"a":1437,"n":964},{"m":"2025-12","d":1217,"w":898,"a":1617,"n":927},{"m":"2026-01","d":392,"w":405,"a":562,"n":202},{"m":"2026-02","d":80,"w":197,"a":226,"n":36},{"m":"2026-03","d":155,"w":179,"a":270,"n":72},{"m":"2026-04","d":131,"w":173,"a":248,"n":56},{"m":"2026-05","d":106,"w":201,"a":249,"n":65},{"m":"2026-06","d":58,"w":132,"a":167,"n":34}];
 
@@ -875,6 +1001,7 @@ function line(el, key, label) {
 bars("chart-bars");
 line("chart-mau", "a", "Active wallets");
 line("chart-new", "n", "New wallets");
+renderXAnalytics();
 </script>
 </body>
 </html>

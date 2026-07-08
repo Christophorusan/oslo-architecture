@@ -1,0 +1,420 @@
+{
+  "handle": "harmonixfi",
+  "as_of": "2026-07-07",
+  "scraped_at": "2026-07-08T20:41:11.297Z",
+  "followers": 11905,
+  "following": 345,
+  "tweets": 2961,
+  "year": {
+    "impressions": 2298206,
+    "engagements": 115069,
+    "likes": 12917,
+    "follows": 5524,
+    "posts": 253,
+    "days": 365
+  },
+  "trailing_30d": {
+    "impressions": 66535,
+    "engagements": 2039,
+    "likes": 327,
+    "follows": 74,
+    "posts": 22,
+    "engagement_rate": 0.0306
+  },
+  "months": [
+    {
+      "m": "2025-07",
+      "impressions": 99131,
+      "engagements": 3632,
+      "likes": 744,
+      "follows": 412,
+      "posts": 14,
+      "profile": 753
+    },
+    {
+      "m": "2025-08",
+      "impressions": 121738,
+      "engagements": 7341,
+      "likes": 871,
+      "follows": 1372,
+      "posts": 15,
+      "profile": 839
+    },
+    {
+      "m": "2025-09",
+      "impressions": 143844,
+      "engagements": 7011,
+      "likes": 1040,
+      "follows": 429,
+      "posts": 21,
+      "profile": 943
+    },
+    {
+      "m": "2025-10",
+      "impressions": 227830,
+      "engagements": 9878,
+      "likes": 1808,
+      "follows": 720,
+      "posts": 18,
+      "profile": 1696
+    },
+    {
+      "m": "2025-11",
+      "impressions": 700280,
+      "engagements": 37969,
+      "likes": 2479,
+      "follows": 1279,
+      "posts": 18,
+      "profile": 5050
+    },
+    {
+      "m": "2025-12",
+      "impressions": 634420,
+      "engagements": 29023,
+      "likes": 2741,
+      "follows": 758,
+      "posts": 27,
+      "profile": 4155
+    },
+    {
+      "m": "2026-01",
+      "impressions": 78826,
+      "engagements": 2983,
+      "likes": 457,
+      "follows": 119,
+      "posts": 13,
+      "profile": 425
+    },
+    {
+      "m": "2026-02",
+      "impressions": 78817,
+      "engagements": 4507,
+      "likes": 1028,
+      "follows": 125,
+      "posts": 26,
+      "profile": 474
+    },
+    {
+      "m": "2026-03",
+      "impressions": 49465,
+      "engagements": 3969,
+      "likes": 525,
+      "follows": 83,
+      "posts": 24,
+      "profile": 306
+    },
+    {
+      "m": "2026-04",
+      "impressions": 36196,
+      "engagements": 3340,
+      "likes": 305,
+      "follows": 59,
+      "posts": 22,
+      "profile": 280
+    },
+    {
+      "m": "2026-05",
+      "impressions": 52634,
+      "engagements": 3009,
+      "likes": 540,
+      "follows": 77,
+      "posts": 30,
+      "profile": 390
+    },
+    {
+      "m": "2026-06",
+      "impressions": 63112,
+      "engagements": 2032,
+      "likes": 305,
+      "follows": 73,
+      "posts": 20,
+      "profile": 238
+    },
+    {
+      "m": "2026-07",
+      "impressions": 11913,
+      "engagements": 375,
+      "likes": 74,
+      "follows": 18,
+      "posts": 5,
+      "profile": 47
+    }
+  ],
+  "follower_series": [
+    {
+      "d": "2025-07-08",
+      "f": 6409
+    },
+    {
+      "d": "2025-07-15",
+      "f": 6535
+    },
+    {
+      "d": "2025-07-22",
+      "f": 6626
+    },
+    {
+      "d": "2025-07-29",
+      "f": 6758
+    },
+    {
+      "d": "2025-08-05",
+      "f": 6855
+    },
+    {
+      "d": "2025-08-12",
+      "f": 6942
+    },
+    {
+      "d": "2025-08-19",
+      "f": 7002
+    },
+    {
+      "d": "2025-08-26",
+      "f": 7146
+    },
+    {
+      "d": "2025-09-02",
+      "f": 8192
+    },
+    {
+      "d": "2025-09-09",
+      "f": 8284
+    },
+    {
+      "d": "2025-09-16",
+      "f": 8429
+    },
+    {
+      "d": "2025-09-23",
+      "f": 8529
+    },
+    {
+      "d": "2025-09-30",
+      "f": 8594
+    },
+    {
+      "d": "2025-10-07",
+      "f": 8803
+    },
+    {
+      "d": "2025-10-14",
+      "f": 8995
+    },
+    {
+      "d": "2025-10-21",
+      "f": 9167
+    },
+    {
+      "d": "2025-10-28",
+      "f": 9281
+    },
+    {
+      "d": "2025-11-04",
+      "f": 9351
+    },
+    {
+      "d": "2025-11-11",
+      "f": 9444
+    },
+    {
+      "d": "2025-11-18",
+      "f": 10006
+    },
+    {
+      "d": "2025-11-25",
+      "f": 10389
+    },
+    {
+      "d": "2025-12-02",
+      "f": 10728
+    },
+    {
+      "d": "2025-12-09",
+      "f": 10916
+    },
+    {
+      "d": "2025-12-16",
+      "f": 11137
+    },
+    {
+      "d": "2025-12-23",
+      "f": 11316
+    },
+    {
+      "d": "2025-12-30",
+      "f": 11342
+    },
+    {
+      "d": "2026-01-06",
+      "f": 11380
+    },
+    {
+      "d": "2026-01-13",
+      "f": 11398
+    },
+    {
+      "d": "2026-01-20",
+      "f": 11424
+    },
+    {
+      "d": "2026-01-27",
+      "f": 11454
+    },
+    {
+      "d": "2026-02-03",
+      "f": 11529
+    },
+    {
+      "d": "2026-02-10",
+      "f": 11544
+    },
+    {
+      "d": "2026-02-17",
+      "f": 11572
+    },
+    {
+      "d": "2026-02-24",
+      "f": 11589
+    },
+    {
+      "d": "2026-03-03",
+      "f": 11601
+    },
+    {
+      "d": "2026-03-10",
+      "f": 11615
+    },
+    {
+      "d": "2026-03-17",
+      "f": 11644
+    },
+    {
+      "d": "2026-03-24",
+      "f": 11669
+    },
+    {
+      "d": "2026-03-31",
+      "f": 11678
+    },
+    {
+      "d": "2026-04-07",
+      "f": 11697
+    },
+    {
+      "d": "2026-04-14",
+      "f": 11708
+    },
+    {
+      "d": "2026-04-21",
+      "f": 11723
+    },
+    {
+      "d": "2026-04-28",
+      "f": 11732
+    },
+    {
+      "d": "2026-05-05",
+      "f": 11743
+    },
+    {
+      "d": "2026-05-12",
+      "f": 11754
+    },
+    {
+      "d": "2026-05-19",
+      "f": 11769
+    },
+    {
+      "d": "2026-05-26",
+      "f": 11796
+    },
+    {
+      "d": "2026-06-02",
+      "f": 11824
+    },
+    {
+      "d": "2026-06-09",
+      "f": 11834
+    },
+    {
+      "d": "2026-06-16",
+      "f": 11855
+    },
+    {
+      "d": "2026-06-23",
+      "f": 11871
+    },
+    {
+      "d": "2026-06-30",
+      "f": 11887
+    },
+    {
+      "d": "2026-07-07",
+      "f": 11905
+    }
+  ],
+  "recent_posts_agg": {
+    "likes": 165,
+    "reposts": 19,
+    "replies": 32,
+    "engagement_score": 235,
+    "views": 23513
+  },
+  "top_posts": [
+    {
+      "id": "2070598206342451452",
+      "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 \u2192",
+      "likes": 19,
+      "reposts": 6,
+      "replies": 4,
+      "views": 3221,
+      "created_at": "2026-06-26T20:00:56.000Z"
+    },
+    {
+      "id": "2072344674459885635",
+      "text": "The kHYPE vault just crossed $3.1M TVL 3.57% APY on kHYPE. \ud83d\udc49 https://app.harmonix.fi/vaults/hyperevm-khype-v1",
+      "likes": 20,
+      "reposts": 2,
+      "replies": 5,
+      "views": 1304,
+      "created_at": "2026-07-01T15:40:47.000Z"
+    },
+    {
+      "id": "2070248552643842071",
+      "text": "Article Vault APY Returns: USDC 9.77% \u00b7 kHYPE 3.52% \u00b7 HYPE 3.8% APY, share price, and benchmark comparison across Harmonix vaults Harmonix h",
+      "likes": 13,
+      "reposts": 3,
+      "replies": 6,
+      "views": 2752,
+      "created_at": "Thu Jun 25 20:51:32 +0000 2026"
+    },
+    {
+      "id": "2073965041477452077",
+      "text": "Harmonix TVL crossed 9.28m today",
+      "likes": 17,
+      "reposts": 3,
+      "replies": 1,
+      "views": 1210,
+      "created_at": "2026-07-06T02:59:32.000Z"
+    },
+    {
+      "id": "2074568138717311039",
+      "text": "Hyperliquid yield capacity is starting to look more real.  Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is ",
+      "likes": 15,
+      "reposts": 2,
+      "replies": 4,
+      "views": 1090,
+      "created_at": "Tue Jul 07 18:56:02 +0000 2026"
+    },
+    {
+      "id": "2071707929619685602",
+      "text": "If hyperliquid:native reaches Multicoin\u2019s 2028 targets, current Harmonix HYPE-kHYPE TVL could generate up to $5.6M in extra value for users ",
+      "likes": 18,
+      "reposts": 1,
+      "replies": 2,
+      "views": 1583,
+      "created_at": "2026-06-29T21:30:35.000Z"
+    }
+  ]
+}
