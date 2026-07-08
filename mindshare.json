@@ -1,0 +1,387 @@
+{
+  "vertical": "hyperliquid-yield",
+  "label": "Hyperliquid \u00b7 yield / trading voices",
+  "description": "Curated watchlist for Harmonix mindshare (not global Kaito). Public posts only.",
+  "as_of": "2026-07-08T21:07:18.034Z",
+  "method": "Share of engagement-weighted score among watchlist public posts (likes+2\u00d7reposts+3\u00d7replies+0.001\u00d7views \u00d7 recency \u00d7 keyword boost). Not global Kaito mindshare.",
+  "voices": [
+    {
+      "handle": "HyperliquidX",
+      "tier": "ecosystem",
+      "tags": [
+        "hyperliquid",
+        "L1"
+      ],
+      "followers": 410789,
+      "posts_sampled": 9,
+      "raw_score": 8484.265368830198,
+      "mindshare_pct": 78.25728781974095,
+      "likes_sum": 22323,
+      "eng_sum": 37614,
+      "views_sum": 3326966,
+      "keyword_posts": 8,
+      "top_post": {
+        "id": "2072721677524644255",
+        "text": "VALR, Africa's largest crypto exchange by trading volume, is using Hyperliquid as the onchain infrastructure layer to bring perpetuals to it",
+        "likes": 2339,
+        "reposts": 726,
+        "replies": 245,
+        "views": 380992,
+        "created_at": "Thu Jul 02 16:38:51 +0000 2026",
+        "keyword_hit": true
+      }
+    },
+    {
+      "handle": "aave",
+      "tier": "peer",
+      "tags": [
+        "lending"
+      ],
+      "followers": 698592,
+      "posts_sampled": 6,
+      "raw_score": 895.4877598540434,
+      "mindshare_pct": 8.259812761091805,
+      "likes_sum": 524,
+      "eng_sum": 777,
+      "views_sum": 103188,
+      "keyword_posts": 0,
+      "top_post": {
+        "id": "2074571014734753916",
+        "text": "Aave Labs posted a proposal to onboard @maplefinance's newly launched syrupUSDG to the @global_dollar Hub on Aave V4.",
+        "likes": 208,
+        "reposts": 40,
+        "replies": 23,
+        "views": 27994,
+        "created_at": "Tue Jul 07 19:07:28 +0000 2026",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "pendle_fi",
+      "tier": "peer",
+      "tags": [
+        "yield"
+      ],
+      "followers": 160976,
+      "posts_sampled": 5,
+      "raw_score": 407.1658409361165,
+      "mindshare_pct": 3.7556220862169787,
+      "likes_sum": 412,
+      "eng_sum": 553,
+      "views_sum": 47176,
+      "keyword_posts": 2,
+      "top_post": {
+        "id": "2072919488572629044",
+        "text": "New ATH milestone - total $PENDLE staked surpassed 100M (~36% of total supply)\n\nSince the launch of sPENDLE:\n\ud83d\udd39 Emissions cut by 71%, more t",
+        "likes": 152,
+        "reposts": 17,
+        "replies": 17,
+        "views": 19383,
+        "created_at": "2026-07-03T05:44:53.000Z",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "kinetiq_xyz",
+      "tier": "peer",
+      "tags": [
+        "lst",
+        "khype"
+      ],
+      "followers": 25768,
+      "posts_sampled": 6,
+      "raw_score": 260.79102166122016,
+      "mindshare_pct": 2.405487942176465,
+      "likes_sum": 217,
+      "eng_sum": 327,
+      "views_sum": 26759,
+      "keyword_posts": 2,
+      "top_post": {
+        "id": "2072417837038133621",
+        "text": "Omnia.hl \u03c0 (@0xOmnia) \u2014 https://nitter.net/0xOmnia/status/2071995391914983684#m",
+        "likes": 67,
+        "reposts": 6,
+        "replies": 21,
+        "views": 6829,
+        "created_at": "2026-07-01T20:31:30.000Z",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "felixprotocol",
+      "tier": "peer",
+      "tags": [
+        "hyperliquid",
+        "defi"
+      ],
+      "followers": 22080,
+      "posts_sampled": 10,
+      "raw_score": 213.3273224558446,
+      "mindshare_pct": 1.967691597032582,
+      "likes_sum": 666,
+      "eng_sum": 879,
+      "views_sum": 76496,
+      "keyword_posts": 4,
+      "top_post": {
+        "id": "2072325432838418762",
+        "text": "Fully on-chain SPCX DCA is now live\n\nTrade spot equities with DCA orders\u00a0via Felix here: https://trade.usefelix.xyz/equities/SPCX",
+        "likes": 80,
+        "reposts": 8,
+        "replies": 4,
+        "views": 7316,
+        "created_at": "2026-07-01T14:24:19.000Z",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "hyperlendx",
+      "tier": "peer",
+      "tags": [
+        "lending",
+        "hyperliquid"
+      ],
+      "followers": 31260,
+      "posts_sampled": 10,
+      "raw_score": 208.14910587933514,
+      "mindshare_pct": 1.9199286891785186,
+      "likes_sum": 1248,
+      "eng_sum": 1860,
+      "views_sum": 158515,
+      "keyword_posts": 9,
+      "top_post": {
+        "id": "2069756522284847550",
+        "text": "As part of our pursuit of continually refining and upgrading protocol security measures HyperLend is today introducing our newly created Vet",
+        "likes": 162,
+        "reposts": 21,
+        "replies": 41,
+        "views": 18822,
+        "created_at": "2026-06-24T12:16:23.000Z",
+        "keyword_hit": true
+      }
+    },
+    {
+      "handle": "harmonixfi",
+      "tier": "self",
+      "tags": [
+        "harmonix",
+        "vaults",
+        "yield"
+      ],
+      "followers": 11905,
+      "posts_sampled": 10,
+      "raw_score": 176.8791839462526,
+      "mindshare_pct": 1.6315007376191164,
+      "likes_sum": 140,
+      "eng_sum": 204,
+      "views_sum": 17845,
+      "keyword_posts": 10,
+      "top_post": {
+        "id": "2074568138717311039",
+        "text": "Hyperliquid yield capacity is starting to look more real.\n\nStablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is ",
+        "likes": 15,
+        "reposts": 2,
+        "replies": 4,
+        "views": 1090,
+        "created_at": "Tue Jul 07 18:56:02 +0000 2026",
+        "keyword_hit": true
+      }
+    },
+    {
+      "handle": "resolvlabs",
+      "tier": "peer",
+      "tags": [
+        "yield"
+      ],
+      "followers": 41020,
+      "posts_sampled": 3,
+      "raw_score": 136.68787823496965,
+      "mindshare_pct": 1.2607835992261744,
+      "likes_sum": 169,
+      "eng_sum": 348,
+      "views_sum": 59285,
+      "keyword_posts": 2,
+      "top_post": {
+        "id": "2071953216275714138",
+        "text": "Article Introducing primeUSD: Institutional Yield with a Low-Risk Profile Connecting RWA Markets The tokenized RWA market has reached instit",
+        "likes": 74,
+        "reposts": 58,
+        "replies": 12,
+        "views": 18187,
+        "created_at": "Tue Jun 30 13:45:16 +0000 2026",
+        "keyword_hit": true
+      }
+    },
+    {
+      "handle": "hyenatrade",
+      "tier": "ecosystem",
+      "tags": [
+        "hip3",
+        "funding"
+      ],
+      "followers": 13248,
+      "posts_sampled": 10,
+      "raw_score": 39.6715106624047,
+      "mindshare_pct": 0.36592264541340996,
+      "likes_sum": 790,
+      "eng_sum": 1150,
+      "views_sum": 92777,
+      "keyword_posts": 1,
+      "top_post": {
+        "id": "2072055304465092634",
+        "text": "The IP perpetual market is being delisted.\n\nStarting 12:00 UTC on July 1, IP enters delisting pricing: the mark price converges to a 1-hour ",
+        "likes": 39,
+        "reposts": 2,
+        "replies": 8,
+        "views": 7092,
+        "created_at": "Tue Jun 30 20:30:56 +0000 2026",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "usualmoney",
+      "tier": "peer",
+      "tags": [
+        "stablecoin",
+        "yield"
+      ],
+      "followers": 110008,
+      "posts_sampled": 10,
+      "raw_score": 18.682781432602695,
+      "mindshare_pct": 0.17232650562957216,
+      "likes_sum": 510,
+      "eng_sum": 774,
+      "views_sum": 61787,
+      "keyword_posts": 0,
+      "top_post": {
+        "id": "2067558700865200511",
+        "text": "Article \ud83c\udfe6 Usual v2 is live. It looks like a new app. It\u2019s more than that. V2 is the foundation of a FinTech you own. The logic is simple. U",
+        "likes": 60,
+        "reposts": 18,
+        "replies": 14,
+        "views": 6011,
+        "created_at": "Thu Jun 18 10:43:02 +0000 2026",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "hypurrfi",
+      "tier": "peer",
+      "tags": [
+        "defi",
+        "hyperliquid"
+      ],
+      "followers": 15074,
+      "posts_sampled": 6,
+      "raw_score": 0.3502588476148964,
+      "mindshare_pct": 0.0032307225502293596,
+      "likes_sum": 117,
+      "eng_sum": 148,
+      "views_sum": 11540,
+      "keyword_posts": 4,
+      "top_post": {
+        "id": "2054905963019108689",
+        "text": "HypurrFi is working with Native Markets and Hyperliquid to ensure this is a graceful transition. Stay tuned to official announcements, and k",
+        "likes": 16,
+        "reposts": 1,
+        "replies": 1,
+        "views": 1508,
+        "created_at": "Thu May 14 12:45:34 +0000 2026",
+        "keyword_hit": true
+      }
+    },
+    {
+      "handle": "MorphoLabs",
+      "tier": "peer",
+      "tags": [
+        "lending"
+      ],
+      "followers": 4817,
+      "posts_sampled": 1,
+      "raw_score": 0.02389660428482074,
+      "mindshare_pct": 0.00022041783915694715,
+      "likes_sum": 26,
+      "eng_sum": 62,
+      "views_sum": 3900,
+      "keyword_posts": 0,
+      "top_post": {
+        "id": "2044025711099556347",
+        "text": "M\u0336o\u0336r\u0336p\u0336h\u0336o\u0336 \u0336M\u0336a\u0336r\u0336k\u0336e\u0336t\u0336s\u0336 \u0336V\u03362\u0336 Morpho Midnight Paul Frambot \ud83e\udd8b (@PaulFrambot) Morpho's fixed rate protocol now has a name: Morpho Midnig",
+        "likes": 26,
+        "reposts": 4,
+        "replies": 28,
+        "views": 3900,
+        "created_at": "Tue Apr 14 12:11:20 +0000 2026",
+        "keyword_hit": false
+      }
+    },
+    {
+      "handle": "ethena_labs",
+      "tier": "peer",
+      "tags": [
+        "yield",
+        "stablecoin"
+      ],
+      "followers": null,
+      "posts_sampled": 0,
+      "raw_score": 0.01,
+      "mindshare_pct": 9.223814251171988e-05,
+      "likes_sum": 0,
+      "eng_sum": 0,
+      "views_sum": 0,
+      "keyword_posts": 0,
+      "top_post": null
+    },
+    {
+      "handle": "HyperBeat_",
+      "tier": "peer",
+      "tags": [
+        "hyperliquid"
+      ],
+      "followers": 0,
+      "posts_sampled": 0,
+      "raw_score": 0.01,
+      "mindshare_pct": 9.223814251171988e-05,
+      "likes_sum": 0,
+      "eng_sum": 0,
+      "views_sum": 0,
+      "keyword_posts": 0,
+      "top_post": null
+    }
+  ],
+  "self": {
+    "handle": "harmonixfi",
+    "tier": "self",
+    "tags": [
+      "harmonix",
+      "vaults",
+      "yield"
+    ],
+    "followers": 11905,
+    "posts_sampled": 10,
+    "raw_score": 176.8791839462526,
+    "mindshare_pct": 1.6315007376191164,
+    "likes_sum": 140,
+    "eng_sum": 204,
+    "views_sum": 17845,
+    "keyword_posts": 10,
+    "top_post": {
+      "id": "2074568138717311039",
+      "text": "Hyperliquid yield capacity is starting to look more real.\n\nStablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is ",
+      "likes": 15,
+      "reposts": 2,
+      "replies": 4,
+      "views": 1090,
+      "created_at": "Tue Jul 07 18:56:02 +0000 2026",
+      "keyword_hit": true
+    }
+  },
+  "previous": {
+    "as_of": null,
+    "self_pct": null,
+    "delta_pp": null
+  },
+  "sources": [
+    "public fxtwitter + nitter",
+    "curated watchlist"
+  ]
+}
