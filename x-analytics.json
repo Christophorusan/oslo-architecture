@@ -1,7 +1,7 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-07",
-  "scraped_at": "2026-07-08T20:41:11.297Z",
+  "scraped_at": "2026-07-08T21:02:30.281Z",
   "csv_stale": false,
   "stale_days": 1,
   "followers": 11905,
@@ -389,7 +389,7 @@
     "reposts": 19,
     "replies": 32,
     "engagement_score": 235,
-    "views": 23513
+    "views": 23514
   },
   "top_posts": [
     {
@@ -425,7 +425,7 @@
       "likes": 17,
       "reposts": 3,
       "replies": 1,
-      "views": 1210,
+      "views": 1211,
       "created_at": "2026-07-06T02:59:32.000Z"
     },
     {
@@ -502,7 +502,7 @@
       "likes": 17,
       "reposts": 3,
       "replies": 1,
-      "views": 1210,
+      "views": 1211,
       "created_at": "2026-07-06T02:59:32.000Z",
       "engagement": 24
     },
@@ -586,5 +586,79 @@
       "created_at": "Tue Jun 30 15:38:23 +0000 2026",
       "engagement": 0
     }
-  ]
+  ],
+  "funnel": {
+    "insights": [
+      {
+        "id": "imp-delta",
+        "severity": "good",
+        "title": "Impressions +25% vs prior 30d",
+        "detail": "66,535 impressions this period vs 53,393 prior (official CSV).",
+        "evidence": [
+          "x-analytics-csv",
+          "last_day=2026-07-07"
+        ]
+      },
+      {
+        "id": "eng-lag",
+        "severity": "warn",
+        "title": "Engagement lagging impressions",
+        "detail": "Engagements -27% while impressions +25%. Reach is up but interaction density is weaker — favor proof-heavy posts (numbers, mechanisms).",
+        "evidence": [
+          "x-analytics-csv"
+        ]
+      },
+      {
+        "id": "cadence-ok",
+        "severity": "good",
+        "title": "Healthy posting volume",
+        "detail": "22 posts in 30d. Keep quality bar; check top posts for format winners.",
+        "evidence": [
+          "x-analytics-csv"
+        ]
+      },
+      {
+        "id": "top-post",
+        "severity": "info",
+        "title": "Top recent post",
+        "detail": "\"Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE re…\" · eng 35 · 3,221 views",
+        "evidence": [
+          "post:2070598206342451452",
+          "public-scrape"
+        ]
+      },
+      {
+        "id": "follows-delta",
+        "severity": "warn",
+        "title": "New follows -9% vs prior 30d",
+        "detail": "74 new follows this period vs 81 prior (CSV; unfollows not included).",
+        "evidence": [
+          "x-analytics-csv"
+        ]
+      },
+      {
+        "id": "utm",
+        "severity": "info",
+        "title": "Tag every X link with UTMs",
+        "detail": "Use utm_source=x&utm_medium=organic&utm_campaign=<slug> on app.harmonix.fi links so posts can join to deposits later.",
+        "evidence": [
+          "operator-playbook"
+        ]
+      }
+    ],
+    "ratios": {
+      "impressions_per_depositor": null,
+      "engagements_per_depositor": null
+    },
+    "protocol": {
+      "depositors_30d": 0,
+      "withdrawers_30d": 0,
+      "deposits": 0,
+      "withdraws": 0,
+      "mau": 0,
+      "unique_wallets": 0,
+      "last_event_at": null
+    },
+    "generated_at": "2026-07-08T21:02:30.285Z"
+  }
 }
