@@ -111,8 +111,6 @@ tbody tr:hover { background: var(--row-hover); }
 
 footer { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 24px; font-size: 12px; color: var(--ink-mute); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
 footer a { color: var(--ink-soft); }
-.view { display: none; }
-.view.active { display: block; }
 #analytics-subnav a { color: var(--ink-mute); }
 #analytics-subnav a:hover { color: var(--ink); }
 
@@ -136,6 +134,9 @@ footer a { color: var(--ink-soft); }
 .cal-weekdays div { padding: 2px 4px; }
 .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 4px; }
 .cal-pad { min-height: 100px; }
+.cal-nav .pill, .cal-nav button.pill {
+  border-radius: 8px !important;
+}
 .cal-cell { display: flex; flex-direction: column; min-height: 100px; border: 1px solid var(--border); background: var(--card); border-radius: 8px; padding: 4px; text-align: left; transition: border-color .12s, background .12s; }
 .cal-cell:hover { border-color: rgb(245 245 244 / .2); background: var(--bg-soft); }
 .cal-cell.selected { border-color: rgb(245 245 244 / .4); background: var(--bg-soft); }
@@ -388,6 +389,37 @@ footer a { color: var(--ink-soft); }
 }
 
 
+
+
+/* ---- Tab isolation: never paint another view's content ---- */
+.view { display: none !important; }
+.view.active { display: block !important; }
+/* Belt: hide known analytics anchors outside Analytics */
+body:not([data-view="analytics"]) #an-capital,
+body:not([data-view="analytics"]) #an-har,
+body:not([data-view="analytics"]) #an-dashboards,
+body:not([data-view="analytics"]) #an-protocol,
+body:not([data-view="analytics"]) #an-vaults,
+body:not([data-view="analytics"]) #an-x,
+body:not([data-view="analytics"]) #an-mindshare,
+body:not([data-view="analytics"]) #an-narratives,
+body:not([data-view="analytics"]) #analytics-subnav {
+  display: none !important;
+  visibility: hidden !important;
+}
+/* Content calendar only on Content tab */
+body:not([data-view="content"]) #content-calendar-root {
+  display: none !important;
+}
+/* Roadmap calendar only on Roadmap */
+body:not([data-view="calendar"]) #calendar-root {
+  display: none !important;
+}
+/* Operator tiles only on Operator */
+body:not([data-view="operator"]) #view-operator .tiles,
+body:not([data-view="operator"]) #view-operator .grid2 {
+  /* section already hidden via .view */
+}
 
 /* Absolute kill-switch: capital never paints outside Analytics tab */
 body:not([data-view="analytics"]) #an-capital,
@@ -899,10 +931,10 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
     <div class="page-head">
       <div>
         <h1 class="page">Content</h1>
-        <p class="sub">Editorial ship plan — threads, newsletters, longform. Channel performance lives under Analytics → X · Social.</p>
+        <p class="sub">Editorial ship plan — threads, newsletters, longform, diagrams. Month grid like Roadmap. Channel performance lives under Analytics → X · Social.</p>
       </div>
       <div class="page-meta">
-        <div>Calendar · next 30 days</div>
+        <div>Calendar · full month grid</div>
         <div><a href="#an-x" id="goto-x-analytics" style="color:var(--ink-soft)">See Analytics → X · Social</a></div>
       </div>
     </div>
@@ -1260,15 +1292,16 @@ function renderContentCalendar() {
   const today = todayISO();
   let items = loadContentItems(today);
   let selected = today;
-  const days = next30(today);
-  const firstDow = parseDay(days[0]).dow;
+  let viewMonth = monthKey();
 
   function byDate(iso) { return items.filter(i => i.occurs_on === iso); }
+  function monthItems() { return items.filter(i => i.occurs_on.startsWith(viewMonth)); }
   function counts() {
+    const mi = monthItems();
     return {
-      planned: items.filter(i => i.status === "planned" || i.status === "drafted" || i.status === "scheduled").length,
-      shipped: items.filter(i => i.status === "shipped").length,
-      total: items.length,
+      planned: mi.filter(i => i.status === "planned" || i.status === "drafted" || i.status === "scheduled").length,
+      shipped: mi.filter(i => i.status === "shipped").length,
+      total: mi.length,
     };
   }
   function addItem(occurs_on, title, format = "thread") {
@@ -1279,6 +1312,7 @@ function renderContentCalendar() {
     }, ...items];
     saveContentItems(items);
     selected = occurs_on;
+    viewMonth = occurs_on.slice(0, 7);
     paint();
   }
   function ship(id) {
@@ -1291,9 +1325,15 @@ function renderContentCalendar() {
   }
 
   function paint() {
+    const days = daysInMonth(viewMonth);
+    const firstDow = parseDay(days[0]).dow;
+    if (!selected.startsWith(viewMonth)) {
+      selected = today.startsWith(viewMonth) ? today : days[0];
+    }
     const c = counts();
     const selectedItems = byDate(selected);
     const { weekday, day, month, isToday } = parseDay(selected);
+    const [vy, vm] = viewMonth.split("-").map(Number);
     const legend = Object.entries(CONTENT_FORMATS).map(([k, lab]) =>
       `<span class="chip-${k}"><strong>${lab[0]}</strong> <span style="color:var(--ink-mute)">${lab}</span></span>`
     ).join("");
@@ -1334,10 +1374,19 @@ function renderContentCalendar() {
       <div class="cal-head">
         <div>
           <h2>Content calendar</h2>
-          <p>Editorial ship plan for the next 30 days — threads, newsletters, longform, diagrams. Type in a day cell and press Enter to schedule.</p>
-          <div class="meta">${c.planned} in pipeline · ${c.shipped} shipped · ${c.total} total</div>
+          <p>Editorial ship plan — threads, newsletters, longform, diagrams. Type in a day and press Enter. Arrows move months.</p>
+          <div class="meta">${c.planned} in pipeline · ${c.shipped} shipped · ${c.total} this month</div>
         </div>
         <div class="cal-legend">${legend}</div>
+      </div>
+      <div class="cal-nav" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;gap:6px;align-items:center">
+          <button type="button" id="content-cal-prev" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">←</button>
+          <button type="button" id="content-cal-next" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">→</button>
+          <button type="button" id="content-cal-today" class="pill" style="cursor:pointer;padding:6px 12px;border-radius:8px">Today</button>
+        </div>
+        <div style="font-size:17px;font-weight:600;letter-spacing:-0.02em">${MONTHS_LONG[vm - 1]} ${vy}</div>
+        <div style="width:88px"></div>
       </div>
       <div class="cal-grid-wrap">
         <div class="cal-weekdays">${WEEKDAYS.map(w => `<div>${w}</div>`).join("")}</div>
@@ -1358,6 +1407,9 @@ function renderContentCalendar() {
         </form>
       </div>`;
 
+    root.querySelector("#content-cal-prev")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, -1); paint(); });
+    root.querySelector("#content-cal-next")?.addEventListener("click", () => { viewMonth = shiftMonth(viewMonth, 1); paint(); });
+    root.querySelector("#content-cal-today")?.addEventListener("click", () => { viewMonth = monthKey(); selected = today; paint(); });
     root.querySelectorAll("[data-cselect]").forEach(btn => {
       btn.addEventListener("click", () => { selected = btn.getAttribute("data-cselect"); paint(); });
     });
@@ -1390,6 +1442,7 @@ function renderContentCalendar() {
   paint();
 }
 renderContentCalendar();
+
 
 
 // ---- X analytics (official CSV + public scrape) ----
