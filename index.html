@@ -91,6 +91,20 @@ h1 {
   font-size: 12px;
 }
 
+.jump-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.jump-list a {
+  border-bottom-color: rgba(118, 118, 118, 0.28);
+}
+
 section {
   border-top: 1px solid var(--line);
   margin-top: 48px;
@@ -130,6 +144,82 @@ p {
   padding: 18px 0 20px;
 }
 
+details.doc,
+details.arch-item {
+  border-top: 1px solid var(--line);
+}
+
+details.doc {
+  display: block;
+  padding: 0;
+}
+
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.doc summary {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 118px;
+  gap: 20px;
+  align-items: baseline;
+  padding: 18px 0 20px;
+}
+
+.doc summary::after,
+.arch-item summary::after {
+  color: var(--faint);
+  content: "+";
+  font-family: 'Aeonik Mono', ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.doc summary::after {
+  justify-self: end;
+}
+
+.doc[open] summary::after,
+.arch-item[open] summary::after {
+  content: "-";
+}
+
+.doc-panel,
+.arch-panel {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.doc-panel {
+  margin-left: 72px;
+  max-width: 600px;
+  padding: 0 0 22px;
+}
+
+.doc-panel p,
+.arch-panel p {
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.doc-panel ul,
+.arch-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doc-panel li,
+.arch-panel li {
+  border-top: 1px solid var(--line);
+  padding: 9px 0;
+}
+
 .num,
 .status,
 .mono {
@@ -153,6 +243,29 @@ p {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.5;
+}
+
+.arch-list {
+  border-bottom: 1px solid var(--line);
+  margin-top: 18px;
+}
+
+.arch-item summary {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 24px;
+  gap: 20px;
+  align-items: baseline;
+  padding: 16px 0;
+}
+
+.arch-item h3 {
+  font-size: 17px;
+}
+
+.arch-panel {
+  margin-left: 72px;
+  max-width: 610px;
+  padding: 0 0 20px;
 }
 
 .signal {
@@ -264,6 +377,10 @@ footer {
   body { padding: 64px 22px 72px; }
   header { margin-bottom: 52px; }
   .doc { grid-template-columns: 42px 1fr; gap: 12px; }
+  .doc summary,
+  .arch-item summary { grid-template-columns: 42px 1fr 18px; gap: 12px; }
+  .doc-panel,
+  .arch-panel { margin-left: 54px; }
   .status { grid-column: 2; justify-self: start; margin-top: 5px; }
   .signal,
   .two-col { grid-template-columns: 1fr; }
@@ -287,6 +404,15 @@ footer {
         <span>runtime: Mac Oslo bot</span>
         <span>default report channel: internal #growth</span>
       </div>
+      <nav class="jump-list" aria-label="Page index">
+        <a href="#documents">01 documents</a>
+        <a href="#live">02 current state</a>
+        <a href="#architecture">03 architecture</a>
+        <a href="#loop">04 lifecycle loop</a>
+        <a href="#implementation">05 implementation</a>
+        <a href="#principles">06 rules</a>
+        <a href="#next">07 next</a>
+      </nav>
 
       <svg class="line" viewBox="0 0 820 84" role="img" aria-label="Signal line showing Oslo turning market signals into lifecycle actions">
         <path class="ghost" d="M0 54 C90 54 95 54 150 54 S230 54 286 54 S382 54 430 54 S518 54 572 54 S704 54 820 54" />
@@ -297,77 +423,151 @@ footer {
     <section id="documents">
       <h2>01 / documents</h2>
       <div class="doc-list">
-        <article class="doc">
-          <div class="num">00</div>
-          <div>
-            <h3>Frank brief and roadmap</h3>
-            <p>The first GTM framing: what Harmonix needs from Oslo, what belongs in the growth system, and which work should come first.</p>
+        <details class="doc" id="doc-00">
+          <summary>
+            <div class="num">00</div>
+            <div>
+              <h3>Frank brief and roadmap</h3>
+              <p>The first GTM framing: what Harmonix needs from Oslo, what belongs in the growth system, and which work should come first.</p>
+            </div>
+            <div class="status ok">drafted</div>
+          </summary>
+          <div class="doc-panel">
+            <p>Purpose: align the GTM work before building more automation.</p>
+            <ul>
+              <li>Defines proof-led growth as the operating thesis.</li>
+              <li>Separates Harmonix execution from Olson personal/runtime work.</li>
+            </ul>
           </div>
-          <div class="status ok">drafted</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">01</div>
-          <div>
-            <h3>Harmonix Growth System Playbook</h3>
-            <p>Turns proof, market structure, BD, X, and vault data into a weekly operating loop instead of isolated marketing tasks.</p>
+        <details class="doc" id="doc-01">
+          <summary>
+            <div class="num">01</div>
+            <div>
+              <h3>Harmonix Growth System Playbook</h3>
+              <p>Turns proof, market structure, BD, X, and vault data into a weekly operating loop instead of isolated marketing tasks.</p>
+            </div>
+            <div class="status ok">drafted</div>
+          </summary>
+          <div class="doc-panel">
+            <p>The playbook is the “how we run growth” layer.</p>
+            <ul>
+              <li>Inputs: market narratives, vault facts, BD signals, X attention, and protocol proof.</li>
+              <li>Outputs: weekly priorities, content angles, BD actions, reports, and experiments.</li>
+            </ul>
           </div>
-          <div class="status ok">drafted</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">02</div>
-          <div>
-            <h3>Lead system spec</h3>
-            <p>The lead engine: signals, scores, outreach drafts, review cards, and outcome logging. No automatic DMs.</p>
+        <details class="doc" id="doc-02">
+          <summary>
+            <div class="num">02</div>
+            <div>
+              <h3>Lead system spec</h3>
+              <p>The lead engine: signals, scores, outreach drafts, review cards, and outcome logging. No automatic DMs.</p>
+            </div>
+            <div class="status ok">drafted</div>
+          </summary>
+          <div class="doc-panel">
+            <p>This is the approval-gated GTM queue.</p>
+            <ul>
+              <li>Every lead needs evidence, score reason, suggested action, and confidence.</li>
+              <li>Human approval remains required for external outreach.</li>
+            </ul>
           </div>
-          <div class="status ok">drafted</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">03</div>
-          <div>
-            <h3>Oslo / Olson operating handoff</h3>
-            <p>Defines the boundary. Mac Olson stays canonical. Oslo executes Harmonix work. No VM bot, no credential migration.</p>
+        <details class="doc" id="doc-03">
+          <summary>
+            <div class="num">03</div>
+            <div>
+              <h3>Oslo / Olson operating handoff</h3>
+              <p>Defines the boundary. Mac Olson stays canonical. Oslo executes Harmonix work. No VM bot, no credential migration.</p>
+            </div>
+            <div class="status ok">drafted</div>
+          </summary>
+          <div class="doc-panel">
+            <p>The handoff prevents accidental bot duplication or memory leakage.</p>
+            <ul>
+              <li>Mac Olson remains the canonical Olson runtime and brain.</li>
+              <li>Oslo remains Harmonix execution memory and Discord/reporting runtime.</li>
+            </ul>
           </div>
-          <div class="status ok">drafted</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">04</div>
-          <div>
-            <h3>Harmonix X + Oslo Bot Automation Audit</h3>
-            <p>Analyzes @harmonixfi as a proof and lead surface. Adds X source-health tracking, RSS fallback, and proposal generation.</p>
+        <details class="doc" id="doc-04" open>
+          <summary>
+            <div class="num">04</div>
+            <div>
+              <h3>Harmonix X + Oslo Bot Automation Audit</h3>
+              <p>Analyzes @harmonixfi as a proof and lead surface. Adds X source-health tracking, RSS fallback, and proposal generation.</p>
+            </div>
+            <div class="status ok">built</div>
+          </summary>
+          <div class="doc-panel">
+            <p>This is where content becomes signal infrastructure.</p>
+            <ul>
+              <li>Built: <code>marketing.x-performance-audit</code>.</li>
+              <li>Tracks source health, proof density, weak posts, strong posts, and recommendations.</li>
+              <li>Next: turn replies and mentions into holder/LP lead signals.</li>
+            </ul>
           </div>
-          <div class="status ok">built</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">05</div>
-          <div>
-            <h3>Holder Lead Onboarding Plan</h3>
-            <p>Starts from revealed behavior: HYPE, kHYPE, USDC, Harmonix vaults, recency, and multi-vault use. Routes leads into internal review.</p>
+        <details class="doc" id="doc-05" open>
+          <summary>
+            <div class="num">05</div>
+            <div>
+              <h3>Holder Lead Onboarding Plan</h3>
+              <p>Starts from revealed behavior: HYPE, kHYPE, USDC, Harmonix vaults, recency, and multi-vault use. Routes leads into internal review.</p>
+            </div>
+            <div class="status warn">blocked</div>
+          </summary>
+          <div class="doc-panel">
+            <p>The top priority lead system starts with wallets, not cold personas.</p>
+            <ul>
+              <li>Built: <code>bd.holder-lead-discovery</code>.</li>
+              <li>Blocked: migrations 035/036 are not applied in production.</li>
+              <li>Blocked: HyperEVM holder ingestion needs a chunked RPC scanner.</li>
+            </ul>
           </div>
-          <div class="status warn">blocked</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">06</div>
-          <div>
-            <h3>Lifecycle marketing operator spec</h3>
-            <p>Maps OKX lifecycle, xAI lifecycle, and Stripe Radar PMM patterns into a Harmonix lifecycle system.</p>
+        <details class="doc" id="doc-06">
+          <summary>
+            <div class="num">06</div>
+            <div>
+              <h3>Lifecycle marketing operator spec</h3>
+              <p>Maps OKX lifecycle, xAI lifecycle, and Stripe Radar PMM patterns into a Harmonix lifecycle system.</p>
+            </div>
+            <div class="status ok">built v1</div>
+          </summary>
+          <div class="doc-panel">
+            <p>This turns Oslo from a content assistant into a lifecycle operator.</p>
+            <ul>
+              <li>Stages: discover, qualify, onboard, activate, habit, expand, retain, win back.</li>
+              <li>Default report destination: internal Discord growth channel.</li>
+            </ul>
           </div>
-          <div class="status ok">built v1</div>
-        </article>
+        </details>
 
-        <article class="doc">
-          <div class="num">07</div>
-          <div>
-            <h3>Lifecycle Operator Benchmark Report</h3>
-            <p>Names the operating model: user behavior data, segmentation, triggered journeys, PMM, experiments, and internal reporting.</p>
+        <details class="doc" id="doc-07" open>
+          <summary>
+            <div class="num">07</div>
+            <div>
+              <h3>Lifecycle Operator Benchmark Report</h3>
+              <p>Names the operating model: user behavior data, segmentation, triggered journeys, PMM, experiments, and internal reporting.</p>
+            </div>
+            <div class="status ok">posted</div>
+          </summary>
+          <div class="doc-panel">
+            <p>Benchmark pattern: OKX lifecycle systems, xAI triggered journeys, Stripe Radar PMM clarity.</p>
+            <ul>
+              <li>Applied to Harmonix: holder intelligence, lifecycle reports, PMM launch packets, approval cards.</li>
+              <li>Posted internally to <span class="mono">MARKETING &amp; COMMUNITY / #growth</span>.</li>
+            </ul>
           </div>
-          <div class="status ok">posted</div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -386,8 +586,110 @@ footer {
       </div>
     </section>
 
+    <section id="architecture">
+      <h2>03 / architecture</h2>
+      <p>
+        Same Benji-style idea: small sections, one job each. Click any layer to open the details without leaving the page.
+      </p>
+      <nav class="jump-list" aria-label="Architecture subsections">
+        <a href="#arch-inputs">inputs</a>
+        <a href="#arch-signal">signal layer</a>
+        <a href="#arch-skills">skills</a>
+        <a href="#arch-memory">memory</a>
+        <a href="#arch-review">review</a>
+        <a href="#arch-measure">measurement</a>
+      </nav>
+
+      <div class="arch-list">
+        <details class="arch-item" id="arch-inputs" open>
+          <summary>
+            <div class="num">01</div>
+            <h3>Inputs</h3>
+          </summary>
+          <div class="arch-panel">
+            <p>Market research, X posts, X replies, holder activity, vault flows, Discord decisions, BD notes, and product milestones.</p>
+            <ul>
+              <li>Current: X source health and weekly lifecycle reporting.</li>
+              <li>Next: HyperEVM holder scanner and wallet/profile normalization.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="arch-item" id="arch-signal">
+          <summary>
+            <div class="num">02</div>
+            <h3>Signal layer</h3>
+          </summary>
+          <div class="arch-panel">
+            <p>Raw inputs become typed signals: holder lead, stablecoin allocator, HYPE/kHYPE interest, proof relevance, reply opportunity, retention risk.</p>
+            <ul>
+              <li>Tables: <code>lead_signals</code>, <code>holder_leads</code>, <code>x_posts</code>, <code>x_source_health</code>.</li>
+              <li>Blocked until migrations 035/036 are applied.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="arch-item" id="arch-skills">
+          <summary>
+            <div class="num">03</div>
+            <h3>Skills</h3>
+          </summary>
+          <div class="arch-panel">
+            <p>Skills are the executable layer. They read signals, produce evidence, and write proposals or internal reports.</p>
+            <ul>
+              <li><code>marketing.x-performance-audit</code> audits Harmonix X.</li>
+              <li><code>bd.holder-lead-discovery</code> scores wallet leads.</li>
+              <li><code>lifecycle.weekly-report</code> posts lifecycle state to Discord.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="arch-item" id="arch-memory">
+          <summary>
+            <div class="num">04</div>
+            <h3>Memory</h3>
+          </summary>
+          <div class="arch-panel">
+            <p>Memory is separated by function: documents for operating truth, Supabase for structured signals, Discord for internal review history.</p>
+            <ul>
+              <li>Docs live in <code>brain/harmonix-sync/gtm/</code>.</li>
+              <li>Structured lifecycle data lives in the 035/036 tables once applied.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="arch-item" id="arch-review">
+          <summary>
+            <div class="num">05</div>
+            <h3>Review</h3>
+          </summary>
+          <div class="arch-panel">
+            <p>Oslo drafts. Humans decide. Internal reports and review cards go to <span class="mono">MARKETING &amp; COMMUNITY / #growth</span>.</p>
+            <ul>
+              <li>No automatic X, Telegram, Discord, or email DMs.</li>
+              <li>No public wallet balance disclosure.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="arch-item" id="arch-measure">
+          <summary>
+            <div class="num">06</div>
+            <h3>Measurement</h3>
+          </summary>
+          <div class="arch-panel">
+            <p>The system should learn from outcomes, not impressions alone.</p>
+            <ul>
+              <li>Primary measures: approvals, replies, meetings, first deposits, repeat deposits, TVL retained, expansion deposits, withdrawal recovery.</li>
+              <li>Secondary measures: X proof density, source health, report cadence, and time from signal to action.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
     <section id="loop">
-      <h2>03 / lifecycle loop</h2>
+      <h2>04 / lifecycle loop</h2>
       <div class="flow">
         <div class="step">
           <div class="num">01</div>
@@ -428,7 +730,7 @@ footer {
     </section>
 
     <section id="implementation">
-      <h2>04 / implementation</h2>
+      <h2>05 / implementation</h2>
       <div class="two-col">
         <div>
           <ul class="note-list">
@@ -450,7 +752,7 @@ footer {
     </section>
 
     <section id="principles">
-      <h2>05 / rules</h2>
+      <h2>06 / rules</h2>
       <ul class="note-list">
         <li><span class="tag">rule</span>Mac Oslo is the production runtime for Harmonix. No VM bot.</li>
         <li><span class="tag">rule</span>Internal lifecycle, lead, X-performance, and benchmark reports post to <span class="mono">MARKETING &amp; COMMUNITY / #growth</span>.</li>
@@ -461,7 +763,7 @@ footer {
     </section>
 
     <section id="next">
-      <h2>06 / next</h2>
+      <h2>07 / next</h2>
       <p>
         Apply migrations 035 and 036. Patch holder ingestion to use chunked HyperEVM RPC logs. Run holder discovery.
         Then let <code>lifecycle.weekly-report</code> post a real segment report with actual wallets, lifecycle stages, and approval cards.
