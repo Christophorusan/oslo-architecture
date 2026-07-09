@@ -735,7 +735,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
       <article id="top">
         <!-- HERO -->
         <div class="hero">
-          <div class="eyebrow">Protocol docs · v0.4</div>
+          <div class="eyebrow">Protocol docs · v0.5</div>
           <h1>Full Lifecycle Operating System</h1>
           <p class="lede">
             Technical documentation for Oslo: ingestion, signal normalization, wallet lead scoring,
@@ -1012,7 +1012,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
                 </div>
                 <span class="badge warn">blocked db</span>
               </summary>
-              <div class="row-body"><p>Output: scored holder leads and review cards. Blocked until production migrations and holder ingestion are live.</p></div>
+              <div class="row-body"><p>Output: scored holder leads and review cards. Unblocked by the component scorer + app-activity layer; first full run lands with the wallet seed.</p></div>
             </details>
             <details class="row" open>
               <summary>
@@ -1024,6 +1024,21 @@ body.sidebar-open .sidebar-backdrop { display: block; }
                 <span class="badge ok">built v1</span>
               </summary>
               <div class="row-body"><p>Output: weekly segment report, blockers, and next actions in <code>#growth</code>.</p></div>
+            </details>
+          </div>
+        
+          <div class="rows" style="margin-top:12px">
+            <details class="row">
+              <summary><strong>4.4 · ops.roadmap-digest</strong> <span class="tag">built v1</span></summary>
+              <div class="row-body"><p class="prose">Daily digest of gtm.calendar_items — overdue, due today, next 7 days, newly added — posted to <code>OSLO / #roadmap</code> (7:00 UTC). Discord mirror of the team app's Roadmap.</p></div>
+            </details>
+            <details class="row">
+              <summary><strong>4.5 · bd.holder-component-scoring</strong> <span class="tag">built v1</span></summary>
+              <div class="row-body"><p class="prose">Deterministic five-component holder scoring with per-component reasons → holder_leads. Segments: priority ≥70 · qualified ≥45 · monitor. Runs daily after app-activity sync.</p></div>
+            </details>
+            <details class="row">
+              <summary><strong>4.6 · lifecycle.outcome-writer</strong> <span class="tag">built v1</span></summary>
+              <div class="row-body"><p class="prose">Weekly measurement loop: replied / meetings / first + repeat deposits / retained TVL written to lifecycle_metrics with evidence refs so the next scoring run has memory.</p></div>
             </details>
           </div>
         </section>
@@ -1040,7 +1055,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
               <li><span class="tag">write</span><span>Supabase tables for normalized leads, signals, lifecycle profiles, and source health.</span></li>
             </ul>
             <ul class="note-card">
-              <li><span class="tag">write</span><span>Internal Discord reports and review cards.</span></li>
+              <li><span class="tag">write</span><span>Internal Discord — three canonical channels under <code>OSLO</code>: <code>#operator</code> (alerts, lead cards, briefs, review queue), <code>#roadmap</code> (calendar digests), <code>#analytics</code> (X audits, newsletters, research). Legacy #ops/#marketing fallback until channels exist.</span></li>
               <li><span class="tag">manual</span><span>Human approval before X, Telegram, Discord, email, or BD outreach.</span></li>
               <li><span class="tag">live</span><span>Oslo team app on Vercel — Operator hub (contacts, conversion, weekly intelligence, OKRs), shared Roadmap/Content calendars, analytics. <a href="https://oslo-teamview-git-main-chrisportugals-projects.vercel.app/operator" target="_blank" rel="noopener">Open →</a></span></li>
               <li><span class="tag">future</span><span>Olson web UI merge after the Mac Olson runtime is preserved.</span></li>
@@ -1113,12 +1128,12 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             <div class="step">
               <span class="n">02</span>
               <h3>Patch holder ingestion</h3>
-              <p>Replace the broken explorer path with chunked HyperEVM RPC log scans and normalized asset exposure records.</p>
+              <p>Done in code (chunked RPC scanner + snapshot). Remaining: add SUPABASE_SERVICE_ROLE_KEY and run <code>scripts/seed_app_activity.ts</code> + <code>rebuild_app_cohorts()</code>.</p>
             </div>
             <div class="step">
               <span class="n">03</span>
               <h3>Run holder discovery</h3>
-              <p>Score HYPE, kHYPE, USDC, and vault-linked wallets. Store reasons and evidence for every lead.</p>
+              <p>bd.holder-component-scoring runs daily post-seed — five components with reasons per lead. Grant the bot Manage Channels (or create OSLO/#operator #roadmap #analytics) for routed reports.</p>
             </div>
             <div class="step">
               <span class="n">04</span>
@@ -1144,7 +1159,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
             Technical operating docs for lifecycle growth infrastructure.
           </div>
           <div>
-            Version 0.4 · Updated 08 July 2026<br>
+            Version 0.5 · Updated 08 July 2026<br>
             Runtime: Mac Oslo
           </div>
           <div>
