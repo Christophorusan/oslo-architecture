@@ -990,12 +990,12 @@ body:not([data-view="analytics"]) .cap-board {
       <nav class="tabs" id="analytics-subnav">
         <a href="#an-capital" style="text-decoration:none">Capital</a>
         <a href="#an-har" style="text-decoration:none">HAR · Live</a>
-        <a href="#an-dashboards" style="text-decoration:none">Dashboards</a>
         <a href="#an-protocol" style="text-decoration:none">Protocol</a>
+        <a href="#an-narratives" style="text-decoration:none">Narratives</a>
+        <a href="#an-dashboards" style="text-decoration:none">Dashboards</a>
         <a href="#an-vaults" style="text-decoration:none">Vaults</a>
         <a href="#an-x" style="text-decoration:none">X · Social</a>
         <a href="#an-mindshare" style="text-decoration:none">Mindshare</a>
-        <a href="#an-narratives" style="text-decoration:none">Narratives</a>
       </nav>
     </div>
 
@@ -1056,31 +1056,27 @@ body:not([data-view="analytics"]) .cap-board {
     <!-- ========== HAR LIVE PRICE (Hyperliquid) ========== -->
     <div id="an-har" style="scroll-margin-top:24px;margin-bottom:28px">
       <div class="panel" style="border:1px solid var(--accent, #1d9bf0);overflow:hidden">
-        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:rgba(29,155,240,0.08);border-bottom:1px solid var(--border)">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:10px 14px;background:rgba(29,155,240,0.08);border-bottom:1px solid var(--border)">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
             <span class="pill" style="background:var(--card);border:1px solid var(--accent, #1d9bf0);color:var(--accent, #1d9bf0)">
               <span style="display:inline-block;width:8px;height:8px;border-radius:99px;background:var(--green,#00ba7c);margin-right:6px;vertical-align:middle;animation:harPulse 1.2s infinite"></span>
               Live · Hyperliquid
             </span>
-            <span style="font-weight:700;font-size:15px;color:var(--ink)">HAR</span>
-            <span id="har-price" class="tabular" style="font-size:28px;font-weight:700;color:var(--ink);letter-spacing:-0.02em">—</span>
-            <span id="har-chg" class="tabular" style="font-size:14px;font-weight:600;color:var(--ink-mute)">—</span>
+            <span style="font-weight:700;font-size:14px;color:var(--ink)">HAR</span>
+            <span id="har-price" class="tabular" style="font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-0.02em">—</span>
+            <span id="har-chg" class="tabular" style="font-size:13px;font-weight:600;color:var(--ink-mute)">—</span>
           </div>
-          <div class="dim" style="font-size:12px;text-align:right">
-            <div id="har-asof">fetching…</div>
-            <div>Harmonix Finance token</div>
+          <div class="tabular" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;font-size:12px">
+            <span class="dim">Mark <strong id="har-mark" style="color:var(--ink)">—</strong></span>
+            <span class="dim">Mid <strong id="har-mid" style="color:var(--ink)">—</strong></span>
+            <span class="dim">MCap <strong id="har-mcap" style="color:var(--ink)">—</strong></span>
+            <span class="dim">FDV <strong id="har-fdv" style="color:var(--ink)">—</strong></span>
           </div>
         </div>
-        <div class="tiles" style="margin:0;border:0;border-radius:0">
-          <div class="tile" style="border-radius:0"><div class="label">Mark</div><div class="value tabular" id="har-mark" style="font-size:18px">—</div><div class="hint">tokenDetails</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">Mid</div><div class="value tabular" id="har-mid" style="font-size:18px">—</div><div class="hint">tokenDetails</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">Market cap</div><div class="value tabular" id="har-mcap" style="font-size:18px">—</div><div class="hint">price × circ supply</div></div>
-          <div class="tile" style="border-radius:0"><div class="label">FDV</div><div class="value tabular" id="har-fdv" style="font-size:18px">—</div><div class="hint">price × total supply</div></div>
-        </div>
-        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0">
-          <strong>Source</strong> · Hyperliquid public API <code>tokenDetails</code> · tokenId <code>0x9325…4cda</code> ·
+        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0;font-size:11px;padding:6px 14px">
+          Harmonix Finance token · Hyperliquid public API <code>tokenDetails</code> ·
           <a href="https://hyperevmscan.io/token/0x391121d817da42ed3434d281aedbbcc416a2af18" target="_blank" rel="noopener">HyperEVM contract</a> ·
-          refreshes every 12s · free, no key
+          refreshes every 12s · <span id="har-asof">fetching…</span>
         </div>
       </div>
     </div>
@@ -1088,43 +1084,8 @@ body:not([data-view="analytics"]) .cap-board {
       @keyframes harPulse { 0%,100%{opacity:1} 50%{opacity:.35} }
     </style>
 
-    
-    <!-- ========== HARMONIX DASHBOARDS (API) ========== -->
-    <div id="an-dashboards" style="scroll-margin-top:24px;margin-bottom:28px">
-      <h2 class="page" style="font-size:18px;margin-bottom:4px">Harmonix dashboards · product TVL + HYPE staked</h2>
-      <p class="sub" style="margin-bottom:16px">Live from <a href="https://app.harmonix.fi/dashboards" target="_blank" rel="noopener">app.harmonix.fi/dashboards</a> · as of 2026-07-08 22:12:10</p>
-      <div class="tiles" style="margin-bottom:16px">
-        <div class="tile"><div class="label">Combined AUM</div><div class="value tabular">8.76M</div><div class="hint">USDC · vaults + HYPE staked</div></div>
-        <div class="tile"><div class="label">HYPE deposited (vault)</div><div class="value tabular">33.3K HYPE</div><div class="hint">2.23M USDC · current</div></div>
-        <div class="tile"><div class="label">kHYPE deposited (vault)</div><div class="value tabular">48.1K kHYPE</div><div class="hint">3.29M USDC · current</div></div>
-        <div class="tile"><div class="label">HYPE staked via frontend</div><div class="value tabular">34.0K HYPE</div><div class="hint">2.29M USDC · native stake</div></div>
-      </div>
-      <div class="tiles" style="margin-bottom:16px">
-        <div class="tile"><div class="label">Vault TVL (all)</div><div class="value tabular">6.47M</div><div class="hint">13,472 depositors</div></div>
-        <div class="tile"><div class="label">USDC vault products</div><div class="value tabular">949.2K</div><div class="hint">delta-neutral + haUSDC + …</div></div>
-        <div class="tile"><div class="label">Deposits 30d</div><div class="value tabular">28.7K</div><div class="hint">users 30d 244</div></div>
-        <div class="tile"><div class="label">Yield paid 30d</div><div class="value tabular">653</div><div class="hint">USDC terms</div></div>
-      </div>
-      <div class="grid2" style="margin-bottom:16px">
-        <div class="panel"><h2>Vault deposits (native + USDC)</h2><div class="scrollx"><table>
-          <thead><tr><th>Product</th><th class="num">Deposited now</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th></tr></thead>
-          <tbody><tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr></tbody></table></div>
-        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0">
-          <strong>APY context</strong> · haUSDC 8.93% sits above passive USDC lending on HL money markets because yield comes from HIP-3 carry + portfolio-margin funding capture, not token incentives. Peer-rate tracking (Pendle PT, HyperLend, Aave) is on the Mindshare watchlist — <a href="https://x.com/harmonixfi/status/2070248552643842071" target="_blank" rel="noopener">benchmark comparison post</a>.
-        </div></div>
-        <div class="panel"><h2>HYPE staked by validator</h2><div class="scrollx"><table>
-          <thead><tr><th>Route</th><th class="num">HYPE</th><th class="num">USDC</th><th class="num">%</th></tr></thead>
-          <tbody><tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.99M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.3K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.6K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.7K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
-          <tr style="background:var(--bg-soft)"><td><strong>Total</strong></td><td class="num"><strong>34.0K</strong> HYPE</td><td class="num"><strong>2.29M</strong> USDC</td><td class="num">100%</td></tr>
-          </tbody></table></div>
-          <div class="note" style="margin:0;border-radius:0">Native HYPE staked through Harmonix frontend — separate from haHYPE vault TVL.</div>
-        </div>
-      </div>
-    </div>
-
-    
     <!-- ========== PROTOCOL ========== -->
-    <div id="an-protocol" style="scroll-margin-top:24px">
+    <div id="an-protocol" style="scroll-margin-top:24px;margin-bottom:28px">
       <h2 class="page" style="font-size:18px;margin-bottom:4px">Protocol</h2>
       <p class="sub" style="margin-bottom:16px">Product-side funnel: unique users, activity, and deposit/withdraw volume across Harmonix vaults.</p>
 
@@ -1158,6 +1119,74 @@ body:not([data-view="analytics"]) .cap-board {
         </div>
       </div>
     </div>
+
+
+    <!-- ========== NARRATIVES ========== -->
+    <div id="an-narratives" style="scroll-margin-top:24px;margin-top:40px;margin-bottom:24px">
+      <div class="page-head" style="margin-bottom:16px">
+        <div>
+          <h2 class="page" style="font-size:18px;margin-bottom:4px">Narratives · Harmonix · HL yield narratives</h2>
+          <p class="sub">Market heat vs Harmonix ownership · mapped to conversion stage + UTM for outreach → deposit tracking.</p>
+        </div>
+        <div class="page-meta"><div>as of 2026-07-08 21:20:08</div></div>
+      </div>
+      <div class="panel" style="margin-bottom:16px">
+        <h2>Operator readout</h2>
+        <div class="pad"><div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;color:var(--ink)">Under-indexed: “Risk / retention trust” (heat 23, own 0%) — Market heat 23 · ownership 0% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn</div><div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;color:var(--ink)">Defending: “Stablecoin yield on HL” at 100% ownership — use in outreach proof.</div></div>
+      </div>
+      <div class="grid2" style="margin-bottom:16px">
+        <div class="panel"><h2>Under-indexed (own)</h2><div class="pad"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>Risk / retention trust</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 23 · own 0%</span><span class="pill" style="color:var(--warm);border-color:rgb(251 191 36 / .4)">planned · risk + architecture docs → UTM docs_architecture</span></span></div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>HIP-3 / equity perps</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 10 · own 2%</span><span class="pill" style="color:var(--warm);border-color:rgb(251 191 36 / .4)">planned · haUSDC HIP-3 explainer thread</span></span></div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>LST / kHYPE</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 4 · own 24%</span><span class="pill" style="color:var(--cool);border-color:rgb(29 155 240 / .4)">active · ride HYPE→kHYPE rotation (see Vaults flow readout)</span></span></div></div></div>
+        <div class="panel"><h2>Owning (defend / outreach)</h2><div class="pad"><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Stablecoin yield on HL</span><span style="color:var(--green)">100% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Yield capacity</span><span style="color:var(--green)">100% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Vault APY / proof</span><span style="color:var(--green)">89% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Delta-neutral / basis</span><span style="color:var(--green)">80% own</span></div></div></div>
+      </div>
+      <div class="panel">
+        <h2>Narrative board</h2>
+        <div class="scrollx">
+          <table>
+            <thead><tr><th>Narrative</th><th>Stage</th><th>Status</th><th>Action</th><th class="num">Heat</th><th class="num">Own %</th><th>UTM</th><th>Top post</th></tr></thead>
+            <tbody><tr><td>Hyperliquid ecosystem</td><td class="dim">awareness</td><td class="dim">competing</td><td>ride</td><td class="num">100</td><td class="num">1%</td><td class="dim">earn_home</td><td><a href="https://x.com/HyperliquidX/status/2072721677524644255" target="_blank" rel="noopener" style="color:var(--ink-soft)">@HyperliquidX: VALR, Africa's largest crypto exchange by trading volume, is using Hyp</a></td></tr><tr><td>Risk / retention trust</td><td class="dim">retention</td><td class="dim">market only</td><td>own</td><td class="num">23</td><td class="num">0%</td><td class="dim">docs_architecture</td><td><a href="https://x.com/HyperliquidX/status/2070433243082731757" target="_blank" rel="noopener" style="color:var(--ink-soft)">@HyperliquidX: Hyperliquid has been added to the MAS's Investor Alert List (IAL). IAL</a></td></tr><tr><td>HIP-3 / equity perps</td><td class="dim">awareness</td><td class="dim">under indexed</td><td>own</td><td class="num">10</td><td class="num">2%</td><td class="dim">vault_hausdc</td><td><a href="https://x.com/CryptoHayes/status/2071359963289760165" target="_blank" rel="noopener" style="color:var(--ink-soft)">@CryptoHayes: DYOR - but I found this pretty compelling Duncan (@FloodCapital) ether</a></td></tr><tr><td>HYPE token / beta</td><td class="dim">awareness</td><td class="dim">competing</td><td>ride</td><td class="num">6</td><td class="num">3%</td><td class="dim">vault_hype</td><td><a href="https://x.com/CryptoHayes/status/2071359963289760165" target="_blank" rel="noopener" style="color:var(--ink-soft)">@CryptoHayes: DYOR - but I found this pretty compelling Duncan (@FloodCapital) ether</a></td></tr><tr><td>Institutional / RWA yield</td><td class="dim">consideration</td><td class="dim">market only</td><td>ride</td><td class="num">5</td><td class="num">0%</td><td class="dim">earn_home</td><td><a href="https://x.com/HyperliquidX/status/2061673725502861406" target="_blank" rel="noopener" style="color:var(--ink-soft)">@HyperliquidX: RWA open interest on Hyperliquid reached a new ATH of $3B HIP-3 has se</a></td></tr><tr><td>LST / kHYPE</td><td class="dim">deposit</td><td class="dim">under indexed</td><td>own</td><td class="num">4</td><td class="num">24%</td><td class="dim">vault_khype</td><td><a href="https://x.com/CryptoHayes/status/2072920535520985173" target="_blank" rel="noopener" style="color:var(--ink-soft)">@CryptoHayes: Home games are the most fun. TOKEN2049 (@token2049) Arthur Hayes is ba</a></td></tr><tr><td>Points / incentives</td><td class="dim">awareness</td><td class="dim">competing</td><td>ride</td><td class="num">2</td><td class="num">16%</td><td class="dim">earn_home</td><td><a href="https://x.com/pendle_fi/status/2072919488572629044" target="_blank" rel="noopener" style="color:var(--ink-soft)">@pendle_fi: New ATH milestone - total $PENDLE staked surpassed 100M (~36% of total</a></td></tr><tr><td>Lending / money markets</td><td class="dim">consideration</td><td class="dim">competing</td><td>ride</td><td class="num">1</td><td class="num">40%</td><td class="dim">vault_hype</td><td><a href="https://x.com/hyperlendx/status/2067941865781920132" target="_blank" rel="noopener" style="color:var(--ink-soft)">@hyperlendx: It's been 3 months since we launched the Stake &amp; Save program, so its </a></td></tr><tr><td>Vault APY / proof</td><td class="dim">deposit</td><td class="dim">owning</td><td>defend</td><td class="num">0</td><td class="num">89%</td><td class="dim">earn_home</td><td><a href="https://x.com/hyperlendx/status/2063984625987236334" target="_blank" rel="noopener" style="color:var(--ink-soft)">@hyperlendx: NEW ASSET LISTING: Pendle PT-kHYPE 24 September 2026 by @pendle_fi &amp; @</a></td></tr><tr><td>Stablecoin yield on HL</td><td class="dim">deposit</td><td class="dim">self only</td><td>own</td><td class="num">0</td><td class="num">100%</td><td class="dim">vault_hausdc</td><td><a href="https://x.com/harmonixfi/status/2074568138717311039" target="_blank" rel="noopener" style="color:var(--ink-soft)">@harmonixfi: Hyperliquid yield capacity is starting to look more real. Stablecoins </a></td></tr><tr><td>Delta-neutral / basis</td><td class="dim">consideration</td><td class="dim">owning</td><td>defend</td><td class="num">0</td><td class="num">80%</td><td class="dim">vault_delta</td><td><a href="https://x.com/hyenatrade/status/2061491254886564157" target="_blank" rel="noopener" style="color:var(--ink-soft)">@hyenatrade: HyENA crossed 
+  
+   million in all-time USDe rewards to traders. Ethena (</a></td></tr><tr><td>Yield capacity</td><td class="dim">consideration</td><td class="dim">self only</td><td>own</td><td class="num">0</td><td class="num">100%</td><td class="dim">vault_hype</td><td><a href="https://x.com/harmonixfi/status/2074568138717311039" target="_blank" rel="noopener" style="color:var(--ink-soft)">@harmonixfi: Hyperliquid yield capacity is starting to look more real. Stablecoins </a></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="note" style="margin-top:12px;margin-bottom:0">
+        <strong>Method</strong> · Narrative patterns matched on public watchlist posts. <strong>Heat</strong> = engagement-weighted volume of matching posts in the window (likes + 2×reposts + 3×replies, recency-decayed), normalized 0–100 against the hottest narrative. <strong>Own %</strong> = @harmonixfi share of that narrative's total score; market = non-self voices. Actions map to conversion stage + UTM campaign for outreach → deposit tracking.
+        Edit: <code>config/narratives.json</code> · <code>npm run x:narratives</code>
+      </div>
+
+    <!-- ========== HARMONIX DASHBOARDS (API) ========== -->
+    <div id="an-dashboards" style="scroll-margin-top:24px;margin-bottom:28px">
+      <h2 class="page" style="font-size:18px;margin-bottom:4px">Harmonix dashboards · product TVL + HYPE staked</h2>
+      <p class="sub" style="margin-bottom:16px">Live from <a href="https://app.harmonix.fi/dashboards" target="_blank" rel="noopener">app.harmonix.fi/dashboards</a> · as of 2026-07-08 22:12:10</p>
+      <div class="tiles" style="margin-bottom:16px">
+        <div class="tile"><div class="label">Combined AUM</div><div class="value tabular">8.76M</div><div class="hint">USDC · vaults + HYPE staked</div></div>
+        <div class="tile"><div class="label">HYPE deposited (vault)</div><div class="value tabular">33.3K HYPE</div><div class="hint">2.23M USDC · current</div></div>
+        <div class="tile"><div class="label">kHYPE deposited (vault)</div><div class="value tabular">48.1K kHYPE</div><div class="hint">3.29M USDC · current</div></div>
+        <div class="tile"><div class="label">HYPE staked via frontend</div><div class="value tabular">34.0K HYPE</div><div class="hint">2.29M USDC · native stake</div></div>
+      </div>
+      <div class="tiles" style="margin-bottom:16px">
+        <div class="tile"><div class="label">Vault TVL (all)</div><div class="value tabular">6.47M</div><div class="hint">13,472 depositors</div></div>
+        <div class="tile"><div class="label">USDC vault products</div><div class="value tabular">949.2K</div><div class="hint">delta-neutral + haUSDC + …</div></div>
+        <div class="tile"><div class="label">Deposits 30d</div><div class="value tabular">28.7K</div><div class="hint">users 30d 244</div></div>
+        <div class="tile"><div class="label">Yield paid 30d</div><div class="value tabular">653</div><div class="hint">USDC terms</div></div>
+      </div>
+      <div class="grid2" style="margin-bottom:16px">
+        <div class="panel"><h2>Vault deposits (native + USDC)</h2><div class="scrollx"><table>
+          <thead><tr><th>Product</th><th class="num">Deposited now</th><th class="num">TVL (USDC)</th><th class="num">%</th><th class="num">APY</th></tr></thead>
+          <tbody><tr><td>HyperEVM $KHYPE Vault</td><td class="num"><strong>48.1K KHYPE</strong></td><td class="num"><strong>3.29M</strong> USDC</td><td class="num">50.8%</td><td class="num">3.20%</td></tr><tr><td>HyperEVM $HYPE Vault</td><td class="num"><strong>33.3K HYPE</strong></td><td class="num"><strong>2.23M</strong> USDC</td><td class="num">34.5%</td><td class="num">3.80%</td></tr><tr><td>Hyperliquid - USDC - $HYPE Delta Neutral Vault</td><td class="num"><strong>613.3K USDC</strong></td><td class="num"><strong>613.3K</strong> USDC</td><td class="num">9.5%</td><td class="num">7.33%</td></tr><tr><td>HIP-3 haUSDC Vault</td><td class="num"><strong>314.5K USDC</strong></td><td class="num"><strong>314.5K</strong> USDC</td><td class="num">4.9%</td><td class="num">8.93%</td></tr><tr><td>KelpDao - USDC - Delta Neutral Vault</td><td class="num"><strong>21.4K USDC</strong></td><td class="num"><strong>21.4K</strong> USDC</td><td class="num">0.3%</td><td class="num">0.02%</td></tr></tbody></table></div>
+        <div class="note" style="margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0">
+          <strong>APY context</strong> · haUSDC 8.93% sits above passive USDC lending on HL money markets because yield comes from HIP-3 carry + portfolio-margin funding capture, not token incentives. Peer-rate tracking (Pendle PT, HyperLend, Aave) is on the Mindshare watchlist — <a href="https://x.com/harmonixfi/status/2070248552643842071" target="_blank" rel="noopener">benchmark comparison post</a>.
+        </div></div>
+        <div class="panel"><h2>HYPE staked by validator</h2><div class="scrollx"><table>
+          <thead><tr><th>Route</th><th class="num">HYPE</th><th class="num">USDC</th><th class="num">%</th></tr></thead>
+          <tbody><tr><td>nansen-hypurrcollective</td><td class="num"><strong>29.6K</strong> HYPE</td><td class="num">1.99M USDC</td><td class="num">86.9%</td></tr><tr><td>alphaticks</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">97.3K USDC</td><td class="num">4.3%</td></tr><tr><td>skygg</td><td class="num"><strong>1.4K</strong> HYPE</td><td class="num">94.6K USDC</td><td class="num">4.1%</td></tr><tr><td>validao</td><td class="num"><strong>993.5</strong> HYPE</td><td class="num">66.7K USDC</td><td class="num">2.9%</td></tr><tr><td>staked-hype</td><td class="num"><strong>403.8</strong> HYPE</td><td class="num">27.1K USDC</td><td class="num">1.2%</td></tr><tr><td>asxn</td><td class="num"><strong>214.5</strong> HYPE</td><td class="num">14.4K USDC</td><td class="num">0.6%</td></tr>
+          <tr style="background:var(--bg-soft)"><td><strong>Total</strong></td><td class="num"><strong>34.0K</strong> HYPE</td><td class="num"><strong>2.29M</strong> USDC</td><td class="num">100%</td></tr>
+          </tbody></table></div>
+          <div class="note" style="margin:0;border-radius:0">Native HYPE staked through Harmonix frontend — separate from haHYPE vault TVL.</div>
+        </div>
+      </div>
+    </div>
+
 
         <!-- ========== VAULTS ========== -->
     <div id="an-vaults" style="scroll-margin-top:24px;margin-bottom:40px">
@@ -1328,38 +1357,6 @@ Stablecoins are now a</a></td></tr><tr><td class="num">7</td><td><a href="https:
       </div>
     </div>
 
-    <!-- ========== NARRATIVES ========== -->
-    <div id="an-narratives" style="scroll-margin-top:24px;margin-top:40px;margin-bottom:24px">
-      <div class="page-head" style="margin-bottom:16px">
-        <div>
-          <h2 class="page" style="font-size:18px;margin-bottom:4px">Narratives · Harmonix · HL yield narratives</h2>
-          <p class="sub">Market heat vs Harmonix ownership · mapped to conversion stage + UTM for outreach → deposit tracking.</p>
-        </div>
-        <div class="page-meta"><div>as of 2026-07-08 21:20:08</div></div>
-      </div>
-      <div class="panel" style="margin-bottom:16px">
-        <h2>Operator readout</h2>
-        <div class="pad"><div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;color:var(--ink)">Under-indexed: “Risk / retention trust” (heat 23, own 0%) — Market heat 23 · ownership 0% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn</div><div style="border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px;color:var(--ink)">Defending: “Stablecoin yield on HL” at 100% ownership — use in outreach proof.</div></div>
-      </div>
-      <div class="grid2" style="margin-bottom:16px">
-        <div class="panel"><h2>Under-indexed (own)</h2><div class="pad"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>Risk / retention trust</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 23 · own 0%</span><span class="pill" style="color:var(--warm);border-color:rgb(251 191 36 / .4)">planned · risk + architecture docs → UTM docs_architecture</span></span></div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>HIP-3 / equity perps</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 10 · own 2%</span><span class="pill" style="color:var(--warm);border-color:rgb(251 191 36 / .4)">planned · haUSDC HIP-3 explainer thread</span></span></div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:13px;margin:6px 0"><span>LST / kHYPE</span><span style="display:inline-flex;align-items:center;gap:8px"><span class="dim">heat 4 · own 24%</span><span class="pill" style="color:var(--cool);border-color:rgb(29 155 240 / .4)">active · ride HYPE→kHYPE rotation (see Vaults flow readout)</span></span></div></div></div>
-        <div class="panel"><h2>Owning (defend / outreach)</h2><div class="pad"><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Stablecoin yield on HL</span><span style="color:var(--green)">100% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Yield capacity</span><span style="color:var(--green)">100% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Vault APY / proof</span><span style="color:var(--green)">89% own</span></div><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px;margin:4px 0"><span>Delta-neutral / basis</span><span style="color:var(--green)">80% own</span></div></div></div>
-      </div>
-      <div class="panel">
-        <h2>Narrative board</h2>
-        <div class="scrollx">
-          <table>
-            <thead><tr><th>Narrative</th><th>Stage</th><th>Status</th><th>Action</th><th class="num">Heat</th><th class="num">Own %</th><th>UTM</th><th>Top post</th></tr></thead>
-            <tbody><tr><td>Hyperliquid ecosystem</td><td class="dim">awareness</td><td class="dim">competing</td><td>ride</td><td class="num">100</td><td class="num">1%</td><td class="dim">earn_home</td><td><a href="https://x.com/HyperliquidX/status/2072721677524644255" target="_blank" rel="noopener" style="color:var(--ink-soft)">@HyperliquidX: VALR, Africa's largest crypto exchange by trading volume, is using Hyp</a></td></tr><tr><td>Risk / retention trust</td><td class="dim">retention</td><td class="dim">market only</td><td>own</td><td class="num">23</td><td class="num">0%</td><td class="dim">docs_architecture</td><td><a href="https://x.com/HyperliquidX/status/2070433243082731757" target="_blank" rel="noopener" style="color:var(--ink-soft)">@HyperliquidX: Hyperliquid has been added to the MAS's Investor Alert List (IAL). IAL</a></td></tr><tr><td>HIP-3 / equity perps</td><td class="dim">awareness</td><td class="dim">under indexed</td><td>own</td><td class="num">10</td><td class="num">2%</td><td class="dim">vault_hausdc</td><td><a href="https://x.com/CryptoHayes/status/2071359963289760165" target="_blank" rel="noopener" style="color:var(--ink-soft)">@CryptoHayes: DYOR - but I found this pretty compelling Duncan (@FloodCapital) ether</a></td></tr><tr><td>HYPE token / beta</td><td class="dim">awareness</td><td class="dim">competing</td><td>ride</td><td class="num">6</td><td class="num">3%</td><td class="dim">vault_hype</td><td><a href="https://x.com/CryptoHayes/status/2071359963289760165" target="_blank" rel="noopener" style="color:var(--ink-soft)">@CryptoHayes: DYOR - but I found this pretty compelling Duncan (@FloodCapital) ether</a></td></tr><tr><td>Institutional / RWA yield</td><td class="dim">consideration</td><td class="dim">market only</td><td>ride</td><td class="num">5</td><td class="num">0%</td><td class="dim">earn_home</td><td><a href="https://x.com/HyperliquidX/status/2061673725502861406" target="_blank" rel="noopener" style="color:var(--ink-soft)">@HyperliquidX: RWA open interest on Hyperliquid reached a new ATH of $3B HIP-3 has se</a></td></tr><tr><td>LST / kHYPE</td><td class="dim">deposit</td><td class="dim">under indexed</td><td>own</td><td class="num">4</td><td class="num">24%</td><td class="dim">vault_khype</td><td><a href="https://x.com/CryptoHayes/status/2072920535520985173" target="_blank" rel="noopener" style="color:var(--ink-soft)">@CryptoHayes: Home games are the most fun. TOKEN2049 (@token2049) Arthur Hayes is ba</a></td></tr><tr><td>Points / incentives</td><td class="dim">awareness</td><td class="dim">competing</td><td>ride</td><td class="num">2</td><td class="num">16%</td><td class="dim">earn_home</td><td><a href="https://x.com/pendle_fi/status/2072919488572629044" target="_blank" rel="noopener" style="color:var(--ink-soft)">@pendle_fi: New ATH milestone - total $PENDLE staked surpassed 100M (~36% of total</a></td></tr><tr><td>Lending / money markets</td><td class="dim">consideration</td><td class="dim">competing</td><td>ride</td><td class="num">1</td><td class="num">40%</td><td class="dim">vault_hype</td><td><a href="https://x.com/hyperlendx/status/2067941865781920132" target="_blank" rel="noopener" style="color:var(--ink-soft)">@hyperlendx: It's been 3 months since we launched the Stake &amp; Save program, so its </a></td></tr><tr><td>Vault APY / proof</td><td class="dim">deposit</td><td class="dim">owning</td><td>defend</td><td class="num">0</td><td class="num">89%</td><td class="dim">earn_home</td><td><a href="https://x.com/hyperlendx/status/2063984625987236334" target="_blank" rel="noopener" style="color:var(--ink-soft)">@hyperlendx: NEW ASSET LISTING: Pendle PT-kHYPE 24 September 2026 by @pendle_fi &amp; @</a></td></tr><tr><td>Stablecoin yield on HL</td><td class="dim">deposit</td><td class="dim">self only</td><td>own</td><td class="num">0</td><td class="num">100%</td><td class="dim">vault_hausdc</td><td><a href="https://x.com/harmonixfi/status/2074568138717311039" target="_blank" rel="noopener" style="color:var(--ink-soft)">@harmonixfi: Hyperliquid yield capacity is starting to look more real. Stablecoins </a></td></tr><tr><td>Delta-neutral / basis</td><td class="dim">consideration</td><td class="dim">owning</td><td>defend</td><td class="num">0</td><td class="num">80%</td><td class="dim">vault_delta</td><td><a href="https://x.com/hyenatrade/status/2061491254886564157" target="_blank" rel="noopener" style="color:var(--ink-soft)">@hyenatrade: HyENA crossed 
-  
-   million in all-time USDe rewards to traders. Ethena (</a></td></tr><tr><td>Yield capacity</td><td class="dim">consideration</td><td class="dim">self only</td><td>own</td><td class="num">0</td><td class="num">100%</td><td class="dim">vault_hype</td><td><a href="https://x.com/harmonixfi/status/2074568138717311039" target="_blank" rel="noopener" style="color:var(--ink-soft)">@harmonixfi: Hyperliquid yield capacity is starting to look more real. Stablecoins </a></td></tr></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="note" style="margin-top:12px;margin-bottom:0">
-        <strong>Method</strong> · Narrative patterns matched on public watchlist posts. <strong>Heat</strong> = engagement-weighted volume of matching posts in the window (likes + 2×reposts + 3×replies, recency-decayed), normalized 0–100 against the hottest narrative. <strong>Own %</strong> = @harmonixfi share of that narrative's total score; market = non-self voices. Actions map to conversion stage + UTM campaign for outreach → deposit tracking.
-        Edit: <code>config/narratives.json</code> · <code>npm run x:narratives</code>
-      </div>
     </div>
 
 
