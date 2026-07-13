@@ -1,14 +1,26 @@
 [
   {
     "day": "2026-07-08",
-    "as_of": "2026-07-08T22:12:10.651Z",
-    "combined_aum_usd": 8757408.295069858,
-    "vault_tvl_usd": 6470914.968803727,
+    "as_of": "2026-07-08T23:46:44.266Z",
+    "combined_aum_usd": 8810709.326268286,
+    "vault_tvl_usd": 6509400.114773499,
     "hype_deposited": 33252.25378629571,
-    "hype_deposited_usd": 2233703.521967521,
+    "hype_deposited_usd": 2244377.4954329217,
     "khype_deposited": 48072.65275276792,
-    "khype_deposited_usd": 3288036.1356123444,
-    "hype_staked": 34043.9055552197,
-    "hype_staked_usd": 2286493.3262661323
+    "khype_deposited_usd": 3315830.681989822,
+    "hype_staked": 34043.905555219695,
+    "hype_staked_usd": 2301309.2114947857
+  },
+  {
+    "day": "2026-07-13",
+    "as_of": "2026-07-13T20:29:35.127Z",
+    "combined_aum_usd": 8294336.840316398,
+    "vault_tvl_usd": 6142792.479071264,
+    "hype_deposited": 33238.19803004989,
+    "hype_deposited_usd": 2108249.0437490195,
+    "khype_deposited": 47523.52276941552,
+    "khype_deposited_usd": 3091160.9802904897,
+    "hype_staked": 34034.26864996969,
+    "hype_staked_usd": 2151544.361245134
   }
 ]
