@@ -2,7 +2,7 @@
   "version": 1,
   "label": "Harmonix · HL yield narratives",
   "description": "Curated narratives for market heat vs Harmonix ownership. Links to conversion stage + UTM campaigns for outreach → deposit tracking.",
-  "as_of": "2026-07-13T20:27:40.330Z",
+  "as_of": "2026-07-21T16:37:59.066Z",
   "self_handle": "harmonixfi",
   "method": "Narrative patterns matched on public watchlist posts. Market = non-self voices; ownership = self score / total. Actions map to conversion stage + UTM campaign for outreach → deposit tracking.",
   "narratives": [
@@ -18,28 +18,28 @@
       "conversion_stage": "awareness",
       "utm_campaign": "earn_home",
       "outreach_angle": "Hitch product proof to HL growth posts",
-      "market_score": 9809.108475438417,
-      "self_score": 81.6597570014036,
-      "total_score": 9890.768232439821,
-      "market_posts": 89,
-      "self_posts": 5,
-      "market_voices": 24,
-      "ownership_pct": 0.83,
+      "market_score": 6438.879132382176,
+      "self_score": 72.02230020539162,
+      "total_score": 6510.901432587568,
+      "market_posts": 62,
+      "self_posts": 7,
+      "market_voices": 15,
+      "ownership_pct": 1.11,
       "market_heat": 100,
-      "self_heat": 87,
+      "self_heat": 73,
       "status": "competing",
       "action": "ride",
       "action_detail": "Competing on “Hyperliquid ecosystem” (own 1%). Hitch product proof to HL growth posts",
       "delta_market_heat": 0,
-      "delta_ownership_pp": -0.01,
+      "delta_ownership_pp": 0.31,
       "top_market_posts": [
         {
           "handle": "HyperliquidX",
           "tier": "ecosystem",
           "id": "2076573023973642282",
           "text": "Real-world asset (RWA) open interest on Hyperliquid reached a new ATH of $3.6B Total OI reached a new high for 2026 of $11B",
-          "score": 3208.038801941743,
-          "likes": 1546,
+          "score": 2541.810398918032,
+          "likes": 1952,
           "is_self": false
         },
         {
@@ -47,8 +47,8 @@
           "tier": "ecosystem",
           "id": "2072721677524644255",
           "text": "VALR, Africa's largest crypto exchange by trading volume, is using Hyperliquid as the onchain infrastructure layer to bring perpetuals to it",
-          "score": 2133.636413411046,
-          "likes": 2380,
+          "score": 1212.4849840715056,
+          "likes": 2394,
           "is_self": false
         },
         {
@@ -56,8 +56,8 @@
           "tier": "ecosystem",
           "id": "2070433243082731757",
           "text": "Hyperliquid has been added to the MAS's Investor Alert List (IAL). IAL listing does not constitute a ban, an enforcement action, or a findin",
-          "score": 1432.8179423564065,
-          "likes": 3024,
+          "score": 823.109232567439,
+          "likes": 3040,
           "is_self": false
         }
       ],
@@ -65,28 +65,28 @@
         {
           "handle": "harmonixfi",
           "tier": "self",
+          "id": "2077162981704581423",
+          "text": "The assets backing Harmonix vaults are having a strong month. The last 24 hours alone: $HYPE +4.3%, as @HyperliquidX and @tradexyz represent",
+          "score": 21.26679700768976,
+          "likes": 21,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
           "id": "2075701525327012343",
           "text": "Two months of haUSDC. Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield fr",
-          "score": 32.679791200329056,
+          "score": 15.383997068507963,
+          "likes": 13,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2077588448983044202",
+          "text": "In the first half of 2026, DeFi lost over 900 million dollars. More than 80 percent of it went through compromised keys and cross-chain brid",
+          "score": 12.339074898687706,
           "likes": 12,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2074568138717311039",
-          "text": "Hyperliquid yield capacity is starting to look more real. Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is a",
-          "score": 24.07335830606273,
-          "likes": 18,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2070598206342451452",
-          "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 →",
-          "score": 10.784431349486166,
-          "likes": 20,
           "is_self": true
         }
       ]
@@ -103,28 +103,37 @@
       "conversion_stage": "consideration",
       "utm_campaign": "earn_home",
       "outreach_angle": "Contrast on-chain HL capacity vs RWA wrappers for right ICPs",
-      "market_score": 4511.307294889056,
-      "self_score": 36.91396288757781,
-      "total_score": 4548.221257776634,
-      "market_posts": 28,
-      "self_posts": 2,
-      "market_voices": 13,
-      "ownership_pct": 0.81,
-      "market_heat": 46,
-      "self_heat": 39,
+      "market_score": 3473.084458345802,
+      "self_score": 69.68452362335213,
+      "total_score": 3542.768981969154,
+      "market_posts": 22,
+      "self_posts": 5,
+      "market_voices": 7,
+      "ownership_pct": 1.97,
+      "market_heat": 54,
+      "self_heat": 71,
       "status": "competing",
       "action": "ride",
-      "action_detail": "Competing on “Institutional / RWA yield” (own 1%). Contrast on-chain HL capacity vs RWA wrappers for right ICPs",
-      "delta_market_heat": 25,
-      "delta_ownership_pp": 0.81,
+      "action_detail": "Competing on “Institutional / RWA yield” (own 2%). Contrast on-chain HL capacity vs RWA wrappers for right ICPs",
+      "delta_market_heat": -12,
+      "delta_ownership_pp": 1.19,
       "top_market_posts": [
         {
           "handle": "HyperliquidX",
           "tier": "ecosystem",
           "id": "2076573023973642282",
           "text": "Real-world asset (RWA) open interest on Hyperliquid reached a new ATH of $3.6B Total OI reached a new high for 2026 of $11B",
-          "score": 3208.038801941743,
-          "likes": 1546,
+          "score": 2541.810398918032,
+          "likes": 1952,
+          "is_self": false
+        },
+        {
+          "handle": "alturax",
+          "tier": "peer",
+          "id": "2079552225979035941",
+          "text": "Dear Community, As many of you know, the winding-down process is progressing well, and we'd like to share an update. We currently have appro",
+          "score": 315.61604104744777,
+          "likes": 91,
           "is_self": false
         },
         {
@@ -132,17 +141,8 @@
           "tier": "peer",
           "id": "2074837995023397045",
           "text": "Altura Community Update The wind-down of the Inessa strategy is well underway. Over $4.3M has been received this week alone, with transfers ",
-          "score": 325.8375539914013,
-          "likes": 138,
-          "is_self": false
-        },
-        {
-          "handle": "alturax",
-          "tier": "peer",
-          "id": "2070118060074451215",
-          "text": "Treasury Unwind Update The Inessa unwind is underway, and transfers to Altura's bank account are now being processed through JPMorgan Chase.",
-          "score": 248.37223957801604,
-          "likes": 177,
+          "score": 153.8980692754253,
+          "likes": 140,
           "is_self": false
         }
       ],
@@ -150,19 +150,28 @@
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2075701525327012343",
-          "text": "Two months of haUSDC. Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield fr",
-          "score": 32.679791200329056,
-          "likes": 12,
+          "id": "2077162981704581423",
+          "text": "The assets backing Harmonix vaults are having a strong month. The last 24 hours alone: $HYPE +4.3%, as @HyperliquidX and @tradexyz represent",
+          "score": 21.26679700768976,
+          "likes": 21,
           "is_self": true
         },
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2075705298342567973",
-          "text": "The markets it trades have grown quickly: > Open positions: $260m in December → $3.1b today > 86 markets, more than half of Hyperliquid's da",
-          "score": 4.234171687248751,
-          "likes": 4,
+          "id": "2079332152089661818",
+          "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY ",
+          "score": 20.804308561763115,
+          "likes": 8,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2075701525327012343",
+          "text": "Two months of haUSDC. Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield fr",
+          "score": 15.383997068507963,
+          "likes": 13,
           "is_self": true
         }
       ]
@@ -179,37 +188,37 @@
       "conversion_stage": "retention",
       "utm_campaign": "docs_architecture",
       "outreach_angle": "Trust content for depositors who might churn",
-      "market_score": 1832.2571165476356,
-      "self_score": 0,
-      "total_score": 1832.2571165476356,
-      "market_posts": 8,
-      "self_posts": 0,
-      "market_voices": 7,
-      "ownership_pct": 0,
+      "market_score": 1240.2175624357737,
+      "self_score": 12.339074898687706,
+      "total_score": 1252.5566373344614,
+      "market_posts": 5,
+      "self_posts": 1,
+      "market_voices": 4,
+      "ownership_pct": 0.99,
       "market_heat": 19,
-      "self_heat": 0,
-      "status": "market_only",
+      "self_heat": 13,
+      "status": "under_indexed",
       "action": "own",
-      "action_detail": "Market heat 19 · ownership 0% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn",
-      "delta_market_heat": -10,
-      "delta_ownership_pp": 0,
+      "action_detail": "Market heat 19 · ownership 1% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn",
+      "delta_market_heat": -4,
+      "delta_ownership_pp": 0.99,
       "top_market_posts": [
         {
           "handle": "HyperliquidX",
           "tier": "ecosystem",
           "id": "2070433243082731757",
           "text": "Hyperliquid has been added to the MAS's Investor Alert List (IAL). IAL listing does not constitute a ban, an enforcement action, or a findin",
-          "score": 1432.8179423564065,
-          "likes": 3024,
+          "score": 823.109232567439,
+          "likes": 3040,
           "is_self": false
         },
         {
-          "handle": "derivexyz",
+          "handle": "alturax",
           "tier": "peer",
-          "id": "2074840966947889191",
-          "text": "Derive is now live on @LorisTools alongside top CEXes in its options dashboard. Beyond options, traders can compare funding, open interest, ",
-          "score": 122.68241907584814,
-          "likes": 127,
+          "id": "2077384697387389390",
+          "text": "Community Update – Strategy Unwinding Progress Dear Community, We would like to provide you with a transparent update on the progress of the",
+          "score": 281.999750624182,
+          "likes": 140,
           "is_self": false
         },
         {
@@ -217,65 +226,8 @@
           "tier": "peer",
           "id": "2069125770719740387",
           "text": "An update on Altura's multi-strategy vault. Every user deposit is backed. The vault is over-collateralized with reserves near 104%, the pric",
-          "score": 121.57550508919861,
-          "likes": 218,
-          "is_self": false
-        }
-      ],
-      "top_self_posts": []
-    },
-    {
-      "id": "hype_token",
-      "label": "HYPE token / beta",
-      "description": "HYPE price, valuation, beta — market heat; convert via vault product not price calls.",
-      "tags": [
-        "token",
-        "market"
-      ],
-      "own_intent": false,
-      "conversion_stage": "awareness",
-      "utm_campaign": "vault_hype",
-      "outreach_angle": "Redirect price talk → productive HYPE vault",
-      "market_score": 578.5005041445986,
-      "self_score": 10.784431349486166,
-      "total_score": 589.2849354940847,
-      "market_posts": 35,
-      "self_posts": 1,
-      "market_voices": 10,
-      "ownership_pct": 1.83,
-      "market_heat": 6,
-      "self_heat": 11,
-      "status": "competing",
-      "action": "ride",
-      "action_detail": "Competing on “HYPE token / beta” (own 2%). Redirect price talk → productive HYPE vault",
-      "delta_market_heat": -3,
-      "delta_ownership_pp": -0.1,
-      "top_market_posts": [
-        {
-          "handle": "hypersurfaceX",
-          "tier": "peer",
-          "id": "2073087723141759475",
-          "text": "URGENT: Unfollow us NOW if you are bearish on Hyperliquid. 😈🫵 Or drop a comment if you're a $HYPE permabull! 👇💚 Hypurrliquid",
-          "score": 59.41276171494512,
-          "likes": 27,
-          "is_self": false
-        },
-        {
-          "handle": "hypersurfaceX",
-          "tier": "peer",
-          "id": "2074468440950046790",
-          "text": "Quick check: Are you here because you actually believe in Hyperliquid... Or are you just watching from the sidelines pretending you’re early",
-          "score": 57.08112251428236,
-          "likes": 29,
-          "is_self": false
-        },
-        {
-          "handle": "monetrix_xyz",
-          "tier": "peer",
-          "id": "2072304157135077497",
-          "text": "Article The only yield capable of scaling alongside $HYPE is yield generated by Hyperliquid itself. Hyperliquid is evolving beyond a trading",
-          "score": 54.268825368077074,
-          "likes": 59,
+          "score": 55.32134483611934,
+          "likes": 220,
           "is_self": false
         }
       ],
@@ -283,95 +235,10 @@
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2070598206342451452",
-          "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 →",
-          "score": 10.784431349486166,
-          "likes": 20,
-          "is_self": true
-        }
-      ]
-    },
-    {
-      "id": "lst_khype",
-      "label": "LST / kHYPE",
-      "description": "Liquid staking on HL, kHYPE, restaking yield.",
-      "tags": [
-        "product",
-        "lst"
-      ],
-      "own_intent": true,
-      "conversion_stage": "deposit",
-      "utm_campaign": "vault_khype",
-      "outreach_angle": "kHYPE vault as LST yield layer",
-      "market_score": 408.432049625138,
-      "self_score": 82.35280397470603,
-      "total_score": 490.78485359984404,
-      "market_posts": 21,
-      "self_posts": 7,
-      "market_voices": 13,
-      "ownership_pct": 16.78,
-      "market_heat": 4,
-      "self_heat": 88,
-      "status": "under_indexed",
-      "action": "own",
-      "action_detail": "Market heat 4 · ownership 17% — publish proof + UTM `vault_khype`. kHYPE vault as LST yield layer",
-      "delta_market_heat": -2,
-      "delta_ownership_pp": 0.18,
-      "top_market_posts": [
-        {
-          "handle": "prjx_hl",
-          "tier": "peer",
-          "id": "2069098746499993848",
-          "text": "We are shifting our $50k/month of LP rewards from $USDC to $kHYPE Our vision is to give our community long term exposure to Hyperliquid. Nev",
-          "score": 216.10792883085853,
-          "likes": 545,
-          "is_self": false
-        },
-        {
-          "handle": "ValantisLabs",
-          "tier": "peer",
-          "id": "2075465900430680110",
-          "text": "Engineering a new experience on Hyperliquid. A liquid staking token, a trading terminal app, and a smart account combine to deliver the lowe",
-          "score": 26.694872417035892,
-          "likes": 23,
-          "is_self": false
-        },
-        {
-          "handle": "RamsesExchange",
-          "tier": "peer",
-          "id": "2074151975331963041",
-          "text": "🚨DID YOU KNOW: Ramses offers pools with Fee Share. Look for multicolored APR on the Liquidity tab (link in next post) and hover over the AP",
-          "score": 22.893862656354674,
-          "likes": 20,
-          "is_self": false
-        }
-      ],
-      "top_self_posts": [
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2074568138717311039",
-          "text": "Hyperliquid yield capacity is starting to look more real. Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is a",
-          "score": 24.07335830606273,
-          "likes": 18,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2072344674459885635",
-          "text": "The kHYPE vault just crossed $3.1M TVL 3.57% APY on kHYPE. 👉 https://app.harmonix.fi/vaults/hyperevm-khype-v1",
-          "score": 14.880441501381084,
-          "likes": 20,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2076708255909454252",
-          "text": "Not many people are pricing in how productive kHYPE has become as an asset, but the Harmonix kHYPE vault is quietly one of the better risk-a",
-          "score": 10.948295672891458,
-          "likes": 5,
+          "id": "2077588448983044202",
+          "text": "In the first half of 2026, DeFi lost over 900 million dollars. More than 80 percent of it went through compromised keys and cross-chain brid",
+          "score": 12.339074898687706,
+          "likes": 12,
           "is_self": true
         }
       ]
@@ -388,131 +255,46 @@
       "conversion_stage": "deposit",
       "utm_campaign": "earn_home",
       "outreach_angle": "Numbers-first deposit CTA",
-      "market_score": 378.80243625300005,
-      "self_score": 93.93877262332768,
-      "total_score": 472.74120887632773,
+      "market_score": 805.2306005315525,
+      "self_score": 98.37898574668635,
+      "total_score": 903.6095862782388,
       "market_posts": 33,
       "self_posts": 8,
-      "market_voices": 12,
-      "ownership_pct": 19.87,
-      "market_heat": 4,
+      "market_voices": 10,
+      "ownership_pct": 10.89,
+      "market_heat": 13,
       "self_heat": 100,
       "status": "under_indexed",
       "action": "own",
-      "action_detail": "Market heat 4 · ownership 20% — publish proof + UTM `earn_home`. Numbers-first deposit CTA",
-      "delta_market_heat": -1,
-      "delta_ownership_pp": -2.99,
+      "action_detail": "Market heat 13 · ownership 11% — publish proof + UTM `earn_home`. Numbers-first deposit CTA",
+      "delta_market_heat": 11,
+      "delta_ownership_pp": -7.56,
       "top_market_posts": [
         {
-          "handle": "monetrix_xyz",
+          "handle": "liminalmoney",
           "tier": "peer",
-          "id": "2074827705800077430",
-          "text": "YieldMaxxing is live on @merkl_xyz ​Our first campaign is now live and will run for two weeks. ​This campaign will allow Merkl users to expe",
-          "score": 60.65407597976396,
-          "likes": 38,
+          "id": "2078510132598558906",
+          "text": "Portfolio Margin is now fully deployed across $xHYPE & $xBTC. Since then, net APYs increased by +50%, resulting in: +11.5% APY from $HYPE fu",
+          "score": 234.8709889261608,
+          "likes": 108,
           "is_self": false
         },
         {
-          "handle": "RamsesExchange",
+          "handle": "derivexyz",
           "tier": "peer",
-          "id": "2075966762663694561",
-          "text": "The Ramses team is working on Saturday, but you don't have to. Stake your xRAM in AutoVaults, or hold hyperRAM for passive earning each and ",
-          "score": 40.78317826498495,
-          "likes": 24,
-          "is_self": false
-        },
-        {
-          "handle": "D2_Finance",
-          "tier": "peer",
-          "id": "2076626847589417236",
-          "text": "H1 2026, in receipts. 1- hyperliquid:native 46 calls, May expiry. $34K in, $736K out. One structure, settled on @DeriveXYZ , screenshot stra",
-          "score": 31.421139962326066,
-          "likes": 12,
-          "is_self": false
-        }
-      ],
-      "top_self_posts": [
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2074568138717311039",
-          "text": "Hyperliquid yield capacity is starting to look more real. Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is a",
-          "score": 24.07335830606273,
-          "likes": 18,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2073965041477452077",
-          "text": "Harmonix TVL crossed 9.28m today",
-          "score": 15.73233581064104,
-          "likes": 17,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2072344674459885635",
-          "text": "The kHYPE vault just crossed $3.1M TVL 3.57% APY on kHYPE. 👉 https://app.harmonix.fi/vaults/hyperevm-khype-v1",
-          "score": 14.880441501381084,
-          "likes": 20,
-          "is_self": true
-        }
-      ]
-    },
-    {
-      "id": "hip3_equities",
-      "label": "HIP-3 / equity perps",
-      "description": "HIP-3 markets, equity perps, new listing flow.",
-      "tags": [
-        "ecosystem",
-        "product"
-      ],
-      "own_intent": true,
-      "conversion_stage": "awareness",
-      "utm_campaign": "vault_hausdc",
-      "outreach_angle": "Ride HIP-3 attention into haUSDC / related vaults",
-      "market_score": 321.5561458750331,
-      "self_score": 10.416653543423484,
-      "total_score": 331.9727994184566,
-      "market_posts": 10,
-      "self_posts": 1,
-      "market_voices": 5,
-      "ownership_pct": 3.14,
-      "market_heat": 3,
-      "self_heat": 11,
-      "status": "under_indexed",
-      "action": "own",
-      "action_detail": "Market heat 3 · ownership 3% — publish proof + UTM `vault_hausdc`. Ride HIP-3 attention into haUSDC / related vaults",
-      "delta_market_heat": -2,
-      "delta_ownership_pp": -0.16,
-      "top_market_posts": [
-        {
-          "handle": "HyperliquidX",
-          "tier": "ecosystem",
-          "id": "2061673725502861406",
-          "text": "RWA open interest on Hyperliquid reached a new ATH of $3B HIP-3 has set a new OI record every month since its launch in October 2025 Video",
-          "score": 165.98855801145945,
-          "likes": 3677,
-          "is_self": false
-        },
-        {
-          "handle": "D2_Finance",
-          "tier": "peer",
-          "id": "2075840309398000037",
-          "text": "We broke the @TradingProtocol website. Sincere apologies. 😅 TexasHedge went straight up in its second epoch. $SPCX perp plus $SPY puts plus",
-          "score": 46.712334545547606,
-          "likes": 25,
+          "id": "2078370124860723504",
+          "text": "Why Derive stands out: • 🥇 Largest onchain options exchange • 📊 +$30B+ lifetime trading volume. • 📈 +$1.5B+ cumulative open interest. • \ud83d",
+          "score": 131.4914775984522,
+          "likes": 78,
           "is_self": false
         },
         {
           "handle": "felixprotocol",
           "tier": "peer",
-          "id": "2072325432838418762",
-          "text": "Fully on-chain SPCX DCA is now live Trade spot equities with DCA orders via Felix here: https://trade.usefelix.xyz/equities/SPCX",
-          "score": 41.68265842062609,
-          "likes": 80,
+          "id": "2079561364092408263",
+          "text": "The kHYPE loop quantified With @kinetiq_xyz kHYPE continuing to be the dominant collateral asset across HyperEVM, we wanted to give a breakd",
+          "score": 51.568980863902816,
+          "likes": 26,
           "is_self": false
         }
       ],
@@ -520,142 +302,84 @@
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2072644448664899616",
-          "text": "Harmonix has distributed $ENA rewards to HYPE-USDC and HIP-3 haUSDC vault users haUSDC deposits keep earning HIP-3 rewards alongside a 9.5% ",
-          "score": 10.416653543423484,
-          "likes": 15,
+          "id": "2077162981704581423",
+          "text": "The assets backing Harmonix vaults are having a strong month. The last 24 hours alone: $HYPE +4.3%, as @HyperliquidX and @tradexyz represent",
+          "score": 21.26679700768976,
+          "likes": 21,
           "is_self": true
-        }
-      ]
-    },
-    {
-      "id": "points_incentives",
-      "label": "Points / incentives",
-      "description": "Points farming and incentive narratives (competitive).",
-      "tags": [
-        "growth",
-        "competitive"
-      ],
-      "own_intent": false,
-      "conversion_stage": "awareness",
-      "utm_campaign": "earn_home",
-      "outreach_angle": "Only if we have a real program — else avoid",
-      "market_score": 308.63703678449673,
-      "self_score": 21.36494921631494,
-      "total_score": 330.00198600081166,
-      "market_posts": 24,
-      "self_posts": 2,
-      "market_voices": 11,
-      "ownership_pct": 6.47,
-      "market_heat": 3,
-      "self_heat": 23,
-      "status": "competing",
-      "action": "ride",
-      "action_detail": "Competing on “Points / incentives” (own 6%). Only if we have a real program — else avoid",
-      "delta_market_heat": -2,
-      "delta_ownership_pp": 0.99,
-      "top_market_posts": [
-        {
-          "handle": "monetrix_xyz",
-          "tier": "peer",
-          "id": "2074827705800077430",
-          "text": "YieldMaxxing is live on @merkl_xyz ​Our first campaign is now live and will run for two weeks. ​This campaign will allow Merkl users to expe",
-          "score": 60.65407597976396,
-          "likes": 38,
-          "is_self": false
         },
         {
-          "handle": "HyperSwapX",
-          "tier": "peer",
-          "id": "2072330000183750699",
-          "text": "HyperSwap UI v2 The most HyperLiquid-aligned AMM, distributing over $20,000 in monthly LP incentives while allocating 75% of protocol revenu",
-          "score": 50.137920375731476,
-          "likes": 74,
-          "is_self": false
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2079332152089661818",
+          "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY ",
+          "score": 20.804308561763115,
+          "likes": 8,
+          "is_self": true
         },
-        {
-          "handle": "monetrix_xyz",
-          "tier": "peer",
-          "id": "2074512908827205941",
-          "text": "sUSDM/USDM pools are now live on @HybraFinance. Bribes are live for sUSDM<>USDM pools Earn 10x points for LPing, emissions begin next epoch.",
-          "score": 38.359447967925654,
-          "likes": 29,
-          "is_self": false
-        }
-      ],
-      "top_self_posts": [
         {
           "handle": "harmonixfi",
           "tier": "self",
           "id": "2076708255909454252",
           "text": "Not many people are pricing in how productive kHYPE has become as an asset, but the Harmonix kHYPE vault is quietly one of the better risk-a",
-          "score": 10.948295672891458,
-          "likes": 5,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2072644448664899616",
-          "text": "Harmonix has distributed $ENA rewards to HYPE-USDC and HIP-3 haUSDC vault users haUSDC deposits keep earning HIP-3 rewards alongside a 9.5% ",
-          "score": 10.416653543423484,
-          "likes": 15,
+          "score": 12.619572804585612,
+          "likes": 14,
           "is_self": true
         }
       ]
     },
     {
-      "id": "lending_mm",
-      "label": "Lending / money markets",
-      "description": "Lending TVL, borrow demand — capacity inputs for vault design.",
+      "id": "lst_khype",
+      "label": "LST / kHYPE",
+      "description": "Liquid staking on HL, kHYPE, restaking yield.",
       "tags": [
-        "ecosystem",
-        "defi"
+        "product",
+        "lst"
       ],
-      "own_intent": false,
-      "conversion_stage": "consideration",
-      "utm_campaign": "vault_hype",
-      "outreach_angle": "Lending depth = vault capacity story",
-      "market_score": 60.595521457895316,
-      "self_score": 24.07335830606273,
-      "total_score": 84.66887976395805,
-      "market_posts": 5,
-      "self_posts": 1,
-      "market_voices": 4,
-      "ownership_pct": 28.43,
-      "market_heat": 1,
-      "self_heat": 26,
-      "status": "competing",
-      "action": "ride",
-      "action_detail": "Competing on “Lending / money markets” (own 28%). Lending depth = vault capacity story",
-      "delta_market_heat": 0,
-      "delta_ownership_pp": 0.64,
+      "own_intent": true,
+      "conversion_stage": "deposit",
+      "utm_campaign": "vault_khype",
+      "outreach_angle": "kHYPE vault as LST yield layer",
+      "market_score": 733.5276813469114,
+      "self_score": 89.30470691768728,
+      "total_score": 822.8323882645988,
+      "market_posts": 19,
+      "self_posts": 8,
+      "market_voices": 9,
+      "ownership_pct": 10.85,
+      "market_heat": 11,
+      "self_heat": 91,
+      "status": "under_indexed",
+      "action": "own",
+      "action_detail": "Market heat 11 · ownership 11% — publish proof + UTM `vault_khype`. kHYPE vault as LST yield layer",
+      "delta_market_heat": 11,
+      "delta_ownership_pp": -43.86,
       "top_market_posts": [
         {
-          "handle": "hyperlendx",
+          "handle": "derivexyz",
           "tier": "peer",
-          "id": "2067941865781920132",
-          "text": "It's been 3 months since we launched the Stake & Save program, so its time for our first ever HPL Staking quarterly review. Over the first 3",
-          "score": 32.757754756836164,
-          "likes": 72,
+          "id": "2078208139200246131",
+          "text": "With HYPE moving around, sophisticated traders on Derive are using options to farm the volatility rather than selling their HYPE/kHYPE. The ",
+          "score": 131.00751667608483,
+          "likes": 111,
           "is_self": false
         },
         {
-          "handle": "RamsesExchange",
+          "handle": "markets_xyz",
           "tier": "peer",
-          "id": "2073128701953249327",
-          "text": "Hercules is right, TVL is climbing and liquidity is active again. Take a dip in a few of our liquidity pools like the $WHYPE / base:0x833589",
-          "score": 16.373937876278514,
-          "likes": 16,
+          "id": "2079197691884781624",
+          "text": "km Kinetiq (@Kinetiq_xyz) HIP-4 — https://nitter.net/Kinetiq_xyz/status/2036620218101903363#m",
+          "score": 119.6964640747384,
+          "likes": 60,
           "is_self": false
         },
         {
-          "handle": "liminalmoney",
+          "handle": "markets_xyz",
           "tier": "peer",
-          "id": "2066551775252123729",
-          "text": "You're one click away from earning Hyperliquid's Native Yield with Liminal. xHYPE → $HYPE funding rates & $kHYPE staking yield xBTC → $BTC f",
-          "score": 11.358755979240252,
-          "likes": 58,
+          "id": "2079193873545392419",
+          "text": "Traders on Insilico now earn kPoints. Eligible by trading current and upcoming HIP-3 Markets by @Kinetiq_xyz. Heavily mkts coded. Insilico T",
+          "score": 118.50848681602577,
+          "likes": 62,
           "is_self": false
         }
       ],
@@ -663,10 +387,28 @@
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2074568138717311039",
-          "text": "Hyperliquid yield capacity is starting to look more real. Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is a",
-          "score": 24.07335830606273,
-          "likes": 18,
+          "id": "2077162981704581423",
+          "text": "The assets backing Harmonix vaults are having a strong month. The last 24 hours alone: $HYPE +4.3%, as @HyperliquidX and @tradexyz represent",
+          "score": 21.26679700768976,
+          "likes": 21,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2078168059601379529",
+          "text": "GM kHYPE holders",
+          "score": 20.04683097621802,
+          "likes": 10,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2076708255909454252",
+          "text": "Not many people are pricing in how productive kHYPE has become as an asset, but the Harmonix kHYPE vault is quietly one of the better risk-a",
+          "score": 12.619572804585612,
+          "likes": 14,
           "is_self": true
         }
       ]
@@ -683,46 +425,46 @@
       "conversion_stage": "consideration",
       "utm_campaign": "vault_delta",
       "outreach_angle": "Risk-defined yield for desks",
-      "market_score": 60.25367728361379,
-      "self_score": 17.432105457635835,
-      "total_score": 77.68578274124962,
-      "market_posts": 8,
+      "market_score": 579.7835043280029,
+      "self_score": 25.609614070835654,
+      "total_score": 605.3931183988385,
+      "market_posts": 9,
       "self_posts": 2,
-      "market_voices": 6,
-      "ownership_pct": 22.44,
-      "market_heat": 1,
-      "self_heat": 19,
+      "market_voices": 5,
+      "ownership_pct": 4.23,
+      "market_heat": 9,
+      "self_heat": 26,
       "status": "under_indexed",
       "action": "own",
-      "action_detail": "Market heat 1 · ownership 22% — publish proof + UTM `vault_delta`. Risk-defined yield for desks",
-      "delta_market_heat": 0,
-      "delta_ownership_pp": 0.39,
+      "action_detail": "Market heat 9 · ownership 4% — publish proof + UTM `vault_delta`. Risk-defined yield for desks",
+      "delta_market_heat": 8,
+      "delta_ownership_pp": -8.25,
       "top_market_posts": [
         {
-          "handle": "upshift_fi",
+          "handle": "alturax",
           "tier": "peer",
-          "id": "2069420589002228014",
-          "text": "Earn institutional yield on-chain with @tori_finance, powered by Upshift. The pre-deposit vault is open: deposit USDC or USDT, receive etrUS",
-          "score": 13.75861869006479,
-          "likes": 48,
-          "is_self": false
-        },
-        {
-          "handle": "monetrix_xyz",
-          "tier": "peer",
-          "id": "2064694065048817946",
-          "text": "Article From Trading Venue to Onchain Financial Layer Turning Portfolio Margin into Onchain Funding Yield Hyperliquid is becoming one of the",
-          "score": 12.152522771792427,
-          "likes": 119,
+          "id": "2079552225979035941",
+          "text": "Dear Community, As many of you know, the winding-down process is progressing well, and we'd like to share an update. We currently have appro",
+          "score": 315.61604104744777,
+          "likes": 91,
           "is_self": false
         },
         {
           "handle": "liminalmoney",
           "tier": "peer",
-          "id": "2066551775252123729",
-          "text": "You're one click away from earning Hyperliquid's Native Yield with Liminal. xHYPE → $HYPE funding rates & $kHYPE staking yield xBTC → $BTC f",
-          "score": 11.358755979240252,
-          "likes": 58,
+          "id": "2078510132598558906",
+          "text": "Portfolio Margin is now fully deployed across $xHYPE & $xBTC. Since then, net APYs increased by +50%, resulting in: +11.5% APY from $HYPE fu",
+          "score": 234.8709889261608,
+          "likes": 108,
+          "is_self": false
+        },
+        {
+          "handle": "liminalmoney",
+          "tier": "peer",
+          "id": "2078510135077486677",
+          "text": "Just mint & hold $xHYPE, $xBTC or $limUSD to earn HyperEVM's highest yields directly sourced from Hyperliquid's Native Yield: liminal.money/",
+          "score": 8.461015365795625,
+          "likes": 8,
           "is_self": false
         }
       ],
@@ -730,22 +472,231 @@
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2074193522400600559",
-          "text": "Harmonix Vaults 07.06.26 Snapshot : · USDC: 9.00% APY · HYPE: 3.80% APY · kHYPE: 4.30% APY · Basis Trade 5.9% APY Christophorus (@christopho",
-          "score": 9.888004458276894,
-          "likes": 9,
+          "id": "2079332152089661818",
+          "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY ",
+          "score": 20.804308561763115,
+          "likes": 8,
           "is_self": true
         },
         {
           "handle": "harmonixfi",
           "tier": "self",
-          "id": "2071978600149205105",
-          "text": "Your haUSDC earns MAX funding yield via Portfolio Margin Traditional carry splits capital across two legs, cutting funding yield in half. (H",
-          "score": 7.544100999358942,
+          "id": "2074193522400600559",
+          "text": "Harmonix Vaults 07.06.26 Snapshot : · USDC: 9.00% APY · HYPE: 3.80% APY · kHYPE: 4.30% APY · Basis Trade 5.9% APY Christophorus (@christopho",
+          "score": 4.805305509072541,
+          "likes": 10,
+          "is_self": true
+        }
+      ]
+    },
+    {
+      "id": "hype_token",
+      "label": "HYPE token / beta",
+      "description": "HYPE price, valuation, beta — market heat; convert via vault product not price calls.",
+      "tags": [
+        "token",
+        "market"
+      ],
+      "own_intent": false,
+      "conversion_stage": "awareness",
+      "utm_campaign": "vault_hype",
+      "outreach_angle": "Redirect price talk → productive HYPE vault",
+      "market_score": 578.5101428636431,
+      "self_score": 26.21434857169541,
+      "total_score": 604.7244914353385,
+      "market_posts": 23,
+      "self_posts": 2,
+      "market_voices": 9,
+      "ownership_pct": 4.33,
+      "market_heat": 9,
+      "self_heat": 27,
+      "status": "competing",
+      "action": "ride",
+      "action_detail": "Competing on “HYPE token / beta” (own 4%). Redirect price talk → productive HYPE vault",
+      "delta_market_heat": 7,
+      "delta_ownership_pp": -1.68,
+      "top_market_posts": [
+        {
+          "handle": "liminalmoney",
+          "tier": "peer",
+          "id": "2078510132598558906",
+          "text": "Portfolio Margin is now fully deployed across $xHYPE & $xBTC. Since then, net APYs increased by +50%, resulting in: +11.5% APY from $HYPE fu",
+          "score": 234.8709889261608,
+          "likes": 108,
+          "is_self": false
+        },
+        {
+          "handle": "derivexyz",
+          "tier": "peer",
+          "id": "2078370124860723504",
+          "text": "Why Derive stands out: • 🥇 Largest onchain options exchange • 📊 +$30B+ lifetime trading volume. • 📈 +$1.5B+ cumulative open interest. • \ud83d",
+          "score": 131.4914775984522,
+          "likes": 78,
+          "is_self": false
+        },
+        {
+          "handle": "markets_xyz",
+          "tier": "peer",
+          "id": "2078040259065991275",
+          "text": "$HYPE is down 9.1% since this post. Markets Alpha (@MarketsAlpha) An entity that used Anchorage to buy hyperliquid:native a few months ago h",
+          "score": 87.12130059938187,
+          "likes": 62,
+          "is_self": false
+        }
+      ],
+      "top_self_posts": [
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2077162981704581423",
+          "text": "The assets backing Harmonix vaults are having a strong month. The last 24 hours alone: $HYPE +4.3%, as @HyperliquidX and @tradexyz represent",
+          "score": 21.26679700768976,
+          "likes": 21,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2070598206342451452",
+          "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 →",
+          "score": 4.947551564005648,
+          "likes": 20,
+          "is_self": true
+        }
+      ]
+    },
+    {
+      "id": "points_incentives",
+      "label": "Points / incentives",
+      "description": "Points farming and incentive narratives (competitive).",
+      "tags": [
+        "growth",
+        "competitive"
+      ],
+      "own_intent": false,
+      "conversion_stage": "awareness",
+      "utm_campaign": "earn_home",
+      "outreach_angle": "Only if we have a real program — else avoid",
+      "market_score": 369.53203793620906,
+      "self_score": 33.42388136634872,
+      "total_score": 402.9559193025578,
+      "market_posts": 20,
+      "self_posts": 2,
+      "market_voices": 8,
+      "ownership_pct": 8.29,
+      "market_heat": 6,
+      "self_heat": 34,
+      "status": "competing",
+      "action": "ride",
+      "action_detail": "Competing on “Points / incentives” (own 8%). Only if we have a real program — else avoid",
+      "delta_market_heat": 4,
+      "delta_ownership_pp": 8.29,
+      "top_market_posts": [
+        {
+          "handle": "markets_xyz",
+          "tier": "peer",
+          "id": "2079193873545392419",
+          "text": "Traders on Insilico now earn kPoints. Eligible by trading current and upcoming HIP-3 Markets by @Kinetiq_xyz. Heavily mkts coded. Insilico T",
+          "score": 118.50848681602577,
+          "likes": 62,
+          "is_self": false
+        },
+        {
+          "handle": "kinetiq_xyz",
+          "tier": "peer",
+          "id": "2077402285424964014",
+          "text": "$QQQ is available on @markets_xyz with 25x leverage. Trading qualifies for kPoints Boosts. Heavily Markets coded. Markets (@Markets_xyz) Sem",
+          "score": 91.28102865614566,
+          "likes": 84,
+          "is_self": false
+        },
+        {
+          "handle": "D2_Finance",
+          "tier": "peer",
+          "id": "2079046916898459964",
+          "text": "KIMCHI PREMIUM IS PRICED. The strike is 75.418. That is the independent @Bloomberg BVOL fixing at today's Seoul close, and we traded flat to",
+          "score": 38.10146449286065,
+          "likes": 9,
+          "is_self": false
+        }
+      ],
+      "top_self_posts": [
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2079332152089661818",
+          "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY ",
+          "score": 20.804308561763115,
+          "likes": 8,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2076708255909454252",
+          "text": "Not many people are pricing in how productive kHYPE has become as an asset, but the Harmonix kHYPE vault is quietly one of the better risk-a",
+          "score": 12.619572804585612,
           "likes": 14,
           "is_self": true
         }
       ]
+    },
+    {
+      "id": "hip3_equities",
+      "label": "HIP-3 / equity perps",
+      "description": "HIP-3 markets, equity perps, new listing flow.",
+      "tags": [
+        "ecosystem",
+        "product"
+      ],
+      "own_intent": true,
+      "conversion_stage": "awareness",
+      "utm_campaign": "vault_hausdc",
+      "outreach_angle": "Ride HIP-3 attention into haUSDC / related vaults",
+      "market_score": 250.52193533908573,
+      "self_score": 0,
+      "total_score": 250.52193533908573,
+      "market_posts": 7,
+      "self_posts": 0,
+      "market_voices": 5,
+      "ownership_pct": 0,
+      "market_heat": 4,
+      "self_heat": 0,
+      "status": "market_only",
+      "action": "own",
+      "action_detail": "Market heat 4 · ownership 0% — publish proof + UTM `vault_hausdc`. Ride HIP-3 attention into haUSDC / related vaults",
+      "delta_market_heat": 1,
+      "delta_ownership_pp": 0,
+      "top_market_posts": [
+        {
+          "handle": "markets_xyz",
+          "tier": "peer",
+          "id": "2079193873545392419",
+          "text": "Traders on Insilico now earn kPoints. Eligible by trading current and upcoming HIP-3 Markets by @Kinetiq_xyz. Heavily mkts coded. Insilico T",
+          "score": 118.50848681602577,
+          "likes": 62,
+          "is_self": false
+        },
+        {
+          "handle": "HyperliquidX",
+          "tier": "ecosystem",
+          "id": "2061673725502861406",
+          "text": "RWA open interest on Hyperliquid reached a new ATH of $3B HIP-3 has set a new OI record every month since its launch in October 2025 Video",
+          "score": 93.01321725457007,
+          "likes": 3641,
+          "is_self": false
+        },
+        {
+          "handle": "felixprotocol",
+          "tier": "peer",
+          "id": "2072325432838418762",
+          "text": "Fully on-chain SPCX DCA is now live Trade spot equities with DCA orders via Felix here: https://trade.usefelix.xyz/equities/SPCX",
+          "score": 19.607394914845827,
+          "likes": 83,
+          "is_self": false
+        }
+      ],
+      "top_self_posts": []
     },
     {
       "id": "stablecoin_yield",
@@ -759,47 +710,124 @@
       "conversion_stage": "deposit",
       "utm_campaign": "vault_hausdc",
       "outreach_angle": "Park stables in HL-native yield",
-      "market_score": 0,
-      "self_score": 74.71390404917422,
-      "total_score": 74.71390404917422,
-      "market_posts": 0,
-      "self_posts": 4,
-      "market_voices": 0,
-      "ownership_pct": 100,
+      "market_score": 23.59851115291178,
+      "self_score": 81.11744182310788,
+      "total_score": 104.71595297601966,
+      "market_posts": 1,
+      "self_posts": 5,
+      "market_voices": 1,
+      "ownership_pct": 77.46,
       "market_heat": 0,
-      "self_heat": 80,
-      "status": "self_only",
-      "action": "own",
-      "action_detail": "You’re talking “Stablecoin yield on HL” but market isn’t — good for owned channels; pair with peer amplification.",
+      "self_heat": 82,
+      "status": "owning",
+      "action": "defend",
+      "action_detail": "You lead “Stablecoin yield on HL” (77% own) — keep proof cadence; use for retention/outreach.",
       "delta_market_heat": 0,
-      "delta_ownership_pp": 0,
-      "top_market_posts": [],
+      "delta_ownership_pp": -22.54,
+      "top_market_posts": [
+        {
+          "handle": "upshift_fi",
+          "tier": "peer",
+          "id": "2077702571947442182",
+          "text": "Users on Jumper can now access DeFi yield on their stablecoins. Vaults bring onchain finance to the world. Powered by Upshift, Earn on Jumpe",
+          "score": 23.59851115291178,
+          "likes": 20,
+          "is_self": false
+        }
+      ],
       "top_self_posts": [
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2077162981704581423",
+          "text": "The assets backing Harmonix vaults are having a strong month. The last 24 hours alone: $HYPE +4.3%, as @HyperliquidX and @tradexyz represent",
+          "score": 21.26679700768976,
+          "likes": 21,
+          "is_self": true
+        },
+        {
+          "handle": "harmonixfi",
+          "tier": "self",
+          "id": "2079332152089661818",
+          "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY ",
+          "score": 20.804308561763115,
+          "likes": 8,
+          "is_self": true
+        },
         {
           "handle": "harmonixfi",
           "tier": "self",
           "id": "2075701525327012343",
           "text": "Two months of haUSDC. Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield fr",
-          "score": 32.679791200329056,
-          "likes": 12,
+          "score": 15.383997068507963,
+          "likes": 13,
           "is_self": true
+        }
+      ]
+    },
+    {
+      "id": "lending_mm",
+      "label": "Lending / money markets",
+      "description": "Lending TVL, borrow demand — capacity inputs for vault design.",
+      "tags": [
+        "ecosystem",
+        "defi"
+      ],
+      "own_intent": false,
+      "conversion_stage": "consideration",
+      "utm_campaign": "vault_hype",
+      "outreach_angle": "Lending depth = vault capacity story",
+      "market_score": 22.400615723230963,
+      "self_score": 11.323264286459334,
+      "total_score": 33.7238800096903,
+      "market_posts": 3,
+      "self_posts": 1,
+      "market_voices": 3,
+      "ownership_pct": 33.58,
+      "market_heat": 0,
+      "self_heat": 12,
+      "status": "competing",
+      "action": "ride",
+      "action_detail": "Competing on “Lending / money markets” (own 34%). Lending depth = vault capacity story",
+      "delta_market_heat": 0,
+      "delta_ownership_pp": 33.58,
+      "top_market_posts": [
+        {
+          "handle": "upshift_fi",
+          "tier": "peer",
+          "id": "2077103747524653269",
+          "text": "7D APY on EarnAUSD is 10.19%, driven by strong borrow demand on @Curvance. PT-earnAUSD lets users lock in a fixed yield, while serving as co",
+          "score": 17.05574209571777,
+          "likes": 16,
+          "is_self": false
         },
+        {
+          "handle": "liminalmoney",
+          "tier": "peer",
+          "id": "2066551775252123729",
+          "text": "You're one click away from earning Hyperliquid's Native Yield with Liminal. xHYPE → $HYPE funding rates & $kHYPE staking yield xBTC → $BTC f",
+          "score": 5.330791195387108,
+          "likes": 62,
+          "is_self": false
+        },
+        {
+          "handle": "hypurrfi",
+          "tier": "peer",
+          "id": "2054919270581104948",
+          "text": "New borrows and new lending for USDH in the Pooled Market have been frozen. With the sunset of USDH, we encourage users to begin the process",
+          "score": 0.014082432126085972,
+          "likes": 7,
+          "is_self": false
+        }
+      ],
+      "top_self_posts": [
         {
           "handle": "harmonixfi",
           "tier": "self",
           "id": "2074568138717311039",
           "text": "Hyperliquid yield capacity is starting to look more real. Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is a",
-          "score": 24.07335830606273,
-          "likes": 18,
-          "is_self": true
-        },
-        {
-          "handle": "harmonixfi",
-          "tier": "self",
-          "id": "2072644448664899616",
-          "text": "Harmonix has distributed $ENA rewards to HYPE-USDC and HIP-3 haUSDC vault users haUSDC deposits keep earning HIP-3 rewards alongside a 9.5% ",
-          "score": 10.416653543423484,
-          "likes": 15,
+          "score": 11.323264286459334,
+          "likes": 19,
           "is_self": true
         }
       ]
@@ -817,19 +845,19 @@
       "utm_campaign": "vault_hype",
       "outreach_angle": "Capacity + depth proof for LPs sizing up",
       "market_score": 0,
-      "self_score": 24.07335830606273,
-      "total_score": 24.07335830606273,
+      "self_score": 11.323264286459334,
+      "total_score": 11.323264286459334,
       "market_posts": 0,
       "self_posts": 1,
       "market_voices": 0,
       "ownership_pct": 100,
       "market_heat": 0,
-      "self_heat": 26,
+      "self_heat": 12,
       "status": "self_only",
       "action": "own",
       "action_detail": "You’re talking “Yield capacity” but market isn’t — good for owned channels; pair with peer amplification.",
       "delta_market_heat": 0,
-      "delta_ownership_pp": 0,
+      "delta_ownership_pp": 100,
       "top_market_posts": [],
       "top_self_posts": [
         {
@@ -837,8 +865,8 @@
           "tier": "self",
           "id": "2074568138717311039",
           "text": "Hyperliquid yield capacity is starting to look more real. Stablecoins are now around $6B, USDC is still ~97% of supply, and lending TVL is a",
-          "score": 24.07335830606273,
-          "likes": 18,
+          "score": 11.323264286459334,
+          "likes": 19,
           "is_self": true
         }
       ]
@@ -849,58 +877,82 @@
       "id": "retention_safety",
       "label": "Risk / retention trust",
       "market_heat": 19,
-      "ownership_pct": 0,
-      "action_detail": "Market heat 19 · ownership 0% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn"
-    },
-    {
-      "id": "lst_khype",
-      "label": "LST / kHYPE",
-      "market_heat": 4,
-      "ownership_pct": 16.78,
-      "action_detail": "Market heat 4 · ownership 17% — publish proof + UTM `vault_khype`. kHYPE vault as LST yield layer"
+      "ownership_pct": 0.99,
+      "action_detail": "Market heat 19 · ownership 1% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn"
     },
     {
       "id": "vault_apy_proof",
       "label": "Vault APY / proof",
-      "market_heat": 4,
-      "ownership_pct": 19.87,
-      "action_detail": "Market heat 4 · ownership 20% — publish proof + UTM `earn_home`. Numbers-first deposit CTA"
+      "market_heat": 13,
+      "ownership_pct": 10.89,
+      "action_detail": "Market heat 13 · ownership 11% — publish proof + UTM `earn_home`. Numbers-first deposit CTA"
     },
     {
-      "id": "hip3_equities",
-      "label": "HIP-3 / equity perps",
-      "market_heat": 3,
-      "ownership_pct": 3.14,
-      "action_detail": "Market heat 3 · ownership 3% — publish proof + UTM `vault_hausdc`. Ride HIP-3 attention into haUSDC / related vaults"
+      "id": "lst_khype",
+      "label": "LST / kHYPE",
+      "market_heat": 11,
+      "ownership_pct": 10.85,
+      "action_detail": "Market heat 11 · ownership 11% — publish proof + UTM `vault_khype`. kHYPE vault as LST yield layer"
     },
     {
       "id": "delta_neutral",
       "label": "Delta-neutral / basis",
-      "market_heat": 1,
-      "ownership_pct": 22.44,
-      "action_detail": "Market heat 1 · ownership 22% — publish proof + UTM `vault_delta`. Risk-defined yield for desks"
+      "market_heat": 9,
+      "ownership_pct": 4.23,
+      "action_detail": "Market heat 9 · ownership 4% — publish proof + UTM `vault_delta`. Risk-defined yield for desks"
+    },
+    {
+      "id": "hip3_equities",
+      "label": "HIP-3 / equity perps",
+      "market_heat": 4,
+      "ownership_pct": 0,
+      "action_detail": "Market heat 4 · ownership 0% — publish proof + UTM `vault_hausdc`. Ride HIP-3 attention into haUSDC / related vaults"
     }
   ],
   "owning": [
     {
-      "id": "stablecoin_yield",
-      "label": "Stablecoin yield on HL",
-      "ownership_pct": 100,
-      "self_heat": 80
-    },
-    {
       "id": "yield_capacity",
       "label": "Yield capacity",
       "ownership_pct": 100,
-      "self_heat": 26
+      "self_heat": 12
+    },
+    {
+      "id": "stablecoin_yield",
+      "label": "Stablecoin yield on HL",
+      "ownership_pct": 77.46,
+      "self_heat": 82
     }
   ],
   "rising": [
     {
-      "id": "institutional_rwa",
-      "label": "Institutional / RWA yield",
-      "delta_market_heat": 25,
-      "market_heat": 46
+      "id": "vault_apy_proof",
+      "label": "Vault APY / proof",
+      "delta_market_heat": 11,
+      "market_heat": 13
+    },
+    {
+      "id": "lst_khype",
+      "label": "LST / kHYPE",
+      "delta_market_heat": 11,
+      "market_heat": 11
+    },
+    {
+      "id": "delta_neutral",
+      "label": "Delta-neutral / basis",
+      "delta_market_heat": 8,
+      "market_heat": 9
+    },
+    {
+      "id": "hype_token",
+      "label": "HYPE token / beta",
+      "delta_market_heat": 7,
+      "market_heat": 9
+    },
+    {
+      "id": "points_incentives",
+      "label": "Points / incentives",
+      "delta_market_heat": 4,
+      "market_heat": 6
     }
   ],
   "by_stage": {
@@ -910,28 +962,28 @@
         "label": "Hyperliquid ecosystem",
         "status": "competing",
         "market_heat": 100,
-        "ownership_pct": 0.83
+        "ownership_pct": 1.11
       },
       {
         "id": "hype_token",
         "label": "HYPE token / beta",
         "status": "competing",
-        "market_heat": 6,
-        "ownership_pct": 1.83
-      },
-      {
-        "id": "hip3_equities",
-        "label": "HIP-3 / equity perps",
-        "status": "under_indexed",
-        "market_heat": 3,
-        "ownership_pct": 3.14
+        "market_heat": 9,
+        "ownership_pct": 4.33
       },
       {
         "id": "points_incentives",
         "label": "Points / incentives",
         "status": "competing",
-        "market_heat": 3,
-        "ownership_pct": 6.47
+        "market_heat": 6,
+        "ownership_pct": 8.29
+      },
+      {
+        "id": "hip3_equities",
+        "label": "HIP-3 / equity perps",
+        "status": "market_only",
+        "market_heat": 4,
+        "ownership_pct": 0
       }
     ],
     "consideration": [
@@ -939,22 +991,22 @@
         "id": "institutional_rwa",
         "label": "Institutional / RWA yield",
         "status": "competing",
-        "market_heat": 46,
-        "ownership_pct": 0.81
-      },
-      {
-        "id": "lending_mm",
-        "label": "Lending / money markets",
-        "status": "competing",
-        "market_heat": 1,
-        "ownership_pct": 28.43
+        "market_heat": 54,
+        "ownership_pct": 1.97
       },
       {
         "id": "delta_neutral",
         "label": "Delta-neutral / basis",
         "status": "under_indexed",
-        "market_heat": 1,
-        "ownership_pct": 22.44
+        "market_heat": 9,
+        "ownership_pct": 4.23
+      },
+      {
+        "id": "lending_mm",
+        "label": "Lending / money markets",
+        "status": "competing",
+        "market_heat": 0,
+        "ownership_pct": 33.58
       },
       {
         "id": "yield_capacity",
@@ -966,47 +1018,47 @@
     ],
     "deposit": [
       {
-        "id": "lst_khype",
-        "label": "LST / kHYPE",
-        "status": "under_indexed",
-        "market_heat": 4,
-        "ownership_pct": 16.78
-      },
-      {
         "id": "vault_apy_proof",
         "label": "Vault APY / proof",
         "status": "under_indexed",
-        "market_heat": 4,
-        "ownership_pct": 19.87
+        "market_heat": 13,
+        "ownership_pct": 10.89
+      },
+      {
+        "id": "lst_khype",
+        "label": "LST / kHYPE",
+        "status": "under_indexed",
+        "market_heat": 11,
+        "ownership_pct": 10.85
       },
       {
         "id": "stablecoin_yield",
         "label": "Stablecoin yield on HL",
-        "status": "self_only",
+        "status": "owning",
         "market_heat": 0,
-        "ownership_pct": 100
+        "ownership_pct": 77.46
       }
     ],
     "retention": [
       {
         "id": "retention_safety",
         "label": "Risk / retention trust",
-        "status": "market_only",
+        "status": "under_indexed",
         "market_heat": 19,
-        "ownership_pct": 0
+        "ownership_pct": 0.99
       }
     ]
   },
   "previous": {
-    "as_of": "2026-07-09T21:02:21.322Z"
+    "as_of": "2026-07-14T20:31:41.333Z"
   },
   "sources": [
     "mindshare-voices-raw / public posts",
     "config/narratives.json"
   ],
   "operator_readout": [
-    "Under-indexed: “Risk / retention trust” (heat 19, own 0%) — Market heat 19 · ownership 0% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn",
-    "Defending: “Stablecoin yield on HL” at 100% ownership — use in outreach proof.",
-    "Rising market: “Institutional / RWA yield” Δheat +25 — ride this week."
+    "Under-indexed: “Risk / retention trust” (heat 19, own 1%) — Market heat 19 · ownership 1% — publish proof + UTM `docs_architecture`. Trust content for depositors who might churn",
+    "Defending: “Yield capacity” at 100% ownership — use in outreach proof.",
+    "Rising market: “Vault APY / proof” Δheat +11 — ride this week."
   ]
 }
