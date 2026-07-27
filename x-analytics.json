@@ -1,12 +1,12 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-20",
-  "scraped_at": "2026-07-22T14:00:15.476Z",
+  "scraped_at": "2026-07-27T14:00:15.007Z",
   "csv_stale": false,
-  "stale_days": 1,
-  "followers": 11863,
-  "following": 347,
-  "tweets": 2982,
+  "stale_days": 6,
+  "followers": 11851,
+  "following": 352,
+  "tweets": 2988,
   "year": {
     "impressions": 2258031,
     "engagements": 113647,
@@ -173,232 +173,232 @@
   "follower_series": [
     {
       "d": "2025-07-21",
-      "f": 6545
+      "f": 6533
     },
     {
       "d": "2025-07-28",
-      "f": 6688
+      "f": 6676
     },
     {
       "d": "2025-08-04",
-      "f": 6788
+      "f": 6776
     },
     {
       "d": "2025-08-11",
-      "f": 6877
+      "f": 6865
     },
     {
       "d": "2025-08-18",
-      "f": 6939
+      "f": 6927
     },
     {
       "d": "2025-08-25",
-      "f": 7008
+      "f": 6996
     },
     {
       "d": "2025-09-01",
-      "f": 8120
+      "f": 8108
     },
     {
       "d": "2025-09-08",
-      "f": 8198
+      "f": 8186
     },
     {
       "d": "2025-09-15",
-      "f": 8350
+      "f": 8338
     },
     {
       "d": "2025-09-22",
-      "f": 8451
+      "f": 8439
     },
     {
       "d": "2025-09-29",
-      "f": 8525
+      "f": 8513
     },
     {
       "d": "2025-10-06",
-      "f": 8706
+      "f": 8694
     },
     {
       "d": "2025-10-13",
-      "f": 8919
+      "f": 8907
     },
     {
       "d": "2025-10-20",
-      "f": 9095
+      "f": 9083
     },
     {
       "d": "2025-10-27",
-      "f": 9214
+      "f": 9202
     },
     {
       "d": "2025-11-03",
-      "f": 9278
+      "f": 9266
     },
     {
       "d": "2025-11-10",
-      "f": 9364
+      "f": 9352
     },
     {
       "d": "2025-11-17",
-      "f": 9903
+      "f": 9891
     },
     {
       "d": "2025-11-24",
-      "f": 10285
+      "f": 10273
     },
     {
       "d": "2025-12-01",
-      "f": 10608
+      "f": 10596
     },
     {
       "d": "2025-12-08",
-      "f": 10814
+      "f": 10802
     },
     {
       "d": "2025-12-15",
-      "f": 11035
+      "f": 11023
     },
     {
       "d": "2025-12-22",
-      "f": 11244
+      "f": 11232
     },
     {
       "d": "2025-12-29",
-      "f": 11282
+      "f": 11270
     },
     {
       "d": "2026-01-05",
-      "f": 11320
+      "f": 11308
     },
     {
       "d": "2026-01-12",
-      "f": 11338
+      "f": 11326
     },
     {
       "d": "2026-01-19",
-      "f": 11365
+      "f": 11353
     },
     {
       "d": "2026-01-26",
-      "f": 11391
+      "f": 11379
     },
     {
       "d": "2026-02-02",
-      "f": 11454
+      "f": 11442
     },
     {
       "d": "2026-02-09",
-      "f": 11486
+      "f": 11474
     },
     {
       "d": "2026-02-16",
-      "f": 11512
+      "f": 11500
     },
     {
       "d": "2026-02-23",
-      "f": 11528
+      "f": 11516
     },
     {
       "d": "2026-03-02",
-      "f": 11542
+      "f": 11530
     },
     {
       "d": "2026-03-09",
-      "f": 11556
+      "f": 11544
     },
     {
       "d": "2026-03-16",
-      "f": 11585
+      "f": 11573
     },
     {
       "d": "2026-03-23",
-      "f": 11606
+      "f": 11594
     },
     {
       "d": "2026-03-30",
-      "f": 11618
+      "f": 11606
     },
     {
       "d": "2026-04-06",
-      "f": 11637
+      "f": 11625
     },
     {
       "d": "2026-04-13",
-      "f": 11649
+      "f": 11637
     },
     {
       "d": "2026-04-20",
-      "f": 11664
+      "f": 11652
     },
     {
       "d": "2026-04-27",
-      "f": 11673
+      "f": 11661
     },
     {
       "d": "2026-05-04",
-      "f": 11683
+      "f": 11671
     },
     {
       "d": "2026-05-11",
-      "f": 11694
+      "f": 11682
     },
     {
       "d": "2026-05-18",
-      "f": 11709
+      "f": 11697
     },
     {
       "d": "2026-05-25",
-      "f": 11734
+      "f": 11722
     },
     {
       "d": "2026-06-01",
-      "f": 11762
+      "f": 11750
     },
     {
       "d": "2026-06-08",
-      "f": 11774
+      "f": 11762
     },
     {
       "d": "2026-06-15",
-      "f": 11794
+      "f": 11782
     },
     {
       "d": "2026-06-22",
-      "f": 11811
+      "f": 11799
     },
     {
       "d": "2026-06-29",
-      "f": 11824
+      "f": 11812
     },
     {
       "d": "2026-07-06",
-      "f": 11847
+      "f": 11835
     },
     {
       "d": "2026-07-13",
-      "f": 11852
+      "f": 11840
     },
     {
       "d": "2026-07-20",
-      "f": 11863
+      "f": 11851
     }
   ],
   "recent_posts_agg": {
-    "likes": 288,
-    "reposts": 36,
-    "replies": 46,
-    "engagement_score": 406,
-    "views": 37848
+    "likes": 309,
+    "reposts": 43,
+    "replies": 51,
+    "engagement_score": 446,
+    "views": 40702
   },
   "top_posts": [
     {
       "id": "2070598206342451452",
       "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 → ~$7.6M TVL Base: $3",
-      "likes": 20,
-      "reposts": 6,
+      "likes": 21,
+      "reposts": 7,
       "replies": 4,
-      "views": 3582,
+      "views": 3625,
       "created_at": "2026-06-26T20:00:56.000Z"
     },
     {
@@ -407,7 +407,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1401,
+      "views": 1423,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026"
     },
     {
@@ -416,7 +416,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1342,
+      "views": 1347,
       "created_at": "2026-07-01T15:40:47.000Z"
     },
     {
@@ -425,7 +425,7 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1387,
+      "views": 1401,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026"
     },
     {
@@ -434,7 +434,7 @@
       "likes": 13,
       "reposts": 3,
       "replies": 6,
-      "views": 2803,
+      "views": 2814,
       "created_at": "Thu Jun 25 20:51:32 +0000 2026"
     },
     {
@@ -443,7 +443,7 @@
       "likes": 17,
       "reposts": 3,
       "replies": 1,
-      "views": 1293,
+      "views": 1299,
       "created_at": "2026-07-06T02:59:32.000Z"
     },
     {
@@ -452,7 +452,7 @@
       "likes": 13,
       "reposts": 2,
       "replies": 6,
-      "views": 1159,
+      "views": 1173,
       "created_at": "2026-07-10T21:59:42.000Z"
     },
     {
@@ -461,7 +461,7 @@
       "likes": 22,
       "reposts": 0,
       "replies": 1,
-      "views": 2321,
+      "views": 2335,
       "created_at": "2026-07-08T22:17:20.000Z"
     }
   ],
@@ -469,12 +469,12 @@
     {
       "id": "2070598206342451452",
       "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 → ~$7.6M TVL Base: $319 → ~$22.3M TVL Bull: $689 → ~$48.2M TV",
-      "likes": 20,
-      "reposts": 6,
+      "likes": 21,
+      "reposts": 7,
       "replies": 4,
-      "views": 3582,
+      "views": 3625,
       "created_at": "2026-06-26T20:00:56.000Z",
-      "engagement": 36
+      "engagement": 39
     },
     {
       "id": "2077162981704581423",
@@ -482,7 +482,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1401,
+      "views": 1423,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026",
       "engagement": 30
     },
@@ -492,7 +492,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1342,
+      "views": 1347,
       "created_at": "2026-07-01T15:40:47.000Z",
       "engagement": 29
     },
@@ -502,7 +502,7 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1387,
+      "views": 1401,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026",
       "engagement": 27
     },
@@ -512,7 +512,7 @@
       "likes": 13,
       "reposts": 3,
       "replies": 6,
-      "views": 2803,
+      "views": 2814,
       "created_at": "Thu Jun 25 20:51:32 +0000 2026",
       "engagement": 25
     },
@@ -522,7 +522,7 @@
       "likes": 17,
       "reposts": 3,
       "replies": 1,
-      "views": 1293,
+      "views": 1299,
       "created_at": "2026-07-06T02:59:32.000Z",
       "engagement": 24
     },
@@ -532,7 +532,7 @@
       "likes": 13,
       "reposts": 2,
       "replies": 6,
-      "views": 1159,
+      "views": 1173,
       "created_at": "2026-07-10T21:59:42.000Z",
       "engagement": 23
     },
@@ -542,7 +542,7 @@
       "likes": 22,
       "reposts": 0,
       "replies": 1,
-      "views": 2321,
+      "views": 2335,
       "created_at": "2026-07-08T22:17:20.000Z",
       "engagement": 23
     },
@@ -552,7 +552,7 @@
       "likes": 18,
       "reposts": 1,
       "replies": 2,
-      "views": 1622,
+      "views": 1628,
       "created_at": "2026-06-29T21:30:35.000Z",
       "engagement": 22
     },
@@ -562,7 +562,7 @@
       "likes": 10,
       "reposts": 5,
       "replies": 1,
-      "views": 868,
+      "views": 897,
       "created_at": "2026-07-17T17:20:50.000Z",
       "engagement": 21
     },
@@ -572,9 +572,19 @@
       "likes": 15,
       "reposts": 1,
       "replies": 2,
-      "views": 3105,
+      "views": 3137,
       "created_at": "Thu Jul 02 11:31:59 +0000 2026",
       "engagement": 19
+    },
+    {
+      "id": "2080734503774142652",
+      "text": "Pass the CLARITY Act Tushar Jain (@tushar_jain) Article Getting to a Yes on CLARITY Senate Republican leadership moved the Digital Asset Market Clarity Act (CLARITY) to a floor vote this week. The bil",
+      "likes": 10,
+      "reposts": 3,
+      "replies": 2,
+      "views": 1082,
+      "created_at": "2026-07-24T19:18:58.000Z",
+      "engagement": 18
     },
     {
       "id": "2067682998632505648",
@@ -582,9 +592,19 @@
       "likes": 14,
       "reposts": 1,
       "replies": 2,
-      "views": 951,
+      "views": 957,
       "created_at": "Thu Jun 18 18:56:57 +0000 2026",
       "engagement": 18
+    },
+    {
+      "id": "2080706515007377683",
+      "text": "Those who can, do. Those who can't, fud. @multicoin Capital's 2028 case for $HYPE : Bear · $2.73B → ~$109 Base · $8B → ~$319 Bull · $17.3B → ~$689 Harmonix, last 30 days ↓ Tushar Jain (@tushar_jain) Y",
+      "likes": 8,
+      "reposts": 3,
+      "replies": 2,
+      "views": 1037,
+      "created_at": "2026-07-24T17:27:45.000Z",
+      "engagement": 16
     },
     {
       "id": "2079332152089661818",
@@ -592,7 +612,7 @@
       "likes": 9,
       "reposts": 3,
       "replies": 1,
-      "views": 1048,
+      "views": 1223,
       "created_at": "2026-07-20T22:26:31.000Z",
       "engagement": 16
     },
@@ -602,7 +622,7 @@
       "likes": 12,
       "reposts": 2,
       "replies": 0,
-      "views": 1235,
+      "views": 1259,
       "created_at": "Thu Jul 16 02:57:40 +0000 2026",
       "engagement": 16
     },
@@ -612,7 +632,7 @@
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2469,
+      "views": 2486,
       "created_at": "2026-07-13T16:40:06.000Z",
       "engagement": 16
     },
@@ -622,7 +642,7 @@
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2687,
+      "views": 2712,
       "created_at": "Tue Jun 30 15:26:08 +0000 2026",
       "engagement": 16
     },
@@ -632,7 +652,7 @@
       "likes": 11,
       "reposts": 0,
       "replies": 2,
-      "views": 4850,
+      "views": 4870,
       "created_at": "Thu Jun 18 11:56:06 +0000 2026",
       "engagement": 13
     },
@@ -642,29 +662,29 @@
       "likes": 10,
       "reposts": 0,
       "replies": 2,
-      "views": 1124,
+      "views": 1132,
       "created_at": "2026-07-06T18:07:27.000Z",
       "engagement": 12
     },
     {
       "id": "2079676409782632480",
       "text": "Earn 3.89% APY with the Harmonix kHYPE vault + S2 @Kinetiq_xyz points Omnia π (@0xOmnia) It’s been 1 year since @Kinetiq_xyz went live Since then: > billions in lifetime deposits / redemptions > doubl",
-      "likes": 6,
+      "likes": 7,
       "reposts": 1,
       "replies": 1,
-      "views": 799,
+      "views": 976,
       "created_at": "Tue Jul 21 21:14:29 +0000 2026",
-      "engagement": 9
+      "engagement": 10
     },
     {
       "id": "2079334864424431972",
       "text": "The Clarity Act matters to us for a simple reason: everything we build sits on markets that need clear rules to keep growing. RWA perps, tokenized treasuries, onchain vaults, all of it scales faster w",
-      "likes": 6,
+      "likes": 7,
       "reposts": 0,
-      "replies": 1,
-      "views": 935,
+      "replies": 2,
+      "views": 1013,
       "created_at": "2026-07-20T22:37:18.000Z",
-      "engagement": 7
+      "engagement": 9
     },
     {
       "id": "2075705298342567973",
@@ -672,7 +692,7 @@
       "likes": 4,
       "reposts": 0,
       "replies": 0,
-      "views": 595,
+      "views": 602,
       "created_at": "2026-07-10T22:14:42.000Z",
       "engagement": 4
     },
@@ -682,7 +702,7 @@
       "likes": 0,
       "reposts": 0,
       "replies": 0,
-      "views": 272,
+      "views": 274,
       "created_at": "Tue Jun 30 15:38:23 +0000 2026",
       "engagement": 0
     }
@@ -712,7 +732,7 @@
         "id": "top-post",
         "severity": "info",
         "title": "Top recent post",
-        "detail": "\"Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE re…\" · eng 36 · 3,582 views",
+        "detail": "\"Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE re…\" · eng 39 · 3,625 views",
         "evidence": [
           "post:2070598206342451452",
           "public-scrape"
@@ -770,6 +790,6 @@
       "unique_wallets": 4074,
       "last_event_at": "2026-06-22T12:40:14.000Z"
     },
-    "generated_at": "2026-07-22T14:00:15.488Z"
+    "generated_at": "2026-07-27T14:00:15.015Z"
   }
 }
