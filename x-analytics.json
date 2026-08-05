@@ -1,12 +1,12 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-20",
-  "scraped_at": "2026-07-27T14:00:15.007Z",
-  "csv_stale": false,
-  "stale_days": 6,
-  "followers": 11851,
-  "following": 352,
-  "tweets": 2988,
+  "scraped_at": "2026-08-05T14:00:12.990Z",
+  "csv_stale": true,
+  "stale_days": 15,
+  "followers": 11820,
+  "following": 353,
+  "tweets": 3004,
   "year": {
     "impressions": 2258031,
     "engagements": 113647,
@@ -173,232 +173,232 @@
   "follower_series": [
     {
       "d": "2025-07-21",
-      "f": 6533
+      "f": 6502
     },
     {
       "d": "2025-07-28",
-      "f": 6676
+      "f": 6645
     },
     {
       "d": "2025-08-04",
-      "f": 6776
+      "f": 6745
     },
     {
       "d": "2025-08-11",
-      "f": 6865
+      "f": 6834
     },
     {
       "d": "2025-08-18",
-      "f": 6927
+      "f": 6896
     },
     {
       "d": "2025-08-25",
-      "f": 6996
+      "f": 6965
     },
     {
       "d": "2025-09-01",
-      "f": 8108
+      "f": 8077
     },
     {
       "d": "2025-09-08",
-      "f": 8186
+      "f": 8155
     },
     {
       "d": "2025-09-15",
-      "f": 8338
+      "f": 8307
     },
     {
       "d": "2025-09-22",
-      "f": 8439
+      "f": 8408
     },
     {
       "d": "2025-09-29",
-      "f": 8513
+      "f": 8482
     },
     {
       "d": "2025-10-06",
-      "f": 8694
+      "f": 8663
     },
     {
       "d": "2025-10-13",
-      "f": 8907
+      "f": 8876
     },
     {
       "d": "2025-10-20",
-      "f": 9083
+      "f": 9052
     },
     {
       "d": "2025-10-27",
-      "f": 9202
+      "f": 9171
     },
     {
       "d": "2025-11-03",
-      "f": 9266
+      "f": 9235
     },
     {
       "d": "2025-11-10",
-      "f": 9352
+      "f": 9321
     },
     {
       "d": "2025-11-17",
-      "f": 9891
+      "f": 9860
     },
     {
       "d": "2025-11-24",
-      "f": 10273
+      "f": 10242
     },
     {
       "d": "2025-12-01",
-      "f": 10596
+      "f": 10565
     },
     {
       "d": "2025-12-08",
-      "f": 10802
+      "f": 10771
     },
     {
       "d": "2025-12-15",
-      "f": 11023
+      "f": 10992
     },
     {
       "d": "2025-12-22",
-      "f": 11232
+      "f": 11201
     },
     {
       "d": "2025-12-29",
-      "f": 11270
+      "f": 11239
     },
     {
       "d": "2026-01-05",
-      "f": 11308
+      "f": 11277
     },
     {
       "d": "2026-01-12",
-      "f": 11326
+      "f": 11295
     },
     {
       "d": "2026-01-19",
-      "f": 11353
+      "f": 11322
     },
     {
       "d": "2026-01-26",
-      "f": 11379
+      "f": 11348
     },
     {
       "d": "2026-02-02",
-      "f": 11442
+      "f": 11411
     },
     {
       "d": "2026-02-09",
-      "f": 11474
+      "f": 11443
     },
     {
       "d": "2026-02-16",
-      "f": 11500
+      "f": 11469
     },
     {
       "d": "2026-02-23",
-      "f": 11516
+      "f": 11485
     },
     {
       "d": "2026-03-02",
-      "f": 11530
+      "f": 11499
     },
     {
       "d": "2026-03-09",
-      "f": 11544
+      "f": 11513
     },
     {
       "d": "2026-03-16",
-      "f": 11573
+      "f": 11542
     },
     {
       "d": "2026-03-23",
-      "f": 11594
+      "f": 11563
     },
     {
       "d": "2026-03-30",
-      "f": 11606
+      "f": 11575
     },
     {
       "d": "2026-04-06",
-      "f": 11625
+      "f": 11594
     },
     {
       "d": "2026-04-13",
-      "f": 11637
+      "f": 11606
     },
     {
       "d": "2026-04-20",
-      "f": 11652
+      "f": 11621
     },
     {
       "d": "2026-04-27",
-      "f": 11661
+      "f": 11630
     },
     {
       "d": "2026-05-04",
-      "f": 11671
+      "f": 11640
     },
     {
       "d": "2026-05-11",
-      "f": 11682
+      "f": 11651
     },
     {
       "d": "2026-05-18",
-      "f": 11697
+      "f": 11666
     },
     {
       "d": "2026-05-25",
-      "f": 11722
+      "f": 11691
     },
     {
       "d": "2026-06-01",
-      "f": 11750
+      "f": 11719
     },
     {
       "d": "2026-06-08",
-      "f": 11762
+      "f": 11731
     },
     {
       "d": "2026-06-15",
-      "f": 11782
+      "f": 11751
     },
     {
       "d": "2026-06-22",
-      "f": 11799
+      "f": 11768
     },
     {
       "d": "2026-06-29",
-      "f": 11812
+      "f": 11781
     },
     {
       "d": "2026-07-06",
-      "f": 11835
+      "f": 11804
     },
     {
       "d": "2026-07-13",
-      "f": 11840
+      "f": 11809
     },
     {
       "d": "2026-07-20",
-      "f": 11851
+      "f": 11820
     }
   ],
   "recent_posts_agg": {
-    "likes": 309,
-    "reposts": 43,
-    "replies": 51,
-    "engagement_score": 446,
-    "views": 40702
+    "likes": 387,
+    "reposts": 57,
+    "replies": 65,
+    "engagement_score": 566,
+    "views": 50449
   },
   "top_posts": [
     {
       "id": "2070598206342451452",
-      "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 → ~$7.6M TVL Base: $3",
+      "text": "Harmonix TVL growth projections:  HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.  If HYPE reaches @multicoin's targets:  Bear: $109 → ~$7.6M TVL Base:",
       "likes": 21,
-      "reposts": 7,
+      "reposts": 6,
       "replies": 4,
-      "views": 3625,
+      "views": 3654,
       "created_at": "2026-06-26T20:00:56.000Z"
     },
     {
@@ -407,7 +407,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1423,
+      "views": 1448,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026"
     },
     {
@@ -416,7 +416,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1347,
+      "views": 1355,
       "created_at": "2026-07-01T15:40:47.000Z"
     },
     {
@@ -425,8 +425,17 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1401,
+      "views": 1570,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026"
+    },
+    {
+      "id": "2075701525327012343",
+      "text": "Two months of haUSDC.  Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield from those RWA perps.",
+      "likes": 15,
+      "reposts": 2,
+      "replies": 6,
+      "views": 1190,
+      "created_at": "2026-07-10T21:59:42.000Z"
     },
     {
       "id": "2070248552643842071",
@@ -434,47 +443,38 @@
       "likes": 13,
       "reposts": 3,
       "replies": 6,
-      "views": 2814,
+      "views": 2826,
       "created_at": "Thu Jun 25 20:51:32 +0000 2026"
     },
     {
-      "id": "2073965041477452077",
-      "text": "Harmonix TVL crossed 9.28m today",
-      "likes": 17,
+      "id": "2082768489576870162",
+      "text": "New haHYPE market is now live on @pendle_fi  Matured PT-haHYPE has consistently delivered 4.4% APR on average  New market continues to be one of the best hyperl",
+      "likes": 16,
       "reposts": 3,
-      "replies": 1,
-      "views": 1299,
-      "created_at": "2026-07-06T02:59:32.000Z"
+      "replies": 2,
+      "views": 1574,
+      "created_at": "Thu Jul 30 10:01:18 +0000 2026"
     },
     {
-      "id": "2075701525327012343",
-      "text": "Two months of haUSDC.  Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield from those RWA perps.",
-      "likes": 13,
-      "reposts": 2,
-      "replies": 6,
-      "views": 1173,
-      "created_at": "2026-07-10T21:59:42.000Z"
-    },
-    {
-      "id": "2074981186812977539",
-      "text": "Omnia π (@0xOmnia) — https://nitter.net/0xOmnia/status/2071995391914983684#m",
-      "likes": 22,
-      "reposts": 0,
+      "id": "2078168059601379529",
+      "text": "GM kHYPE holders",
+      "likes": 11,
+      "reposts": 6,
       "replies": 1,
-      "views": 2335,
-      "created_at": "2026-07-08T22:17:20.000Z"
+      "views": 939,
+      "created_at": "2026-07-17T17:20:50.000Z"
     }
   ],
   "all_posts": [
     {
       "id": "2070598206342451452",
-      "text": "Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE reaches @multicoin's targets: Bear: $109 → ~$7.6M TVL Base: $319 → ~$22.3M TVL Bull: $689 → ~$48.2M TV",
+      "text": "Harmonix TVL growth projections:  HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.  If HYPE reaches @multicoin's targets:  Bear: $109 → ~$7.6M TVL Base: $319 → ~$22.3M TVL Bull: $689 → ~$48.2M",
       "likes": 21,
-      "reposts": 7,
+      "reposts": 6,
       "replies": 4,
-      "views": 3625,
+      "views": 3654,
       "created_at": "2026-06-26T20:00:56.000Z",
-      "engagement": 39
+      "engagement": 37
     },
     {
       "id": "2077162981704581423",
@@ -482,7 +482,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1423,
+      "views": 1448,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026",
       "engagement": 30
     },
@@ -492,7 +492,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1347,
+      "views": 1355,
       "created_at": "2026-07-01T15:40:47.000Z",
       "engagement": 29
     },
@@ -502,9 +502,19 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1401,
+      "views": 1570,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026",
       "engagement": 27
+    },
+    {
+      "id": "2075701525327012343",
+      "text": "Two months of haUSDC.  Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield from those RWA perps.  Tokenized treasuries pay 4.3–4.65%. ha",
+      "likes": 15,
+      "reposts": 2,
+      "replies": 6,
+      "views": 1190,
+      "created_at": "2026-07-10T21:59:42.000Z",
+      "engagement": 25
     },
     {
       "id": "2070248552643842071",
@@ -512,9 +522,29 @@
       "likes": 13,
       "reposts": 3,
       "replies": 6,
-      "views": 2814,
+      "views": 2826,
       "created_at": "Thu Jun 25 20:51:32 +0000 2026",
       "engagement": 25
+    },
+    {
+      "id": "2082768489576870162",
+      "text": "New haHYPE market is now live on @pendle_fi  Matured PT-haHYPE has consistently delivered 4.4% APR on average  New market continues to be one of the best hyperliquid:native  yield plays on HyperEVM",
+      "likes": 16,
+      "reposts": 3,
+      "replies": 2,
+      "views": 1574,
+      "created_at": "Thu Jul 30 10:01:18 +0000 2026",
+      "engagement": 24
+    },
+    {
+      "id": "2078168059601379529",
+      "text": "GM kHYPE holders",
+      "likes": 11,
+      "reposts": 6,
+      "replies": 1,
+      "views": 939,
+      "created_at": "2026-07-17T17:20:50.000Z",
+      "engagement": 24
     },
     {
       "id": "2073965041477452077",
@@ -522,27 +552,17 @@
       "likes": 17,
       "reposts": 3,
       "replies": 1,
-      "views": 1299,
+      "views": 1309,
       "created_at": "2026-07-06T02:59:32.000Z",
       "engagement": 24
     },
     {
-      "id": "2075701525327012343",
-      "text": "Two months of haUSDC.  Equities, commodities and currencies now trade on @HyperliquidX. haUSDC is the only vault on HyperEVM earning yield from those RWA perps.  Tokenized treasuries pay 4.3–4.65%. ha",
-      "likes": 13,
-      "reposts": 2,
-      "replies": 6,
-      "views": 1173,
-      "created_at": "2026-07-10T21:59:42.000Z",
-      "engagement": 23
-    },
-    {
       "id": "2074981186812977539",
-      "text": "Omnia π (@0xOmnia) — https://nitter.net/0xOmnia/status/2071995391914983684#m",
+      "text": "",
       "likes": 22,
       "reposts": 0,
       "replies": 1,
-      "views": 2335,
+      "views": 2739,
       "created_at": "2026-07-08T22:17:20.000Z",
       "engagement": 23
     },
@@ -552,19 +572,29 @@
       "likes": 18,
       "reposts": 1,
       "replies": 2,
-      "views": 1628,
+      "views": 1637,
       "created_at": "2026-06-29T21:30:35.000Z",
       "engagement": 22
     },
     {
-      "id": "2078168059601379529",
-      "text": "GM kHYPE holders",
-      "likes": 10,
-      "reposts": 5,
-      "replies": 1,
-      "views": 897,
-      "created_at": "2026-07-17T17:20:50.000Z",
+      "id": "2080734503774142652",
+      "text": "Pass the CLARITY Act Tushar Jain (@tushar_jain) Article Getting to a Yes on CLARITY Senate Republican leadership moved the Digital Asset Market Clarity Act (CLARITY) to a floor vote this week. The bil",
+      "likes": 11,
+      "reposts": 4,
+      "replies": 2,
+      "views": 1253,
+      "created_at": "2026-07-24T19:18:58.000Z",
       "engagement": 21
+    },
+    {
+      "id": "2080706515007377683",
+      "text": "Those who can, do. Those who can't, fud. @multicoin Capital's 2028 case for $HYPE : Bear · $2.73B → ~$109 Base · $8B → ~$319 Bull · $17.3B → ~$689 Harmonix, last 30 days ↓ Tushar Jain (@tushar_jain) Y",
+      "likes": 9,
+      "reposts": 4,
+      "replies": 2,
+      "views": 1154,
+      "created_at": "2026-07-24T17:27:45.000Z",
+      "engagement": 19
     },
     {
       "id": "2072644448664899616",
@@ -572,18 +602,28 @@
       "likes": 15,
       "reposts": 1,
       "replies": 2,
-      "views": 3137,
+      "views": 3556,
       "created_at": "Thu Jul 02 11:31:59 +0000 2026",
       "engagement": 19
     },
     {
-      "id": "2080734503774142652",
-      "text": "Pass the CLARITY Act Tushar Jain (@tushar_jain) Article Getting to a Yes on CLARITY Senate Republican leadership moved the Digital Asset Market Clarity Act (CLARITY) to a floor vote this week. The bil",
-      "likes": 10,
+      "id": "2084822842533925234",
+      "text": "45 days. 3.8% APY. Every single day.  The HYPE Vault pays yield in hyperliquid:native, and depositors are stacking points on top:  @Kinetiq_xyz S2: 28.34K points, active @ValantisLabs: 1.62M points, a",
+      "likes": 9,
       "reposts": 3,
-      "replies": 2,
-      "views": 1082,
-      "created_at": "2026-07-24T19:18:58.000Z",
+      "replies": 3,
+      "views": 1455,
+      "created_at": "2026-08-05T02:04:34.000Z",
+      "engagement": 18
+    },
+    {
+      "id": "2081880121242468597",
+      "text": "With Harmonix, you get:  • kHYPE earning 3.89% APY + Kinetiq S2 points • USDC yield that doesn't care which way the market goes • +3.8% Yield on HYPE without selling a single one • Point extras — like",
+      "likes": 13,
+      "reposts": 1,
+      "replies": 3,
+      "views": 1300,
+      "created_at": "2026-07-27T23:11:15.000Z",
       "engagement": 18
     },
     {
@@ -592,47 +632,57 @@
       "likes": 14,
       "reposts": 1,
       "replies": 2,
-      "views": 957,
+      "views": 963,
       "created_at": "Thu Jun 18 18:56:57 +0000 2026",
       "engagement": 18
     },
     {
-      "id": "2080706515007377683",
-      "text": "Those who can, do. Those who can't, fud. @multicoin Capital's 2028 case for $HYPE : Bear · $2.73B → ~$109 Base · $8B → ~$319 Bull · $17.3B → ~$689 Harmonix, last 30 days ↓ Tushar Jain (@tushar_jain) Y",
-      "likes": 8,
+      "id": "2083376041301586412",
+      "text": "Traditional finance is being rebuilt onchain one piece at a time. Perps first, then stablecoins, now vaults. Perps. Onchain perp volume is up 30% since May 2025. @binance's is down 31%. @HyperliquidX'",
+      "likes": 10,
+      "reposts": 2,
+      "replies": 3,
+      "views": 1072,
+      "created_at": "2026-08-01T02:15:30.000Z",
+      "engagement": 17
+    },
+    {
+      "id": "2082170506569200074",
+      "text": "Harmonix × @pendle_fi. Incoming.",
+      "likes": 10,
       "reposts": 3,
-      "replies": 2,
-      "views": 1037,
-      "created_at": "2026-07-24T17:27:45.000Z",
-      "engagement": 16
+      "replies": 1,
+      "views": 715,
+      "created_at": "Tue Jul 28 18:25:08 +0000 2026",
+      "engagement": 17
     },
     {
       "id": "2079332152089661818",
       "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY on USDC.  Demand for tokenized equities, commodities, and pr",
-      "likes": 9,
+      "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 1223,
+      "views": 1359,
       "created_at": "2026-07-20T22:26:31.000Z",
-      "engagement": 16
+      "engagement": 17
     },
     {
       "id": "2077588448983044202",
       "text": "In the first half of 2026, DeFi lost over 900 million dollars. More than 80 percent of it went through compromised keys and cross-chain bridges, not flawed contract logic. The losses cluster in two pl",
-      "likes": 12,
+      "likes": 13,
       "reposts": 2,
       "replies": 0,
-      "views": 1259,
+      "views": 1285,
       "created_at": "Thu Jul 16 02:57:40 +0000 2026",
-      "engagement": 16
+      "engagement": 17
     },
     {
       "id": "2076708255909454252",
-      "text": "Not many people are pricing in how productive kHYPE has become as an asset, but the Harmonix kHYPE vault is quietly one of the better risk-adjusted yield lines on HyperEVM. The vault runs market-neutr",
+      "text": "Not many people are pricing in how productive kHYPE has become as an asset, but the Harmonix kHYPE vault is quietly one of the better risk-adjusted yield lines on HyperEVM.  The vault runs market-neut",
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2486,
+      "views": 2886,
       "created_at": "2026-07-13T16:40:06.000Z",
       "engagement": 16
     },
@@ -642,7 +692,7 @@
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2712,
+      "views": 2736,
       "created_at": "Tue Jun 30 15:26:08 +0000 2026",
       "engagement": 16
     },
@@ -652,17 +702,17 @@
       "likes": 11,
       "reposts": 0,
       "replies": 2,
-      "views": 4870,
+      "views": 4905,
       "created_at": "Thu Jun 18 11:56:06 +0000 2026",
       "engagement": 13
     },
     {
       "id": "2074193522400600559",
-      "text": "Harmonix Vaults 07.06.26 Snapshot : · USDC: 9.00% APY · HYPE: 3.80% APY · kHYPE: 4.30% APY · Basis Trade 5.9% APY Christophorus (@christophorusan) HYPE isn’t just going up. It’s outperforming the majo",
+      "text": "Harmonix Vaults 07.06.26 Snapshot :  · USDC: 9.00% APY · HYPE: 3.80% APY · kHYPE: 4.30% APY · Basis Trade 5.9% APY",
       "likes": 10,
       "reposts": 0,
       "replies": 2,
-      "views": 1132,
+      "views": 1147,
       "created_at": "2026-07-06T18:07:27.000Z",
       "engagement": 12
     },
@@ -672,29 +722,59 @@
       "likes": 7,
       "reposts": 1,
       "replies": 1,
-      "views": 976,
+      "views": 1031,
       "created_at": "Tue Jul 21 21:14:29 +0000 2026",
       "engagement": 10
     },
     {
       "id": "2079334864424431972",
       "text": "The Clarity Act matters to us for a simple reason: everything we build sits on markets that need clear rules to keep growing. RWA perps, tokenized treasuries, onchain vaults, all of it scales faster w",
-      "likes": 7,
+      "likes": 8,
       "reposts": 0,
       "replies": 2,
-      "views": 1013,
+      "views": 1057,
       "created_at": "2026-07-20T22:37:18.000Z",
-      "engagement": 9
+      "engagement": 10
+    },
+    {
+      "id": "2084498998979883414",
+      "text": "Vaults are the future Bitwise (@Bitwise) From mutual funds to ETFs, and now vaults. The next iteration of finance is happening onchain. Video — https://nitter.net/Bitwise/status/2084327278561915381#m",
+      "likes": 6,
+      "reposts": 0,
+      "replies": 1,
+      "views": 908,
+      "created_at": "Tue Aug 04 04:37:44 +0000 2026",
+      "engagement": 7
+    },
+    {
+      "id": "2081880128741847065",
+      "text": "Don't take our word for it — @0xOmnia wrote the best thing anyone's written about one year of kHYPE. The sharpest takes keep coming from outside. We love that. Harmonix Finance (@harmonixfi) — https:/",
+      "likes": 5,
+      "reposts": 0,
+      "replies": 1,
+      "views": 350,
+      "created_at": "2026-07-27T23:11:16.000Z",
+      "engagement": 6
     },
     {
       "id": "2075705298342567973",
-      "text": "The markets it trades have grown quickly: > Open positions: $260m in December → $3.1b today > 86 markets, more than half of Hyperliquid's daily volume > Listing a market requires a 500k HYPE deposit, ",
+      "text": "The markets it trades have grown quickly:  > Open positions: $260m in December → $3.1b today > 86 markets, more than half of Hyperliquid's daily volume > Listing a market requires a 500k HYPE deposit,",
       "likes": 4,
       "reposts": 0,
       "replies": 0,
-      "views": 602,
+      "views": 611,
       "created_at": "2026-07-10T22:14:42.000Z",
       "engagement": 4
+    },
+    {
+      "id": "2082768492819021913",
+      "text": "Still in the matured market? Time to rotate your LP or PT. app.pendle.finance/trade/mar… Link Pendle V2 Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or spec",
+      "likes": 1,
+      "reposts": 0,
+      "replies": 0,
+      "views": 187,
+      "created_at": "Thu Jul 30 10:01:19 +0000 2026",
+      "engagement": 1
     },
     {
       "id": "2071981681972818057",
@@ -702,7 +782,7 @@
       "likes": 0,
       "reposts": 0,
       "replies": 0,
-      "views": 274,
+      "views": 278,
       "created_at": "Tue Jun 30 15:38:23 +0000 2026",
       "engagement": 0
     }
@@ -720,6 +800,15 @@
         ]
       },
       {
+        "id": "csv-stale",
+        "severity": "warn",
+        "title": "Official X CSV is stale",
+        "detail": "Last day in export is 2026-07-20 (15d ago). Re-export Account overview for accurate impressions.",
+        "evidence": [
+          "x-analytics-csv"
+        ]
+      },
+      {
         "id": "cadence-ok",
         "severity": "good",
         "title": "Healthy posting volume",
@@ -732,7 +821,7 @@
         "id": "top-post",
         "severity": "info",
         "title": "Top recent post",
-        "detail": "\"Harmonix TVL growth projections: HYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent. If HYPE re…\" · eng 39 · 3,625 views",
+        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,654 views",
         "evidence": [
           "post:2070598206342451452",
           "public-scrape"
@@ -790,6 +879,6 @@
       "unique_wallets": 4074,
       "last_event_at": "2026-06-22T12:40:14.000Z"
     },
-    "generated_at": "2026-07-27T14:00:15.015Z"
+    "generated_at": "2026-08-05T14:00:13.000Z"
   }
 }
