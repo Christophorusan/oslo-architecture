@@ -1,12 +1,12 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-20",
-  "scraped_at": "2026-08-05T14:00:12.990Z",
+  "scraped_at": "2026-08-06T14:00:15.662Z",
   "csv_stale": true,
-  "stale_days": 15,
-  "followers": 11820,
+  "stale_days": 16,
+  "followers": 11817,
   "following": 353,
-  "tweets": 3004,
+  "tweets": 3009,
   "year": {
     "impressions": 2258031,
     "engagements": 113647,
@@ -173,223 +173,223 @@
   "follower_series": [
     {
       "d": "2025-07-21",
-      "f": 6502
+      "f": 6499
     },
     {
       "d": "2025-07-28",
-      "f": 6645
+      "f": 6642
     },
     {
       "d": "2025-08-04",
-      "f": 6745
+      "f": 6742
     },
     {
       "d": "2025-08-11",
-      "f": 6834
+      "f": 6831
     },
     {
       "d": "2025-08-18",
-      "f": 6896
+      "f": 6893
     },
     {
       "d": "2025-08-25",
-      "f": 6965
+      "f": 6962
     },
     {
       "d": "2025-09-01",
-      "f": 8077
+      "f": 8074
     },
     {
       "d": "2025-09-08",
-      "f": 8155
+      "f": 8152
     },
     {
       "d": "2025-09-15",
-      "f": 8307
+      "f": 8304
     },
     {
       "d": "2025-09-22",
-      "f": 8408
+      "f": 8405
     },
     {
       "d": "2025-09-29",
-      "f": 8482
+      "f": 8479
     },
     {
       "d": "2025-10-06",
-      "f": 8663
+      "f": 8660
     },
     {
       "d": "2025-10-13",
-      "f": 8876
+      "f": 8873
     },
     {
       "d": "2025-10-20",
-      "f": 9052
+      "f": 9049
     },
     {
       "d": "2025-10-27",
-      "f": 9171
+      "f": 9168
     },
     {
       "d": "2025-11-03",
-      "f": 9235
+      "f": 9232
     },
     {
       "d": "2025-11-10",
-      "f": 9321
+      "f": 9318
     },
     {
       "d": "2025-11-17",
-      "f": 9860
+      "f": 9857
     },
     {
       "d": "2025-11-24",
-      "f": 10242
+      "f": 10239
     },
     {
       "d": "2025-12-01",
-      "f": 10565
+      "f": 10562
     },
     {
       "d": "2025-12-08",
-      "f": 10771
+      "f": 10768
     },
     {
       "d": "2025-12-15",
-      "f": 10992
+      "f": 10989
     },
     {
       "d": "2025-12-22",
-      "f": 11201
+      "f": 11198
     },
     {
       "d": "2025-12-29",
-      "f": 11239
+      "f": 11236
     },
     {
       "d": "2026-01-05",
-      "f": 11277
+      "f": 11274
     },
     {
       "d": "2026-01-12",
-      "f": 11295
+      "f": 11292
     },
     {
       "d": "2026-01-19",
-      "f": 11322
+      "f": 11319
     },
     {
       "d": "2026-01-26",
-      "f": 11348
+      "f": 11345
     },
     {
       "d": "2026-02-02",
-      "f": 11411
+      "f": 11408
     },
     {
       "d": "2026-02-09",
-      "f": 11443
+      "f": 11440
     },
     {
       "d": "2026-02-16",
-      "f": 11469
+      "f": 11466
     },
     {
       "d": "2026-02-23",
-      "f": 11485
+      "f": 11482
     },
     {
       "d": "2026-03-02",
-      "f": 11499
+      "f": 11496
     },
     {
       "d": "2026-03-09",
-      "f": 11513
+      "f": 11510
     },
     {
       "d": "2026-03-16",
-      "f": 11542
+      "f": 11539
     },
     {
       "d": "2026-03-23",
-      "f": 11563
+      "f": 11560
     },
     {
       "d": "2026-03-30",
-      "f": 11575
+      "f": 11572
     },
     {
       "d": "2026-04-06",
-      "f": 11594
+      "f": 11591
     },
     {
       "d": "2026-04-13",
-      "f": 11606
+      "f": 11603
     },
     {
       "d": "2026-04-20",
-      "f": 11621
+      "f": 11618
     },
     {
       "d": "2026-04-27",
-      "f": 11630
+      "f": 11627
     },
     {
       "d": "2026-05-04",
-      "f": 11640
+      "f": 11637
     },
     {
       "d": "2026-05-11",
-      "f": 11651
+      "f": 11648
     },
     {
       "d": "2026-05-18",
-      "f": 11666
+      "f": 11663
     },
     {
       "d": "2026-05-25",
-      "f": 11691
+      "f": 11688
     },
     {
       "d": "2026-06-01",
-      "f": 11719
+      "f": 11716
     },
     {
       "d": "2026-06-08",
-      "f": 11731
+      "f": 11728
     },
     {
       "d": "2026-06-15",
-      "f": 11751
+      "f": 11748
     },
     {
       "d": "2026-06-22",
-      "f": 11768
+      "f": 11765
     },
     {
       "d": "2026-06-29",
-      "f": 11781
+      "f": 11778
     },
     {
       "d": "2026-07-06",
-      "f": 11804
+      "f": 11801
     },
     {
       "d": "2026-07-13",
-      "f": 11809
+      "f": 11806
     },
     {
       "d": "2026-07-20",
-      "f": 11820
+      "f": 11817
     }
   ],
   "recent_posts_agg": {
-    "likes": 387,
-    "reposts": 57,
+    "likes": 396,
+    "reposts": 58,
     "replies": 65,
-    "engagement_score": 566,
-    "views": 50449
+    "engagement_score": 577,
+    "views": 52359
   },
   "top_posts": [
     {
@@ -398,7 +398,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3654,
+      "views": 3658,
       "created_at": "2026-06-26T20:00:56.000Z"
     },
     {
@@ -452,7 +452,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 1574,
+      "views": 1605,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026"
     },
     {
@@ -461,7 +461,7 @@
       "likes": 11,
       "reposts": 6,
       "replies": 1,
-      "views": 939,
+      "views": 940,
       "created_at": "2026-07-17T17:20:50.000Z"
     }
   ],
@@ -472,7 +472,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3654,
+      "views": 3658,
       "created_at": "2026-06-26T20:00:56.000Z",
       "engagement": 37
     },
@@ -532,7 +532,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 1574,
+      "views": 1605,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026",
       "engagement": 24
     },
@@ -542,7 +542,7 @@
       "likes": 11,
       "reposts": 6,
       "replies": 1,
-      "views": 939,
+      "views": 940,
       "created_at": "2026-07-17T17:20:50.000Z",
       "engagement": 24
     },
@@ -582,9 +582,19 @@
       "likes": 11,
       "reposts": 4,
       "replies": 2,
-      "views": 1253,
+      "views": 1254,
       "created_at": "2026-07-24T19:18:58.000Z",
       "engagement": 21
+    },
+    {
+      "id": "2084822842533925234",
+      "text": "45 days. 3.8% APY. Every single day.  The HYPE Vault pays yield in hyperliquid:native, and depositors are stacking points on top:  @Kinetiq_xyz S2: 28.34K points, active @ValantisLabs: 1.62M points, a",
+      "likes": 10,
+      "reposts": 3,
+      "replies": 3,
+      "views": 2552,
+      "created_at": "2026-08-05T02:04:34.000Z",
+      "engagement": 19
     },
     {
       "id": "2080706515007377683",
@@ -592,7 +602,7 @@
       "likes": 9,
       "reposts": 4,
       "replies": 2,
-      "views": 1154,
+      "views": 1155,
       "created_at": "2026-07-24T17:27:45.000Z",
       "engagement": 19
     },
@@ -602,19 +612,9 @@
       "likes": 15,
       "reposts": 1,
       "replies": 2,
-      "views": 3556,
+      "views": 3558,
       "created_at": "Thu Jul 02 11:31:59 +0000 2026",
       "engagement": 19
-    },
-    {
-      "id": "2084822842533925234",
-      "text": "45 days. 3.8% APY. Every single day.  The HYPE Vault pays yield in hyperliquid:native, and depositors are stacking points on top:  @Kinetiq_xyz S2: 28.34K points, active @ValantisLabs: 1.62M points, a",
-      "likes": 9,
-      "reposts": 3,
-      "replies": 3,
-      "views": 1455,
-      "created_at": "2026-08-05T02:04:34.000Z",
-      "engagement": 18
     },
     {
       "id": "2081880121242468597",
@@ -622,7 +622,7 @@
       "likes": 13,
       "reposts": 1,
       "replies": 3,
-      "views": 1300,
+      "views": 1301,
       "created_at": "2026-07-27T23:11:15.000Z",
       "engagement": 18
     },
@@ -642,7 +642,7 @@
       "likes": 10,
       "reposts": 2,
       "replies": 3,
-      "views": 1072,
+      "views": 1082,
       "created_at": "2026-08-01T02:15:30.000Z",
       "engagement": 17
     },
@@ -657,16 +657,6 @@
       "engagement": 17
     },
     {
-      "id": "2079332152089661818",
-      "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY on USDC.  Demand for tokenized equities, commodities, and pr",
-      "likes": 10,
-      "reposts": 3,
-      "replies": 1,
-      "views": 1359,
-      "created_at": "2026-07-20T22:26:31.000Z",
-      "engagement": 17
-    },
-    {
       "id": "2077588448983044202",
       "text": "In the first half of 2026, DeFi lost over 900 million dollars. More than 80 percent of it went through compromised keys and cross-chain bridges, not flawed contract logic. The losses cluster in two pl",
       "likes": 13,
@@ -674,6 +664,16 @@
       "replies": 0,
       "views": 1285,
       "created_at": "Thu Jul 16 02:57:40 +0000 2026",
+      "engagement": 17
+    },
+    {
+      "id": "2079332152089661818",
+      "text": "RWA perps just hit a record $126B in June volume, up 20x year-over-year. haUSDC farms that flow delta-neutral on @tradexyz markets: 9%+ APY on USDC.  Demand for tokenized equities, commodities, and pr",
+      "likes": 10,
+      "reposts": 3,
+      "replies": 1,
+      "views": 1375,
+      "created_at": "2026-07-20T22:26:31.000Z",
       "engagement": 17
     },
     {
@@ -692,7 +692,7 @@
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2736,
+      "views": 2738,
       "created_at": "Tue Jun 30 15:26:08 +0000 2026",
       "engagement": 16
     },
@@ -715,6 +715,16 @@
       "views": 1147,
       "created_at": "2026-07-06T18:07:27.000Z",
       "engagement": 12
+    },
+    {
+      "id": "2085046493527109930",
+      "text": "Tokenised assets, stablecoins, perps. All live in Harmonix vaults. Andy (@andyyy) Tokenization, stablecoins, perps, vaults. The Big 4. — https://nitter.net/andyyy/status/2084184241974231429#m",
+      "likes": 8,
+      "reposts": 1,
+      "replies": 0,
+      "views": 718,
+      "created_at": "2026-08-05T16:53:17.000Z",
+      "engagement": 10
     },
     {
       "id": "2079676409782632480",
@@ -742,7 +752,7 @@
       "likes": 6,
       "reposts": 0,
       "replies": 1,
-      "views": 908,
+      "views": 934,
       "created_at": "Tue Aug 04 04:37:44 +0000 2026",
       "engagement": 7
     },
@@ -803,7 +813,7 @@
         "id": "csv-stale",
         "severity": "warn",
         "title": "Official X CSV is stale",
-        "detail": "Last day in export is 2026-07-20 (15d ago). Re-export Account overview for accurate impressions.",
+        "detail": "Last day in export is 2026-07-20 (16d ago). Re-export Account overview for accurate impressions.",
         "evidence": [
           "x-analytics-csv"
         ]
@@ -821,7 +831,7 @@
         "id": "top-post",
         "severity": "info",
         "title": "Top recent post",
-        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,654 views",
+        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,658 views",
         "evidence": [
           "post:2070598206342451452",
           "public-scrape"
@@ -879,6 +889,6 @@
       "unique_wallets": 4074,
       "last_event_at": "2026-06-22T12:40:14.000Z"
     },
-    "generated_at": "2026-08-05T14:00:13.000Z"
+    "generated_at": "2026-08-06T14:00:15.672Z"
   }
 }
