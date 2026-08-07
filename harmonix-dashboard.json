@@ -1,66 +1,66 @@
 {
   "version": 1,
-  "as_of": "2026-08-06T14:02:45.130Z",
+  "as_of": "2026-08-07T21:50:30.414Z",
   "source": "api.harmonix.fi/api/v1 (app.harmonix.fi/dashboards)",
   "dashboard_url": "https://app.harmonix.fi/dashboards",
   "hype_staked": {
-    "total_hype": 32731.998060459722,
-    "total_usd": 1804776.9309880668,
-    "implied_hype_price": 55.13800067,
+    "total_hype": 32731.998060459733,
+    "total_usd": 1769545.9051025682,
+    "implied_hype_price": 54.06165251,
     "validators": [
       {
         "validator_id": "7a128411-edd6-440c-888e-7a3bb9276404",
         "slug": "nansen-hypurrcollective",
         "hype_validator_id": "0xb8f45222a3246a2b0104696a1df26842007c5bc5",
-        "total_staked_hype": 28632.422572409996,
-        "total_staked_usd": 1578734.5349812654
+        "total_staked_hype": 28632.42257241001,
+        "total_staked_usd": 1547916.0796291104
       },
       {
         "validator_id": "c4c30390-3a77-4f35-80d3-80d8b8f51b50",
         "slug": "skygg",
         "hype_validator_id": "0x65baa675fa9e5f6c7ae4541ebdb16c526de06f1f",
-        "total_staked_hype": 1406.7771025699994,
-        "total_staked_usd": 77566.87682404528
+        "total_staked_hype": 1406.77710257,
+        "total_staked_usd": 76052.69487816397
       },
       {
         "validator_id": "c4324184-9797-4d9a-916f-be89a6347861",
         "slug": "alphaticks",
         "hype_validator_id": "0x3e5b2598a32ebf003ad5a7254faa3d04ff41d9fe",
-        "total_staked_hype": 1286.6446158999997,
-        "total_staked_usd": 70943.01169354607
+        "total_staked_hype": 1286.6446159000004,
+        "total_staked_usd": 69558.13412864825
       },
       {
         "validator_id": "9e6b36e4-1fc0-46bd-878d-4fb024f42f8a",
         "slug": "validao",
         "hype_validator_id": "0x000000000056f99d36b6f2e0c51fd41496bbacb8",
         "total_staked_hype": 787.8759992399999,
-        "total_staked_usd": 43441.90737397203
+        "total_staked_usd": 42593.8784918819
       },
       {
         "validator_id": "90d4d00c-46ad-494f-a8d1-13e0fe977237",
         "slug": "staked-hype",
         "hype_validator_id": "0x0000000000000000000000000000000000000000",
         "total_staked_hype": 403.7558916097183,
-        "total_staked_usd": 22262.292622093093
+        "total_staked_usd": 21827.710711069816
       },
       {
         "validator_id": "100093a0-7074-4463-a13f-a7b614795c87",
         "slug": "asxn",
         "hype_validator_id": "0xe45c96a6a32318e5df7347477963bf0de38ff7ff",
         "total_staked_hype": 214.52187873,
-        "total_staked_usd": 11828.307493144397
+        "total_staked_usd": 11597.40726369362
       }
     ],
     "note": "Native HYPE staked through Harmonix frontend (validators), separate from haHYPE vault TVL."
   },
   "protocol": {
-    "tvl_all_vaults_usd": 5194226.38755592,
+    "tvl_all_vaults_usd": 5121649.22682968,
     "total_depositors": 13527,
     "tvl_composition": {
-      "Hyperliquid - USDC - $HYPE Delta Neutral Vault": 597887.662566,
-      "HyperEVM $KHYPE Vault": 2603965.827730928,
-      "HyperEVM $HYPE Vault": 1631521.5114102366,
-      "HIP-3 haUSDC Vault": 339614.36007175513,
+      "Hyperliquid - USDC - $HYPE Delta Neutral Vault": 598032.7209,
+      "HyperEVM $KHYPE Vault": 2561572.177379637,
+      "HyperEVM $HYPE Vault": 1601042.4327012878,
+      "HIP-3 haUSDC Vault": 339764.87007175514,
       "KelpDao - USDC - Delta Neutral Vault": 21237.025777
     },
     "vaults": [
@@ -68,43 +68,43 @@
         "id": "b6982c21-76ff-4545-b49c-053b722eecd1",
         "name": "HyperEVM $KHYPE Vault",
         "slug": "hyperevm-khype-v1",
-        "tvl_native": 46195.26946077579,
-        "tvl_usd": 2603965.827730928,
+        "tvl_native": 46154.03496701248,
+        "tvl_usd": 2561572.177379637,
         "currency": "KHYPE",
-        "apy_1y": 2.9522866612691883,
-        "price_per_share": 1.0193141331704678,
+        "apy_1y": 2.8792507840163855,
+        "price_per_share": 1.0193223716070547,
         "risk_factor": 0
       },
       {
         "id": "7d13eb4a-ea91-4622-9f0a-e8f8dbbc1fdc",
         "name": "HyperEVM $HYPE Vault",
         "slug": "hyperevm-delta-neutral-hype-v3",
-        "tvl_native": 29631.97107511395,
-        "tvl_usd": 1631521.5114102366,
+        "tvl_native": 29622.32869924767,
+        "tvl_usd": 1601042.4327012878,
         "currency": "HYPE",
         "apy_1y": 3.8,
-        "price_per_share": 1.042782386427671,
+        "price_per_share": 1.0428550794560874,
         "risk_factor": 0.00007520742206627001
       },
       {
         "id": "ba33d0f9-aa1f-4b59-af87-d0751ccb4dd3",
         "name": "Hyperliquid - USDC - $HYPE Delta Neutral Vault",
         "slug": "hype-delta-neutral-v1",
-        "tvl_native": 597887.662566,
-        "tvl_usd": 597887.662566,
+        "tvl_native": 598032.7209,
+        "tvl_usd": 598032.7209,
         "currency": "USDC",
-        "apy_1y": 7.239087055197646,
-        "price_per_share": 1.171348,
+        "apy_1y": 6.990846614123902,
+        "price_per_share": 1.171658,
         "risk_factor": 0.002831584361926515
       },
       {
         "id": "5feb56ce-14fa-4aec-94a4-a7d65bc51dd6",
         "name": "HIP-3 haUSDC Vault",
         "slug": "hip3-usdc-vault",
-        "tvl_native": 339614.36007175513,
-        "tvl_usd": 339614.36007175513,
+        "tvl_native": 339764.87007175514,
+        "tvl_usd": 339764.87007175514,
         "currency": "USDC",
-        "apy_1y": 6.219210963943578,
+        "apy_1y": 5.921441199831068,
         "price_per_share": 1.0182883688191628,
         "risk_factor": 0
       },
@@ -120,55 +120,115 @@
         "risk_factor": 0.0005927158318305918
       }
     ],
-    "hype_deposited": 29631.97107511395,
-    "hype_deposited_usd": 1631521.5114102366,
-    "khype_deposited": 46195.26946077579,
-    "khype_deposited_usd": 2603965.827730928,
-    "usdc_vaults_usd": 958739.0484147551,
-    "hausdc_usd": 339614.36007175513,
-    "basis_usd": 619124.688343
+    "hype_deposited": 29622.32869924767,
+    "hype_deposited_usd": 1601042.4327012878,
+    "khype_deposited": 46154.03496701248,
+    "khype_deposited_usd": 2561572.177379637,
+    "usdc_vaults_usd": 959034.6167487551,
+    "hausdc_usd": 339764.87007175514,
+    "basis_usd": 619269.746677
   },
   "activity": {
-    "deposit_7d_usd": 44.50552464244498,
-    "deposit_30d_usd": 281.98934252222074,
-    "users_7d": 11,
-    "users_30d": 77,
-    "yield_1d_usd": -139.43086366312994,
-    "yield_7d_usd": -90.52261890095113,
-    "yield_30d_usd": -97.6705541362201
+    "deposit_7d_usd": 41.68074864244498,
+    "deposit_30d_usd": 280.25384252222074,
+    "users_7d": 13,
+    "users_30d": 79,
+    "yield_1d_usd": -45.10504963374089,
+    "yield_7d_usd": -94.33138724069202,
+    "yield_30d_usd": -165.4207180172449
   },
-  "combined_aum_usd": 6999003.318543986,
+  "combined_aum_usd": 6891195.131932247,
   "deltas_7d": {
-    "combined_aum_usd": -228032.5,
-    "vault_tvl_usd": -167035.87,
-    "hype_deposited": -317.23,
-    "hype_deposited_usd": -72243.78,
-    "khype_deposited": 32.83,
-    "khype_deposited_usd": -92894.77,
-    "hype_staked": 0,
-    "hype_staked_usd": -60996.63,
-    "hausdc_usd": 0,
-    "basis_usd": -2077.02
+    "combined_aum_usd": {
+      "abs": -335840.69,
+      "pct": -4.6
+    },
+    "vault_tvl_usd": {
+      "abs": -239613.03,
+      "pct": -4.5
+    },
+    "hype_deposited": {
+      "abs": -326.88,
+      "pct": -1.1
+    },
+    "hype_deposited_usd": {
+      "abs": -102722.86,
+      "pct": -6
+    },
+    "khype_deposited": {
+      "abs": -8.4,
+      "pct": 0
+    },
+    "khype_deposited_usd": {
+      "abs": -135288.42,
+      "pct": -5
+    },
+    "hype_staked": {
+      "abs": 0,
+      "pct": 0
+    },
+    "hype_staked_usd": {
+      "abs": -96227.66,
+      "pct": -5.2
+    },
+    "hausdc_usd": {
+      "abs": 150.51,
+      "pct": 0
+    },
+    "basis_usd": {
+      "abs": -1931.96,
+      "pct": -0.3
+    }
   },
   "deltas_30d": {
-    "combined_aum_usd": -1811706.01,
-    "vault_tvl_usd": -1315173.73,
-    "hype_deposited": -3620.28,
-    "hype_deposited_usd": -612855.98,
-    "khype_deposited": -1877.38,
-    "khype_deposited_usd": -711864.85,
-    "hype_staked": -1311.91,
-    "hype_staked_usd": -496532.28,
-    "hausdc_usd": 22780.45,
-    "basis_usd": -15577.89
+    "combined_aum_usd": {
+      "abs": -1919514.19,
+      "pct": -21.8
+    },
+    "vault_tvl_usd": {
+      "abs": -1387750.89,
+      "pct": -21.3
+    },
+    "hype_deposited": {
+      "abs": -3629.93,
+      "pct": -10.9
+    },
+    "hype_deposited_usd": {
+      "abs": -643335.06,
+      "pct": -28.7
+    },
+    "khype_deposited": {
+      "abs": -1918.62,
+      "pct": -4
+    },
+    "khype_deposited_usd": {
+      "abs": -754258.5,
+      "pct": -22.7
+    },
+    "hype_staked": {
+      "abs": -1311.91,
+      "pct": -3.9
+    },
+    "hype_staked_usd": {
+      "abs": -531763.31,
+      "pct": -23.1
+    },
+    "hausdc_usd": {
+      "abs": 22930.96,
+      "pct": 7.2
+    },
+    "basis_usd": {
+      "abs": -15432.83,
+      "pct": -2.4
+    }
   },
-  "history_days": 31,
+  "history_days": 32,
   "operator_readout": [
-    "HYPE deposited (vault): 29,632 HYPE (~$1,631,522 USDC)",
-    "kHYPE deposited (vault): 46,195.3 kHYPE (~$2,603,966 USDC)",
-    "HYPE staked via frontend: 32,732 HYPE (~$1,804,777 USDC)",
-    "Vault TVL: $5,194,226 · depositors 13,527",
-    "Combined AUM (vaults + staked HYPE): $6,999,003 USDC",
+    "HYPE deposited (vault): 29,622.3 HYPE (~$1,601,042 USDC)",
+    "kHYPE deposited (vault): 46,154 kHYPE (~$2,561,572 USDC)",
+    "HYPE staked via frontend: 32,732 HYPE (~$1,769,546 USDC)",
+    "Vault TVL: $5,121,649 · depositors 13,527",
+    "Combined AUM (vaults + staked HYPE): $6,891,195 USDC",
     "Top validator route: nansen-hypurrcollective · 28,632 HYPE"
   ],
   "warnings": []

@@ -1,12 +1,12 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-20",
-  "scraped_at": "2026-08-06T14:00:15.662Z",
+  "scraped_at": "2026-08-07T21:46:12.615Z",
   "csv_stale": true,
-  "stale_days": 16,
-  "followers": 11817,
+  "stale_days": 18,
+  "followers": 11816,
   "following": 353,
-  "tweets": 3009,
+  "tweets": 3012,
   "year": {
     "impressions": 2258031,
     "engagements": 113647,
@@ -173,223 +173,223 @@
   "follower_series": [
     {
       "d": "2025-07-21",
-      "f": 6499
+      "f": 6498
     },
     {
       "d": "2025-07-28",
-      "f": 6642
+      "f": 6641
     },
     {
       "d": "2025-08-04",
-      "f": 6742
+      "f": 6741
     },
     {
       "d": "2025-08-11",
-      "f": 6831
+      "f": 6830
     },
     {
       "d": "2025-08-18",
-      "f": 6893
+      "f": 6892
     },
     {
       "d": "2025-08-25",
-      "f": 6962
+      "f": 6961
     },
     {
       "d": "2025-09-01",
-      "f": 8074
+      "f": 8073
     },
     {
       "d": "2025-09-08",
-      "f": 8152
+      "f": 8151
     },
     {
       "d": "2025-09-15",
-      "f": 8304
+      "f": 8303
     },
     {
       "d": "2025-09-22",
-      "f": 8405
+      "f": 8404
     },
     {
       "d": "2025-09-29",
-      "f": 8479
+      "f": 8478
     },
     {
       "d": "2025-10-06",
-      "f": 8660
+      "f": 8659
     },
     {
       "d": "2025-10-13",
-      "f": 8873
+      "f": 8872
     },
     {
       "d": "2025-10-20",
-      "f": 9049
+      "f": 9048
     },
     {
       "d": "2025-10-27",
-      "f": 9168
+      "f": 9167
     },
     {
       "d": "2025-11-03",
-      "f": 9232
+      "f": 9231
     },
     {
       "d": "2025-11-10",
-      "f": 9318
+      "f": 9317
     },
     {
       "d": "2025-11-17",
-      "f": 9857
+      "f": 9856
     },
     {
       "d": "2025-11-24",
-      "f": 10239
+      "f": 10238
     },
     {
       "d": "2025-12-01",
-      "f": 10562
+      "f": 10561
     },
     {
       "d": "2025-12-08",
-      "f": 10768
+      "f": 10767
     },
     {
       "d": "2025-12-15",
-      "f": 10989
+      "f": 10988
     },
     {
       "d": "2025-12-22",
-      "f": 11198
+      "f": 11197
     },
     {
       "d": "2025-12-29",
-      "f": 11236
+      "f": 11235
     },
     {
       "d": "2026-01-05",
-      "f": 11274
+      "f": 11273
     },
     {
       "d": "2026-01-12",
-      "f": 11292
+      "f": 11291
     },
     {
       "d": "2026-01-19",
-      "f": 11319
+      "f": 11318
     },
     {
       "d": "2026-01-26",
-      "f": 11345
+      "f": 11344
     },
     {
       "d": "2026-02-02",
-      "f": 11408
+      "f": 11407
     },
     {
       "d": "2026-02-09",
-      "f": 11440
+      "f": 11439
     },
     {
       "d": "2026-02-16",
-      "f": 11466
+      "f": 11465
     },
     {
       "d": "2026-02-23",
-      "f": 11482
+      "f": 11481
     },
     {
       "d": "2026-03-02",
-      "f": 11496
+      "f": 11495
     },
     {
       "d": "2026-03-09",
-      "f": 11510
+      "f": 11509
     },
     {
       "d": "2026-03-16",
-      "f": 11539
+      "f": 11538
     },
     {
       "d": "2026-03-23",
-      "f": 11560
+      "f": 11559
     },
     {
       "d": "2026-03-30",
-      "f": 11572
+      "f": 11571
     },
     {
       "d": "2026-04-06",
-      "f": 11591
+      "f": 11590
     },
     {
       "d": "2026-04-13",
-      "f": 11603
+      "f": 11602
     },
     {
       "d": "2026-04-20",
-      "f": 11618
+      "f": 11617
     },
     {
       "d": "2026-04-27",
-      "f": 11627
+      "f": 11626
     },
     {
       "d": "2026-05-04",
-      "f": 11637
+      "f": 11636
     },
     {
       "d": "2026-05-11",
-      "f": 11648
+      "f": 11647
     },
     {
       "d": "2026-05-18",
-      "f": 11663
+      "f": 11662
     },
     {
       "d": "2026-05-25",
-      "f": 11688
+      "f": 11687
     },
     {
       "d": "2026-06-01",
-      "f": 11716
+      "f": 11715
     },
     {
       "d": "2026-06-08",
-      "f": 11728
+      "f": 11727
     },
     {
       "d": "2026-06-15",
-      "f": 11748
+      "f": 11747
     },
     {
       "d": "2026-06-22",
-      "f": 11765
+      "f": 11764
     },
     {
       "d": "2026-06-29",
-      "f": 11778
+      "f": 11777
     },
     {
       "d": "2026-07-06",
-      "f": 11801
+      "f": 11800
     },
     {
       "d": "2026-07-13",
-      "f": 11806
+      "f": 11805
     },
     {
       "d": "2026-07-20",
-      "f": 11817
+      "f": 11816
     }
   ],
   "recent_posts_agg": {
-    "likes": 396,
+    "likes": 413,
     "reposts": 58,
-    "replies": 65,
-    "engagement_score": 577,
-    "views": 52359
+    "replies": 66,
+    "engagement_score": 595,
+    "views": 54601
   },
   "top_posts": [
     {
@@ -398,7 +398,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3658,
+      "views": 3661,
       "created_at": "2026-06-26T20:00:56.000Z"
     },
     {
@@ -407,7 +407,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1448,
+      "views": 1449,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026"
     },
     {
@@ -425,7 +425,7 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1570,
+      "views": 1571,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026"
     },
     {
@@ -434,7 +434,7 @@
       "likes": 15,
       "reposts": 2,
       "replies": 6,
-      "views": 1190,
+      "views": 1191,
       "created_at": "2026-07-10T21:59:42.000Z"
     },
     {
@@ -452,7 +452,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 1605,
+      "views": 1629,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026"
     },
     {
@@ -461,7 +461,7 @@
       "likes": 11,
       "reposts": 6,
       "replies": 1,
-      "views": 940,
+      "views": 944,
       "created_at": "2026-07-17T17:20:50.000Z"
     }
   ],
@@ -472,7 +472,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3658,
+      "views": 3661,
       "created_at": "2026-06-26T20:00:56.000Z",
       "engagement": 37
     },
@@ -482,7 +482,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1448,
+      "views": 1449,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026",
       "engagement": 30
     },
@@ -502,7 +502,7 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1570,
+      "views": 1571,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026",
       "engagement": 27
     },
@@ -512,7 +512,7 @@
       "likes": 15,
       "reposts": 2,
       "replies": 6,
-      "views": 1190,
+      "views": 1191,
       "created_at": "2026-07-10T21:59:42.000Z",
       "engagement": 25
     },
@@ -532,7 +532,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 1605,
+      "views": 1629,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026",
       "engagement": 24
     },
@@ -542,7 +542,7 @@
       "likes": 11,
       "reposts": 6,
       "replies": 1,
-      "views": 940,
+      "views": 944,
       "created_at": "2026-07-17T17:20:50.000Z",
       "engagement": 24
     },
@@ -562,7 +562,7 @@
       "likes": 22,
       "reposts": 0,
       "replies": 1,
-      "views": 2739,
+      "views": 2743,
       "created_at": "2026-07-08T22:17:20.000Z",
       "engagement": 23
     },
@@ -582,19 +582,19 @@
       "likes": 11,
       "reposts": 4,
       "replies": 2,
-      "views": 1254,
+      "views": 1257,
       "created_at": "2026-07-24T19:18:58.000Z",
       "engagement": 21
     },
     {
       "id": "2084822842533925234",
       "text": "45 days. 3.8% APY. Every single day.  The HYPE Vault pays yield in hyperliquid:native, and depositors are stacking points on top:  @Kinetiq_xyz S2: 28.34K points, active @ValantisLabs: 1.62M points, a",
-      "likes": 10,
+      "likes": 11,
       "reposts": 3,
       "replies": 3,
-      "views": 2552,
+      "views": 3893,
       "created_at": "2026-08-05T02:04:34.000Z",
-      "engagement": 19
+      "engagement": 20
     },
     {
       "id": "2080706515007377683",
@@ -602,7 +602,7 @@
       "likes": 9,
       "reposts": 4,
       "replies": 2,
-      "views": 1155,
+      "views": 1158,
       "created_at": "2026-07-24T17:27:45.000Z",
       "engagement": 19
     },
@@ -617,12 +617,22 @@
       "engagement": 19
     },
     {
+      "id": "2083376041301586412",
+      "text": "Traditional finance is being rebuilt onchain one piece at a time. Perps first, then stablecoins, now vaults. Perps. Onchain perp volume is up 30% since May 2025. @binance's is down 31%. @HyperliquidX'",
+      "likes": 11,
+      "reposts": 2,
+      "replies": 3,
+      "views": 1103,
+      "created_at": "2026-08-01T02:15:30.000Z",
+      "engagement": 18
+    },
+    {
       "id": "2081880121242468597",
       "text": "With Harmonix, you get:  • kHYPE earning 3.89% APY + Kinetiq S2 points • USDC yield that doesn't care which way the market goes • +3.8% Yield on HYPE without selling a single one • Point extras — like",
       "likes": 13,
       "reposts": 1,
       "replies": 3,
-      "views": 1301,
+      "views": 1303,
       "created_at": "2026-07-27T23:11:15.000Z",
       "engagement": 18
     },
@@ -637,22 +647,12 @@
       "engagement": 18
     },
     {
-      "id": "2083376041301586412",
-      "text": "Traditional finance is being rebuilt onchain one piece at a time. Perps first, then stablecoins, now vaults. Perps. Onchain perp volume is up 30% since May 2025. @binance's is down 31%. @HyperliquidX'",
-      "likes": 10,
-      "reposts": 2,
-      "replies": 3,
-      "views": 1082,
-      "created_at": "2026-08-01T02:15:30.000Z",
-      "engagement": 17
-    },
-    {
       "id": "2082170506569200074",
       "text": "Harmonix × @pendle_fi. Incoming.",
       "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 715,
+      "views": 718,
       "created_at": "Tue Jul 28 18:25:08 +0000 2026",
       "engagement": 17
     },
@@ -662,7 +662,7 @@
       "likes": 13,
       "reposts": 2,
       "replies": 0,
-      "views": 1285,
+      "views": 1287,
       "created_at": "Thu Jul 16 02:57:40 +0000 2026",
       "engagement": 17
     },
@@ -672,7 +672,7 @@
       "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 1375,
+      "views": 1393,
       "created_at": "2026-07-20T22:26:31.000Z",
       "engagement": 17
     },
@@ -692,9 +692,19 @@
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2738,
+      "views": 2739,
       "created_at": "Tue Jun 30 15:26:08 +0000 2026",
       "engagement": 16
+    },
+    {
+      "id": "2085432436025090408",
+      "text": "While bitcoin:native fell 14% over the quarter, @HyperliquidX pulled further ahead. hyperliquid:native returned +79% to a new all-time high And its earning 3.8% APY on Harmonix Hyperliquid Research Co",
+      "likes": 12,
+      "reposts": 0,
+      "replies": 1,
+      "views": 668,
+      "created_at": "Thu Aug 06 18:26:52 +0000 2026",
+      "engagement": 13
     },
     {
       "id": "2067577087549223096",
@@ -707,6 +717,16 @@
       "engagement": 13
     },
     {
+      "id": "2085046493527109930",
+      "text": "Tokenised assets, stablecoins, perps. All live in Harmonix vaults. Andy (@andyyy) Tokenization, stablecoins, perps, vaults. The Big 4. — https://nitter.net/andyyy/status/2084184241974231429#m",
+      "likes": 10,
+      "reposts": 1,
+      "replies": 0,
+      "views": 813,
+      "created_at": "2026-08-05T16:53:17.000Z",
+      "engagement": 12
+    },
+    {
       "id": "2074193522400600559",
       "text": "Harmonix Vaults 07.06.26 Snapshot :  · USDC: 9.00% APY · HYPE: 3.80% APY · kHYPE: 4.30% APY · Basis Trade 5.9% APY",
       "likes": 10,
@@ -717,22 +737,12 @@
       "engagement": 12
     },
     {
-      "id": "2085046493527109930",
-      "text": "Tokenised assets, stablecoins, perps. All live in Harmonix vaults. Andy (@andyyy) Tokenization, stablecoins, perps, vaults. The Big 4. — https://nitter.net/andyyy/status/2084184241974231429#m",
-      "likes": 8,
-      "reposts": 1,
-      "replies": 0,
-      "views": 718,
-      "created_at": "2026-08-05T16:53:17.000Z",
-      "engagement": 10
-    },
-    {
       "id": "2079676409782632480",
       "text": "Earn 3.89% APY with the Harmonix kHYPE vault + S2 @Kinetiq_xyz points Omnia π (@0xOmnia) It’s been 1 year since @Kinetiq_xyz went live Since then: > billions in lifetime deposits / redemptions > doubl",
       "likes": 7,
       "reposts": 1,
       "replies": 1,
-      "views": 1031,
+      "views": 1032,
       "created_at": "Tue Jul 21 21:14:29 +0000 2026",
       "engagement": 10
     },
@@ -749,12 +759,12 @@
     {
       "id": "2084498998979883414",
       "text": "Vaults are the future Bitwise (@Bitwise) From mutual funds to ETFs, and now vaults. The next iteration of finance is happening onchain. Video — https://nitter.net/Bitwise/status/2084327278561915381#m",
-      "likes": 6,
+      "likes": 7,
       "reposts": 0,
       "replies": 1,
-      "views": 934,
+      "views": 975,
       "created_at": "Tue Aug 04 04:37:44 +0000 2026",
-      "engagement": 7
+      "engagement": 8
     },
     {
       "id": "2081880128741847065",
@@ -762,7 +772,7 @@
       "likes": 5,
       "reposts": 0,
       "replies": 1,
-      "views": 350,
+      "views": 354,
       "created_at": "2026-07-27T23:11:16.000Z",
       "engagement": 6
     },
@@ -782,7 +792,7 @@
       "likes": 1,
       "reposts": 0,
       "replies": 0,
-      "views": 187,
+      "views": 188,
       "created_at": "Thu Jul 30 10:01:19 +0000 2026",
       "engagement": 1
     },
@@ -813,7 +823,7 @@
         "id": "csv-stale",
         "severity": "warn",
         "title": "Official X CSV is stale",
-        "detail": "Last day in export is 2026-07-20 (16d ago). Re-export Account overview for accurate impressions.",
+        "detail": "Last day in export is 2026-07-20 (18d ago). Re-export Account overview for accurate impressions.",
         "evidence": [
           "x-analytics-csv"
         ]
@@ -831,7 +841,7 @@
         "id": "top-post",
         "severity": "info",
         "title": "Top recent post",
-        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,658 views",
+        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,661 views",
         "evidence": [
           "post:2070598206342451452",
           "public-scrape"
@@ -889,6 +899,6 @@
       "unique_wallets": 4074,
       "last_event_at": "2026-06-22T12:40:14.000Z"
     },
-    "generated_at": "2026-08-06T14:00:15.672Z"
+    "generated_at": "2026-08-07T21:46:12.620Z"
   }
 }
