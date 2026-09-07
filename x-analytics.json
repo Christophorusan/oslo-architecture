@@ -1,12 +1,12 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-20",
-  "scraped_at": "2026-09-03T14:13:54.616Z",
+  "scraped_at": "2026-09-07T14:00:16.369Z",
   "csv_stale": true,
-  "stale_days": 44,
-  "followers": 11725,
-  "following": 358,
-  "tweets": 3029,
+  "stale_days": 48,
+  "followers": 11710,
+  "following": 357,
+  "tweets": 3031,
   "year": {
     "impressions": 2258031,
     "engagements": 113647,
@@ -173,223 +173,223 @@
   "follower_series": [
     {
       "d": "2025-07-21",
-      "f": 6407
+      "f": 6392
     },
     {
       "d": "2025-07-28",
-      "f": 6550
+      "f": 6535
     },
     {
       "d": "2025-08-04",
-      "f": 6650
+      "f": 6635
     },
     {
       "d": "2025-08-11",
-      "f": 6739
+      "f": 6724
     },
     {
       "d": "2025-08-18",
-      "f": 6801
+      "f": 6786
     },
     {
       "d": "2025-08-25",
-      "f": 6870
+      "f": 6855
     },
     {
       "d": "2025-09-01",
-      "f": 7982
+      "f": 7967
     },
     {
       "d": "2025-09-08",
-      "f": 8060
+      "f": 8045
     },
     {
       "d": "2025-09-15",
-      "f": 8212
+      "f": 8197
     },
     {
       "d": "2025-09-22",
-      "f": 8313
+      "f": 8298
     },
     {
       "d": "2025-09-29",
-      "f": 8387
+      "f": 8372
     },
     {
       "d": "2025-10-06",
-      "f": 8568
+      "f": 8553
     },
     {
       "d": "2025-10-13",
-      "f": 8781
+      "f": 8766
     },
     {
       "d": "2025-10-20",
-      "f": 8957
+      "f": 8942
     },
     {
       "d": "2025-10-27",
-      "f": 9076
+      "f": 9061
     },
     {
       "d": "2025-11-03",
-      "f": 9140
+      "f": 9125
     },
     {
       "d": "2025-11-10",
-      "f": 9226
+      "f": 9211
     },
     {
       "d": "2025-11-17",
-      "f": 9765
+      "f": 9750
     },
     {
       "d": "2025-11-24",
-      "f": 10147
+      "f": 10132
     },
     {
       "d": "2025-12-01",
-      "f": 10470
+      "f": 10455
     },
     {
       "d": "2025-12-08",
-      "f": 10676
+      "f": 10661
     },
     {
       "d": "2025-12-15",
-      "f": 10897
+      "f": 10882
     },
     {
       "d": "2025-12-22",
-      "f": 11106
+      "f": 11091
     },
     {
       "d": "2025-12-29",
-      "f": 11144
+      "f": 11129
     },
     {
       "d": "2026-01-05",
-      "f": 11182
+      "f": 11167
     },
     {
       "d": "2026-01-12",
-      "f": 11200
+      "f": 11185
     },
     {
       "d": "2026-01-19",
-      "f": 11227
+      "f": 11212
     },
     {
       "d": "2026-01-26",
-      "f": 11253
+      "f": 11238
     },
     {
       "d": "2026-02-02",
-      "f": 11316
+      "f": 11301
     },
     {
       "d": "2026-02-09",
-      "f": 11348
+      "f": 11333
     },
     {
       "d": "2026-02-16",
-      "f": 11374
+      "f": 11359
     },
     {
       "d": "2026-02-23",
-      "f": 11390
+      "f": 11375
     },
     {
       "d": "2026-03-02",
-      "f": 11404
+      "f": 11389
     },
     {
       "d": "2026-03-09",
-      "f": 11418
+      "f": 11403
     },
     {
       "d": "2026-03-16",
-      "f": 11447
+      "f": 11432
     },
     {
       "d": "2026-03-23",
-      "f": 11468
+      "f": 11453
     },
     {
       "d": "2026-03-30",
-      "f": 11480
+      "f": 11465
     },
     {
       "d": "2026-04-06",
-      "f": 11499
+      "f": 11484
     },
     {
       "d": "2026-04-13",
-      "f": 11511
+      "f": 11496
     },
     {
       "d": "2026-04-20",
-      "f": 11526
+      "f": 11511
     },
     {
       "d": "2026-04-27",
-      "f": 11535
+      "f": 11520
     },
     {
       "d": "2026-05-04",
-      "f": 11545
+      "f": 11530
     },
     {
       "d": "2026-05-11",
-      "f": 11556
+      "f": 11541
     },
     {
       "d": "2026-05-18",
-      "f": 11571
+      "f": 11556
     },
     {
       "d": "2026-05-25",
-      "f": 11596
+      "f": 11581
     },
     {
       "d": "2026-06-01",
-      "f": 11624
+      "f": 11609
     },
     {
       "d": "2026-06-08",
-      "f": 11636
+      "f": 11621
     },
     {
       "d": "2026-06-15",
-      "f": 11656
+      "f": 11641
     },
     {
       "d": "2026-06-22",
-      "f": 11673
+      "f": 11658
     },
     {
       "d": "2026-06-29",
-      "f": 11686
+      "f": 11671
     },
     {
       "d": "2026-07-06",
-      "f": 11709
+      "f": 11694
     },
     {
       "d": "2026-07-13",
-      "f": 11714
+      "f": 11699
     },
     {
       "d": "2026-07-20",
-      "f": 11725
+      "f": 11710
     }
   ],
   "recent_posts_agg": {
-    "likes": 483,
+    "likes": 486,
     "reposts": 67,
     "replies": 76,
-    "engagement_score": 693,
-    "views": 70399
+    "engagement_score": 696,
+    "views": 70657
   },
   "top_posts": [
     {
@@ -398,7 +398,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3706,
+      "views": 3709,
       "created_at": "2026-06-26T20:00:56.000Z"
     },
     {
@@ -407,7 +407,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1461,
+      "views": 1462,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026"
     },
     {
@@ -416,7 +416,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1362,
+      "views": 1363,
       "created_at": "2026-07-01T15:40:47.000Z"
     },
     {
@@ -425,7 +425,7 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1581,
+      "views": 1582,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026"
     },
     {
@@ -434,7 +434,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 1,
-      "views": 3945,
+      "views": 3977,
       "created_at": "2026-08-14T22:52:59.000Z"
     },
     {
@@ -443,7 +443,7 @@
       "likes": 15,
       "reposts": 2,
       "replies": 6,
-      "views": 1202,
+      "views": 1203,
       "created_at": "2026-07-10T21:59:42.000Z"
     },
     {
@@ -452,7 +452,7 @@
       "likes": 13,
       "reposts": 3,
       "replies": 6,
-      "views": 2839,
+      "views": 2840,
       "created_at": "Thu Jun 25 20:51:32 +0000 2026"
     },
     {
@@ -461,7 +461,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 2192,
+      "views": 2199,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026"
     }
   ],
@@ -472,7 +472,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3706,
+      "views": 3709,
       "created_at": "2026-06-26T20:00:56.000Z",
       "engagement": 37
     },
@@ -482,7 +482,7 @@
       "likes": 21,
       "reposts": 4,
       "replies": 1,
-      "views": 1461,
+      "views": 1462,
       "created_at": "Tue Jul 14 22:47:01 +0000 2026",
       "engagement": 30
     },
@@ -492,7 +492,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1362,
+      "views": 1363,
       "created_at": "2026-07-01T15:40:47.000Z",
       "engagement": 29
     },
@@ -502,7 +502,7 @@
       "likes": 19,
       "reposts": 2,
       "replies": 4,
-      "views": 1581,
+      "views": 1582,
       "created_at": "Tue Jul 07 18:56:02 +0000 2026",
       "engagement": 27
     },
@@ -512,7 +512,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 1,
-      "views": 3945,
+      "views": 3977,
       "created_at": "2026-08-14T22:52:59.000Z",
       "engagement": 25
     },
@@ -522,7 +522,7 @@
       "likes": 15,
       "reposts": 2,
       "replies": 6,
-      "views": 1202,
+      "views": 1203,
       "created_at": "2026-07-10T21:59:42.000Z",
       "engagement": 25
     },
@@ -532,7 +532,7 @@
       "likes": 13,
       "reposts": 3,
       "replies": 6,
-      "views": 2839,
+      "views": 2840,
       "created_at": "Thu Jun 25 20:51:32 +0000 2026",
       "engagement": 25
     },
@@ -542,7 +542,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 2192,
+      "views": 2199,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026",
       "engagement": 24
     },
@@ -552,7 +552,7 @@
       "likes": 11,
       "reposts": 6,
       "replies": 1,
-      "views": 956,
+      "views": 957,
       "created_at": "2026-07-17T17:20:50.000Z",
       "engagement": 24
     },
@@ -562,7 +562,7 @@
       "likes": 17,
       "reposts": 3,
       "replies": 1,
-      "views": 1314,
+      "views": 1315,
       "created_at": "2026-07-06T02:59:32.000Z",
       "engagement": 24
     },
@@ -572,7 +572,7 @@
       "likes": 22,
       "reposts": 0,
       "replies": 1,
-      "views": 2760,
+      "views": 2761,
       "created_at": "2026-07-08T22:17:20.000Z",
       "engagement": 23
     },
@@ -582,7 +582,7 @@
       "likes": 13,
       "reposts": 3,
       "replies": 3,
-      "views": 6284,
+      "views": 6307,
       "created_at": "2026-08-05T02:04:34.000Z",
       "engagement": 22
     },
@@ -592,9 +592,19 @@
       "likes": 18,
       "reposts": 1,
       "replies": 2,
-      "views": 1646,
+      "views": 1647,
       "created_at": "2026-06-29T21:30:35.000Z",
       "engagement": 22
+    },
+    {
+      "id": "2088015255142039735",
+      "text": "+$424,006 earned in yield across Harmonix vaults, and counting.  Deposit into HYPE, kHYPE, and USDC vaults to earn native yield while stacking ecosystem rewards.  Earning with our partners @Kinetiq_xy",
+      "likes": 17,
+      "reposts": 2,
+      "replies": 0,
+      "views": 2460,
+      "created_at": "Thu Aug 13 21:30:04 +0000 2026",
+      "engagement": 21
     },
     {
       "id": "2080734503774142652",
@@ -602,19 +612,9 @@
       "likes": 11,
       "reposts": 4,
       "replies": 2,
-      "views": 1282,
+      "views": 1289,
       "created_at": "2026-07-24T19:18:58.000Z",
       "engagement": 21
-    },
-    {
-      "id": "2088015255142039735",
-      "text": "+$424,006 earned in yield across Harmonix vaults, and counting.  Deposit into HYPE, kHYPE, and USDC vaults to earn native yield while stacking ecosystem rewards.  Earning with our partners @Kinetiq_xy",
-      "likes": 16,
-      "reposts": 2,
-      "replies": 0,
-      "views": 2442,
-      "created_at": "Thu Aug 13 21:30:04 +0000 2026",
-      "engagement": 20
     },
     {
       "id": "2080706515007377683",
@@ -622,7 +622,7 @@
       "likes": 9,
       "reposts": 4,
       "replies": 2,
-      "views": 1183,
+      "views": 1189,
       "created_at": "2026-07-24T17:27:45.000Z",
       "engagement": 19
     },
@@ -632,7 +632,7 @@
       "likes": 15,
       "reposts": 1,
       "replies": 2,
-      "views": 3585,
+      "views": 3589,
       "created_at": "Thu Jul 02 11:31:59 +0000 2026",
       "engagement": 19
     },
@@ -642,7 +642,7 @@
       "likes": 13,
       "reposts": 1,
       "replies": 3,
-      "views": 1332,
+      "views": 1336,
       "created_at": "2026-07-27T23:11:15.000Z",
       "engagement": 18
     },
@@ -652,7 +652,7 @@
       "likes": 11,
       "reposts": 2,
       "replies": 3,
-      "views": 1173,
+      "views": 1179,
       "created_at": "2026-08-01T02:15:30.000Z",
       "engagement": 18
     },
@@ -662,7 +662,7 @@
       "likes": 14,
       "reposts": 1,
       "replies": 2,
-      "views": 971,
+      "views": 972,
       "created_at": "Thu Jun 18 18:56:57 +0000 2026",
       "engagement": 18
     },
@@ -672,7 +672,7 @@
       "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 748,
+      "views": 752,
       "created_at": "Tue Jul 28 18:25:08 +0000 2026",
       "engagement": 17
     },
@@ -682,7 +682,7 @@
       "likes": 13,
       "reposts": 2,
       "replies": 0,
-      "views": 1304,
+      "views": 1305,
       "created_at": "Thu Jul 16 02:57:40 +0000 2026",
       "engagement": 17
     },
@@ -692,7 +692,7 @@
       "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 1522,
+      "views": 1526,
       "created_at": "2026-07-20T22:26:31.000Z",
       "engagement": 17
     },
@@ -702,7 +702,7 @@
       "likes": 13,
       "reposts": 1,
       "replies": 1,
-      "views": 890,
+      "views": 898,
       "created_at": "Thu Aug 06 18:26:52 +0000 2026",
       "engagement": 16
     },
@@ -712,9 +712,19 @@
       "likes": 14,
       "reposts": 0,
       "replies": 2,
-      "views": 2912,
+      "views": 2920,
       "created_at": "2026-07-13T16:40:06.000Z",
       "engagement": 16
+    },
+    {
+      "id": "2087025941851808247",
+      "text": "",
+      "likes": 10,
+      "reposts": 2,
+      "replies": 1,
+      "views": 1050,
+      "created_at": "Tue Aug 11 03:58:54 +0000 2026",
+      "engagement": 15
     },
     {
       "id": "2071978600149205105",
@@ -722,19 +732,9 @@
       "likes": 13,
       "reposts": 0,
       "replies": 2,
-      "views": 2798,
+      "views": 2802,
       "created_at": "Tue Jun 30 15:26:08 +0000 2026",
       "engagement": 15
-    },
-    {
-      "id": "2087025941851808247",
-      "text": "",
-      "likes": 9,
-      "reposts": 2,
-      "replies": 1,
-      "views": 1038,
-      "created_at": "Tue Aug 11 03:58:54 +0000 2026",
-      "engagement": 14
     },
     {
       "id": "2085046493527109930",
@@ -742,7 +742,7 @@
       "likes": 11,
       "reposts": 1,
       "replies": 0,
-      "views": 938,
+      "views": 946,
       "created_at": "2026-08-05T16:53:17.000Z",
       "engagement": 13
     },
@@ -752,9 +752,19 @@
       "likes": 11,
       "reposts": 0,
       "replies": 2,
-      "views": 4925,
+      "views": 4930,
       "created_at": "Thu Jun 18 11:56:06 +0000 2026",
       "engagement": 13
+    },
+    {
+      "id": "2086982428762198338",
+      "text": "Harmonix is interesting when it comes to yield.",
+      "likes": 8,
+      "reposts": 0,
+      "replies": 4,
+      "views": 1319,
+      "created_at": "Tue Aug 11 01:05:59 +0000 2026",
+      "engagement": 12
     },
     {
       "id": "2074193522400600559",
@@ -762,7 +772,7 @@
       "likes": 10,
       "reposts": 0,
       "replies": 2,
-      "views": 1155,
+      "views": 1156,
       "created_at": "2026-07-06T18:07:27.000Z",
       "engagement": 12
     },
@@ -772,7 +782,7 @@
       "likes": 7,
       "reposts": 1,
       "replies": 2,
-      "views": 1662,
+      "views": 1685,
       "created_at": "2026-08-16T02:05:33.000Z",
       "engagement": 11
     },
@@ -782,18 +792,8 @@
       "likes": 7,
       "reposts": 1,
       "replies": 2,
-      "views": 834,
+      "views": 842,
       "created_at": "2026-08-07T22:31:58.000Z",
-      "engagement": 11
-    },
-    {
-      "id": "2086982428762198338",
-      "text": "Harmonix is interesting when it comes to yield.",
-      "likes": 7,
-      "reposts": 0,
-      "replies": 4,
-      "views": 1301,
-      "created_at": "Tue Aug 11 01:05:59 +0000 2026",
       "engagement": 11
     },
     {
@@ -802,7 +802,7 @@
       "likes": 7,
       "reposts": 1,
       "replies": 1,
-      "views": 1053,
+      "views": 1056,
       "created_at": "Tue Jul 21 21:14:29 +0000 2026",
       "engagement": 10
     },
@@ -812,7 +812,7 @@
       "likes": 7,
       "reposts": 0,
       "replies": 2,
-      "views": 1074,
+      "views": 1077,
       "created_at": "2026-07-20T22:37:18.000Z",
       "engagement": 9
     },
@@ -822,7 +822,7 @@
       "likes": 7,
       "reposts": 0,
       "replies": 1,
-      "views": 1054,
+      "views": 1062,
       "created_at": "Tue Aug 04 04:37:44 +0000 2026",
       "engagement": 8
     },
@@ -842,7 +842,7 @@
       "likes": 4,
       "reposts": 0,
       "replies": 0,
-      "views": 619,
+      "views": 620,
       "created_at": "2026-07-10T22:14:42.000Z",
       "engagement": 4
     },
@@ -852,7 +852,7 @@
       "likes": 1,
       "reposts": 0,
       "replies": 0,
-      "views": 171,
+      "views": 184,
       "created_at": "Tue Aug 11 01:14:19 +0000 2026",
       "engagement": 1
     },
@@ -862,7 +862,7 @@
       "likes": 1,
       "reposts": 0,
       "replies": 0,
-      "views": 335,
+      "views": 336,
       "created_at": "Tue Aug 11 01:15:07 +0000 2026",
       "engagement": 1
     },
@@ -872,7 +872,7 @@
       "likes": 1,
       "reposts": 0,
       "replies": 0,
-      "views": 207,
+      "views": 211,
       "created_at": "Thu Jul 30 10:01:19 +0000 2026",
       "engagement": 1
     },
@@ -882,7 +882,7 @@
       "likes": 0,
       "reposts": 0,
       "replies": 0,
-      "views": 284,
+      "views": 285,
       "created_at": "Tue Jun 30 15:38:23 +0000 2026",
       "engagement": 0
     }
@@ -903,7 +903,7 @@
         "id": "csv-stale",
         "severity": "warn",
         "title": "Official X CSV is stale",
-        "detail": "Last day in export is 2026-07-20 (44d ago). Re-export Account overview for accurate impressions.",
+        "detail": "Last day in export is 2026-07-20 (48d ago). Re-export Account overview for accurate impressions.",
         "evidence": [
           "x-analytics-csv"
         ]
@@ -921,7 +921,7 @@
         "id": "top-post",
         "severity": "info",
         "title": "Top recent post",
-        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,706 views",
+        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,709 views",
         "evidence": [
           "post:2070598206342451452",
           "public-scrape"
@@ -979,6 +979,6 @@
       "unique_wallets": 4074,
       "last_event_at": "2026-06-22T12:40:14.000Z"
     },
-    "generated_at": "2026-09-03T14:13:54.627Z"
+    "generated_at": "2026-09-07T14:00:16.380Z"
   }
 }
