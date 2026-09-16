@@ -1,12 +1,12 @@
 {
   "handle": "harmonixfi",
   "as_of": "2026-07-20",
-  "scraped_at": "2026-09-10T14:00:23.799Z",
+  "scraped_at": "2026-09-16T14:00:21.673Z",
   "csv_stale": true,
-  "stale_days": 51,
-  "followers": 11708,
+  "stale_days": 57,
+  "followers": 11694,
   "following": 357,
-  "tweets": 3033,
+  "tweets": 3034,
   "year": {
     "impressions": 2258031,
     "engagements": 113647,
@@ -173,223 +173,223 @@
   "follower_series": [
     {
       "d": "2025-07-21",
-      "f": 6390
+      "f": 6376
     },
     {
       "d": "2025-07-28",
-      "f": 6533
+      "f": 6519
     },
     {
       "d": "2025-08-04",
-      "f": 6633
+      "f": 6619
     },
     {
       "d": "2025-08-11",
-      "f": 6722
+      "f": 6708
     },
     {
       "d": "2025-08-18",
-      "f": 6784
+      "f": 6770
     },
     {
       "d": "2025-08-25",
-      "f": 6853
+      "f": 6839
     },
     {
       "d": "2025-09-01",
-      "f": 7965
+      "f": 7951
     },
     {
       "d": "2025-09-08",
-      "f": 8043
+      "f": 8029
     },
     {
       "d": "2025-09-15",
-      "f": 8195
+      "f": 8181
     },
     {
       "d": "2025-09-22",
-      "f": 8296
+      "f": 8282
     },
     {
       "d": "2025-09-29",
-      "f": 8370
+      "f": 8356
     },
     {
       "d": "2025-10-06",
-      "f": 8551
+      "f": 8537
     },
     {
       "d": "2025-10-13",
-      "f": 8764
+      "f": 8750
     },
     {
       "d": "2025-10-20",
-      "f": 8940
+      "f": 8926
     },
     {
       "d": "2025-10-27",
-      "f": 9059
+      "f": 9045
     },
     {
       "d": "2025-11-03",
-      "f": 9123
+      "f": 9109
     },
     {
       "d": "2025-11-10",
-      "f": 9209
+      "f": 9195
     },
     {
       "d": "2025-11-17",
-      "f": 9748
+      "f": 9734
     },
     {
       "d": "2025-11-24",
-      "f": 10130
+      "f": 10116
     },
     {
       "d": "2025-12-01",
-      "f": 10453
+      "f": 10439
     },
     {
       "d": "2025-12-08",
-      "f": 10659
+      "f": 10645
     },
     {
       "d": "2025-12-15",
-      "f": 10880
+      "f": 10866
     },
     {
       "d": "2025-12-22",
-      "f": 11089
+      "f": 11075
     },
     {
       "d": "2025-12-29",
-      "f": 11127
+      "f": 11113
     },
     {
       "d": "2026-01-05",
-      "f": 11165
+      "f": 11151
     },
     {
       "d": "2026-01-12",
-      "f": 11183
+      "f": 11169
     },
     {
       "d": "2026-01-19",
-      "f": 11210
+      "f": 11196
     },
     {
       "d": "2026-01-26",
-      "f": 11236
+      "f": 11222
     },
     {
       "d": "2026-02-02",
-      "f": 11299
+      "f": 11285
     },
     {
       "d": "2026-02-09",
-      "f": 11331
+      "f": 11317
     },
     {
       "d": "2026-02-16",
-      "f": 11357
+      "f": 11343
     },
     {
       "d": "2026-02-23",
-      "f": 11373
+      "f": 11359
     },
     {
       "d": "2026-03-02",
-      "f": 11387
+      "f": 11373
     },
     {
       "d": "2026-03-09",
-      "f": 11401
+      "f": 11387
     },
     {
       "d": "2026-03-16",
-      "f": 11430
+      "f": 11416
     },
     {
       "d": "2026-03-23",
-      "f": 11451
+      "f": 11437
     },
     {
       "d": "2026-03-30",
-      "f": 11463
+      "f": 11449
     },
     {
       "d": "2026-04-06",
-      "f": 11482
+      "f": 11468
     },
     {
       "d": "2026-04-13",
-      "f": 11494
+      "f": 11480
     },
     {
       "d": "2026-04-20",
-      "f": 11509
+      "f": 11495
     },
     {
       "d": "2026-04-27",
-      "f": 11518
+      "f": 11504
     },
     {
       "d": "2026-05-04",
-      "f": 11528
+      "f": 11514
     },
     {
       "d": "2026-05-11",
-      "f": 11539
+      "f": 11525
     },
     {
       "d": "2026-05-18",
-      "f": 11554
+      "f": 11540
     },
     {
       "d": "2026-05-25",
-      "f": 11579
+      "f": 11565
     },
     {
       "d": "2026-06-01",
-      "f": 11607
+      "f": 11593
     },
     {
       "d": "2026-06-08",
-      "f": 11619
+      "f": 11605
     },
     {
       "d": "2026-06-15",
-      "f": 11639
+      "f": 11625
     },
     {
       "d": "2026-06-22",
-      "f": 11656
+      "f": 11642
     },
     {
       "d": "2026-06-29",
-      "f": 11669
+      "f": 11655
     },
     {
       "d": "2026-07-06",
-      "f": 11692
+      "f": 11678
     },
     {
       "d": "2026-07-13",
-      "f": 11697
+      "f": 11683
     },
     {
       "d": "2026-07-20",
-      "f": 11708
+      "f": 11694
     }
   ],
   "recent_posts_agg": {
-    "likes": 486,
-    "reposts": 67,
-    "replies": 76,
-    "engagement_score": 696,
-    "views": 70804
+    "likes": 485,
+    "reposts": 66,
+    "replies": 77,
+    "engagement_score": 694,
+    "views": 71024
   },
   "top_posts": [
     {
@@ -398,7 +398,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3713,
+      "views": 3727,
       "created_at": "2026-06-26T20:00:56.000Z"
     },
     {
@@ -416,7 +416,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1363,
+      "views": 1364,
       "created_at": "2026-07-01T15:40:47.000Z"
     },
     {
@@ -433,8 +433,8 @@
       "text": "our USDC/HYPE delta-neutral vault has averaged ~6.9% APY over the last 45d.  what matters is whether that yield can actually become a product people build on.  ",
       "likes": 20,
       "reposts": 2,
-      "replies": 1,
-      "views": 4003,
+      "replies": 2,
+      "views": 4066,
       "created_at": "2026-08-14T22:52:59.000Z"
     },
     {
@@ -461,7 +461,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 2206,
+      "views": 2244,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026"
     }
   ],
@@ -472,7 +472,7 @@
       "likes": 21,
       "reposts": 6,
       "replies": 4,
-      "views": 3713,
+      "views": 3727,
       "created_at": "2026-06-26T20:00:56.000Z",
       "engagement": 37
     },
@@ -492,7 +492,7 @@
       "likes": 20,
       "reposts": 2,
       "replies": 5,
-      "views": 1363,
+      "views": 1364,
       "created_at": "2026-07-01T15:40:47.000Z",
       "engagement": 29
     },
@@ -511,10 +511,10 @@
       "text": "our USDC/HYPE delta-neutral vault has averaged ~6.9% APY over the last 45d.  what matters is whether that yield can actually become a product people build on.  → consistent yield: performance is indep",
       "likes": 20,
       "reposts": 2,
-      "replies": 1,
-      "views": 4003,
+      "replies": 2,
+      "views": 4066,
       "created_at": "2026-08-14T22:52:59.000Z",
-      "engagement": 25
+      "engagement": 26
     },
     {
       "id": "2075701525327012343",
@@ -542,7 +542,7 @@
       "likes": 16,
       "reposts": 3,
       "replies": 2,
-      "views": 2206,
+      "views": 2244,
       "created_at": "Thu Jul 30 10:01:18 +0000 2026",
       "engagement": 24
     },
@@ -552,18 +552,8 @@
       "likes": 11,
       "reposts": 6,
       "replies": 1,
-      "views": 958,
+      "views": 959,
       "created_at": "2026-07-17T17:20:50.000Z",
-      "engagement": 24
-    },
-    {
-      "id": "2073965041477452077",
-      "text": "Harmonix TVL crossed 9.28m today",
-      "likes": 17,
-      "reposts": 3,
-      "replies": 1,
-      "views": 1316,
-      "created_at": "2026-07-06T02:59:32.000Z",
       "engagement": 24
     },
     {
@@ -582,7 +572,7 @@
       "likes": 13,
       "reposts": 3,
       "replies": 3,
-      "views": 6314,
+      "views": 6318,
       "created_at": "2026-08-05T02:04:34.000Z",
       "engagement": 22
     },
@@ -592,7 +582,7 @@
       "likes": 18,
       "reposts": 1,
       "replies": 2,
-      "views": 1647,
+      "views": 1648,
       "created_at": "2026-06-29T21:30:35.000Z",
       "engagement": 22
     },
@@ -602,7 +592,7 @@
       "likes": 17,
       "reposts": 2,
       "replies": 0,
-      "views": 2469,
+      "views": 2480,
       "created_at": "Thu Aug 13 21:30:04 +0000 2026",
       "engagement": 21
     },
@@ -614,6 +604,16 @@
       "replies": 2,
       "views": 1293,
       "created_at": "2026-07-24T19:18:58.000Z",
+      "engagement": 21
+    },
+    {
+      "id": "2073965041477452077",
+      "text": "Harmonix TVL crossed 9.28m today",
+      "likes": 16,
+      "reposts": 2,
+      "replies": 1,
+      "views": 1316,
+      "created_at": "2026-07-06T02:59:32.000Z",
       "engagement": 21
     },
     {
@@ -642,7 +642,7 @@
       "likes": 13,
       "reposts": 1,
       "replies": 3,
-      "views": 1339,
+      "views": 1347,
       "created_at": "2026-07-27T23:11:15.000Z",
       "engagement": 18
     },
@@ -652,7 +652,7 @@
       "likes": 11,
       "reposts": 2,
       "replies": 3,
-      "views": 1182,
+      "views": 1184,
       "created_at": "2026-08-01T02:15:30.000Z",
       "engagement": 18
     },
@@ -672,7 +672,7 @@
       "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 755,
+      "views": 756,
       "created_at": "Tue Jul 28 18:25:08 +0000 2026",
       "engagement": 17
     },
@@ -682,7 +682,7 @@
       "likes": 13,
       "reposts": 2,
       "replies": 0,
-      "views": 1306,
+      "views": 1307,
       "created_at": "Thu Jul 16 02:57:40 +0000 2026",
       "engagement": 17
     },
@@ -692,7 +692,7 @@
       "likes": 10,
       "reposts": 3,
       "replies": 1,
-      "views": 1532,
+      "views": 1561,
       "created_at": "2026-07-20T22:26:31.000Z",
       "engagement": 17
     },
@@ -702,7 +702,7 @@
       "likes": 13,
       "reposts": 1,
       "replies": 1,
-      "views": 903,
+      "views": 905,
       "created_at": "Thu Aug 06 18:26:52 +0000 2026",
       "engagement": 16
     },
@@ -722,7 +722,7 @@
       "likes": 10,
       "reposts": 2,
       "replies": 1,
-      "views": 1054,
+      "views": 1060,
       "created_at": "Tue Aug 11 03:58:54 +0000 2026",
       "engagement": 15
     },
@@ -732,7 +732,7 @@
       "likes": 13,
       "reposts": 0,
       "replies": 2,
-      "views": 2806,
+      "views": 2817,
       "created_at": "Tue Jun 30 15:26:08 +0000 2026",
       "engagement": 15
     },
@@ -742,7 +742,7 @@
       "likes": 11,
       "reposts": 1,
       "replies": 0,
-      "views": 950,
+      "views": 952,
       "created_at": "2026-08-05T16:53:17.000Z",
       "engagement": 13
     },
@@ -762,7 +762,7 @@
       "likes": 8,
       "reposts": 0,
       "replies": 4,
-      "views": 1324,
+      "views": 1327,
       "created_at": "Tue Aug 11 01:05:59 +0000 2026",
       "engagement": 12
     },
@@ -782,7 +782,7 @@
       "likes": 7,
       "reposts": 1,
       "replies": 2,
-      "views": 1705,
+      "views": 1719,
       "created_at": "2026-08-16T02:05:33.000Z",
       "engagement": 11
     },
@@ -792,7 +792,7 @@
       "likes": 7,
       "reposts": 1,
       "replies": 2,
-      "views": 846,
+      "views": 850,
       "created_at": "2026-08-07T22:31:58.000Z",
       "engagement": 11
     },
@@ -822,7 +822,7 @@
       "likes": 7,
       "reposts": 0,
       "replies": 1,
-      "views": 1066,
+      "views": 1067,
       "created_at": "Tue Aug 04 04:37:44 +0000 2026",
       "engagement": 8
     },
@@ -852,7 +852,7 @@
       "likes": 1,
       "reposts": 0,
       "replies": 0,
-      "views": 189,
+      "views": 191,
       "created_at": "Tue Aug 11 01:14:19 +0000 2026",
       "engagement": 1
     },
@@ -862,7 +862,7 @@
       "likes": 1,
       "reposts": 0,
       "replies": 0,
-      "views": 336,
+      "views": 337,
       "created_at": "Tue Aug 11 01:15:07 +0000 2026",
       "engagement": 1
     },
@@ -903,7 +903,7 @@
         "id": "csv-stale",
         "severity": "warn",
         "title": "Official X CSV is stale",
-        "detail": "Last day in export is 2026-07-20 (51d ago). Re-export Account overview for accurate impressions.",
+        "detail": "Last day in export is 2026-07-20 (57d ago). Re-export Account overview for accurate impressions.",
         "evidence": [
           "x-analytics-csv"
         ]
@@ -921,7 +921,7 @@
         "id": "top-post",
         "severity": "info",
         "title": "Top recent post",
-        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,713 views",
+        "detail": "\"Harmonix TVL growth projections:\n\nHYPE/kHYPE vaults currently hold 69,918 HYPE-equivalent.\n\nIf HYPE …\" · eng 37 · 3,727 views",
         "evidence": [
           "post:2070598206342451452",
           "public-scrape"
@@ -979,6 +979,6 @@
       "unique_wallets": 4074,
       "last_event_at": "2026-06-22T12:40:14.000Z"
     },
-    "generated_at": "2026-09-10T14:00:23.811Z"
+    "generated_at": "2026-09-16T14:00:21.687Z"
   }
 }

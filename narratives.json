@@ -2,7 +2,7 @@
   "version": 1,
   "label": "Harmonix · HL yield narratives",
   "description": "Curated narratives for market heat vs Harmonix ownership. Links to conversion stage + UTM campaigns for outreach → deposit tracking.",
-  "as_of": "2026-09-10T14:00:28.526Z",
+  "as_of": "2026-09-16T14:00:26.058Z",
   "self_handle": "harmonixfi",
   "method": "Narrative patterns matched on public watchlist posts. Market = non-self voices; ownership = self score / total. Actions map to conversion stage + UTM campaign for outreach → deposit tracking.",
   "narratives": [
@@ -453,7 +453,7 @@
     ]
   },
   "previous": {
-    "as_of": "2026-09-07T14:00:19.615Z"
+    "as_of": "2026-09-15T14:00:35.150Z"
   },
   "sources": [
     "mindshare-voices-raw / public posts",
