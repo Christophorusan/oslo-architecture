@@ -498,5 +498,19 @@
     "hype_staked_usd": 2551643.178749214,
     "hausdc_usd": 261453.27313667032,
     "basis_usd": 515071.676571
+  },
+  {
+    "day": "2026-10-09",
+    "as_of": "2026-10-09T14:02:34.939Z",
+    "combined_aum_usd": 10060494.570630107,
+    "vault_tvl_usd": 7274132.517154387,
+    "hype_deposited": 16122.138999779216,
+    "hype_deposited_usd": 1364666.5167058115,
+    "khype_deposited": 59761.63823214286,
+    "khype_deposited_usd": 5218448.936205906,
+    "hype_staked": 32731.19343206974,
+    "hype_staked_usd": 2786362.053475719,
+    "hausdc_usd": 189155.27956467032,
+    "basis_usd": 501861.784678
   }
 ]
