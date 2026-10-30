@@ -914,6 +914,126 @@ body:not([data-view="analytics"]) .cap-board {
 .chip-longform { color: var(--warm); border-color: rgb(251 191 36 / .4); background: rgb(251 191 36 / .05); }
 .chip-diagram { color: var(--hot); border-color: rgb(251 146 60 / .4); background: rgb(251 146 60 / .05); }
 .chip-shipped { opacity: .75; text-decoration: line-through; }
+
+/* ---- Oslo Analytics: restrained charcoal + Scandinavian editorial rhythm ---- */
+body[data-view="analytics"] {
+  --bg: #0b0b0c;
+  --bg-soft: #131316;
+  --card: #15151a;
+  --row-hover: #1c1c22;
+  --ink: #f5f5f4;
+  --ink-soft: #d4d4d0;
+  --ink-mute: #a09f99;
+  --ink-fade: #777773;
+  --border: #303036;
+  --border-soft: #24242a;
+  --accent: #9aafbf;
+  --accent-hover: #b6c7d2;
+  --accent-soft: rgb(154 175 191 / .12);
+  --hot: #e78d5d;
+  --warm: #e7b966;
+  --cool: #9aafbf;
+  --green: #8fc79b;
+  --chart-in: #62a77a;
+  --chart-out: #dc8055;
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-chip: 6px;
+}
+body[data-view="analytics"] .cap-board,
+body[data-view="analytics"] .cap-board-inner {
+  background: var(--card);
+}
+body[data-view="analytics"] .cap-board-inner {
+  border-radius: 12px;
+}
+body[data-view="analytics"] .cap-board {
+  border-color: var(--border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body[data-view="analytics"] .cap-live,
+body[data-view="analytics"] .cap-chip {
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
+body[data-view="analytics"] .cap-live { color: var(--green); }
+body[data-view="analytics"] .cap-head,
+body[data-view="analytics"] .cap-heroes,
+body[data-view="analytics"] .cap-metric {
+  border-color: var(--border);
+}
+body[data-view="analytics"] nav.tabs {
+  border-radius: 8px;
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
+body[data-view="analytics"] nav.tabs button.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+body[data-view="analytics"] #analytics-subnav {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+body[data-view="analytics"] #analytics-subnav a {
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+body[data-view="analytics"] #analytics-subnav a:hover {
+  background: var(--row-hover);
+  color: var(--ink);
+}
+body[data-view="analytics"] #tabs button,
+body[data-view="analytics"] #analytics-subnav a,
+body[data-view="analytics"] a {
+  transition: color .16s ease, background-color .16s ease, border-color .16s ease;
+}
+body[data-view="analytics"] #tabs button:focus-visible,
+body[data-view="analytics"] #analytics-subnav a:focus-visible,
+body[data-view="analytics"] a:focus-visible,
+body[data-view="analytics"] button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+body[data-view="analytics"] .live-banner {
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
+body[data-view="analytics"] .live-banner .copy strong {
+  color: var(--ink);
+}
+body[data-view="analytics"] .page-head { margin-bottom: 28px; }
+body[data-view="analytics"] h1.page {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 500;
+  letter-spacing: -.045em;
+}
+body[data-view="analytics"] .page-head .sub {
+  max-width: 52rem;
+  line-height: 1.6;
+}
+body[data-view="analytics"] .tile,
+body[data-view="analytics"] .panel,
+body[data-view="analytics"] .cal-section {
+  box-shadow: none;
+}
+body[data-view="analytics"] .cap-hero-value.up,
+body[data-view="analytics"] .cap-hero-value.down {
+  color: var(--ink);
+}
+body[data-view="analytics"] .cap-hero-delta.up,
+body[data-view="analytics"] .cap-metric .delta.up,
+body[data-view="analytics"] .pos { color: var(--green); }
+body[data-view="analytics"] .cap-hero-delta.down,
+body[data-view="analytics"] .cap-metric .delta.down,
+body[data-view="analytics"] .neg { color: var(--hot); }
+@media (max-width: 640px) {
+  body[data-view="analytics"] .wrap { padding: 24px 18px 40px; }
+  body[data-view="analytics"] .page-meta { text-align: left; }
+  body[data-view="analytics"] #analytics-subnav { width: 100%; }
+}
 </style>
 </head>
 <body data-view="calendar">
@@ -3001,7 +3121,7 @@ renderXAnalytics();
   function makeLine(canvas, color){
     if(!canvas) return { set:function(){}, destroy:function(){} };
     var ctx=canvas.getContext('2d');
-    var target=[], display=[], raf=0, col=color||'#1d9bf0', dead=false;
+    var target=[], display=[], raf=0, col=color||'#94a3b8', dead=false;
     function resize(){
       var dpr=window.devicePixelRatio||1;
       var w=canvas.clientWidth, h=canvas.clientHeight;
@@ -3055,8 +3175,8 @@ renderXAnalytics();
     };
   }
 
-  var aumLine = makeLine(document.getElementById('cap-aum-chart'), '#1d9bf0');
-  var harLine = makeLine(document.getElementById('cap-har-chart'), '#1d9bf0');
+  var aumLine = makeLine(document.getElementById('cap-aum-chart'), '#94a3b8');
+  var harLine = makeLine(document.getElementById('cap-har-chart'), '#94a3b8');
   var harSeries = [];
 
   function breath(base, n){
@@ -3083,9 +3203,9 @@ renderXAnalytics();
     if(d7.combined_aum_usd!=null && aum!=null){
       var start=aum-d7.combined_aum_usd, pts=[], N=24;
       for(var i=0;i<N;i++){ var t=i/(N-1); pts.push(start+(aum-start)*(0.15+0.85*t*t)); }
-      aumLine.set(pts, '#1d9bf0');
+      aumLine.set(pts, '#94a3b8');
     } else if(aum!=null){
-      aumLine.set(breath(aum), '#1d9bf0');
+      aumLine.set(breath(aum), '#94a3b8');
     }
 
     var metrics=[
@@ -3121,7 +3241,7 @@ renderXAnalytics();
   fetch('harmonix-dashboard.json', {cache:'no-store'}).then(function(r){return r.json();}).then(renderDash).catch(function(){});
   fetch('capital-history.json', {cache:'no-store'}).then(function(r){return r.json();}).then(function(h){
     var pts=(Array.isArray(h)?h:(h.points||[])).map(function(p){return n(p.combined_aum_usd);}).filter(function(v){return v!=null;});
-    if(pts.length>=2) aumLine.set(pts, '#1d9bf0');
+    if(pts.length>=2) aumLine.set(pts, '#94a3b8');
   }).catch(function(){});
 
   function paintHar(d){
@@ -3129,7 +3249,7 @@ renderXAnalytics();
     var price=mid!=null?mid:mark;
     var chg=(price!=null&&prev!=null&&prev>0)?((price-prev)/prev)*100:null;
     var mom=chg==null?'flat':chg>0.05?'up':chg<-0.05?'down':'flat';
-    var col=mom==='up'?'#00ba7c':mom==='down'?'#f4212e':'#1d9bf0';
+    var col=mom==='up'?'#16a34a':mom==='down'?'#ea580c':'#94a3b8';
     setTxt('cap-har-price', fmtPrice(price));
     setTxt('cap-c-har', fmtPrice(price));
     if(chg==null){ setTxt('cap-c-har-d','live'); setCls('cap-c-har-d','d','flat'); }
