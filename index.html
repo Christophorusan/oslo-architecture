@@ -12,7 +12,7 @@
       var base = "https://oslo-teamview-git-main-chrisportugals-projects.vercel.app";
       var current = new URL(window.location.href);
       var view = current.searchParams.get("view");
-      var routes = { analytics: "/analytics", operator: "/today", calendar: "/calendar", roadmap: "/calendar", content: "/calendar?type=content" };
+      var routes = { analytics: "/analytics", operator: "/operator", calendar: "/calendar", roadmap: "/calendar", content: "/calendar?type=content" };
       var target = new URL(routes[view] || "/analytics", base);
       current.searchParams.delete("view");
       current.searchParams.forEach(function (value, key) { target.searchParams.set(key, value); });
