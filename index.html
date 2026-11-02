@@ -914,6 +914,40 @@ body:not([data-view="analytics"]) .cap-board {
 .chip-longform { color: var(--warm); border-color: rgb(251 191 36 / .4); background: rgb(251 191 36 / .05); }
 .chip-diagram { color: var(--hot); border-color: rgb(251 146 60 / .4); background: rgb(251 146 60 / .05); }
 .chip-shipped { opacity: .75; text-decoration: line-through; }
+
+/* Oslo analytics: restrained glass, existing X palette, and asset marks */
+body[data-view="analytics"] #an-capital {
+  --green: #1d9bf0;
+  --chart-in: #1d9bf0;
+  --card: rgba(13, 15, 19, .74);
+  --bg-soft: rgba(25, 29, 35, .66);
+}
+body[data-view="analytics"] #an-capital.cap-board {
+  background: linear-gradient(145deg, rgba(31, 37, 45, .78), rgba(8, 9, 12, .86));
+  border-color: rgba(172, 190, 211, .24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 22px 60px rgba(0,0,0,.36);
+}
+body[data-view="analytics"] #an-capital .cap-board-inner {
+  background: linear-gradient(145deg, rgba(24, 28, 34, .75), rgba(5, 6, 8, .83));
+  backdrop-filter: blur(22px) saturate(1.15);
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+}
+body[data-view="analytics"] #an-capital .cap-head,
+body[data-view="analytics"] #an-capital .cap-hero,
+body[data-view="analytics"] #an-capital .cap-metric {
+  background-color: rgba(255,255,255,.018);
+}
+body[data-view="analytics"] #an-capital .cap-hero + .cap-hero { background-color: rgba(255,255,255,.028); }
+body[data-view="analytics"] #an-capital .cap-live .dot::before,
+body[data-view="analytics"] #an-capital .cap-live .dot::after,
+body[data-view="analytics"] #an-capital .cap-hero-label span[style*="background:var(--green)"] {
+  background: #1d9bf0 !important;
+}
+body[data-view="analytics"] #an-capital .cap-metric .delta.up { color: #6db8ed; }
+body[data-view="analytics"] #an-capital .cap-metrics { background: rgba(255,255,255,.012); }
+.cap-token-mark { width: 19px; height: 19px; border-radius: 50%; overflow: hidden; display: inline-grid; place-items: center; vertical-align: -4px; margin-right: 6px; background: rgba(255,255,255,.10); color: #e7e9ea; font-size: 9px; font-weight: 700; }
+.cap-token-mark img { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) { body[data-view="analytics"] #an-capital * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 </style>
 </head>
 <body data-view="calendar">
@@ -3105,16 +3139,16 @@ renderXAnalytics();
     }
 
     var metrics=[
-      {label:'HYPE vault', primary:fmtNative(pr.hype_deposited,'HYPE'), hint:fmtUsdc(pr.hype_deposited_usd)+' USDC', d:deltaNat(d7.hype_deposited,'HYPE')},
-      {label:'kHYPE vault', primary:fmtNative(pr.khype_deposited,'kHYPE'), hint:fmtUsdc(pr.khype_deposited_usd)+' USDC', d:deltaNat(d7.khype_deposited,'kHYPE')},
-      {label:'HYPE staked', primary:fmtNative(s.total_hype,'HYPE'), hint:fmtUsdc(s.total_usd)+' · frontend', d:deltaNat(d7.hype_staked,'HYPE')},
+      {label:'HYPE vault', logo:'https://assets.coingecko.com/coins/images/50882/standard/hyperliquid.jpg?1729431300=', primary:fmtNative(pr.hype_deposited,'HYPE'), hint:fmtUsdc(pr.hype_deposited_usd)+' USDC', d:deltaNat(d7.hype_deposited,'HYPE')},
+      {label:'kHYPE vault', logo:'https://assets.coingecko.com/coins/images/69299/standard/_hakHYPE.png?1758122756=', primary:fmtNative(pr.khype_deposited,'kHYPE'), hint:fmtUsdc(pr.khype_deposited_usd)+' USDC', d:deltaNat(d7.khype_deposited,'kHYPE')},
+      {label:'HYPE staked', logo:'https://assets.coingecko.com/coins/images/50882/standard/hyperliquid.jpg?1729431300=', primary:fmtNative(s.total_hype,'HYPE'), hint:fmtUsdc(s.total_usd)+' · frontend', d:deltaNat(d7.hype_staked,'HYPE')},
       {label:'Vault TVL', primary:fmtUsdc(pr.tvl_all_vaults_usd), hint:Number(pr.total_depositors||0).toLocaleString()+' depositors', d:deltaUsd(d7.vault_tvl_usd)},
-      {label:'USDC vaults', primary:fmtUsdc(pr.usdc_vaults_usd), hint:'delta-neutral + haUSDC', d:{t:'product stack', c:'flat'}}
+      {label:'USDC vaults', logo:'https://assets.coingecko.com/coins/images/6319/large/usdc.png', primary:fmtUsdc(pr.usdc_vaults_usd), hint:'delta-neutral + haUSDC', d:{t:'product stack', c:'flat'}}
     ];
     var root=document.getElementById('cap-metrics');
     if(root){
       root.innerHTML=metrics.map(function(m){
-        return '<div class="cap-metric"><div class="label">'+m.label+'</div>'
+        return '<div class="cap-metric"><div class="label">'+(m.logo?'<span class="cap-token-mark"><img src="'+m.logo+'" alt="" loading="lazy" referrerpolicy="no-referrer"></span>':'')+m.label+'</div>'
           +'<div class="value tabular">'+m.primary+'</div>'
           +'<div class="hint">'+m.hint+'</div>'
           +'<div class="delta '+m.d.c+'">'+m.d.t+'</div></div>';
